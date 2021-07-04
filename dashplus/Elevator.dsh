@@ -1,0 +1,271 @@
+/*
+MIT License 
+
+Copyright (c) [2021] [Tamjid Hossain]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. */
+
+open util/ordering[Floor]
+open util/boolean
+open util/integer
+
+sig Floor {}
+abstract sig Direction {}
+one sig Up, Down extends Direction {}
+
+abstract sig Door{}
+one sig Open, Close extends Door {}
+
+conc state ElevatorSystem {
+
+env request: Floor -> lone Direction
+  
+conc state Controller {
+
+	trans sendUpReq {
+	
+		when some request		
+		do {
+			one e1: evelPID | one req: request |
+				
+			((Floo.req = Up and Elevator[e1]/direction = Up and 
+			lt(Elevator[e1]/current, req.direction)
+			and 
+			(no e2: evelPID | e2/direction = Up
+			and gt(Elevator[e1]/current, Elevator[e2]/current)
+			and lt(Elevator[e2]/current, req.direction))
+			=> 	
+			(Elevator[e1]/called' = Elevator[e1]/called + req)
+		}
+	}
+		
+	trans sendDownReq{
+			do {
+			one e1: evelPID | one req: request |
+				
+			((Floo.req = Down and Elevator[e1]/direction = Down and 
+			gt(Elevator[e1]/current, req.direction)
+			and 
+			(no e2: evelPID | e2/direction = Up
+			and lt(Elevator[e1]/current, Elevator[e2]/current)
+			and gt(Elevator[e2]/current, req.direction))
+			=> 	
+			(Elevator[e1]/called' = Elevator[e1]/called + req)
+		}
+	}		
+}
+
+
+conc state [p: elevPID] Elevator {
+    direction: one Direction
+    door: one Door
+    called: Floor -> Direction
+    current: set Floor
+
+    action NotArriving[ (current' -> direction) not in called' ] {}
+    action WaitingToArrive[{called - (current' -> direction)} in called'] {}
+    action OpenDoor [(current' -> direction) in called implies door' = Open] {}
+
+    init {
+        no called
+        direction = Down
+        current = max[Floor]
+        door = Close
+    }
+    
+    state MovingUp {
+    	//Move to the next floor
+    	trans nextFloor {
+    		when {
+    			some called
+    			door = Close
+    			direction = Up
+    			some nexts[current] & called.direction
+    			!((current' -> direction) in called)
+    		}
+    		do {
+    			current' = min[(nexts[current] 
+    			& called.direction)]	
+          NotArriving
+    		}
+    	}
+    	
+    	//Change state to moving down
+    	trans ChangeDirToDown {
+        	when {
+            	some called
+            	direction = Up
+            	door = Close
+            	no nexts[current] & called.direction
+       		}
+        	do {
+           		direction' = Down
+            	NotArriving
+        	}
+        	goto MovingDown
+    	}
+    	
+    	//Change state to destination
+    	trans StopMoving {
+    		when (current' -> direction) in called
+    		goto OnDestinationFloor
+    	}   	
+    }
+    
+    state MovingDown {
+    
+    	//Move to the next floor
+    	trans nextFloor {
+    		when {
+    			some called
+    			door = Close
+    			direction = Down
+    			some nexts[current] & called.direction
+    			!((current' -> direction) in called)
+    		}
+    		do {
+    			current' = min[(nexts[current] 
+    			& called.direction)]	
+          NotArriving
+    		}
+    	}
+    	
+    	//Change state to moving down
+    	trans ChangeDirToUp {
+        	when {
+            	some called
+            	direction = Down
+            	door = Close
+            	no nexts[current] & called.direction
+       		}
+        	do {
+           		direction' = Up
+            	NotArriving
+        	}
+        	goto MovingUp
+    	}
+    	
+    	//Change state to destination
+    	trans StopMoving {
+    		when (current' -> direction) in called
+    		goto OnDestinationFloor
+    	}   	
+    }
+    
+    state OnDestinationFloor {
+    	//Open the door for passengers
+    	//Remove current floor from called list
+    	trans OpenDoor {
+    		when door = Close
+    		do {
+    			WaitingToArrive
+    			door' = Open
+    		}
+    		goto ContinueMoving
+    	}
+    	
+    	//Close the door and
+    	//move to next up request
+    	trans ContinueMovingUp {
+				when {
+					door = Open
+					direction = Up
+				}
+				do door' = Close
+				goto MoveUp
+    	}
+    	
+    	 //Close the door and
+    	//move to next request
+    	trans ContinueMovingDown {
+				when {
+					door = Open
+					direction = Down
+				}
+				do door' = Close
+				goto MoveDown
+    	}
+    	
+    	//Go to idle if no more calls
+    	trans GotoIdle
+    	{
+    		when no called
+    		goto Idle
+    	}    	
+    }
+    
+    state Idle{
+    	trans defaultToGround{
+    		when {
+    			no called
+    			min[Floor] not in current
+    		}
+    		do{
+    			current' = min[Floor]
+    			direction' = Down
+    		}
+    	}
+    	
+    	trans RemainIdle{
+    		when {
+    			no called
+    			min[Floor] in current
+    		}
+    		do {
+    			direction' = direction
+    		}
+    	}
+    	
+    	trans StartMoving {
+    		when some called
+    		goto MoveUp
+    	}
+    } 	
+    
+}
+
+}
+
+
+//PROPERTIES TO CHECK
+
+//Door cannot be in an Open state if an elector is not at a requested floor
+
+assert safeDoor{
+	ctl_mc[ag[all e: elevPid | !(Elevator[p]/current in Elevator[p]/called) => Elevator[p]/door = Closed]] 
+}
+
+//Every elevator must eventually reach a requested floor
+
+assert completeRequest{
+	ctl_mc[af[all e: elevPid | some Elevator[p]/called => (Elevator[p]/current in Elevator[p]/called)]] 
+}
+
+//Some elevators must eventually have responded to every request in its list
+
+assert emptyList{
+	ctl_mc[af[some e: elevPid | no Elevator[p]/called]] 
+}
+
+//All elevators will have one current floor
+
+assert emptyList{
+	ag(all e: elevPid | one Elevator[p]/current)
+}
+
