@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.poFile org.eventb.core.poStamp="0">
+    <org.eventb.core.poPredicateSet name="CTXHYP" org.eventb.core.poStamp="0">
+        <org.eventb.core.poIdentifier name="A" org.eventb.core.type="ℙ(ℤ×ℙ(ℤ×ℤ))"/>
+        <org.eventb.core.poIdentifier name="B" org.eventb.core.type="ℙ(ℤ×ℙ(ℤ×ℤ))"/>
+        <org.eventb.core.poIdentifier name="T" org.eventb.core.type="ℙ(ℤ×ℙ(ℤ×ℤ))"/>
+        <org.eventb.core.poIdentifier name="LA" org.eventb.core.type="ℤ"/>
+        <org.eventb.core.poIdentifier name="LB" org.eventb.core.type="ℤ"/>
+        <org.eventb.core.poPredicate name="LC" org.eventb.core.predicate="T∈0 ‥ 7 → (0 ‥ 6 → 1 ‥ 27)" org.eventb.core.source="/railway/railway_c0.buc|org.eventb.core.contextFile#railway_c0|org.eventb.core.axiom#("/>
+        <org.eventb.core.poPredicate name="LD" org.eventb.core.predicate="A∈0 ‥ 7 → (0 ‥ 6 → −1 ‥ 1)" org.eventb.core.source="/railway/railway_c0.buc|org.eventb.core.contextFile#railway_c0|org.eventb.core.axiom#*"/>
+        <org.eventb.core.poPredicate name="LE" org.eventb.core.predicate="B∈0 ‥ 7 → (0 ‥ 6 → −1 ‥ 1)" org.eventb.core.source="/railway/railway_c0.buc|org.eventb.core.contextFile#railway_c0|org.eventb.core.axiom#,"/>
+        <org.eventb.core.poPredicate name="LF" org.eventb.core.predicate="T={0 ↦ {0 ↦ 1,1 ↦ 9,2 ↦ 10,3 ↦ 13,4 ↦ 15,5 ↦ 20,6 ↦ 23},1 ↦ {0 ↦ 3,1 ↦ 9,2 ↦ 10,3 ↦ 13,4 ↦ 15,5 ↦ 20,6 ↦ 24},2 ↦ {0 ↦ 5,1 ↦ 27,2 ↦ 11,3 ↦ 13,4 ↦ 16,5 ↦ 20,6 ↦ 25},3 ↦ {0 ↦ 7,1 ↦ 27,2 ↦ 11,3 ↦ 13,4 ↦ 16,5 ↦ 20,6 ↦ 26},4 ↦ {0 ↦ 23,1 ↦ 22,2 ↦ 17,3 ↦ 18,4 ↦ 11,5 ↦ 9,6 ↦ 2},5 ↦ {0 ↦ 24,1 ↦ 22,2 ↦ 17,3 ↦ 18,4 ↦ 11,5 ↦ 9,6 ↦ 4},6 ↦ {0 ↦ 25,1 ↦ 22,2 ↦ 17,3 ↦ 18,4 ↦ 12,5 ↦ 27,6 ↦ 6},7 ↦ {0 ↦ 26,1 ↦ 22,2 ↦ 17,3 ↦ 18,4 ↦ 12,5 ↦ 27,6 ↦ 8}}" org.eventb.core.source="/railway/railway_c0.buc|org.eventb.core.contextFile#railway_c0|org.eventb.core.axiom#-"/>
+        <org.eventb.core.poPredicate name="LG" org.eventb.core.predicate="A={0 ↦ {0 ↦ 0,1 ↦ 0,2 ↦ 0,3 ↦ 1,4 ↦ 0,5 ↦ −1,6 ↦ 0},1 ↦ {0 ↦ 0,1 ↦ 0,2 ↦ 0,3 ↦ 1,4 ↦ 0,5 ↦ −1,6 ↦ 0},2 ↦ {0 ↦ 0,1 ↦ 0,2 ↦ 1,3 ↦ −1,4 ↦ 0,5 ↦ 1,6 ↦ 0},3 ↦ {0 ↦ 0,1 ↦ 0,2 ↦ 1,3 ↦ −1,4 ↦ 0,5 ↦ 0,6 ↦ 0},4 ↦ {0 ↦ 0,1 ↦ 1,2 ↦ 0,3 ↦ 0,4 ↦ −1,5 ↦ 0,6 ↦ 0},5 ↦ {0 ↦ 0,1 ↦ 1,2 ↦ 0,3 ↦ 0,4 ↦ −1,5 ↦ 0,6 ↦ 0},6 ↦ {0 ↦ 0,1 ↦ 0,2 ↦ 0,3 ↦ −1,4 ↦ 0,5 ↦ 0,6 ↦ 0},7 ↦ {0 ↦ 0,1 ↦ 1,2 ↦ 0,3 ↦ −1,4 ↦ 0,5 ↦ 0,6 ↦ 0}}" org.eventb.core.source="/railway/railway_c0.buc|org.eventb.core.contextFile#railway_c0|org.eventb.core.axiom#."/>
+        <org.eventb.core.poPredicate name="LH" org.eventb.core.predicate="B={0 ↦ {0 ↦ 0,1 ↦ 0,2 ↦ 0,3 ↦ 1,4 ↦ 0,5 ↦ −1,6 ↦ 0},1 ↦ {0 ↦ 0,1 ↦ 0,2 ↦ 0,3 ↦ 1,4 ↦ 0,5 ↦ −1,6 ↦ 0},2 ↦ {0 ↦ 0,1 ↦ 0,2 ↦ 1,3 ↦ −1,4 ↦ 0,5 ↦ 0,6 ↦ 0},3 ↦ {0 ↦ 0,1 ↦ 0,2 ↦ 1,3 ↦ −1,4 ↦ 0,5 ↦ 1,6 ↦ 0},4 ↦ {0 ↦ 0,1 ↦ 1,2 ↦ 0,3 ↦ 0,4 ↦ −1,5 ↦ 0,6 ↦ 0},5 ↦ {0 ↦ 0,1 ↦ 1,2 ↦ 0,3 ↦ 0,4 ↦ −1,5 ↦ 0,6 ↦ 0},6 ↦ {0 ↦ 0,1 ↦ 1,2 ↦ 0,3 ↦ −1,4 ↦ 0,5 ↦ 0,6 ↦ 0},7 ↦ {0 ↦ 0,1 ↦ 0,2 ↦ 0,3 ↦ −1,4 ↦ 0,5 ↦ 0,6 ↦ 0}}" org.eventb.core.source="/railway/railway_c0.buc|org.eventb.core.contextFile#railway_c0|org.eventb.core.axiom#\/"/>
+        <org.eventb.core.poPredicate name="LI" org.eventb.core.predicate="LA=7" org.eventb.core.source="/railway/railway_c0.buc|org.eventb.core.contextFile#railway_c0|org.eventb.core.axiom#1"/>
+        <org.eventb.core.poPredicate name="LJ" org.eventb.core.predicate="LB=7" org.eventb.core.source="/railway/railway_c0.buc|org.eventb.core.contextFile#railway_c0|org.eventb.core.axiom#3"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="ABSHYP" org.eventb.core.parentSet="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#CTXHYP" org.eventb.core.poStamp="0">
+        <org.eventb.core.poIdentifier name="P" org.eventb.core.type="ℙ(ℤ×ℤ)"/>
+        <org.eventb.core.poIdentifier name="RA" org.eventb.core.type="ℤ"/>
+        <org.eventb.core.poIdentifier name="RB" org.eventb.core.type="ℤ"/>
+        <org.eventb.core.poIdentifier name="ct" org.eventb.core.type="ℤ"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poSequent name="inv1/WD" org.eventb.core.accurate="true" org.eventb.core.poDesc="Well-definedness of Invariant" org.eventb.core.poStamp="0">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#ABSHYP"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="∀i⦂ℤ·i∈0 ‥ 7⇒i∈dom(P)∧P∈ℤ ⇸ ℤ" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.invariant#*"/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.invariant#*"/>
+        <org.eventb.core.poSelHint name="SEQHYS" org.eventb.core.poSelHintFst="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#ABSHYP" org.eventb.core.poSelHintSnd="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#ABSHYP"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poSequent name="INITIALISATION/inv1/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  establishment" org.eventb.core.poStamp="0">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTALLHYPrailway_c5">
+            <org.eventb.core.poPredicate name="'" org.eventb.core.predicate="∀i⦂ℤ·i∈0 ‥ 7⇒P'(i)=0" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#'|org.eventb.core.action#'"/>
+        </org.eventb.core.poPredicateSet>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="∀i⦂ℤ·i∈0 ‥ 7⇒P'(i)∈0 ‥ 6" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.invariant#*"/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#'"/>
+        <org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.invariant#*"/>
+        <org.eventb.core.poSelHint name="SEQHYT" org.eventb.core.poSelHintFst="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#CTXHYP" org.eventb.core.poSelHintSnd="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poSequent#INITIALISATION\/inv1\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+        <org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD0"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poSequent name="INITIALISATION/inv2/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  establishment" org.eventb.core.poStamp="0">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTALLHYPrailway_c5"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="1∈0 ‥ 8" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.invariant#,"/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#'"/>
+        <org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.invariant#,"/>
+        <org.eventb.core.poSelHint name="SEQHYT" org.eventb.core.poSelHintFst="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#CTXHYP" org.eventb.core.poSelHintSnd="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poSequent#INITIALISATION\/inv2\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+        <org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD1"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poSequent name="INITIALISATION/inv3/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  establishment" org.eventb.core.poStamp="0">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTALLHYPrailway_c5"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="1∈0 ‥ 8" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.invariant#."/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#'"/>
+        <org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.invariant#."/>
+        <org.eventb.core.poSelHint name="SEQHYT" org.eventb.core.poSelHintFst="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#CTXHYP" org.eventb.core.poSelHintSnd="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poSequent#INITIALISATION\/inv3\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+        <org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD2"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poSequent name="INITIALISATION/inv4/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  establishment" org.eventb.core.poStamp="0">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTALLHYPrailway_c5">
+            <org.eventb.core.poPredicate name="'" org.eventb.core.predicate="ct'∈0 ‥ 7" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#'|org.eventb.core.action#*"/>
+        </org.eventb.core.poPredicateSet>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="ct'∈0 ‥ 7" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.invariant#0"/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#'"/>
+        <org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.invariant#0"/>
+        <org.eventb.core.poSelHint name="SEQHYT" org.eventb.core.poSelHintFst="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#CTXHYP" org.eventb.core.poSelHintSnd="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poSequent#INITIALISATION\/inv4\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+        <org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD3"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poSequent name="INITIALISATION/act1/WD" org.eventb.core.accurate="true" org.eventb.core.poDesc="Well-definedness of action" org.eventb.core.poStamp="0">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTALLHYPrailway_c5"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="∀P'⦂ℙ(ℤ×ℤ),i⦂ℤ·i∈0 ‥ 7⇒i∈dom(P')∧P'∈ℤ ⇸ ℤ" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#'|org.eventb.core.action#'"/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#'|org.eventb.core.action#'"/>
+        <org.eventb.core.poSelHint name="SEQHYS" org.eventb.core.poSelHintFst="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#CTXHYP" org.eventb.core.poSelHintSnd="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTALLHYPrailway_c5"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poSequent name="INITIALISATION/act1/FIS" org.eventb.core.accurate="true" org.eventb.core.poDesc="Feasibility of action" org.eventb.core.poStamp="0">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTALLHYPrailway_c5"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="∃P'⦂ℙ(ℤ×ℤ)·∀i⦂ℤ·i∈0 ‥ 7⇒P'(i)=0" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#'|org.eventb.core.action#'"/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#'|org.eventb.core.action#'"/>
+        <org.eventb.core.poSelHint name="SEQHYS" org.eventb.core.poSelHintFst="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#CTXHYP" org.eventb.core.poSelHintSnd="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTALLHYPrailway_c5"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poSequent name="INITIALISATION/act4/FIS" org.eventb.core.accurate="true" org.eventb.core.poDesc="Feasibility of action" org.eventb.core.poStamp="0">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTALLHYPrailway_c5"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="0 ‥ 7≠(∅ ⦂ ℙ(ℤ))" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#'|org.eventb.core.action#*"/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#'|org.eventb.core.action#*"/>
+        <org.eventb.core.poSelHint name="SEQHYS" org.eventb.core.poSelHintFst="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#CTXHYP" org.eventb.core.poSelHintSnd="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTALLHYPrailway_c5"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poPredicateSet name="EVTIDENTrailway_c5" org.eventb.core.parentSet="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#CTXHYP" org.eventb.core.poStamp="0">
+        <org.eventb.core.poIdentifier name="P'" org.eventb.core.type="ℙ(ℤ×ℤ)"/>
+        <org.eventb.core.poIdentifier name="RA'" org.eventb.core.type="ℤ"/>
+        <org.eventb.core.poIdentifier name="ct'" org.eventb.core.type="ℤ"/>
+        <org.eventb.core.poIdentifier name="RB'" org.eventb.core.type="ℤ"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTALLHYPrailway_c5" org.eventb.core.parentSet="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTIDENTrailway_c5" org.eventb.core.poStamp="0"/>
+    <org.eventb.core.poSequent name="move_train/grd1/WD" org.eventb.core.accurate="true" org.eventb.core.poDesc="Well-definedness of Guard" org.eventb.core.poStamp="0">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTIDENTrailway_c6"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="ct∈dom(P)∧P∈ℤ ⇸ ℤ" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#1|org.eventb.core.guard#'"/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#1|org.eventb.core.guard#'"/>
+        <org.eventb.core.poSelHint name="SEQHYS" org.eventb.core.poSelHintFst="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTIDENTrailway_c6"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poSequent name="move_train/grd2/WD" org.eventb.core.accurate="true" org.eventb.core.poDesc="Well-definedness of Guard" org.eventb.core.poStamp="0">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTHYPrailway_c6'"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="∀t⦂ℤ·t∈0 ‥ 7∧t≠ct⇒ct∈dom(T)∧T∈ℤ ⇸ ℙ(ℤ × ℤ)∧ct∈dom(P)∧P∈ℤ ⇸ ℤ∧P(ct)+1∈dom(T(ct))∧T(ct)∈ℤ ⇸ ℤ∧t∈dom(T)∧t∈dom(P)∧P(t)∈dom(T(t))∧T(t)∈ℤ ⇸ ℤ" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#1|org.eventb.core.guard#("/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#1|org.eventb.core.guard#("/>
+        <org.eventb.core.poSelHint name="SEQHYS" org.eventb.core.poSelHintFst="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTHYPrailway_c6'"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poSequent name="move_train/grd3/WD" org.eventb.core.accurate="true" org.eventb.core.poDesc="Well-definedness of Guard" org.eventb.core.poStamp="0">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTHYPrailway_c6("/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="ct∈dom(A)∧A∈ℤ ⇸ ℙ(ℤ × ℤ)∧ct∈dom(P)∧P∈ℤ ⇸ ℤ∧P(ct)+1∈dom(A(ct))∧A(ct)∈ℤ ⇸ ℤ" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#1|org.eventb.core.guard#)"/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#1|org.eventb.core.guard#)"/>
+        <org.eventb.core.poSelHint name="SEQHYS" org.eventb.core.poSelHintFst="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTHYPrailway_c6("/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poSequent name="move_train/grd4/WD" org.eventb.core.accurate="true" org.eventb.core.poDesc="Well-definedness of Guard" org.eventb.core.poStamp="0">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTHYPrailway_c6)"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="ct∈dom(B)∧B∈ℤ ⇸ ℙ(ℤ × ℤ)∧ct∈dom(P)∧P∈ℤ ⇸ ℤ∧P(ct)+1∈dom(B(ct))∧B(ct)∈ℤ ⇸ ℤ" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#1|org.eventb.core.guard#*"/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#1|org.eventb.core.guard#*"/>
+        <org.eventb.core.poSelHint name="SEQHYS" org.eventb.core.poSelHintFst="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTHYPrailway_c6)"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poSequent name="move_train/inv1/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  preservation" org.eventb.core.poStamp="0">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTALLHYPrailway_c6"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="∀i⦂ℤ·i∈0 ‥ 7⇒(P{ct ↦ P(ct)+1})(i)∈0 ‥ 6" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.invariant#*"/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#1"/>
+        <org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.invariant#*"/>
+        <org.eventb.core.poSelHint name="SEQHYT" org.eventb.core.poSelHintFst="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poSequent#move_train\/inv1\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+        <org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD0"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poSequent name="move_train/inv2/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  preservation" org.eventb.core.poStamp="0">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTALLHYPrailway_c6"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="RA+A(ct)(P(ct))∈0 ‥ 8" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.invariant#,"/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#1"/>
+        <org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.invariant#,"/>
+        <org.eventb.core.poSelHint name="SEQHYT" org.eventb.core.poSelHintFst="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poSequent#move_train\/inv2\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+        <org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD1"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poSequent name="move_train/inv3/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  preservation" org.eventb.core.poStamp="0">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTALLHYPrailway_c6"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="RB+B(ct)(P(ct))∈0 ‥ 8" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.invariant#."/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#1"/>
+        <org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.invariant#."/>
+        <org.eventb.core.poSelHint name="SEQHYT" org.eventb.core.poSelHintFst="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poSequent#move_train\/inv3\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+        <org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD2"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poSequent name="move_train/act1/WD" org.eventb.core.accurate="true" org.eventb.core.poDesc="Well-definedness of action" org.eventb.core.poStamp="0">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTALLHYPrailway_c6"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="ct∈dom(P)∧P∈ℤ ⇸ ℤ" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#1|org.eventb.core.action#+"/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#1|org.eventb.core.action#+"/>
+        <org.eventb.core.poSelHint name="SEQHYS" org.eventb.core.poSelHintFst="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTALLHYPrailway_c6"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poSequent name="move_train/act2/WD" org.eventb.core.accurate="true" org.eventb.core.poDesc="Well-definedness of action" org.eventb.core.poStamp="0">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTALLHYPrailway_c6"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="ct∈dom(A)∧A∈ℤ ⇸ ℙ(ℤ × ℤ)∧ct∈dom(P)∧P∈ℤ ⇸ ℤ∧P(ct)∈dom(A(ct))∧A(ct)∈ℤ ⇸ ℤ" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#1|org.eventb.core.action#,"/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#1|org.eventb.core.action#,"/>
+        <org.eventb.core.poSelHint name="SEQHYS" org.eventb.core.poSelHintFst="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTALLHYPrailway_c6"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poSequent name="move_train/act3/WD" org.eventb.core.accurate="true" org.eventb.core.poDesc="Well-definedness of action" org.eventb.core.poStamp="0">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTALLHYPrailway_c6"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="ct∈dom(B)∧B∈ℤ ⇸ ℙ(ℤ × ℤ)∧ct∈dom(P)∧P∈ℤ ⇸ ℤ∧P(ct)∈dom(B(ct))∧B(ct)∈ℤ ⇸ ℤ" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#1|org.eventb.core.action#-"/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#1|org.eventb.core.action#-"/>
+        <org.eventb.core.poSelHint name="SEQHYS" org.eventb.core.poSelHintFst="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTALLHYPrailway_c6"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poPredicateSet name="EVTIDENTrailway_c6" org.eventb.core.parentSet="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="0">
+        <org.eventb.core.poIdentifier name="P'" org.eventb.core.type="ℙ(ℤ×ℤ)"/>
+        <org.eventb.core.poIdentifier name="RA'" org.eventb.core.type="ℤ"/>
+        <org.eventb.core.poIdentifier name="RB'" org.eventb.core.type="ℤ"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTHYPrailway_c6'" org.eventb.core.parentSet="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTIDENTrailway_c6" org.eventb.core.poStamp="0">
+        <org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="P(ct)&lt;6" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#1|org.eventb.core.guard#'"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTHYPrailway_c6(" org.eventb.core.parentSet="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTHYPrailway_c6'" org.eventb.core.poStamp="0">
+        <org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="∀t⦂ℤ·t∈0 ‥ 7∧t≠ct⇒T(ct)(P(ct)+1)≠T(t)(P(t))" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#1|org.eventb.core.guard#("/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTHYPrailway_c6)" org.eventb.core.parentSet="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTHYPrailway_c6(" org.eventb.core.poStamp="0">
+        <org.eventb.core.poPredicate name="PRD2" org.eventb.core.predicate="RA+A(ct)(P(ct)+1)≤LA" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#1|org.eventb.core.guard#)"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTALLHYPrailway_c6" org.eventb.core.parentSet="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTHYPrailway_c6)" org.eventb.core.poStamp="0">
+        <org.eventb.core.poPredicate name="PRD3" org.eventb.core.predicate="RB+B(ct)(P(ct)+1)≤LB" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#1|org.eventb.core.guard#*"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poSequent name="choose_train/inv4/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  preservation" org.eventb.core.poStamp="0">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTALLHYPrailway_c7">
+            <org.eventb.core.poPredicate name="'" org.eventb.core.predicate="(ct&lt;7⇒ct'=ct+1)∧(ct=7⇒ct'=0)" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#2|org.eventb.core.action#'"/>
+        </org.eventb.core.poPredicateSet>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="ct'∈0 ‥ 7" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.invariant#0"/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#2"/>
+        <org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.invariant#0"/>
+        <org.eventb.core.poSelHint name="SEQHYT" org.eventb.core.poSelHintFst="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poSequent#choose_train\/inv4\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+        <org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD3"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poSequent name="choose_train/act1/FIS" org.eventb.core.accurate="true" org.eventb.core.poDesc="Feasibility of action" org.eventb.core.poStamp="0">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTALLHYPrailway_c7"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="∃ct'⦂ℤ·(ct&lt;7⇒ct'=ct+1)∧(ct=7⇒ct'=0)" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#2|org.eventb.core.action#'"/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.event#2|org.eventb.core.action#'"/>
+        <org.eventb.core.poSelHint name="SEQHYS" org.eventb.core.poSelHintFst="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTALLHYPrailway_c7"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poPredicateSet name="EVTIDENTrailway_c7" org.eventb.core.parentSet="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="0">
+        <org.eventb.core.poIdentifier name="ct'" org.eventb.core.type="ℤ"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTALLHYPrailway_c7" org.eventb.core.parentSet="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#EVTIDENTrailway_c7" org.eventb.core.poStamp="0"/>
+    <org.eventb.core.poPredicateSet name="ALLHYP" org.eventb.core.parentSet="/railway/railway_m0.bpo|org.eventb.core.poFile#railway_m0|org.eventb.core.poPredicateSet#ABSHYP" org.eventb.core.poStamp="0">
+        <org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="∀i⦂ℤ·i∈0 ‥ 7⇒P(i)∈0 ‥ 6" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.invariant#*"/>
+        <org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="RA∈0 ‥ 8" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.invariant#,"/>
+        <org.eventb.core.poPredicate name="PRD2" org.eventb.core.predicate="RB∈0 ‥ 8" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.invariant#."/>
+        <org.eventb.core.poPredicate name="PRD3" org.eventb.core.predicate="ct∈0 ‥ 7" org.eventb.core.source="/railway/railway_m0.bum|org.eventb.core.machineFile#railway_m0|org.eventb.core.invariant#0"/>
+    </org.eventb.core.poPredicateSet>
+</org.eventb.core.poFile>

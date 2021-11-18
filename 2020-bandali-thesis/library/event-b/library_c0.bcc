@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.scContextFile org.eventb.core.accurate="true" org.eventb.core.configuration="org.eventb.core.fwd">
+    <org.eventb.core.scAxiom name="'" org.eventb.core.label="axm1" org.eventb.core.predicate="partition(MemberID,{m1},{m2},{m3})" org.eventb.core.source="/library/library_c0.buc|org.eventb.core.contextFile#library_c0|org.eventb.core.axiom#+" org.eventb.core.theorem="false"/>
+    <org.eventb.core.scAxiom name="(" org.eventb.core.label="axm2" org.eventb.core.predicate="partition(BookID,{b1},{b2},{b3})" org.eventb.core.source="/library/library_c0.buc|org.eventb.core.contextFile#library_c0|org.eventb.core.axiom#0" org.eventb.core.theorem="false"/>
+    <org.eventb.core.scAxiom name=")" org.eventb.core.label="axm3" org.eventb.core.predicate="maxNbLoans=card(BookID) − 1" org.eventb.core.source="/library/library_c0.buc|org.eventb.core.contextFile#library_c0|org.eventb.core.axiom#2" org.eventb.core.theorem="false"/>
+    <org.eventb.core.scConstant name="maxNbLoans" org.eventb.core.source="/library/library_c0.buc|org.eventb.core.contextFile#library_c0|org.eventb.core.constant#1" org.eventb.core.type="ℤ"/>
+    <org.eventb.core.scConstant name="b1" org.eventb.core.source="/library/library_c0.buc|org.eventb.core.contextFile#library_c0|org.eventb.core.constant#-" org.eventb.core.type="BookID"/>
+    <org.eventb.core.scConstant name="b2" org.eventb.core.source="/library/library_c0.buc|org.eventb.core.contextFile#library_c0|org.eventb.core.constant#." org.eventb.core.type="BookID"/>
+    <org.eventb.core.scConstant name="b3" org.eventb.core.source="/library/library_c0.buc|org.eventb.core.contextFile#library_c0|org.eventb.core.constant#\/" org.eventb.core.type="BookID"/>
+    <org.eventb.core.scCarrierSet name="MemberID" org.eventb.core.source="/library/library_c0.buc|org.eventb.core.contextFile#library_c0|org.eventb.core.carrierSet#'" org.eventb.core.type="ℙ(MemberID)"/>
+    <org.eventb.core.scConstant name="m1" org.eventb.core.source="/library/library_c0.buc|org.eventb.core.contextFile#library_c0|org.eventb.core.constant#(" org.eventb.core.type="MemberID"/>
+    <org.eventb.core.scConstant name="m2" org.eventb.core.source="/library/library_c0.buc|org.eventb.core.contextFile#library_c0|org.eventb.core.constant#)" org.eventb.core.type="MemberID"/>
+    <org.eventb.core.scConstant name="m3" org.eventb.core.source="/library/library_c0.buc|org.eventb.core.contextFile#library_c0|org.eventb.core.constant#*" org.eventb.core.type="MemberID"/>
+    <org.eventb.core.scCarrierSet name="BookID" org.eventb.core.source="/library/library_c0.buc|org.eventb.core.contextFile#library_c0|org.eventb.core.carrierSet#," org.eventb.core.type="ℙ(BookID)"/>
+</org.eventb.core.scContextFile>

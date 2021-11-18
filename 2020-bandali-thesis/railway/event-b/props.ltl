@@ -1,0 +1,2 @@
+GF({!i. (i : 0..7 => P(i) = 6)})
+(WF(choose_train)) & (SF(move_train)) => GF({!i. (i : 0..7 => P(i) = 6)})

@@ -1,0 +1,3 @@
+[ LTL-Formula 0 ]
+((WF(choose_train)) & (SF(move_train)) => G (F ({!i.(i : 0 .. 7 => P(i) = 6)})))
+

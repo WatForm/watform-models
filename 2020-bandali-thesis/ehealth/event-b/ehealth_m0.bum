@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.machineFile org.eventb.core.comment="The EHealth case study - Event-B model&#10;&#10;Copyright (c) 2020 Amin Bandali &lt;bandali@uwaterloo.ca&gt;&#10;Copyright (c) 2020 Nancy Day &lt;nday@uwaterloo.ca&gt;&#10;&#10;This file is part of the EHealth Event-B model.&#10;&#10;The EHealth Event-B model is free software: you can redistribute it&#10;and/or modify it under the terms of the GNU General Public License as&#10;published by the Free Software Foundation, either version 3 of the&#10;License, or (at your option) any later version.&#10;&#10;The EHealth Event-B model is distributed in the hope that it will be&#10;useful, but WITHOUT ANY WARRANTY; without even the implied warranty of&#10;MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU&#10;General Public License for more details.&#10;&#10;You should have received a copy of the GNU General Public License&#10;along with The EHealth Event-B model.  If not, see&#10;&lt;https://www.gnu.org/licenses/&gt;.&#10;&#10;&#10;The EHealth case study is described in Prof. Jonathan S. Ostroff's&#10;technical report~\cite{ostroff2017} and used for teaching EECS 4312,&#10;the Software Engineering Requirements course, at York University,&#10;Toronto, Canada.&#10;&#10;@techreport{ostroff2017,&#10;  author      = {Jonathan S. Ostroff},&#10;  title       = {Validating Software via Abstract State Specifications},&#10;  year        = {2017},&#10;  number      = {EECS-2017-02},&#10;  institution = {York University},&#10;  url         = {http://www.eecs.yorku.ca/research/techreports/2017/?abstract=EECS-2017-02}&#10;}&#10;&#10;The EHealth Event-B model is an adaptation of the TLA+ one by Bandali,&#10;itself based on the snippets presented by&#10;Prof. Ostroff~\cite{ostroff2017}.&#10;&#10;This model has appeared in the following publications:&#10;&#10;@mastersthesis{bandali2020,&#10;  type      = {{MMath} thesis},&#10;  author    = {Amin Bandali},&#10;  title     = {{A Comprehensive Study of Declarative Modelling Languages}},&#10;  school    = &quot;University of Waterloo, David R. Cheriton School of Computer Science&quot;,&#10;  year      = 2020,&#10;  month     = {July},&#10;  publisher = &quot;UWSpace&quot;,&#10;  url       = {http://hdl.handle.net/10012/16059},&#10;  note      = {\url{http://hdl.handle.net/10012/16059} and&#10;                  \url{https://bndl.org/mmath}},&#10;  pdf       = {https://p.bndl.org/bandali-mmath-thesis.pdf}&#10;}" org.eventb.core.configuration="org.eventb.core.fwd" version="5">
+    <org.eventb.core.event name="'" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="INITIALISATION">
+        <org.eventb.core.action name="'" org.eventb.core.assignment="patients, medications, prescriptions, interactions ≔ ∅, ∅, ∅, ∅" org.eventb.core.label="act1"/>
+    </org.eventb.core.event>
+    <org.eventb.core.seesContext name="(" org.eventb.core.target="ehealth_c0"/>
+    <org.eventb.core.variable name=")" org.eventb.core.identifier="patients"/>
+    <org.eventb.core.variable name="*" org.eventb.core.identifier="medications"/>
+    <org.eventb.core.variable name="+" org.eventb.core.identifier="interactions"/>
+    <org.eventb.core.variable name="," org.eventb.core.identifier="prescriptions"/>
+    <org.eventb.core.invariant name="-" org.eventb.core.label="inv1" org.eventb.core.predicate="patients ⊆ Patient"/>
+    <org.eventb.core.invariant name="." org.eventb.core.label="inv2" org.eventb.core.predicate="medications ⊆ Medication"/>
+    <org.eventb.core.invariant name="/" org.eventb.core.label="inv3" org.eventb.core.predicate="interactions ∈ Medication ⇸ ℙ(Medication)"/>
+    <org.eventb.core.invariant name="0" org.eventb.core.label="inv4" org.eventb.core.predicate="prescriptions ∈ Patient ⇸ ℙ(Medication)"/>
+    <org.eventb.core.invariant name="1" org.eventb.core.comment="symmetry of interactions" org.eventb.core.label="symm" org.eventb.core.predicate="∀m1,m2 · m1 ∈ Medication ∧ m2 ∈ Medication ⇒&#10;  (m1 ∈ interactions(m2) ⇒ m2 ∈ interactions(m1))" org.eventb.core.theorem="true"/>
+    <org.eventb.core.invariant name="2" org.eventb.core.comment="irreflexivity of interactions" org.eventb.core.label="irrefl" org.eventb.core.predicate="∀m · m ∈ Medication ⇒ ¬(m ∈ interactions(m))" org.eventb.core.theorem="true"/>
+    <org.eventb.core.invariant name="3" org.eventb.core.comment="safety of prescriptions" org.eventb.core.label="safety" org.eventb.core.predicate="∀m1,m2,p · m1 ∈ Medication ∧ m2 ∈ Medication ∧ p ∈ Patient ⇒&#10;  (m1 ∈ prescriptions(p) ∧ m2 ∈ prescriptions(p) ⇒&#10;    ¬(m1 ∈ interactions(m2)))" org.eventb.core.theorem="true"/>
+    <org.eventb.core.event name="4" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="add_patient">
+        <org.eventb.core.guard name="'" org.eventb.core.label="grd1" org.eventb.core.predicate="p ∈ Patient"/>
+        <org.eventb.core.parameter name="(" org.eventb.core.identifier="p"/>
+        <org.eventb.core.guard name=")" org.eventb.core.label="grd2" org.eventb.core.predicate="p ∉ patients"/>
+        <org.eventb.core.action name="*" org.eventb.core.assignment="patients ≔ patients ∪ {p}" org.eventb.core.label="act1"/>
+        <org.eventb.core.action name="+" org.eventb.core.assignment="prescriptions ≔ prescriptions ∪ {p ↦ ∅}" org.eventb.core.label="act2"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name="5" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="add_medication">
+        <org.eventb.core.parameter name="'" org.eventb.core.identifier="m"/>
+        <org.eventb.core.guard name="(" org.eventb.core.label="grd1" org.eventb.core.predicate="m ∈ Medication"/>
+        <org.eventb.core.guard name=")" org.eventb.core.label="grd2" org.eventb.core.predicate="m ∉ medications"/>
+        <org.eventb.core.action name="*" org.eventb.core.assignment="medications ≔ medications ∪ {m}" org.eventb.core.label="act1"/>
+        <org.eventb.core.action name="+" org.eventb.core.assignment="interactions ≔ interactions ∪ {m ↦ ∅}" org.eventb.core.label="act2"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name="6" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="add_interaction">
+        <org.eventb.core.parameter name="'" org.eventb.core.identifier="m1"/>
+        <org.eventb.core.parameter name="(" org.eventb.core.identifier="m2"/>
+        <org.eventb.core.guard name=")" org.eventb.core.label="grd1" org.eventb.core.predicate="m1 ∈ medications"/>
+        <org.eventb.core.guard name="*" org.eventb.core.label="grd2" org.eventb.core.predicate="m2 ∈ medications"/>
+        <org.eventb.core.guard name="+" org.eventb.core.label="grd3" org.eventb.core.predicate="m1 ≠ m2"/>
+        <org.eventb.core.guard name="," org.eventb.core.label="grd4" org.eventb.core.predicate="m1 ∉ interactions(m2)"/>
+        <org.eventb.core.guard name="-" org.eventb.core.label="grd5" org.eventb.core.predicate="∀p · p ∈ patients ⇒ ¬(m1 ∈ prescriptions(p) ∧&#10;                       m2 ∈ prescriptions(p))"/>
+        <org.eventb.core.action name="." org.eventb.core.assignment="interactions ≔ interactions  {m1 ↦ interactions(m1) ∪ {m2},&#10;                               m2 ↦ interactions(m2) ∪ {m1}}" org.eventb.core.label="act1"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name="7" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="add_prescription">
+        <org.eventb.core.parameter name="'" org.eventb.core.identifier="p"/>
+        <org.eventb.core.parameter name="(" org.eventb.core.identifier="m"/>
+        <org.eventb.core.guard name=")" org.eventb.core.label="grd1" org.eventb.core.predicate="p ∈ patients"/>
+        <org.eventb.core.guard name="*" org.eventb.core.label="grd2" org.eventb.core.predicate="m ∈ medications"/>
+        <org.eventb.core.guard name="+" org.eventb.core.label="grd3" org.eventb.core.predicate="m ∉ prescriptions(p)"/>
+        <org.eventb.core.guard name="," org.eventb.core.label="grd4" org.eventb.core.predicate="∀m0 · m0 ∈ prescriptions(p) ⇒ m ∉ interactions(m0)"/>
+        <org.eventb.core.action name="-" org.eventb.core.assignment="prescriptions ≔ prescriptions  {p ↦ prescriptions(p) ∪ {m}}" org.eventb.core.label="act1"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name="8" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="remove_interaction">
+        <org.eventb.core.parameter name="'" org.eventb.core.identifier="m1"/>
+        <org.eventb.core.parameter name="(" org.eventb.core.identifier="m2"/>
+        <org.eventb.core.guard name=")" org.eventb.core.label="grd1" org.eventb.core.predicate="m1 ∈ medications"/>
+        <org.eventb.core.guard name="*" org.eventb.core.label="grd2" org.eventb.core.predicate="m2 ∈ medications"/>
+        <org.eventb.core.guard name="+" org.eventb.core.label="grd3" org.eventb.core.predicate="m1 ∈ interactions(m2)"/>
+        <org.eventb.core.action name="," org.eventb.core.assignment="interactions ≔ interactions  {m1 ↦ interactions(m1) ∖ {m2},&#10;                               m2 ↦ interactions(m2) ∖ {m1}}" org.eventb.core.label="act1"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name="9" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="remove_prescription">
+        <org.eventb.core.parameter name="'" org.eventb.core.identifier="p"/>
+        <org.eventb.core.parameter name="(" org.eventb.core.identifier="m"/>
+        <org.eventb.core.guard name=")" org.eventb.core.label="grd1" org.eventb.core.predicate="p ∈ patients"/>
+        <org.eventb.core.guard name="*" org.eventb.core.label="grd2" org.eventb.core.predicate="m ∈ medications"/>
+        <org.eventb.core.guard name="+" org.eventb.core.label="grd3" org.eventb.core.predicate="m ∈ prescriptions(p)"/>
+        <org.eventb.core.action name="," org.eventb.core.assignment="prescriptions ≔ prescriptions  {p ↦ prescriptions(p) ∖ {m}}" org.eventb.core.label="act1"/>
+    </org.eventb.core.event>
+</org.eventb.core.machineFile>

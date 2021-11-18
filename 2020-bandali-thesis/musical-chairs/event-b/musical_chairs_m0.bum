@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.machineFile org.eventb.core.comment="The Musical Chairs case study - Event-B model&#10;&#10;Copyright (c) 2018 Jose Serna &lt;jserna@uwaterloo.ca&gt;&#10;Copyright (c) 2018 Nancy Day &lt;nday@uwaterloo.ca&gt;&#10;Copyright (c) 2020 Amin Bandali &lt;bandali@uwaterloo.ca&gt;&#10;&#10;This file is part of the Musical Chairs Event-B model.&#10;&#10;The Musical Chairs Event-B model is free software: you can&#10;redistribute it and/or modify it under the terms of the GNU General&#10;Public License as published by the Free Software Foundation, either&#10;version 3 of the License, or (at your option) any later version.&#10;&#10;The Musical Chairs Event-B model is distributed in the hope that it&#10;will be useful, but WITHOUT ANY WARRANTY; without even the implied&#10;warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See&#10;the GNU General Public License for more details.&#10;&#10;You should have received a copy of the GNU General Public License&#10;along with the Musical Chairs Event-B model.  If not, see&#10;&lt;https://www.gnu.org/licenses/&gt;.&#10;&#10;&#10;The Musical Chairs case study is described in~\cite{Nissanke_1999} by&#10;Nissanke.  The Musical Chairs Event-B model is an adaptation of the&#10;original model(s) presented there.&#10;&#10;@Book{Nissanke_1999,&#10;  author    = {Nissanke, Nimal},&#10;  title     = {Formal Specification: Techniques and Applications},&#10;  year      = 1999,&#10;  doi       = {10.1007/978-1-4471-0791-0},&#10;  url       = {http://dx.doi.org/10.1007/978-1-4471-0791-0},&#10;  isbn      = 9781447107910,&#10;  publisher = {Springer London}&#10;}&#10;&#10;This model has appeared in the following publications:&#10;&#10;@mastersthesis{bandali2020,&#10;  type      = {{MMath} thesis},&#10;  author    = {Amin Bandali},&#10;  title     = {{A Comprehensive Study of Declarative Modelling Languages}},&#10;  school    = &quot;University of Waterloo, David R. Cheriton School of Computer Science&quot;,&#10;  year      = 2020,&#10;  month     = {July},&#10;  publisher = &quot;UWSpace&quot;,&#10;  url       = {http://hdl.handle.net/10012/16059},&#10;  note      = {\url{http://hdl.handle.net/10012/16059} and&#10;                  \url{https://bndl.org/mmath}},&#10;  pdf       = {https://p.bndl.org/bandali-mmath-thesis.pdf}&#10;}" org.eventb.core.configuration="org.eventb.core.fwd" version="5">
+    <org.eventb.core.event name="'" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="INITIALISATION">
+        <org.eventb.core.action name="'" org.eventb.core.assignment="activePlayers ≔ Player" org.eventb.core.label="act1"/>
+        <org.eventb.core.action name="(" org.eventb.core.assignment="activeChairs ≔ Chair" org.eventb.core.label="act2"/>
+        <org.eventb.core.action name=")" org.eventb.core.assignment="occupied ≔ ∅" org.eventb.core.label="act3"/>
+        <org.eventb.core.action name="*" org.eventb.core.assignment="musicPlaying :∈ BOOL" org.eventb.core.label="act4"/>
+        <org.eventb.core.action name="+" org.eventb.core.assignment="state ≔ start" org.eventb.core.label="act5"/>
+    </org.eventb.core.event>
+    <org.eventb.core.seesContext name="(" org.eventb.core.target="musical_chairs_c0"/>
+    <org.eventb.core.variable name=")" org.eventb.core.identifier="activePlayers"/>
+    <org.eventb.core.variable name="*" org.eventb.core.identifier="activeChairs"/>
+    <org.eventb.core.variable name="+" org.eventb.core.identifier="occupied"/>
+    <org.eventb.core.variable name="," org.eventb.core.identifier="musicPlaying"/>
+    <org.eventb.core.variable name="-" org.eventb.core.identifier="state"/>
+    <org.eventb.core.invariant name="." org.eventb.core.label="inv1" org.eventb.core.predicate="activePlayers ⊆ Player"/>
+    <org.eventb.core.invariant name="/" org.eventb.core.label="inv2" org.eventb.core.predicate="activeChairs ⊆ Chair"/>
+    <org.eventb.core.invariant name="0" org.eventb.core.label="inv3" org.eventb.core.predicate="occupied ∈ Chair ⤔ Player"/>
+    <org.eventb.core.invariant name="1" org.eventb.core.label="inv4" org.eventb.core.predicate="musicPlaying ∈ BOOL"/>
+    <org.eventb.core.invariant name="2" org.eventb.core.label="inv5" org.eventb.core.predicate="state ∈ State"/>
+    <org.eventb.core.event name="3" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="Walk">
+        <org.eventb.core.guard name="'" org.eventb.core.label="grd1" org.eventb.core.predicate="state = start"/>
+        <org.eventb.core.guard name="(" org.eventb.core.label="grd2" org.eventb.core.predicate="musicPlaying = TRUE"/>
+        <org.eventb.core.guard name=")" org.eventb.core.label="grd3" org.eventb.core.predicate="card(activePlayers) &gt; 1"/>
+        <org.eventb.core.action name="*" org.eventb.core.assignment="occupied ≔ ∅" org.eventb.core.label="act1"/>
+        <org.eventb.core.action name="+" org.eventb.core.assignment="state ≔ walking" org.eventb.core.label="act2"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name="4" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="Sit">
+        <org.eventb.core.guard name="'" org.eventb.core.label="grd1" org.eventb.core.predicate="state = walking"/>
+        <org.eventb.core.guard name="(" org.eventb.core.label="grd2" org.eventb.core.predicate="musicPlaying = FALSE"/>
+        <org.eventb.core.action name="*" org.eventb.core.assignment="occupied :∣ occupied' ∈ activeChairs ↣ activePlayers" org.eventb.core.label="act1"/>
+        <org.eventb.core.action name="+" org.eventb.core.assignment="state ≔ sitting" org.eventb.core.label="act2"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name="9" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="EliminateLoser">
+        <org.eventb.core.guard name="'" org.eventb.core.label="grd1" org.eventb.core.predicate="state = sitting"/>
+        <org.eventb.core.guard name="(" org.eventb.core.label="grd2" org.eventb.core.predicate="card(activePlayers) &gt; 1"/>
+        <org.eventb.core.guard name=")" org.eventb.core.label="grd3" org.eventb.core.predicate="card(activePlayers) − card(ran(occupied)) = 1"/>
+        <org.eventb.core.action name="*" org.eventb.core.assignment="activePlayers ≔ ran(occupied)" org.eventb.core.label="act1"/>
+        <org.eventb.core.action name="+" org.eventb.core.assignment="activeChairs :∣ card(activeChairs') = card(activeChairs) − 1" org.eventb.core.label="act2"/>
+        <org.eventb.core.action name="," org.eventb.core.assignment="occupied ≔ ∅" org.eventb.core.label="act3"/>
+        <org.eventb.core.action name="-" org.eventb.core.assignment="state :∣ (card(activePlayers)−1 = 1 ⇒ state' = sitting)&#10;       ∧ (card(activePlayers)−1 ≠ 1 ⇒ state' = start)" org.eventb.core.label="act4"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name="&gt;" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="Win">
+        <org.eventb.core.guard name="'" org.eventb.core.label="grd1" org.eventb.core.predicate="state = sitting"/>
+        <org.eventb.core.guard name="(" org.eventb.core.label="grd2" org.eventb.core.predicate="card(activePlayers) = 1"/>
+        <org.eventb.core.action name=")" org.eventb.core.assignment="state ≔ won" org.eventb.core.label="act1"/>
+    </org.eventb.core.event>
+    <org.eventb.core.invariant name="?" org.eventb.core.label="inv6" org.eventb.core.predicate="card(activePlayers) = card(activeChairs) + 1" org.eventb.core.theorem="true"/>
+    <org.eventb.core.event name="@" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="ChangeMusicPlaying">
+        <org.eventb.core.action name="'" org.eventb.core.assignment="musicPlaying :∣ musicPlaying' ≠ musicPlaying" org.eventb.core.label="act1"/>
+    </org.eventb.core.event>
+</org.eventb.core.machineFile>

@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.poFile org.eventb.core.poStamp="1">
+    <org.eventb.core.poPredicateSet name="CTXHYP" org.eventb.core.poStamp="1">
+        <org.eventb.core.poIdentifier name="Key" org.eventb.core.type="ℙ(Key)"/>
+        <org.eventb.core.poIdentifier name="Display" org.eventb.core.type="ℙ(Display)"/>
+        <org.eventb.core.poIdentifier name="a" org.eventb.core.type="Key"/>
+        <org.eventb.core.poIdentifier name="b" org.eventb.core.type="Key"/>
+        <org.eventb.core.poIdentifier name="c" org.eventb.core.type="Key"/>
+        <org.eventb.core.poIdentifier name="d" org.eventb.core.type="Key"/>
+        <org.eventb.core.poIdentifier name="chime" org.eventb.core.type="Display"/>
+        <org.eventb.core.poIdentifier name="wait" org.eventb.core.type="Display"/>
+        <org.eventb.core.poIdentifier name="time" org.eventb.core.type="Display"/>
+        <org.eventb.core.poIdentifier name="alarm2" org.eventb.core.type="Display"/>
+        <org.eventb.core.poIdentifier name="alarm1" org.eventb.core.type="Display"/>
+        <org.eventb.core.poIdentifier name="stopwatch" org.eventb.core.type="Display"/>
+        <org.eventb.core.poIdentifier name="update" org.eventb.core.type="Display"/>
+        <org.eventb.core.poIdentifier name="date" org.eventb.core.type="Display"/>
+        <org.eventb.core.poIdentifier name="alarms_beep" org.eventb.core.type="Display"/>
+        <org.eventb.core.poPredicate name="alarms_beeq" org.eventb.core.predicate="partition(Key,{a},{b},{c},{d})" org.eventb.core.source="/digital-watch/digital_watch_c0.buc|org.eventb.core.contextFile#digital_watch_c0|org.eventb.core.axiom#,"/>
+        <org.eventb.core.poPredicate name="alarms_beer" org.eventb.core.predicate="partition(Display,{time},{date},{wait},{update},{alarm1},{alarm2},{chime},{stopwatch},{alarms_beep})" org.eventb.core.source="/digital-watch/digital_watch_c0.buc|org.eventb.core.contextFile#digital_watch_c0|org.eventb.core.axiom#7"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="ABSHYP" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#CTXHYP" org.eventb.core.poStamp="1">
+        <org.eventb.core.poIdentifier name="pressed" org.eventb.core.type="ℙ(Key×BOOL)"/>
+        <org.eventb.core.poIdentifier name="waited_2_sec" org.eventb.core.type="BOOL"/>
+        <org.eventb.core.poIdentifier name="light" org.eventb.core.type="BOOL"/>
+        <org.eventb.core.poIdentifier name="display" org.eventb.core.type="Display"/>
+        <org.eventb.core.poIdentifier name="waited_2_min" org.eventb.core.type="BOOL"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poSequent name="INITIALISATION/inv2/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  establishment" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTALLHYPdigital_watch_c6">
+            <org.eventb.core.poPredicate name="'" org.eventb.core.predicate="pressed'∈Key → {FALSE}" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#'|org.eventb.core.action#("/>
+        </org.eventb.core.poPredicateSet>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="pressed'∈Key → BOOL" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.invariant#+"/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#'"/>
+        <org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.invariant#+"/>
+        <org.eventb.core.poSelHint name="SEQHYT" org.eventb.core.poSelHintFst="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#CTXHYP" org.eventb.core.poSelHintSnd="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poSequent#INITIALISATION\/inv2\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+        <org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD1"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poSequent name="INITIALISATION/act2/FIS" org.eventb.core.accurate="true" org.eventb.core.poDesc="Feasibility of action" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTALLHYPdigital_watch_c6"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="∃pressed'⦂ℙ(Key×BOOL)·pressed'∈Key → {FALSE}" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#'|org.eventb.core.action#("/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#'|org.eventb.core.action#("/>
+        <org.eventb.core.poSelHint name="SEQHYS" org.eventb.core.poSelHintFst="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#CTXHYP" org.eventb.core.poSelHintSnd="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTALLHYPdigital_watch_c6"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poPredicateSet name="EVTIDENTdigital_watch_c6" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#CTXHYP" org.eventb.core.poStamp="1">
+        <org.eventb.core.poIdentifier name="waited_2_min'" org.eventb.core.type="BOOL"/>
+        <org.eventb.core.poIdentifier name="light'" org.eventb.core.type="BOOL"/>
+        <org.eventb.core.poIdentifier name="pressed'" org.eventb.core.type="ℙ(Key×BOOL)"/>
+        <org.eventb.core.poIdentifier name="display'" org.eventb.core.type="Display"/>
+        <org.eventb.core.poIdentifier name="waited_2_sec'" org.eventb.core.type="BOOL"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTALLHYPdigital_watch_c6" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTIDENTdigital_watch_c6" org.eventb.core.poStamp="1"/>
+    <org.eventb.core.poSequent name="light_off_light_on/grd2/WD" org.eventb.core.accurate="true" org.eventb.core.poDesc="Well-definedness of Guard" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_c7'"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="b∈dom(pressed)∧pressed∈Key ⇸ BOOL" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#3|org.eventb.core.guard#)"/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#3|org.eventb.core.guard#)"/>
+        <org.eventb.core.poSelHint name="SEQHYS" org.eventb.core.poSelHintFst="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_c7'"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poPredicateSet name="EVTIDENTdigital_watch_c7" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="1">
+        <org.eventb.core.poIdentifier name="light'" org.eventb.core.type="BOOL"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTHYPdigital_watch_c7'" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTIDENTdigital_watch_c7" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="light=FALSE" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#3|org.eventb.core.guard#'"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTALLHYPdigital_watch_c7" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_c7'" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="pressed(b)=TRUE" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#3|org.eventb.core.guard#)"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poSequent name="light_on_light_off/grd2/WD" org.eventb.core.accurate="true" org.eventb.core.poDesc="Well-definedness of Guard" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_c8'"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="b∈dom(pressed)∧pressed∈Key ⇸ BOOL" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#4|org.eventb.core.guard#)"/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#4|org.eventb.core.guard#)"/>
+        <org.eventb.core.poSelHint name="SEQHYS" org.eventb.core.poSelHintFst="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_c8'"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poPredicateSet name="EVTIDENTdigital_watch_c8" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="1">
+        <org.eventb.core.poIdentifier name="light'" org.eventb.core.type="BOOL"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTHYPdigital_watch_c8'" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTIDENTdigital_watch_c8" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="light=TRUE" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#4|org.eventb.core.guard#'"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTALLHYPdigital_watch_c8" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_c8'" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="pressed(b)=FALSE" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#4|org.eventb.core.guard#)"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poSequent name="time_show_date/grd2/WD" org.eventb.core.accurate="true" org.eventb.core.poDesc="Well-definedness of Guard" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_c9'"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="d∈dom(pressed)∧pressed∈Key ⇸ BOOL" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#5|org.eventb.core.guard#("/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#5|org.eventb.core.guard#("/>
+        <org.eventb.core.poSelHint name="SEQHYS" org.eventb.core.poSelHintFst="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_c9'"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poPredicateSet name="EVTIDENTdigital_watch_c9" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="1">
+        <org.eventb.core.poIdentifier name="display'" org.eventb.core.type="Display"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTHYPdigital_watch_c9'" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTIDENTdigital_watch_c9" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="display=time" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#5|org.eventb.core.guard#'"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTALLHYPdigital_watch_c9" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_c9'" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="pressed(d)=TRUE" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#5|org.eventb.core.guard#("/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poSequent name="time_try_update/grd2/WD" org.eventb.core.accurate="true" org.eventb.core.poDesc="Well-definedness of Guard" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_c:'"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="c∈dom(pressed)∧pressed∈Key ⇸ BOOL" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#6|org.eventb.core.guard#("/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#6|org.eventb.core.guard#("/>
+        <org.eventb.core.poSelHint name="SEQHYS" org.eventb.core.poSelHintFst="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_c:'"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poPredicateSet name="EVTIDENTdigital_watch_c:" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="1">
+        <org.eventb.core.poIdentifier name="display'" org.eventb.core.type="Display"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTHYPdigital_watch_c:'" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTIDENTdigital_watch_c:" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="display=time" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#6|org.eventb.core.guard#'"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTALLHYPdigital_watch_c:" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_c:'" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="pressed(c)=TRUE" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#6|org.eventb.core.guard#("/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poSequent name="time_go2alarm1/grd2/WD" org.eventb.core.accurate="true" org.eventb.core.poDesc="Well-definedness of Guard" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_c;'"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="a∈dom(pressed)∧pressed∈Key ⇸ BOOL" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#7|org.eventb.core.guard#("/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#7|org.eventb.core.guard#("/>
+        <org.eventb.core.poSelHint name="SEQHYS" org.eventb.core.poSelHintFst="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_c;'"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poPredicateSet name="EVTIDENTdigital_watch_c;" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="1">
+        <org.eventb.core.poIdentifier name="display'" org.eventb.core.type="Display"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTHYPdigital_watch_c;'" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTIDENTdigital_watch_c;" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="display=time" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#7|org.eventb.core.guard#'"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTALLHYPdigital_watch_c;" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_c;'" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="pressed(a)=TRUE" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#7|org.eventb.core.guard#("/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poSequent name="date_show_time/grd2/WD" org.eventb.core.accurate="true" org.eventb.core.poDesc="Well-definedness of Guard" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_c='"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="d∈dom(pressed)∧pressed∈Key ⇸ BOOL" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#8|org.eventb.core.guard#("/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#8|org.eventb.core.guard#("/>
+        <org.eventb.core.poSelHint name="SEQHYS" org.eventb.core.poSelHintFst="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_c='"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poPredicateSet name="EVTIDENTdigital_watch_c=" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="1">
+        <org.eventb.core.poIdentifier name="display'" org.eventb.core.type="Display"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTHYPdigital_watch_c='" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTIDENTdigital_watch_c=" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="display=wait" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#8|org.eventb.core.guard#'"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTALLHYPdigital_watch_c=" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_c='" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="pressed(d)=TRUE" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#8|org.eventb.core.guard#("/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTIDENTdigital_watch_c&gt;" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="1">
+        <org.eventb.core.poIdentifier name="display'" org.eventb.core.type="Display"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTALLHYPdigital_watch_c&gt;" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTIDENTdigital_watch_c&gt;" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="display=date" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#9|org.eventb.core.guard#'"/>
+        <org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="waited_2_min=TRUE" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#9|org.eventb.core.guard#("/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poSequent name="wait_show_time/grd2/WD" org.eventb.core.accurate="true" org.eventb.core.poDesc="Well-definedness of Guard" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_c?'"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="c∈dom(pressed)∧pressed∈Key ⇸ BOOL" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#:|org.eventb.core.guard#("/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#:|org.eventb.core.guard#("/>
+        <org.eventb.core.poSelHint name="SEQHYS" org.eventb.core.poSelHintFst="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_c?'"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poPredicateSet name="EVTIDENTdigital_watch_c?" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="1">
+        <org.eventb.core.poIdentifier name="display'" org.eventb.core.type="Display"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTHYPdigital_watch_c?'" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTIDENTdigital_watch_c?" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="display=wait" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#:|org.eventb.core.guard#'"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTALLHYPdigital_watch_c?" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_c?'" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="pressed(c)=FALSE" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#:|org.eventb.core.guard#("/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTIDENTdigital_watch_c@" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="1">
+        <org.eventb.core.poIdentifier name="display'" org.eventb.core.type="Display"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTALLHYPdigital_watch_c@" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTIDENTdigital_watch_c@" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="display=wait" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#;|org.eventb.core.guard#'"/>
+        <org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="waited_2_sec=TRUE" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#;|org.eventb.core.guard#("/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poSequent name="update_show_time/grd2/WD" org.eventb.core.accurate="true" org.eventb.core.poDesc="Well-definedness of Guard" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_cA'"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="b∈dom(pressed)∧pressed∈Key ⇸ BOOL" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#=|org.eventb.core.guard#("/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#=|org.eventb.core.guard#("/>
+        <org.eventb.core.poSelHint name="SEQHYS" org.eventb.core.poSelHintFst="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_cA'"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poPredicateSet name="EVTIDENTdigital_watch_cA" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="1">
+        <org.eventb.core.poIdentifier name="display'" org.eventb.core.type="Display"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTHYPdigital_watch_cA'" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTIDENTdigital_watch_cA" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="display=update" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#=|org.eventb.core.guard#'"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTALLHYPdigital_watch_cA" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_cA'" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="pressed(b)=TRUE" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#=|org.eventb.core.guard#("/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poSequent name="alarm1_go2alarm2/grd2/WD" org.eventb.core.accurate="true" org.eventb.core.poDesc="Well-definedness of Guard" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_cB'"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="a∈dom(pressed)∧pressed∈Key ⇸ BOOL" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#&gt;|org.eventb.core.guard#("/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#&gt;|org.eventb.core.guard#("/>
+        <org.eventb.core.poSelHint name="SEQHYS" org.eventb.core.poSelHintFst="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_cB'"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poPredicateSet name="EVTIDENTdigital_watch_cB" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="1">
+        <org.eventb.core.poIdentifier name="display'" org.eventb.core.type="Display"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTHYPdigital_watch_cB'" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTIDENTdigital_watch_cB" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="display=alarm1" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#&gt;|org.eventb.core.guard#'"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTALLHYPdigital_watch_cB" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_cB'" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="pressed(a)=TRUE" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#&gt;|org.eventb.core.guard#("/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poSequent name="alarm2_go2chime/grd2/WD" org.eventb.core.accurate="true" org.eventb.core.poDesc="Well-definedness of Guard" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_cC'"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="a∈dom(pressed)∧pressed∈Key ⇸ BOOL" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#?|org.eventb.core.guard#("/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#?|org.eventb.core.guard#("/>
+        <org.eventb.core.poSelHint name="SEQHYS" org.eventb.core.poSelHintFst="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_cC'"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poPredicateSet name="EVTIDENTdigital_watch_cC" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="1">
+        <org.eventb.core.poIdentifier name="display'" org.eventb.core.type="Display"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTHYPdigital_watch_cC'" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTIDENTdigital_watch_cC" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="display=alarm2" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#?|org.eventb.core.guard#'"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTALLHYPdigital_watch_cC" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_cC'" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="pressed(a)=TRUE" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#?|org.eventb.core.guard#("/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poSequent name="chime_go2stopwatch/grd2/WD" org.eventb.core.accurate="true" org.eventb.core.poDesc="Well-definedness of Guard" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_cD'"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="a∈dom(pressed)∧pressed∈Key ⇸ BOOL" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#@|org.eventb.core.guard#("/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#@|org.eventb.core.guard#("/>
+        <org.eventb.core.poSelHint name="SEQHYS" org.eventb.core.poSelHintFst="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_cD'"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poPredicateSet name="EVTIDENTdigital_watch_cD" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="1">
+        <org.eventb.core.poIdentifier name="display'" org.eventb.core.type="Display"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTHYPdigital_watch_cD'" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTIDENTdigital_watch_cD" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="display=chime" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#@|org.eventb.core.guard#'"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTALLHYPdigital_watch_cD" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_cD'" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="pressed(a)=TRUE" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#@|org.eventb.core.guard#("/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poSequent name="stopwatch_go2time/grd2/WD" org.eventb.core.accurate="true" org.eventb.core.poDesc="Well-definedness of Guard" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_cE'"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="a∈dom(pressed)∧pressed∈Key ⇸ BOOL" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#A|org.eventb.core.guard#("/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#A|org.eventb.core.guard#("/>
+        <org.eventb.core.poSelHint name="SEQHYS" org.eventb.core.poSelHintFst="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_cE'"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poPredicateSet name="EVTIDENTdigital_watch_cE" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="1">
+        <org.eventb.core.poIdentifier name="display'" org.eventb.core.type="Display"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTHYPdigital_watch_cE'" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTIDENTdigital_watch_cE" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="display=stopwatch" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#A|org.eventb.core.guard#'"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTALLHYPdigital_watch_cE" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_cE'" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="pressed(a)=TRUE" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#A|org.eventb.core.guard#("/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poSequent name="pressed_true/grd2/WD" org.eventb.core.accurate="true" org.eventb.core.poDesc="Well-definedness of Guard" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_cF'"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="button∈dom(pressed)∧pressed∈Key ⇸ BOOL" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#B|org.eventb.core.guard#*"/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#B|org.eventb.core.guard#*"/>
+        <org.eventb.core.poSelHint name="SEQHYS" org.eventb.core.poSelHintFst="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_cF'"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poSequent name="pressed_true/inv2/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  preservation" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTALLHYPdigital_watch_cF"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="pressed{button ↦ TRUE}∈Key → BOOL" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.invariant#+"/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#B"/>
+        <org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.invariant#+"/>
+        <org.eventb.core.poSelHint name="SEQHYT" org.eventb.core.poSelHintFst="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poSequent#pressed_true\/inv2\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+        <org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD1"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poPredicateSet name="EVTIDENTdigital_watch_cF" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="1">
+        <org.eventb.core.poIdentifier name="button" org.eventb.core.type="Key"/>
+        <org.eventb.core.poIdentifier name="pressed'" org.eventb.core.type="ℙ(Key×BOOL)"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTHYPdigital_watch_cF'" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTIDENTdigital_watch_cF" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="button∈Key" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#B|org.eventb.core.guard#'"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTALLHYPdigital_watch_cF" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_cF'" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="pressed(button)=FALSE" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#B|org.eventb.core.guard#*"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poSequent name="pressed_false/grd2/WD" org.eventb.core.accurate="true" org.eventb.core.poDesc="Well-definedness of Theorem" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_cG'"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="button∈dom(pressed)∧pressed∈Key ⇸ BOOL" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#C|org.eventb.core.guard#*"/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#C|org.eventb.core.guard#*"/>
+        <org.eventb.core.poSelHint name="SEQHYS" org.eventb.core.poSelHintFst="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_cG'"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poSequent name="pressed_false/grd2/THM" org.eventb.core.accurate="true" org.eventb.core.poDesc="Theorem" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_cG'"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="pressed(button)=TRUE" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#C|org.eventb.core.guard#*"/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#C|org.eventb.core.guard#*"/>
+        <org.eventb.core.poSelHint name="SEQHYS" org.eventb.core.poSelHintFst="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_cG'"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poSequent name="pressed_false/inv2/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  preservation" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTALLHYPdigital_watch_cG"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="pressed{button ↦ FALSE}∈Key → BOOL" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.invariant#+"/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#C"/>
+        <org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.invariant#+"/>
+        <org.eventb.core.poSelHint name="SEQHYT" org.eventb.core.poSelHintFst="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poSequent#pressed_false\/inv2\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+        <org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD1"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poPredicateSet name="EVTIDENTdigital_watch_cG" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="1">
+        <org.eventb.core.poIdentifier name="button" org.eventb.core.type="Key"/>
+        <org.eventb.core.poIdentifier name="pressed'" org.eventb.core.type="ℙ(Key×BOOL)"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTHYPdigital_watch_cG'" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTIDENTdigital_watch_cG" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="button∈Key" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#C|org.eventb.core.guard#'"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTALLHYPdigital_watch_cG" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTHYPdigital_watch_cG'" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="pressed(button)=TRUE" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#C|org.eventb.core.guard#*"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTIDENTdigital_watch_cH" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="1">
+        <org.eventb.core.poIdentifier name="waited_2_min'" org.eventb.core.type="BOOL"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTALLHYPdigital_watch_cH" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTIDENTdigital_watch_cH" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="waited_2_min=FALSE" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#D|org.eventb.core.guard#'"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTIDENTdigital_watch_cI" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="1">
+        <org.eventb.core.poIdentifier name="waited_2_min'" org.eventb.core.type="BOOL"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTALLHYPdigital_watch_cI" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTIDENTdigital_watch_cI" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="waited_2_min=TRUE" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#evt1|org.eventb.core.guard#'"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTIDENTdigital_watch_cJ" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="1">
+        <org.eventb.core.poIdentifier name="waited_2_sec'" org.eventb.core.type="BOOL"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTALLHYPdigital_watch_cJ" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTIDENTdigital_watch_cJ" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="waited_2_sec=FALSE" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#evt2|org.eventb.core.guard#'"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTIDENTdigital_watch_cK" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="1">
+        <org.eventb.core.poIdentifier name="waited_2_sec'" org.eventb.core.type="BOOL"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="EVTALLHYPdigital_watch_cK" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#EVTIDENTdigital_watch_cK" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="waited_2_sec=TRUE" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.event#evt3|org.eventb.core.guard#'"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="ALLHYP" org.eventb.core.parentSet="/digital-watch/digital_watch_m0.bpo|org.eventb.core.poFile#digital_watch_m0|org.eventb.core.poPredicateSet#ABSHYP" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="light∈BOOL" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.invariant#*"/>
+        <org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="pressed∈Key → BOOL" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.invariant#+"/>
+        <org.eventb.core.poPredicate name="PRD2" org.eventb.core.predicate="display∈Display" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.invariant#."/>
+        <org.eventb.core.poPredicate name="PRD3" org.eventb.core.predicate="waited_2_min∈BOOL" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.invariant#1"/>
+        <org.eventb.core.poPredicate name="PRD4" org.eventb.core.predicate="waited_2_sec∈BOOL" org.eventb.core.source="/digital-watch/digital_watch_m0.bum|org.eventb.core.machineFile#digital_watch_m0|org.eventb.core.invariant#2"/>
+    </org.eventb.core.poPredicateSet>
+</org.eventb.core.poFile>

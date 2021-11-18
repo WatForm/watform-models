@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.machineFile org.eventb.core.comment="The DigitalWatch case study - Event-B model&#10;&#10;Copyright (c) 2018 Ali Abbassi &lt;aabbassi@uwaterloo.ca&gt;&#10;Copyright (c) 2018 Nancy Day &lt;nday@uwaterloo.ca&gt;&#10;Copyright (c) 2020 Amin Bandali &lt;bandali@uwaterloo.ca&gt;&#10;&#10;This file is part of the DigitalWatch Event-B model.&#10;&#10;The DigitalWatch Event-B model is free software: you can redistribute&#10;it and/or modify it under the terms of the GNU General Public License&#10;as published by the Free Software Foundation, either version 3 of the&#10;License, or (at your option) any later version.&#10;&#10;The DigitalWatch Event-B model is distributed in the hope that it will&#10;be useful, but WITHOUT ANY WARRANTY; without even the implied warranty&#10;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU&#10;General Public License for more details.&#10;&#10;You should have received a copy of the GNU General Public License&#10;along with the DigitalWatch Event-B model.  If not, see&#10;&lt;https://www.gnu.org/licenses/&gt;.&#10;&#10;&#10;The DigitalWatch case study is described&#10;in~\cite{DBLP:journals/scp/Harel87} by Harel.  The DigitalWatch&#10;Event-B model is an adaptation of the original model(s) presented&#10;there.&#10;&#10;@Article{DBLP:journals/scp/Harel87,&#10;  author    = {David Harel},&#10;  title     = {Statecharts: {A} Visual Formalism for Complex Systems},&#10;  year      = 1987,&#10;  volume    = 8,&#10;  number    = 3,&#10;  pages     = {231-274},&#10;  doi       = {10.1016/0167-6423(87)90035-9},&#10;  url       = {https://doi.org/10.1016/0167-6423(87)90035-9},&#10;  journal   = {Sci. Comput. Program.},&#10;  timestamp = {Wed, 14 Nov 2018 10:21:28 +0100},&#10;  biburl    = {https://dblp.org/rec/bib/journals/scp/Harel87},&#10;  bibsource = {dblp computer science bibliography, https://dblp.org}&#10;}&#10;&#10;This model has appeared in the following publications:&#10;&#10;@inproceedings{DBLP:conf/re/AbbassiBDS18,&#10;  author    = {Ali Abbassi and&#10;               Amin Bandali and&#10;               Nancy A. Day and&#10;               Jos{\'{e}} Serna},&#10;  editor    = {Ana Moreira and&#10;               Gunter Mussbacher and&#10;               Jo{\~{a}}o Ara{\'{u}}jo and&#10;               Pablo S{\'{a}}nchez},&#10;  title     = {A Comparison of the Declarative Modelling Languages B, Dash, and {TLA+}},&#10;  booktitle = {8th {IEEE} International Model-Driven Requirements Engineering Workshop,&#10;               MoDRE@RE 2018, Banff, AB, Canada, August 20, 2018},&#10;  pages     = {11--20},&#10;  publisher = {{IEEE} Computer Society},&#10;  year      = {2018},&#10;  url       = {https://doi.org/10.1109/MoDRE.2018.00008},&#10;  doi       = {10.1109/MoDRE.2018.00008},&#10;  timestamp = {Wed, 16 Oct 2019 14:14:56 +0200},&#10;  biburl    = {https://dblp.org/rec/conf/re/AbbassiBDS18.bib},&#10;  bibsource = {dblp computer science bibliography, https://dblp.org}&#10;}&#10;&#10;@mastersthesis{bandali2020,&#10;  type      = {{MMath} thesis},&#10;  author    = {Amin Bandali},&#10;  title     = {{A Comprehensive Study of Declarative Modelling Languages}},&#10;  school    = &quot;University of Waterloo, David R. Cheriton School of Computer Science&quot;,&#10;  year      = 2020,&#10;  month     = {July},&#10;  publisher = &quot;UWSpace&quot;,&#10;  url       = {http://hdl.handle.net/10012/16059},&#10;  note      = {\url{http://hdl.handle.net/10012/16059} and&#10;                  \url{https://bndl.org/mmath}},&#10;  pdf       = {https://p.bndl.org/bandali-mmath-thesis.pdf}&#10;}" org.eventb.core.configuration="org.eventb.core.fwd" version="5">
+    <org.eventb.core.event name="'" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="INITIALISATION">
+        <org.eventb.core.action name="'" org.eventb.core.assignment="light ≔ FALSE" org.eventb.core.label="act1"/>
+        <org.eventb.core.action name="(" org.eventb.core.assignment="pressed :∣ pressed' ∈ Key → {FALSE}" org.eventb.core.label="act2"/>
+        <org.eventb.core.action name=")" org.eventb.core.assignment="display ≔ time" org.eventb.core.label="act3"/>
+        <org.eventb.core.action name="*" org.eventb.core.assignment="waited_2_min ≔ FALSE" org.eventb.core.label="act4"/>
+        <org.eventb.core.action name="+" org.eventb.core.assignment="waited_2_sec ≔ FALSE" org.eventb.core.label="act5"/>
+    </org.eventb.core.event>
+    <org.eventb.core.seesContext name="(" org.eventb.core.target="digital_watch_c0"/>
+    <org.eventb.core.variable name=")" org.eventb.core.identifier="light"/>
+    <org.eventb.core.invariant name="*" org.eventb.core.comment="FALSE: off, TRUE: on" org.eventb.core.label="inv1" org.eventb.core.predicate="light ∈ BOOL"/>
+    <org.eventb.core.invariant name="+" org.eventb.core.label="inv2" org.eventb.core.predicate="pressed ∈ Key → BOOL"/>
+    <org.eventb.core.variable name="," org.eventb.core.identifier="pressed"/>
+    <org.eventb.core.variable name="-" org.eventb.core.identifier="display"/>
+    <org.eventb.core.invariant name="." org.eventb.core.comment="currently active display" org.eventb.core.label="inv3" org.eventb.core.predicate="display ∈ Display"/>
+    <org.eventb.core.variable name="/" org.eventb.core.identifier="waited_2_min"/>
+    <org.eventb.core.variable name="0" org.eventb.core.identifier="waited_2_sec"/>
+    <org.eventb.core.invariant name="1" org.eventb.core.label="inv4" org.eventb.core.predicate="waited_2_min ∈ BOOL"/>
+    <org.eventb.core.invariant name="2" org.eventb.core.label="inv5" org.eventb.core.predicate="waited_2_sec ∈ BOOL"/>
+    <org.eventb.core.event name="3" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="light_off_light_on">
+        <org.eventb.core.guard name="'" org.eventb.core.label="grd1" org.eventb.core.predicate="light = FALSE"/>
+        <org.eventb.core.action name="(" org.eventb.core.assignment="light ≔ TRUE" org.eventb.core.label="act1"/>
+        <org.eventb.core.guard name=")" org.eventb.core.label="grd2" org.eventb.core.predicate="pressed(b) = TRUE"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name="4" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="light_on_light_off">
+        <org.eventb.core.guard name="'" org.eventb.core.label="grd1" org.eventb.core.predicate="light = TRUE"/>
+        <org.eventb.core.action name="(" org.eventb.core.assignment="light ≔ FALSE" org.eventb.core.label="act1"/>
+        <org.eventb.core.guard name=")" org.eventb.core.label="grd2" org.eventb.core.predicate="pressed(b) = FALSE"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name="5" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="time_show_date">
+        <org.eventb.core.guard name="'" org.eventb.core.label="grd1" org.eventb.core.predicate="display = time"/>
+        <org.eventb.core.guard name="(" org.eventb.core.label="grd2" org.eventb.core.predicate="pressed(d) = TRUE"/>
+        <org.eventb.core.action name=")" org.eventb.core.assignment="display ≔ date" org.eventb.core.label="act1"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name="6" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="time_try_update">
+        <org.eventb.core.guard name="'" org.eventb.core.label="grd1" org.eventb.core.predicate="display = time"/>
+        <org.eventb.core.guard name="(" org.eventb.core.label="grd2" org.eventb.core.predicate="pressed(c) = TRUE"/>
+        <org.eventb.core.action name=")" org.eventb.core.assignment="display ≔ wait" org.eventb.core.label="act1"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name="7" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="time_go2alarm1">
+        <org.eventb.core.guard name="'" org.eventb.core.label="grd1" org.eventb.core.predicate="display = time"/>
+        <org.eventb.core.guard name="(" org.eventb.core.label="grd2" org.eventb.core.predicate="pressed(a) = TRUE"/>
+        <org.eventb.core.action name=")" org.eventb.core.assignment="display ≔ alarm1" org.eventb.core.label="act1"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name="8" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="date_show_time">
+        <org.eventb.core.guard name="'" org.eventb.core.label="grd1" org.eventb.core.predicate="display = wait"/>
+        <org.eventb.core.guard name="(" org.eventb.core.label="grd2" org.eventb.core.predicate="pressed(d) = TRUE"/>
+        <org.eventb.core.action name=")" org.eventb.core.assignment="display ≔ time" org.eventb.core.label="act1"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name="9" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="date_return_to_time">
+        <org.eventb.core.guard name="'" org.eventb.core.label="grd1" org.eventb.core.predicate="display = date"/>
+        <org.eventb.core.guard name="(" org.eventb.core.label="grd2" org.eventb.core.predicate="waited_2_min = TRUE"/>
+        <org.eventb.core.action name=")" org.eventb.core.assignment="display ≔ time" org.eventb.core.label="act1"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name=":" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="wait_show_time">
+        <org.eventb.core.guard name="'" org.eventb.core.label="grd1" org.eventb.core.predicate="display = wait"/>
+        <org.eventb.core.guard name="(" org.eventb.core.label="grd2" org.eventb.core.predicate="pressed(c) = FALSE"/>
+        <org.eventb.core.action name=")" org.eventb.core.assignment="display ≔ time" org.eventb.core.label="act1"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name=";" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="wait_show_update">
+        <org.eventb.core.guard name="'" org.eventb.core.label="grd1" org.eventb.core.predicate="display = wait"/>
+        <org.eventb.core.guard name="(" org.eventb.core.label="grd2" org.eventb.core.predicate="waited_2_sec = TRUE"/>
+        <org.eventb.core.action name=")" org.eventb.core.assignment="display ≔ update" org.eventb.core.label="act1"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name="=" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="update_show_time">
+        <org.eventb.core.guard name="'" org.eventb.core.label="grd1" org.eventb.core.predicate="display = update"/>
+        <org.eventb.core.guard name="(" org.eventb.core.label="grd2" org.eventb.core.predicate="pressed(b) = TRUE"/>
+        <org.eventb.core.action name=")" org.eventb.core.assignment="display ≔ time" org.eventb.core.label="act1"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name="&gt;" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="alarm1_go2alarm2">
+        <org.eventb.core.guard name="'" org.eventb.core.label="grd1" org.eventb.core.predicate="display = alarm1"/>
+        <org.eventb.core.guard name="(" org.eventb.core.label="grd2" org.eventb.core.predicate="pressed(a) = TRUE"/>
+        <org.eventb.core.action name=")" org.eventb.core.assignment="display ≔ alarm2" org.eventb.core.label="act1"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name="?" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="alarm2_go2chime">
+        <org.eventb.core.guard name="'" org.eventb.core.label="grd1" org.eventb.core.predicate="display = alarm2"/>
+        <org.eventb.core.guard name="(" org.eventb.core.label="grd2" org.eventb.core.predicate="pressed(a) = TRUE"/>
+        <org.eventb.core.action name=")" org.eventb.core.assignment="display ≔ chime" org.eventb.core.label="act1"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name="@" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="chime_go2stopwatch">
+        <org.eventb.core.guard name="'" org.eventb.core.label="grd1" org.eventb.core.predicate="display = chime"/>
+        <org.eventb.core.guard name="(" org.eventb.core.label="grd2" org.eventb.core.predicate="pressed(a) = TRUE"/>
+        <org.eventb.core.action name=")" org.eventb.core.assignment="display ≔ stopwatch" org.eventb.core.label="act1"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name="A" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="stopwatch_go2time">
+        <org.eventb.core.guard name="'" org.eventb.core.label="grd1" org.eventb.core.predicate="display = stopwatch"/>
+        <org.eventb.core.guard name="(" org.eventb.core.label="grd2" org.eventb.core.predicate="pressed(a) = TRUE"/>
+        <org.eventb.core.action name=")" org.eventb.core.assignment="display ≔ time" org.eventb.core.label="act1"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name="B" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="pressed_true">
+        <org.eventb.core.guard name="'" org.eventb.core.label="grd1" org.eventb.core.predicate="button ∈ Key"/>
+        <org.eventb.core.action name="(" org.eventb.core.assignment="pressed(button) ≔ TRUE" org.eventb.core.label="act1"/>
+        <org.eventb.core.parameter name=")" org.eventb.core.identifier="button"/>
+        <org.eventb.core.guard name="*" org.eventb.core.label="grd2" org.eventb.core.predicate="pressed(button) = FALSE"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name="C" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="pressed_false">
+        <org.eventb.core.guard name="'" org.eventb.core.label="grd1" org.eventb.core.predicate="button ∈ Key"/>
+        <org.eventb.core.action name="(" org.eventb.core.assignment="pressed(button) ≔ FALSE" org.eventb.core.label="act1"/>
+        <org.eventb.core.parameter name=")" org.eventb.core.identifier="button"/>
+        <org.eventb.core.guard name="*" org.eventb.core.label="grd2" org.eventb.core.predicate="pressed(button) = TRUE" org.eventb.core.theorem="true"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name="D" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="waited_2_min_true">
+        <org.eventb.core.guard name="'" org.eventb.core.label="grd1" org.eventb.core.predicate="waited_2_min = FALSE"/>
+        <org.eventb.core.action name="(" org.eventb.core.assignment="waited_2_min ≔ TRUE" org.eventb.core.label="act1"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name="evt1" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="waited_2_min_false">
+        <org.eventb.core.guard name="'" org.eventb.core.label="grd1" org.eventb.core.predicate="waited_2_min = TRUE"/>
+        <org.eventb.core.action name="(" org.eventb.core.assignment="waited_2_min ≔ FALSE" org.eventb.core.label="act1"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name="evt2" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="waited_2_sec_true">
+        <org.eventb.core.guard name="'" org.eventb.core.label="grd1" org.eventb.core.predicate="waited_2_sec = FALSE"/>
+        <org.eventb.core.action name="(" org.eventb.core.assignment="waited_2_sec ≔ TRUE" org.eventb.core.label="act1"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name="evt3" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="waited_2_sec_false">
+        <org.eventb.core.guard name="'" org.eventb.core.label="grd1" org.eventb.core.predicate="waited_2_sec = TRUE"/>
+        <org.eventb.core.action name="(" org.eventb.core.assignment="waited_2_sec ≔ FALSE" org.eventb.core.label="act1"/>
+    </org.eventb.core.event>
+</org.eventb.core.machineFile>

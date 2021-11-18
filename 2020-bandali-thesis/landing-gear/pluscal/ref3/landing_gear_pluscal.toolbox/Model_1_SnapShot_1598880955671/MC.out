@@ -1,0 +1,747 @@
+@!@!@STARTMSG 2262:0 @!@!@
+TLC2 Version 2.14 of 10 July 2019
+@!@!@ENDMSG 2262 @!@!@
+@!@!@STARTMSG 2187:0 @!@!@
+Running breadth-first search Model-Checking with fp 56 and seed 4717368085004525746 with 4 workers on 8 cores with 1157MB heap and 2601MB offheap memory [pid: 5510] (Linux 4.19.0-10-amd64 amd64, AdoptOpenJDK 11.0.3 x86_64, OffHeapDiskFPSet, DiskStateQueue).
+@!@!@ENDMSG 2187 @!@!@
+@!@!@STARTMSG 2220:0 @!@!@
+Starting SANY...
+@!@!@ENDMSG 2220 @!@!@
+Parsing file /home/bandali/src/git/models/bandali-nday-2020/landing-gear/pluscal/landing_gear_pluscal.toolbox/Model_1/MC.tla
+Parsing file /home/bandali/src/git/models/bandali-nday-2020/landing-gear/pluscal/landing_gear_pluscal.toolbox/Model_1/landing_gear_pluscal.tla
+Parsing file /data/bandali/usr/dls/tla-toolbox/plugins/org.lamport.tlatools_1.0.0.201907102009/tla2sany/StandardModules/TLC.tla
+Parsing file /data/bandali/usr/dls/tla-toolbox/plugins/org.lamport.tlatools_1.0.0.201907102009/tla2sany/StandardModules/Naturals.tla
+Parsing file /data/bandali/usr/dls/tla-toolbox/plugins/org.lamport.tlatools_1.0.0.201907102009/tla2sany/StandardModules/Sequences.tla
+Parsing file /data/bandali/usr/dls/tla-toolbox/plugins/org.lamport.tlatools_1.0.0.201907102009/tla2sany/StandardModules/FiniteSets.tla
+Semantic processing of module landing_gear_pluscal
+Semantic processing of module Naturals
+Semantic processing of module Sequences
+Semantic processing of module FiniteSets
+Semantic processing of module TLC
+Semantic processing of module MC
+@!@!@STARTMSG 2219:0 @!@!@
+SANY finished.
+@!@!@ENDMSG 2219 @!@!@
+@!@!@STARTMSG 2185:0 @!@!@
+Starting... (2020-08-31 09:35:51)
+@!@!@ENDMSG 2185 @!@!@
+@!@!@STARTMSG 2212:0 @!@!@
+Implied-temporal checking--satisfiability problem has 4 branches.
+@!@!@ENDMSG 2212 @!@!@
+@!@!@STARTMSG 2189:0 @!@!@
+Computing initial states...
+@!@!@ENDMSG 2189 @!@!@
+@!@!@STARTMSG 2190:0 @!@!@
+Finished computing initial states: 2 distinct states generated at 2020-08-31 09:35:52.
+@!@!@ENDMSG 2190 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(9) at 2020-08-31 09:35:52: 42 states generated, 20 distinct states found, 0 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+@!@!@STARTMSG 2192:0 @!@!@
+Checking 4 branches of temporal properties for the complete state space with 80 total distinct states at (2020-08-31 09:35:52)
+@!@!@ENDMSG 2192 @!@!@
+@!@!@STARTMSG 2267:0 @!@!@
+Finished checking temporal properties in 00s at 2020-08-31 09:35:52
+@!@!@ENDMSG 2267 @!@!@
+@!@!@STARTMSG 2193:0 @!@!@
+Model checking completed. No error has been found.
+  Estimates of the probability that TLC did not check all reachable states
+  because two distinct states had the same fingerprint:
+  calculated (optimistic):  val = 2.4E-17
+@!@!@ENDMSG 2193 @!@!@
+@!@!@STARTMSG 2201:0 @!@!@
+The coverage statistics at 2020-08-31 09:35:52
+@!@!@ENDMSG 2201 @!@!@
+@!@!@STARTMSG 2773:0 @!@!@
+<Init line 289, col 1 to line 289, col 4 of module landing_gear_pluscal>: 2:2
+@!@!@ENDMSG 2773 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 290, col 12 to line 290, col 34 of module landing_gear_pluscal: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 293, col 12 to line 293, col 40 of module landing_gear_pluscal: 2
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 294, col 12 to line 294, col 43 of module landing_gear_pluscal: 2
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 295, col 12 to line 295, col 44 of module landing_gear_pluscal: 2
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 296, col 12 to line 296, col 46 of module landing_gear_pluscal: 2
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 297, col 12 to line 297, col 45 of module landing_gear_pluscal: 2
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 298, col 12 to line 300, col 86 of module landing_gear_pluscal: 2
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2772:0 @!@!@
+<toggle_handle_ line 420, col 1 to line 420, col 14 of module landing_gear_pluscal>: 9:46
+@!@!@ENDMSG 2772 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 420, col 22 to line 420, col 59 of module landing_gear_pluscal: 92
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 420, col 22 to line 420, col 40 of module landing_gear_pluscal: 46
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 421, col 25 to line 421, col 37 of module landing_gear_pluscal: 46
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 422, col 30 to line 422, col 48 of module landing_gear_pluscal: 27
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 423, col 30 to line 423, col 46 of module landing_gear_pluscal: 19
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 424, col 22 to line 424, col 76 of module landing_gear_pluscal: 46
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 425, col 22 to line 429, col 63 of module landing_gear_pluscal: 46
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2772:0 @!@!@
+<Terminating line 434, col 1 to line 434, col 11 of module landing_gear_pluscal>: 0:0
+@!@!@ENDMSG 2772 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 434, col 19 to line 434, col 56 of module landing_gear_pluscal: 46
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 435, col 19 to line 435, col 32 of module landing_gear_pluscal: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2772:0 @!@!@
+<MyNext line 449, col 1 to line 449, col 6 of module landing_gear_pluscal (450 6 450 69)>: 9:46
+@!@!@ENDMSG 2772 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 450, col 9 to line 450, col 21 of module landing_gear_pluscal: 46
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 302, col 28 to line 302, col 77 of module landing_gear_pluscal: 54
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 302, col 28 to line 302, col 52 of module landing_gear_pluscal: 27
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 303, col 31 to line 303, col 49 of module landing_gear_pluscal: 27
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 304, col 42 to line 304, col 55 of module landing_gear_pluscal: 22
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 305, col 50 to line 308, col 99 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 305, col 60 to line 308, col 98 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 305, col 65 to line 305, col 98 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 306, col 65 to line 306, col 99 of module landing_gear_pluscal: 4
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 307, col 65 to line 307, col 99 of module landing_gear_pluscal: 3
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 309, col 50 to line 312, col 138 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 309, col 82 to line 312, col 137 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 309, col 87 to line 309, col 113 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 310, col 87 to line 310, col 107 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 310, col 112 to line 310, col 116 of module landing_gear_pluscal: 10
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 311, col 87 to line 311, col 114 of module landing_gear_pluscal: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 312, col 87 to line 312, col 137 of module landing_gear_pluscal: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 313, col 50 to line 316, col 136 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 313, col 81 to line 316, col 135 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 313, col 86 to line 313, col 134 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 314, col 86 to line 314, col 106 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 314, col 111 to line 314, col 136 of module landing_gear_pluscal: 10
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 315, col 86 to line 315, col 114 of module landing_gear_pluscal: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 316, col 86 to line 316, col 135 of module landing_gear_pluscal: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 317, col 50 to line 320, col 90 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 321, col 50 to line 323, col 92 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 321, col 60 to line 323, col 91 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 321, col 65 to line 321, col 93 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 322, col 65 to line 322, col 94 of module landing_gear_pluscal: 9
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 323, col 65 to line 323, col 91 of module landing_gear_pluscal: 7
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 324, col 50 to line 327, col 121 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 324, col 76 to line 327, col 120 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 324, col 81 to line 324, col 105 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 325, col 81 to line 325, col 123 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 326, col 81 to line 326, col 98 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 326, col 103 to line 326, col 123 of module landing_gear_pluscal: 4
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 327, col 81 to line 327, col 120 of module landing_gear_pluscal: 7
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 328, col 50 to line 331, col 129 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 328, col 80 to line 331, col 128 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 328, col 85 to line 328, col 130 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 329, col 85 to line 329, col 111 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 330, col 85 to line 330, col 102 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 330, col 107 to line 330, col 131 of module landing_gear_pluscal: 4
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 331, col 85 to line 331, col 128 of module landing_gear_pluscal: 7
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 332, col 50 to line 335, col 127 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 332, col 79 to line 335, col 126 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 332, col 84 to line 332, col 108 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 333, col 84 to line 333, col 109 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 334, col 84 to line 334, col 101 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 334, col 106 to line 334, col 110 of module landing_gear_pluscal: 4
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 335, col 84 to line 335, col 126 of module landing_gear_pluscal: 7
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 336, col 50 to line 338, col 91 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 339, col 39 to line 342, col 82 of module landing_gear_pluscal: 5
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 339, col 49 to line 342, col 81 of module landing_gear_pluscal: 5
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 339, col 54 to line 339, col 80 of module landing_gear_pluscal: 5
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 340, col 54 to line 340, col 82 of module landing_gear_pluscal: 4
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 341, col 54 to line 341, col 83 of module landing_gear_pluscal: 3
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 342, col 54 to line 342, col 81 of module landing_gear_pluscal: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 343, col 39 to line 346, col 112 of module landing_gear_pluscal: 5
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 343, col 65 to line 346, col 111 of module landing_gear_pluscal: 5
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 343, col 70 to line 343, col 109 of module landing_gear_pluscal: 5
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 344, col 70 to line 344, col 87 of module landing_gear_pluscal: 5
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 344, col 92 to line 344, col 96 of module landing_gear_pluscal: 3
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 345, col 70 to line 345, col 112 of module landing_gear_pluscal: 2
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 346, col 70 to line 346, col 111 of module landing_gear_pluscal: 2
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 347, col 39 to line 350, col 120 of module landing_gear_pluscal: 5
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 347, col 69 to line 350, col 119 of module landing_gear_pluscal: 5
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 347, col 74 to line 347, col 96 of module landing_gear_pluscal: 5
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 348, col 74 to line 348, col 91 of module landing_gear_pluscal: 5
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 348, col 96 to line 348, col 100 of module landing_gear_pluscal: 3
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 349, col 74 to line 349, col 99 of module landing_gear_pluscal: 2
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 350, col 74 to line 350, col 119 of module landing_gear_pluscal: 2
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 351, col 39 to line 354, col 118 of module landing_gear_pluscal: 5
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 351, col 68 to line 354, col 117 of module landing_gear_pluscal: 5
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 351, col 73 to line 351, col 115 of module landing_gear_pluscal: 5
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 352, col 73 to line 352, col 90 of module landing_gear_pluscal: 5
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 352, col 95 to line 352, col 118 of module landing_gear_pluscal: 3
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 353, col 73 to line 353, col 99 of module landing_gear_pluscal: 2
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 354, col 73 to line 354, col 117 of module landing_gear_pluscal: 2
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 355, col 39 to line 357, col 80 of module landing_gear_pluscal: 5
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 358, col 28 to line 358, col 94 of module landing_gear_pluscal: 27
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 359, col 28 to line 359, col 43 of module landing_gear_pluscal: 27
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 363, col 26 to line 363, col 71 of module landing_gear_pluscal: 38
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 363, col 26 to line 363, col 48 of module landing_gear_pluscal: 19
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 364, col 29 to line 364, col 46 of module landing_gear_pluscal: 19
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 365, col 40 to line 365, col 53 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 366, col 48 to line 369, col 90 of module landing_gear_pluscal: 6
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 366, col 58 to line 369, col 89 of module landing_gear_pluscal: 6
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 366, col 63 to line 366, col 96 of module landing_gear_pluscal: 6
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 367, col 63 to line 367, col 95 of module landing_gear_pluscal: 4
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 368, col 63 to line 368, col 97 of module landing_gear_pluscal: 3
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 370, col 48 to line 373, col 133 of module landing_gear_pluscal: 6
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 370, col 79 to line 373, col 132 of module landing_gear_pluscal: 6
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 370, col 84 to line 370, col 111 of module landing_gear_pluscal: 6
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 371, col 84 to line 371, col 103 of module landing_gear_pluscal: 6
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 371, col 108 to line 371, col 112 of module landing_gear_pluscal: 5
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 372, col 84 to line 372, col 112 of module landing_gear_pluscal: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 373, col 84 to line 373, col 132 of module landing_gear_pluscal: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 374, col 48 to line 377, col 135 of module landing_gear_pluscal: 6
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 374, col 80 to line 377, col 134 of module landing_gear_pluscal: 6
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 374, col 85 to line 374, col 135 of module landing_gear_pluscal: 6
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 375, col 85 to line 375, col 104 of module landing_gear_pluscal: 6
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 375, col 109 to line 375, col 135 of module landing_gear_pluscal: 5
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 376, col 85 to line 376, col 114 of module landing_gear_pluscal: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 377, col 85 to line 377, col 134 of module landing_gear_pluscal: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 378, col 48 to line 380, col 87 of module landing_gear_pluscal: 6
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 381, col 48 to line 383, col 93 of module landing_gear_pluscal: 5
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 381, col 58 to line 383, col 92 of module landing_gear_pluscal: 5
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 381, col 63 to line 381, col 91 of module landing_gear_pluscal: 5
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 382, col 63 to line 382, col 89 of module landing_gear_pluscal: 3
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 383, col 63 to line 383, col 92 of module landing_gear_pluscal: 2
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 384, col 48 to line 387, col 119 of module landing_gear_pluscal: 5
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 384, col 74 to line 387, col 118 of module landing_gear_pluscal: 5
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 384, col 79 to line 384, col 103 of module landing_gear_pluscal: 5
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 385, col 79 to line 385, col 96 of module landing_gear_pluscal: 5
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 385, col 101 to line 385, col 121 of module landing_gear_pluscal: 4
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 386, col 79 to line 386, col 121 of module landing_gear_pluscal: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 387, col 79 to line 387, col 118 of module landing_gear_pluscal: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 388, col 48 to line 391, col 125 of module landing_gear_pluscal: 5
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 388, col 77 to line 391, col 124 of module landing_gear_pluscal: 5
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 388, col 82 to line 388, col 106 of module landing_gear_pluscal: 5
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 389, col 82 to line 389, col 99 of module landing_gear_pluscal: 5
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 389, col 104 to line 389, col 108 of module landing_gear_pluscal: 4
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 390, col 82 to line 390, col 127 of module landing_gear_pluscal: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 391, col 82 to line 391, col 124 of module landing_gear_pluscal: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 392, col 48 to line 394, col 89 of module landing_gear_pluscal: 5
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 395, col 37 to line 395, col 71 of module landing_gear_pluscal: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 396, col 37 to line 399, col 80 of module landing_gear_pluscal: 8
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 396, col 47 to line 399, col 79 of module landing_gear_pluscal: 8
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 396, col 52 to line 396, col 78 of module landing_gear_pluscal: 8
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 397, col 52 to line 397, col 80 of module landing_gear_pluscal: 4
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 398, col 52 to line 398, col 81 of module landing_gear_pluscal: 3
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 399, col 52 to line 399, col 79 of module landing_gear_pluscal: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 400, col 37 to line 403, col 110 of module landing_gear_pluscal: 8
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 400, col 63 to line 403, col 109 of module landing_gear_pluscal: 8
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 400, col 68 to line 400, col 107 of module landing_gear_pluscal: 8
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 401, col 68 to line 401, col 85 of module landing_gear_pluscal: 8
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 401, col 90 to line 401, col 94 of module landing_gear_pluscal: 6
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 402, col 68 to line 402, col 110 of module landing_gear_pluscal: 2
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 403, col 68 to line 403, col 109 of module landing_gear_pluscal: 2
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 404, col 37 to line 407, col 118 of module landing_gear_pluscal: 8
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 404, col 67 to line 407, col 117 of module landing_gear_pluscal: 8
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 404, col 72 to line 404, col 94 of module landing_gear_pluscal: 8
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 405, col 72 to line 405, col 89 of module landing_gear_pluscal: 8
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 405, col 94 to line 405, col 98 of module landing_gear_pluscal: 6
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 406, col 72 to line 406, col 97 of module landing_gear_pluscal: 2
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 407, col 72 to line 407, col 117 of module landing_gear_pluscal: 2
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 408, col 37 to line 411, col 116 of module landing_gear_pluscal: 8
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 408, col 66 to line 411, col 115 of module landing_gear_pluscal: 8
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 408, col 71 to line 408, col 113 of module landing_gear_pluscal: 8
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 409, col 71 to line 409, col 88 of module landing_gear_pluscal: 8
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 409, col 93 to line 409, col 116 of module landing_gear_pluscal: 6
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 410, col 71 to line 410, col 97 of module landing_gear_pluscal: 2
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 411, col 71 to line 411, col 115 of module landing_gear_pluscal: 2
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 412, col 37 to line 414, col 78 of module landing_gear_pluscal: 8
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 415, col 26 to line 415, col 88 of module landing_gear_pluscal: 19
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 416, col 26 to line 416, col 41 of module landing_gear_pluscal: 19
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2774:0 @!@!@
+<TypeOK line 235, col 1 to line 235, col 6 of module landing_gear_pluscal>
+@!@!@ENDMSG 2774 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 236, col 5 to line 245, col 41 of module landing_gear_pluscal: 20
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 236, col 8 to line 236, col 30 of module landing_gear_pluscal: 20
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 237, col 8 to line 237, col 27 of module landing_gear_pluscal: 20
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 238, col 8 to line 238, col 27 of module landing_gear_pluscal: 20
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 239, col 8 to line 239, col 40 of module landing_gear_pluscal: 20
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 240, col 8 to line 240, col 43 of module landing_gear_pluscal: 20
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 241, col 8 to line 241, col 44 of module landing_gear_pluscal: 20
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 242, col 8 to line 242, col 46 of module landing_gear_pluscal: 20
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 243, col 8 to line 243, col 45 of module landing_gear_pluscal: 20
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 244, col 8 to line 244, col 41 of module landing_gear_pluscal: 20
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 244, col 8 to line 244, col 22 of module landing_gear_pluscal: 20
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |||line 221, col 3 to line 224, col 47 of module landing_gear_pluscal: 20
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||||line 221, col 8 to line 221, col 44 of module landing_gear_pluscal: 20
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||||line 222, col 8 to line 222, col 48 of module landing_gear_pluscal: 12
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||||line 223, col 8 to line 223, col 49 of module landing_gear_pluscal: 8
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||||line 224, col 8 to line 224, col 47 of module landing_gear_pluscal: 4
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 244, col 28 to line 244, col 41 of module landing_gear_pluscal: 20
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 245, col 8 to line 245, col 41 of module landing_gear_pluscal: 20
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 245, col 8 to line 245, col 22 of module landing_gear_pluscal: 20
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |||line 227, col 3 to line 230, col 52 of module landing_gear_pluscal: 20
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||||line 227, col 8 to line 227, col 50 of module landing_gear_pluscal: 20
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||||line 228, col 8 to line 228, col 50 of module landing_gear_pluscal: 12
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||||line 229, col 8 to line 229, col 48 of module landing_gear_pluscal: 10
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||||line 230, col 8 to line 230, col 52 of module landing_gear_pluscal: 2
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 245, col 28 to line 245, col 41 of module landing_gear_pluscal: 20
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2774:0 @!@!@
+<Inv1 line 247, col 1 to line 247, col 4 of module landing_gear_pluscal>
+@!@!@ENDMSG 2774 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 248, col 3 to line 248, col 65 of module landing_gear_pluscal: 20
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 248, col 4 to line 248, col 46 of module landing_gear_pluscal: 20
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 248, col 4 to line 248, col 22 of module landing_gear_pluscal: 20
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 248, col 27 to line 248, col 46 of module landing_gear_pluscal: 18
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 248, col 52 to line 248, col 65 of module landing_gear_pluscal: 4
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2774:0 @!@!@
+<Inv2 line 249, col 1 to line 249, col 4 of module landing_gear_pluscal>
+@!@!@ENDMSG 2774 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 250, col 3 to line 250, col 65 of module landing_gear_pluscal: 20
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 250, col 3 to line 250, col 18 of module landing_gear_pluscal: 20
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 250, col 24 to line 250, col 64 of module landing_gear_pluscal: 4
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 250, col 24 to line 250, col 41 of module landing_gear_pluscal: 4
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 250, col 46 to line 250, col 64 of module landing_gear_pluscal: 2
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2774:0 @!@!@
+<Action line 267, col 6 to line 268, col 20 of module landing_gear_pluscal>
+@!@!@ENDMSG 2774 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 267, col 6 to line 268, col 20 of module landing_gear_pluscal: 20
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2774:0 @!@!@
+<Action line 270, col 6 to line 271, col 49 of module landing_gear_pluscal>
+@!@!@ENDMSG 2774 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 270, col 6 to line 271, col 49 of module landing_gear_pluscal: 20
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2774:0 @!@!@
+<Action line 273, col 6 to line 273, col 61 of module landing_gear_pluscal>
+@!@!@ENDMSG 2774 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 273, col 6 to line 273, col 61 of module landing_gear_pluscal: 20
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2774:0 @!@!@
+<Action line 275, col 6 to line 275, col 65 of module landing_gear_pluscal>
+@!@!@ENDMSG 2774 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 275, col 6 to line 275, col 65 of module landing_gear_pluscal: 20
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2774:0 @!@!@
+<Action line 277, col 6 to line 280, col 62 of module landing_gear_pluscal>
+@!@!@ENDMSG 2774 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 277, col 6 to line 280, col 62 of module landing_gear_pluscal: 20
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2202:0 @!@!@
+End of statistics.
+@!@!@ENDMSG 2202 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(9) at 2020-08-31 09:35:52: 42 states generated (2,661 s/min), 20 distinct states found (1,267 ds/min), 0 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+@!@!@STARTMSG 2199:0 @!@!@
+42 states generated, 20 distinct states found, 0 states left on queue.
+@!@!@ENDMSG 2199 @!@!@
+@!@!@STARTMSG 2194:0 @!@!@
+The depth of the complete state graph search is 9.
+@!@!@ENDMSG 2194 @!@!@
+@!@!@STARTMSG 2268:0 @!@!@
+The average outdegree of the complete state graph is 1 (minimum is 0, the maximum 2 and the 95th percentile is 2).
+@!@!@ENDMSG 2268 @!@!@
+@!@!@STARTMSG 2186:0 @!@!@
+Finished in 949ms at (2020-08-31 09:35:52)
+@!@!@ENDMSG 2186 @!@!@
