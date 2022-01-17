@@ -31,7 +31,7 @@ conc state HeatingSystem {
 		on Reset
 		goto Off
 	}
-	state Off {
+	default state Off {
 		on TurnOn
 		goto On
 	}
