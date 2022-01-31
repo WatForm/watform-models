@@ -1,0 +1,111 @@
+/*******************************************************************************
+ * Title: BitCounter.dsh
+ * Authors: Jose Serna
+ * Created: 14-04-2018
+ * Updated for use in the Alloy Analyzer (extended with Dash): 2022-01-31
+ *
+ * Notes: Two bit counter model taken from Shahram's PhD thesis
+ *
+ *        Shahram Esmaeilsabzali. Perscriptive Semantics for Big-Step Modelling Languages.
+ *        PhD thesis, University of Waterloo, David R. Cheriton School of Computer Science, 2011
+ *        https://cs.uwaterloo.ca/~nday/pdf/theses/2011-esmaeilsabzali-phd-thesis.pdf
+ *
+ ******************************************************************************/
+
+conc state Counter {
+    env event Tk0 {}
+
+    conc state Bit1 {
+        event Tk1 {}
+
+        default state Bit11 {}
+        state Bit12 {}
+
+        trans T1 {
+            from Bit1/Bit11
+            on Tk0
+            goto Bit12
+        }
+
+        trans T2 {
+            from Bit12
+            on Tk0
+            goto Bit11
+            send Tk1
+        }
+    }
+    
+    conc state Bit2 {
+        event Done {}
+
+        default state Bit21 {}
+        state Bit22 {}
+        
+        trans T3 {
+            from Bit21
+            on Bit1/Tk1
+            goto Bit22
+        }
+
+        trans T4 {
+            from Bit22
+            on Bit1/Tk1
+            goto Bit21
+            send Done
+        }
+    }
+}
+
+
+// The final status of bits when done counting
+
+assert ctl_final_bitStatus {
+    ag (
+        Counter/Bit2/Done in events =>
+        {Counter/Bit1/Bit11 + Counter/Bit2/Bit21} in conf
+    )
+}
+check ctl_final_bitStatus for 7 Snapshot, exactly 2 EventLabel expect 0
+
+
+assert final_bitStatus {
+    all s: Snapshot| s.stable = True and Counter_Bit2_Done in s.events =>
+        {Counter_Bit1_Bit11 + Counter_Bit2_Bit21} in s.conf
+}
+check final_bitStatus for 7 Snapshot, exactly 2 EventLabel expect 0
+
+
+
+// The bitcounter has a significant scope of 10 Snapshots
+// Uncomment when not using the path-based instances option
+// run significance for 7 Snapshot, exactly 2 EventLabel expect 1
+
+// Model is responsive
+assert ctl_model_responsive {
+    ctl_mc[
+        ag[
+            imp_ctl[
+                {s: Snapshot| Counter_Tk0 in s.events},
+                af[{s: Snapshot |
+                    s.stable = True and
+                    (Counter_Bit1_T1 in s.taken or
+                    Counter_Bit1_T2 in s.taken or
+                    Counter_Bit2_T3 in s.taken or
+                    Counter_Bit2_T4 in s.taken)
+                }]
+            ]
+        ]
+    ]
+}
+check ctl_model_responsive for 7 Snapshot, exactly 2 EventLabel expect 0
+
+
+assert model_responsive {
+    all s: Snapshot | Counter_Tk0 in s.events and some nextStep =>
+        some s': s.*nextStep | s'.stable = True and
+                    (Counter_Bit1_T1 in s'.taken or
+                    Counter_Bit1_T2 in s'.taken or
+                    Counter_Bit2_T3 in s'.taken or
+                    Counter_Bit2_T4 in s'.taken)
+}
+check model_responsive for 7 Snapshot, exactly 2 EventLabel expect 0
