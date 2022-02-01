@@ -1,0 +1,139 @@
+/*******************************************************************************
+ * Title: rdt.dsh
+ * Authors: Jose Serna
+ * Created: 03-04-2019
+ * Last modified: 2022-01-31
+ *
+ * Notes: Dash model of a Reliable Data Transfer (RDT) protocol.
+ *
+ *      Mitchell Kember, Lynn Tran, George Gao, and Nancy A. Day. 
+ *      Extracting counterexamples from transitive-closure-based model checking. 
+ *      In Workshop on Modelling in Software Engineering (MISE) @ International 
+ *      Conference on Software Engineering (ICSE), pages 47--54. ACM, May 2019.
+ *      https://cs.uwaterloo.ca/~nday/pdf/refereed/2019-KeTrGaDa-mise.pdf
+ *
+ ******************************************************************************/
+
+conc state RDT {
+    env event SendSuccess {}
+    env event SendError {}
+    env event AckSuccess {}
+    env event AckError {}
+
+    conc state Sender {
+        default state ReadySendNext {}
+        state WaitAck {}
+        state ReadyResend {}
+
+        trans {
+            from ReadySendNext
+            on SendSuccess
+            goto WaitAck
+        }
+
+        trans {
+            from ReadySendNext
+            on SendError
+            goto WaitAck
+        }
+
+        trans {
+            from WaitAck
+            on AckSuccess
+            goto ReadySendNext
+        }
+
+        trans {
+            from WaitAck
+            on AckError
+            goto ReadyResend
+        }
+
+        trans {
+            from ReadyResend
+            on SendSuccess
+            goto WaitAck
+        }
+
+        trans {
+            from ReadyResend
+            on SendError
+            goto WaitAck
+        }
+    }
+    conc state Receiver {
+        default state ReadyReceiveNext {}
+        state ReceiveSuccess {}
+        state ReceiveError {}
+        state ReadyReceiveResend {}
+
+        trans {
+            from ReadyReceiveNext
+            on SendSuccess
+            goto ReceiveSuccess
+        }
+
+        trans {
+            from ReceiveSuccess
+            on AckSuccess
+            goto ReadyReceiveNext
+        }
+
+        trans {
+            from ReceiveSuccess
+            on AckError
+            goto ReadyReceiveNext
+        }
+
+        trans {
+            from ReadyReceiveNext
+            on SendError
+            goto ReceiveError
+        }
+
+        trans {
+            from ReceiveError
+            on AckError
+            goto ReadyReceiveResend
+        }
+
+        trans {
+            from ReadyReceiveResend
+            on SendError
+            goto ReceiveError
+        }
+
+        trans {
+            from ReadyReceiveResend
+            on SendSuccess
+            goto ReceiveSuccess
+        }
+    }
+}
+
+/* This property states that the Sender concurrent state and the Receiver concurrent state cannot be in the ReadyResend and ReadyReceiveNext state respectively
+    in a stable Snapshot.*/
+assert safety  {
+        ctl_mc[ag[{ s: Snapshot | s.stable = True => !((RDT_Sender_ReadyResend in s.conf and RDT_Receiver_ReadyReceiveNext in s.conf))}]]
+}
+
+/* This property states that everytime the Receiver concurrent state is in the ReceiveError state, it will always eventually transition to 
+   the ReceiveSucces state */
+assert liveness  {
+        ctl_mc[ag[{ (imp_ctl[
+            {s: Snapshot | s.stable = True and RDT_Receiver_ReceiveError in s.conf},
+            af[{ s: Snapshot | s.stable = True => (RDT_Receiver_ReceiveSuccess in s.conf)}]
+        ])}]]
+    }
+
+/* Please comment out the commands below if the Generate Signiface Axioms Option is turned OFF in the Menubar under Options */
+
+/* The 'run reachabilityAxiom' command checks whether all the snapshots considered during
+analysis are reachable from an initial snapshot. A Snapshot scope of 2 is the minimum
+required for an instance. */
+run reachabilityAxiom for 2 Snapshot, 4 EventLabel expect 1
+
+/* The 'run operationsAxiom' that every transition defined in a model is 
+   represented by a pair of snapshots in the transition relation. A Snapshot 
+   scope of 17 is the minimum required for an instance. */
+run operationsAxiom for 17 Snapshot, 4 EventLabel

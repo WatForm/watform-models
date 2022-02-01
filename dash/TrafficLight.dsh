@@ -1,0 +1,83 @@
+/*******************************************************************************
+ * Title: TrafficLight.dsh
+ * Authors: Jose Serna
+ * Created: 27-04-2018
+ * Last modified: 2022-01-31
+ *
+ * Notes: Traffic light system model taken from Shahram's PhD thesis.
+ *  The single input assumption is required for the model to have the expected
+ *  behaviour
+ *  
+ *  Shahram Esmaeilsabzali. Perscriptive Semantics for Big-Step Modelling Languages.
+ *  PhD thesis, University of Waterloo, David R. Cheriton School of Computer Science, 2011
+ *  https://cs.uwaterloo.ca/~nday/pdf/theses/2011-esmaeilsabzali-phd-thesis.pdf
+ *
+ ******************************************************************************/
+
+conc state TrafficLight {
+    env event Change {}
+    env event End {}
+
+    conc state NorthSouth {
+        default state Green {
+            trans T1 {
+                on End
+                goto Yellow
+            }
+        }
+        
+        state Yellow {
+            trans T2 {
+                on Change
+                goto Red
+            }
+        }
+
+        state Red {
+            trans T3 {
+                on Change
+                goto Green
+            }
+        }
+    }
+
+    conc state EastWest {
+        state Green {
+            trans T5 {
+                on End
+                goto Yellow
+            }
+        }
+
+        state Yellow {
+            trans T6 {
+                on Change
+                goto Red
+            }
+        }
+
+        default state Red {
+            trans T4 {
+                on Change
+                goto Green
+            }
+        }
+    }
+}
+
+/* This property states that the EastWest and NorthSouth traffic lights cannot both be in the 'Green' state */
+assert no_both_lights_green {
+      no s: Snapshot | s.stable = True and {TrafficLight_EastWest_Green + TrafficLight_NorthSouth_Green} in s.conf
+}
+
+/* Please comment out the commands below if the Generate Signiface Axioms Option is turned OFF in the Menubar under Options */
+
+/* The 'run reachabilityAxiom' command checks whether all the snapshots considered during
+analysis are reachable from an initial snapshot. A Snapshot scope of 1 is the minimum
+required for an instance. */
+run reachabilityAxiom for 1 Snapshot, 0 EventLabel
+
+/* The 'run operationsAxiom' that every transition defined in a model is 
+   represented by a pair of snapshots in the transition relation. A Snapshot 
+   scope of 7 is the minimum required for an instance. */
+run operationsAxiom for 7 Snapshot, 0 EventLabel

@@ -1,0 +1,84 @@
+/*******************************************************************************
+ * Title: farmer.dsh
+ * Authors: Jose Serna
+ * Created: 2018-06-11
+ * Last modified: 2022-01-31
+ *
+ * Notes: Adaptation to DASH from the original model available in the Alloy's
+ *        libraries
+ *
+ ******************************************************************************/
+
+abstract sig Object {
+    eats: set Object
+}
+one sig Chicken, Farmer, Fox, Grain extends Object {}
+
+fact eating {
+    eats = Fox -> Chicken + Chicken -> Grain
+}
+
+conc state Puzzle {
+    near: set Object
+    far: set Object
+
+    init {
+        near = Object
+        no far
+    }
+
+    trans near2far {
+        when Farmer in near
+        do {
+            // Farmer takes one Object
+            (one x: near - Farmer | {
+                near' = near - Farmer - x - near'.eats
+                far' = far + Farmer + x
+            }) or 
+            // Farmer crosses alone
+            {
+                near' = near - Farmer - near'.eats
+                far' = far + Farmer
+            }
+        }
+    }
+
+    trans far2near {
+        when Farmer in far
+        do {
+            // Farmer takes one Object
+            (one x: far - Farmer | {
+                far' = far - Farmer - x - far'.eats
+                near' = near + Farmer + x
+            }) or 
+            // Farmer crosses alone
+            {
+                far' = far - Farmer - far'.eats
+                near' = near + Farmer
+            }
+        }
+    }
+}
+
+/* This property states that the farmer will eventually move every Object to other side (far variable) */
+pred ctl_solve  {
+      ctl_mc[ef[{ s: Snapshot | (s.Puzzle_far) = Object}]]
+}
+
+/* This property states that the same Object cannot be in both the near and far variable at any Snapshot  */
+assert ctl_no_quantum_objects  {
+        ctl_mc[ag[{ s: Snapshot | (no x : Object
+         | x in (s.Puzzle_near) and x in (s.Puzzle_far))}]]
+}
+
+/* Please comment out the commands below if the Generate Signiface Axioms Option is turned OFF in the Menubar under Options */
+
+/* The 'run reachabilityAxiom' command checks whether all the snapshots considered during
+analysis are reachable from an initial snapshot. A Snapshot scope of 1is the minimum
+required for an instance. */
+run reachabilityAxiom for 1 Snapshot, 0 EventLabel
+
+/* The 'run operationsAxiom' that every transition defined in a model is 
+   represented by a pair of snapshots in the transition relation. A Snapshot 
+   scope of 3 is the minimum required for an instance. */
+run operationsAxiom for 3 Snapshot, 0 EventLabel

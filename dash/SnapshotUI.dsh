@@ -1,0 +1,88 @@
+/*******************************************************************************
+ * Title: SnapshotUI.dsh
+ * Authors: Jose Serna
+ * Created: 2018-11-09
+ * Last modified: 2022-01-31
+ *
+ * Notes: Dash model of the UI model for the "Snapshot" application described by
+ *        Hillel Wayne in https://www.hillelwayne.com/post/formally-specifying-uis
+ *
+ ******************************************************************************/
+conc state SnapshotUI {
+    event login {}
+    event logout {}
+    event summary {}
+    event students {}
+    event close {}
+    event answer {}
+    event standards {}
+
+    default state LoginPage {
+        trans Login {
+            on login
+            goto Snapshot
+        }
+    }
+
+    state Snapshot {
+        trans Logout {
+            on logout 
+            goto LoginPage
+        }
+
+        default state Reports {
+            trans SeeSummary {
+                on summary
+                goto Summary
+            }
+
+            trans SeeStudents {
+                on students
+                goto Students
+            }
+
+            trans SeeStandards {
+                on standards
+                goto Standards
+            }
+
+            default state Summary {}
+            state Students {
+                trans SeeAnswers {
+                    on answer
+                    goto Answers
+                }
+            }
+
+            state Standards {}
+        }
+
+        state Answers {
+            trans SeeStudents {
+                on close
+                goto Reports/Students
+            }
+        }
+    }
+}
+
+/* This property states it is always the case that if the next state in a Snapshot in the Answers state, then the current state
+    must be the Reports/Students state. */
+assert noSkippingStudentsReport  {
+        ctl_mc[ag[{ (imp_ctl[
+            (ex[{ s: Snapshot | SnapshotUI_Snapshot_Answers in s.conf}]),
+            {s: Snapshot | SnapshotUI_Snapshot_Reports_Students in s.conf}
+        ])}]]
+    }
+
+/* Please comment out the commands below if the Generate Signiface Axioms Option is turned OFF in the Menubar under Options */
+
+/* The 'run reachabilityAxiom' command checks whether all the snapshots considered during
+analysis are reachable from an initial snapshot. A Snapshot scope of 1 is the minimum
+required for an instance. */
+run reachabilityAxiom for 1 Snapshot, 0 EventLabel
+
+/* The 'run operationsAxiom' that every transition defined in a model is 
+   represented by a pair of snapshots in the transition relation. A Snapshot 
+   scope of 8 is the minimum required for an instance. */
+run operationsAxiom for 8 Snapshot, 0 EventLabel

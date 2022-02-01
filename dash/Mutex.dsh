@@ -1,0 +1,106 @@
+/*******************************************************************************
+ * Title: Mutex.dsh
+ * Authors: Jose Serna - jserna@uwaterloo.ca
+ * Created: 2018-06-20
+ * Last modified: 2022-01-31
+ *
+ * Notes: Semaphore based mutual exclusion system
+ *
+ ******************************************************************************/
+conc state Mutex {
+    semaphore_free: one Bool
+
+    init {
+        semaphore_free = True
+    }
+
+    conc state Process1 {
+        default state NonCritical {}
+        state Critical {}
+        state Wait {}
+
+        trans wait {
+            from NonCritical
+            goto Wait
+        }
+
+        trans give_up {
+            from Wait
+            goto NonCritical
+        }
+
+        trans enter_critical_section{
+            from Wait
+            when semaphore_free = True
+            goto Critical
+            do semaphore_free' = False
+        }
+
+        trans exit_critical_section {
+            from Critical
+            when semaphore_free = False
+            goto NonCritical
+            do semaphore_free' = True
+        }
+    }
+
+    conc state Process2 {
+        default state NonCritical {}
+        state Critical {}
+        state Wait {}
+
+        trans wait {
+            from NonCritical
+            goto Wait
+        }
+
+        trans give_up {
+            from Wait
+            goto NonCritical
+        }
+
+        trans enter_critical_section{
+            from Wait
+            when semaphore_free = True
+            goto Critical
+            do semaphore_free' = False
+        }
+
+        trans exit_critical_section {
+            from Critical
+            when semaphore_free = False
+            goto NonCritical
+            do semaphore_free' = True
+        }
+    }
+}
+
+/* This assert ensures that neither concurrent states (Process1 and Process2) are in the 'Critical' state 
+   in any stable Snapshot for every possible path. */
+assert ctl_mutex  {
+        ctl_mc[ag[{ s: Snapshot | s.stable = True => !(({
+            Mutex_Process1_Critical + Mutex_Process2_Critical
+        }
+         in s.conf))}]]
+}
+
+/* This assert ensures that neither that there is no stable Snapshot in which both Concurrent States
+   (Process 1 and Process 2) are in the 'Critical' state.
+   */
+assert mutex {
+    no s: Snapshot | s.stable = True and
+        {Mutex_Process1_Critical + Mutex_Process2_Critical} in s.conf
+}
+
+/* Please comment out the commands below if the Generate Signiface Axioms Option is turned OFF in the Menubar under Options */
+
+/* The 'run reachabilityAxiom' command checks whether all the snapshots considered during
+analysis are reachable from an initial snapshot. A Snapshot scope of 5 is the minimum
+required for an instance. */
+run reachabilityAxiom for 5 Snapshot, 0 EventLabel
+
+/* The 'run operationsAxiom' that every transition defined in a model is 
+   represented by a pair of snapshots in the transition relation. A Snapshot 
+   scope of 11 is the minimum required for an instance. */
+run operationsAxiom for 11 Snapshot, 0 EventLabel
+
