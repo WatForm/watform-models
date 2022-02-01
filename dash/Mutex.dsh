@@ -84,7 +84,7 @@ assert ctl_mutex  {
          in s.conf))}]]
 }
 
-/* This assert ensures that neither that there is no stable Snapshot in which both Concurrent States
+/* This assert ensures that there is no stable Snapshot in which both Concurrent States
    (Process 1 and Process 2) are in the 'Critical' state.
    */
 assert mutex {
