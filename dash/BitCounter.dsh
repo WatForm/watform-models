@@ -2,7 +2,7 @@
  * Title: BitCounter.dsh
  * Authors: Jose Serna
  * Created: 14-04-2018
- * Updated for use in the Alloy Analyzer (extended with Dash): 2022-01-31
+ * Updated for use in the Alloy Analyzer (extended with Dash): 2022-02-10
  *
  * Notes: Two bit counter model taken from Shahram's PhD thesis
  *
@@ -56,20 +56,28 @@ conc state Counter {
     }
 }
 
+// These require the  Generate Significance axioms option to be enabled
+run reachabilityAxiom for 7 Snapshot, exactly 2 EventLabel
 
-// The final status of bits when done counting
+run operationsAxiom for 7 Snapshot, exactly 2 EventLabel
 
-//assert ctl_final_bitStatus {
-//    ctl_mc[
-//      ag[
-//        {s: Snapshot | 
-//        Counter_Bit2_Done in s.events =>
-//        Counter_Bit1_Bit11 + Counter_Bit2_Bit2 in s. conf
-//        }
-//      ]
-//    ]
-//}
-//check ctl_final_bitStatus for 7 Snapshot, exactly 2 EventLabel expect 0
+// Because the above are satisfied, 
+// the bitcounter has a significant scope of 7 Snapshots
+
+// TCMC m/c: requires TCMC option to be enabled
+// CTL property: when done is generated then in basic states Bit11 and Bit21
+
+assert ctl_final_bitStatus {
+    ctl_mc[
+      ag[
+        {s: Snapshot | 
+        Counter_Bit2_Done in s.events =>
+        Counter_Bit1_Bit11 + Counter_Bit2_Bit21 in s. conf
+        }
+      ]
+    ]
+}
+check ctl_final_bitStatus for 7 Snapshot, exactly 2 EventLabel expect 0
 
 
 assert final_bitStatus {
@@ -80,9 +88,6 @@ check final_bitStatus for 7 Snapshot, exactly 2 EventLabel expect 0
 
 
 
-// The bitcounter has a significant scope of 10 Snapshots
-// Uncomment when not using the path-based instances option
-// run significance for 7 Snapshot, exactly 2 EventLabel expect 1
 
 // Model is responsive
 assert ctl_model_responsive {
