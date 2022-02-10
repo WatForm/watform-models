@@ -63,10 +63,19 @@ run operationsAxiom for 7 Snapshot, exactly 2 EventLabel
 
 // Because the above are satisfied, 
 // the bitcounter has a significant scope of 7 Snapshots
+// so we use 6 snapshots for the properties below.
 
-// TCMC m/c: requires TCMC option to be enabled
 // CTL property: when done is generated then in basic states Bit11 and Bit21
 
+assert final_bitStatus {
+    all s: Snapshot| s.stable = True and Counter_Bit2_Done in s.events =>
+        {Counter_Bit1_Bit11 + Counter_Bit2_Bit21} in s.conf
+}
+check final_bitStatus for 7 Snapshot, exactly 2 EventLabel expect 0
+
+
+// TCMC m/c: requires TCMC option to be enabled
+// the same property as above but phrases in CTL and using TCMC
 assert ctl_final_bitStatus {
     ctl_mc[
       ag[
@@ -79,17 +88,18 @@ assert ctl_final_bitStatus {
 }
 check ctl_final_bitStatus for 7 Snapshot, exactly 2 EventLabel expect 0
 
-
-assert final_bitStatus {
-    all s: Snapshot| s.stable = True and Counter_Bit2_Done in s.events =>
-        {Counter_Bit1_Bit11 + Counter_Bit2_Bit21} in s.conf
+//  if the event Tk0 is generated, then eventually a transition is taken
+assert model_responsive {
+    all s: Snapshot | Counter_Tk0 in s.events and some nextStep =>
+        some s_next: s.*nextStep | s_next.stable = True and
+                    (Counter_Bit1_T1 in s_next.taken or
+                    Counter_Bit1_T2 in s_next.taken or
+                    Counter_Bit2_T3 in s_next.taken or
+                    Counter_Bit2_T4 in s_next.taken)
 }
-check final_bitStatus for 7 Snapshot, exactly 2 EventLabel expect 0
+check model_responsive for 7 Snapshot, exactly 2 EventLabel expect 0
 
-
-
-
-// Model is responsive
+// Same property as above but phrased in CTL
 assert ctl_model_responsive {
     ctl_mc[
         ag[
@@ -108,13 +118,3 @@ assert ctl_model_responsive {
 }
 check ctl_model_responsive for 7 Snapshot, exactly 2 EventLabel expect 0
 
-
-assert model_responsive {
-    all s: Snapshot | Counter_Tk0 in s.events and some nextStep =>
-        some s_next: s.*nextStep | s_next.stable = True and
-                    (Counter_Bit1_T1 in s_next.taken or
-                    Counter_Bit1_T2 in s_next.taken or
-                    Counter_Bit2_T3 in s_next.taken or
-                    Counter_Bit2_T4 in s_next.taken)
-}
-check model_responsive for 7 Snapshot, exactly 2 EventLabel expect 0
