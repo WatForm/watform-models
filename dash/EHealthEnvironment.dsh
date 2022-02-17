@@ -1,0 +1,112 @@
+/*******************************************************************************
+ * Title: EHealth.dsh
+ * Authors: Jose Serna - jserna@uwaterloo.ca
+ * Created: 2018-06-20
+ * Last modified: 2022-02-01
+ *
+ * Notes: Adaptation to DASH of original model developed in TLA
+ *        This version explicitly models the environment as a concurrent state of
+ *        the whole system. Input values to transitions are modelled as env
+ *        declarations of the Environment state machine.
+ *
+ *        The model is an adaptation of the case study presented on: 
+ *        Technical Report EECS-2017-02
+ *
+ ******************************************************************************/
+
+ sig Patient {}
+ sig Medication {}
+
+conc state Environment {
+    env p: lone Patient
+    env m1, m2: lone Medication
+}
+
+conc state EHealthSystem {
+    medications: set Medication
+    patients: set Patient
+    prescriptions: Patient -> set Medication
+    interactions: Medication -> set Medication
+
+    invariant symmetry {
+        all m1, m2: Medication |
+            m1 -> m2  in interactions iff m2 -> m1 in interactions
+    }
+
+    invariant no_self_interaction {
+        all m: medications | not (m -> m in interactions)
+    }
+
+    invariant safe_prescriptions {
+        all m1, m2: medications, p: patients |
+            m1 -> m2 in interactions =>
+                !((p -> m1 in prescriptions) and (p -> m2 in prescriptions))
+    }
+
+    trans add_patient {
+        when !(Environment/p in patients)
+        do patients' = patients + Environment/p
+    }
+
+    trans add_medication {
+        when !(Environment/m1 in medications)
+        do medications' = medications + Environment/m1
+    }
+
+    trans add_interaction {
+        when {
+            Environment/m1 != Environment/m2 
+            (!(Environment/m1 -> Environment/m2 in interactions) and !(Environment/m2 -> Environment/m1 in interactions))
+            Environment/m1 in medications
+            Environment/m2 in medications
+        }
+        do interactions' = interactions + {Environment/m1->Environment/m2 + Environment/m2->Environment/m1}
+    }
+
+    trans add_prescription {
+        when {
+                Environment/p in patients
+                !(Environment/p->Environment/m1 in prescriptions)
+                all x: Environment/p.prescriptions| 
+                    !(Environment/m1->x in interactions)
+            }
+        do prescriptions' = prescriptions + Environment/p->Environment/m1
+    }
+
+    trans remove_interaction {
+        when {
+            Environment/m1 in medications
+            Environment/m2 in medications
+            Environment/m1 -> Environment/m2 in interactions
+        }
+        do interactions' = interactions - {Environment/m1->Environment/m2 + Environment/m2->Environment/m1}
+    }
+
+    trans remove_prescription {
+        when {
+            Environment/p in patients
+            Environment/m1 in medications
+            Environment/p->Environment/m1 in prescriptions
+        }
+        do prescriptions' = prescriptions - Environment/p->Environment/m1
+    }
+
+    init {
+        no medications
+        no prescriptions
+        no patients
+        no interactions
+    }
+}
+
+/* Please comment out the commands below if the Generate Signiface Axioms Option is turned OFF in the Menubar under Options */
+
+/* The 'run reachabilityAxiom' command checks whether all the snapshots considered during
+analysis are reachable from an initial snapshot. A Snapshot scope of 5 is the minimum
+required for an instance. */
+run reachabilityAxiom for  2 Snapshot, 0 EventLabel, 3 Patient, 4 Medication
+
+/* The 'run operationsAxiom' that every transition defined in a model is 
+   represented by a pair of snapshots in the transition relation. A Snapshot 
+   scope of 8 is the minimum required for an instance. */
+run operationsAxiom for  8 Snapshot, 0 EventLabel, 3 Patient, 4 Medication

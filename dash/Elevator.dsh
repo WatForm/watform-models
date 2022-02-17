@@ -1,0 +1,157 @@
+/*******************************************************************************
+ * Title: elevator.dsh
+ * Authors: Jose Serna
+ * Created: 03-04-2019
+ * Last modified: 02-01-2022
+ *
+ * Notes: Dash elevator model from Farheen's MMath thesis. The model should be
+ *        checked with the option Vars unchaged set.
+ *
+ *        Sabria Farheen. Improvements to Transitive-Closure-based Model Checking in Alloy. 
+ *        MMath thesis, University of Waterloo, David R. Cheriton School of Computer Science, 2018
+ *        https://cs.uwaterloo.ca/~nday/pdf/theses/2018-01-farheen-mmath-thesis.pdf
+ *
+ ******************************************************************************/
+
+open util/ordering[Floor]
+open util/boolean
+open util/integer
+
+sig Floor {}
+abstract sig Direction {}
+one sig Up, Down extends Direction {}
+
+conc state Elevator {
+    direction: one Direction
+    called: set Floor
+    maintenance: Int
+    current: set Floor
+
+    action NotArriving[current' not in called'] {}
+    action WaitingToArrive[{called - current'} in called'] {}
+
+    init {
+        no called
+        maintenance = 1
+        direction = Down
+        current = max[Floor]
+    }
+
+    trans maintenance {
+        when maintenance = 2
+        do {
+            current' = min[Floor]
+            direction' = Down
+            maintenance' = 0
+            WaitingToArrive
+            NotArriving
+        }
+    }
+
+    trans ChangeDirToDown {
+        when {
+            some called
+            maintenance < 2
+            direction = Up
+            no nexts[current] & called
+        }
+        do {
+            current' = current
+            direction' = Down
+            maintenance' = maintenance.plus[1]
+            WaitingToArrive
+            NotArriving
+        }
+    }
+
+    trans ChangeDirToUp {
+        when {
+            some called
+            maintenance < 2
+            direction = Down
+            no prevs[current] & called
+        }
+        do {
+            current' = current
+            direction' = Up
+            maintenance' = maintenance.plus[1]
+            WaitingToArrive
+            NotArriving
+        }
+    }
+
+    trans MoveUp {
+        when {
+            some called
+            direction = Up
+            some nexts[current] & called
+        }
+        do {
+            current' = min[(nexts[current] & called)]
+            NotArriving
+            WaitingToArrive
+        }
+    }
+
+    trans MoveDown {
+        when {
+            some called
+            direction = Down
+            some prevs[current] & called
+        }
+        do {
+            current' = max[(prevs[current] & called)]
+            NotArriving
+            WaitingToArrive
+        }
+    }
+
+    trans DefaultToGround {
+        when {
+            no called
+            min[Floor] not in current
+        }
+        do {
+            current' = min[Floor]
+            direction' = Down
+            WaitingToArrive
+            NotArriving
+        }
+    }
+
+    trans Idle {
+        when {
+            no called
+            current = min[Floor]
+        }
+        do {
+            current' = current
+            maintenance' = 0
+            WaitingToArrive
+            NotArriving
+        }
+    }
+}
+
+/* This property states that whenever call is made from a floor, the elevator will always eventually reach that floor
+  (current will be the floor that was called) */
+assert infiniteLiveness {
+        all f : Floor | ctl_mc[ag[imp_ctl[Elevator_called.f , af[Elevator_current.f]]]]
+}
+
+/* This property states that */
+assert finiteLiveness {
+        ctl_mc[af[{ s: Snapshot | ((s.Elevator_maintenance) = 0)}]]
+}
+
+/* Please comment out the commands below if the Generate Signiface Axioms Option is turned OFF in the Menubar under Options */
+
+/* The 'run reachabilityAxiom' command checks whether all the snapshots considered during
+analysis are reachable from an initial snapshot. A Snapshot scope of 1 is the minimum
+required for an instance. */
+run reachabilityAxiom for 1 Snapshot, 0 EventLabel, 6 Floor expect 1
+
+/* The 'run operationsAxiom' that every transition defined in a model is 
+   represented by a pair of snapshots in the transition relation. A Snapshot 
+   scope of 8 is the minimum required for an instance. */
+run operationsAxiom for 8 Snapshot, 0 EventLabel, 6 Floor expect 1

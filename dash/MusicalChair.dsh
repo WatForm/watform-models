@@ -1,0 +1,114 @@
+/*******************************************************************************
+ * Title: MusicalChair.dsh
+ * Authors: Jose Serna
+ * Created: 2018-04-25
+ * Last modified: 2022-01-31
+ *
+ * Notes: The purpose is to present an equivalent model of musical chairs but
+ *        using events
+ *
+ ******************************************************************************/
+
+ open util/integer
+ open util/ctl[Snapshot]
+
+ sig Chair, Player {}
+
+ conc state Game {
+     // Game variables
+     active_players: set Player
+     active_chairs: set Chair
+     occupied: Chair set -> set Player
+
+     env event MusicStarts {}
+     env event MusicStops {}
+
+     default state Start {
+         trans Walk {
+             on MusicStarts
+             when #active_players > 1
+             goto Walking
+             do occupied' = none -> none
+         }
+
+         trans DeclareWinner {
+             when one active_players
+             goto End
+         }
+     }
+
+     state Walking {
+         trans Sit {
+            on MusicStops
+            goto Sitting
+            do  {
+                occupied' in active_chairs -> active_players
+                active_chairs' = active_chairs
+                active_players' = active_players
+                // forcing occupied to be total and
+                // each chair mapped to only one player
+                all c : active_chairs' | one c .(occupied')
+                // each " occupying " player is sitting on one chair
+                all p : Chair.(occupied') | one occupied'. p
+            }
+        }
+    }
+
+     state Sitting {
+         trans EliminateLoser {
+             goto Start
+             do {
+                active_players' = Chair.occupied
+                #active_chairs' = (#active_chairs).minus[1]
+             }
+         }
+     }
+
+     state End {}
+
+    init {
+        #active_players > 1
+        #active_players = (#active_chairs).plus[1]
+        // force all Chair and Player to be included
+        active_players = Player
+        active_chairs = Chair
+        occupied = none -> none
+     }
+ }
+
+one sig Alice extends Player {}
+
+/* This property states that the player Alice will eventually win the game. That is, when the game ends (Game_End is in s.conf), the only
+remaining player (s.Game_active_players) will be Alice */
+pred ctl_existential  {
+        ctl_mc[ef[{ s: Snapshot | (Game_End in s.conf and (s.Game_active_players) = Alice)}]]
+}
+
+run ctl_existential for exactly 3 Player, exactly 2 Chair, exactly 8 Snapshot, 2 EventLabel expect 1
+
+/* This property states that the system will eventually always be in a state in which the players 
+   are sitting (Game_Sitting in s.conf) */
+assert ctl_finiteLiveness  {
+        ctl_mc[af[{ s: Snapshot | (Game_Sitting in s.conf)}]]
+}
+
+check ctl_finiteLiveness  for exactly 3 Player, exactly 2 Chair, exactly 8 Snapshot, 2 EventLabel expect 0
+
+/* This property states that the number of players ( s.Game_active_players) will eventually become 1
+   and remain at 1. */
+assert ctl_infiniteLiveness {
+	ctl_mc[af[ag[{ s : Snapshot | #s.Game_active_players = 1}]]]
+}
+check ctl_infiniteLiveness for exactly 3 Player , exactly 2 Chair, exactly 8 Snapshot, 2 EventLabel expect 0
+
+/* Please comment out the commands below if the Generate Signiface Axioms Option is turned OFF in the Menubar under Options */
+
+/* The 'run reachabilityAxiom' command checks whether all the snapshots considered during
+analysis are reachable from an initial snapshot. A Snapshot scope of 1 is the minimum
+required for an instance. */
+run reachabilityAxiom for 1 Snapshot, 2 EventLabel, 3 Chair, 3 Player
+
+/* The 'run operationsAxiom' that every transition defined in a model is 
+   represented by a pair of snapshots in the transition relation. The minimum Snapshot scope
+   for an instance is 8. */
+run operationsAxiom for exactly 3 Player, exactly 2 Chair, exactly 8 Snapshot, 2 EventLabel expect 0
