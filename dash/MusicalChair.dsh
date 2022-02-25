@@ -2,7 +2,7 @@
  * Title: MusicalChair.dsh
  * Authors: Jose Serna
  * Created: 2018-04-25
- * Last modified: 2022-01-31
+ * Updated for use in the Alloy Analyzer (extended with Dash): 2022-02-25
  *
  * Notes: The purpose is to present an equivalent model of musical chairs but
  *        using events
@@ -10,7 +10,6 @@
  ******************************************************************************/
 
  open util/integer
- open util/ctl[Snapshot]
 
  sig Chair, Player {}
 
