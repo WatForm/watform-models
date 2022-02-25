@@ -11,6 +11,7 @@
  *        https://cs.uwaterloo.ca/~nday/pdf/theses/2011-esmaeilsabzali-phd-thesis.pdf
  *
  ******************************************************************************/
+open util/ordering[Snapshot] as snapshot
 
 conc state Counter {
     env event Tk0 {}
@@ -57,9 +58,9 @@ conc state Counter {
 }
 
 // These require the Generate Significance axioms option to be enabled
-run reachabilityAxiom for 7 Snapshot, exactly 2 EventLabel
+//run reachabilityAxiom for 7 Snapshot, exactly 2 EventLabel
 
-run operationsAxiom for 7 Snapshot, exactly 2 EventLabel
+//run operationsAxiom for 7 Snapshot, exactly 2 EventLabel
 
 // Because the above are satisfied, 
 // the bitcounter has a significant scope of 7 Snapshots
@@ -91,7 +92,7 @@ check ctl_final_bitStatus for 7 Snapshot, exactly 2 EventLabel expect 0
 //  if the event Tk0 is generated, then eventually a transition is taken
 assert model_responsive {
     all s: Snapshot | Counter_Tk0 in s.events and some s.next =>
-        some s_next: s.*(ordering/next) | s_next.stable = True and
+        some s_next: s.*(snapshot/next) | s_next.stable = True and
                     (Counter_Bit1_T1 in s_next.taken or
                     Counter_Bit1_T2 in s_next.taken or
                     Counter_Bit2_T3 in s_next.taken or
