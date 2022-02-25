@@ -2,7 +2,7 @@
  * Title: Mutex.dsh
  * Authors: Jose Serna - jserna@uwaterloo.ca
  * Created: 2018-06-20
- * Last modified: 2022-01-31
+ * Updated for use in the Alloy Analyzer (extended with Dash): 2022-02-25
  *
  * Notes: Semaphore based mutual exclusion system
  *
@@ -84,6 +84,8 @@ assert ctl_mutex  {
          in s.conf))}]]
 }
 
+check ctl_mutex for 9 Snapshot, exactly 0 EventLabel expect 0
+
 /* This assert ensures that there is no stable Snapshot in which both Concurrent States
    (Process 1 and Process 2) are in the 'Critical' state.
    */
@@ -91,6 +93,8 @@ assert mutex {
     no s: Snapshot | s.stable = True and
         {Mutex_Process1_Critical + Mutex_Process2_Critical} in s.conf
 }
+
+check mutex for 9 Snapshot, exactly 0 EventLabel expect 0
 
 /* Please comment out the commands below if the Generate Signiface Axioms Option is turned OFF in the Menubar under Options */
 
