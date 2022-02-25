@@ -2,7 +2,7 @@
  * Title: EHealth.dsh
  * Authors: Jose Serna - jserna@uwaterloo.ca
  * Created: 2018-06-20
- * Last modified: 2022-02-01
+ * Updated for use in the Alloy Analyzer (extended with Dash): 2022-02-01
  *
  * Notes: Adaptation to DASH of original model developed in TLA
  *        This version explicitly models the environment as a concurrent state of
