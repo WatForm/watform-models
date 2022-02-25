@@ -2,7 +2,7 @@
  * Title: elevator.dsh
  * Authors: Jose Serna
  * Created: 03-04-2019
- * Last modified: 02-01-2022
+ * Updated for use in the Alloy Analyzer (extended with Dash): 02-25-2022
  *
  * Notes: Dash elevator model from Farheen's MMath thesis. The model should be
  *        checked with the option Vars unchaged set.
@@ -139,10 +139,16 @@ assert infiniteLiveness {
         all f : Floor | ctl_mc[ag[imp_ctl[Elevator_called.f , af[Elevator_current.f]]]]
 }
 
+check infiniteLiveness for exactly 6 Floor , 8 Snapshot, 0 EventLabel
+    expect 0
+
 /* This property states that */
 assert finiteLiveness {
         ctl_mc[af[{ s: Snapshot | ((s.Elevator_maintenance) = 0)}]]
 }
+
+check finiteLiveness for exactly 6 Floor , 8 Snapshot, 0 EventLabel
+    expect 0
 
 /* Please comment out the commands below if the Generate Signiface Axioms Option is turned OFF in the Menubar under Options */
 
