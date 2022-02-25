@@ -2,20 +2,20 @@
  * Title: SnapshotUI.dsh
  * Authors: Jose Serna
  * Created: 2018-11-09
- * Last modified: 2022-01-31
+ * Updated for use in the Alloy Analyzer (extended with Dash): 2022-02-25
  *
  * Notes: Dash model of the UI model for the "Snapshot" application described by
  *        Hillel Wayne in https://www.hillelwayne.com/post/formally-specifying-uis
  *
  ******************************************************************************/
 conc state SnapshotUI {
-    event login {}
-    event logout {}
-    event summary {}
-    event students {}
-    event close {}
-    event answer {}
-    event standards {}
+    env event login {}
+    env event logout {}
+    env event summary {}
+    env event students {}
+    env event close {}
+    env event answer {}
+    env event standards {}
 
     default state LoginPage {
         trans Login {
@@ -74,6 +74,8 @@ assert noSkippingStudentsReport  {
             {s: Snapshot | SnapshotUI_Snapshot_Reports_Students in s.conf}
         ])}]]
     }
+
+check noSkippingStudentsReport for 10 expect 0
 
 /* Please comment out the commands below if the Generate Signiface Axioms Option is turned OFF in the Menubar under Options */
 
