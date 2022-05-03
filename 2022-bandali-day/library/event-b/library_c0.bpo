@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.poFile org.eventb.core.poStamp="1">
+    <org.eventb.core.poPredicateSet name="ABSHYP" org.eventb.core.poStamp="1">
+        <org.eventb.core.poIdentifier name="MemberID" org.eventb.core.type="ℙ(MemberID)"/>
+        <org.eventb.core.poIdentifier name="BookID" org.eventb.core.type="ℙ(BookID)"/>
+        <org.eventb.core.poIdentifier name="maxNbLoans" org.eventb.core.type="ℤ"/>
+        <org.eventb.core.poIdentifier name="b1" org.eventb.core.type="BookID"/>
+        <org.eventb.core.poIdentifier name="b2" org.eventb.core.type="BookID"/>
+        <org.eventb.core.poIdentifier name="b3" org.eventb.core.type="BookID"/>
+        <org.eventb.core.poIdentifier name="m1" org.eventb.core.type="MemberID"/>
+        <org.eventb.core.poIdentifier name="m2" org.eventb.core.type="MemberID"/>
+        <org.eventb.core.poIdentifier name="m3" org.eventb.core.type="MemberID"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poSequent name="axm3/WD" org.eventb.core.accurate="true" org.eventb.core.poDesc="Well-definedness of Axiom" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/library/library_c0.bpo|org.eventb.core.poFile#library_c0|org.eventb.core.poPredicateSet#HYP("/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="finite(BookID)" org.eventb.core.source="/library/library_c0.buc|org.eventb.core.contextFile#library_c0|org.eventb.core.axiom#2"/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/library/library_c0.buc|org.eventb.core.contextFile#library_c0|org.eventb.core.axiom#2"/>
+        <org.eventb.core.poSelHint name="SEQHYS" org.eventb.core.poSelHintFst="/library/library_c0.bpo|org.eventb.core.poFile#library_c0|org.eventb.core.poPredicateSet#ABSHYP" org.eventb.core.poSelHintSnd="/library/library_c0.bpo|org.eventb.core.poFile#library_c0|org.eventb.core.poPredicateSet#HYP("/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poPredicateSet name="HYP(" org.eventb.core.parentSet="/library/library_c0.bpo|org.eventb.core.poFile#library_c0|org.eventb.core.poPredicateSet#ABSHYP" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="partition(MemberID,{m1},{m2},{m3})" org.eventb.core.source="/library/library_c0.buc|org.eventb.core.contextFile#library_c0|org.eventb.core.axiom#+"/>
+        <org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="partition(BookID,{b1},{b2},{b3})" org.eventb.core.source="/library/library_c0.buc|org.eventb.core.contextFile#library_c0|org.eventb.core.axiom#0"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="ALLHYP" org.eventb.core.parentSet="/library/library_c0.bpo|org.eventb.core.poFile#library_c0|org.eventb.core.poPredicateSet#HYP(" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD2" org.eventb.core.predicate="maxNbLoans=card(BookID) − 1" org.eventb.core.source="/library/library_c0.buc|org.eventb.core.contextFile#library_c0|org.eventb.core.axiom#2"/>
+    </org.eventb.core.poPredicateSet>
+</org.eventb.core.poFile>

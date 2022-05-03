@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.scContextFile org.eventb.core.accurate="true" org.eventb.core.configuration="org.eventb.core.fwd">
+    <org.eventb.core.scAxiom name="'" org.eventb.core.label="axm1" org.eventb.core.predicate="card(Player)=card(Chair)+1" org.eventb.core.source="/musical-chairs/musical_chairs_c0.buc|org.eventb.core.contextFile#musical_chairs_c0|org.eventb.core.axiom#," org.eventb.core.theorem="false"/>
+    <org.eventb.core.scAxiom name="(" org.eventb.core.label="axm2" org.eventb.core.predicate="partition(State,{start},{walking},{sitting},{won})" org.eventb.core.source="/musical-chairs/musical_chairs_c0.buc|org.eventb.core.contextFile#musical_chairs_c0|org.eventb.core.axiom#7" org.eventb.core.theorem="false"/>
+    <org.eventb.core.scCarrierSet name="State" org.eventb.core.source="/musical-chairs/musical_chairs_c0.buc|org.eventb.core.contextFile#musical_chairs_c0|org.eventb.core.carrierSet#2" org.eventb.core.type="ℙ(State)"/>
+    <org.eventb.core.scCarrierSet name="Player" org.eventb.core.source="/musical-chairs/musical_chairs_c0.buc|org.eventb.core.contextFile#musical_chairs_c0|org.eventb.core.carrierSet#'" org.eventb.core.type="ℙ(Player)"/>
+    <org.eventb.core.scConstant name="start" org.eventb.core.source="/musical-chairs/musical_chairs_c0.buc|org.eventb.core.contextFile#musical_chairs_c0|org.eventb.core.constant#3" org.eventb.core.type="State"/>
+    <org.eventb.core.scConstant name="won" org.eventb.core.source="/musical-chairs/musical_chairs_c0.buc|org.eventb.core.contextFile#musical_chairs_c0|org.eventb.core.constant#6" org.eventb.core.type="State"/>
+    <org.eventb.core.scCarrierSet name="Chair" org.eventb.core.source="/musical-chairs/musical_chairs_c0.buc|org.eventb.core.contextFile#musical_chairs_c0|org.eventb.core.carrierSet#-" org.eventb.core.type="ℙ(Chair)"/>
+    <org.eventb.core.scConstant name="sitting" org.eventb.core.source="/musical-chairs/musical_chairs_c0.buc|org.eventb.core.contextFile#musical_chairs_c0|org.eventb.core.constant#5" org.eventb.core.type="State"/>
+    <org.eventb.core.scConstant name="walking" org.eventb.core.source="/musical-chairs/musical_chairs_c0.buc|org.eventb.core.contextFile#musical_chairs_c0|org.eventb.core.constant#4" org.eventb.core.type="State"/>
+</org.eventb.core.scContextFile>

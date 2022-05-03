@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.scContextFile org.eventb.core.accurate="true" org.eventb.core.configuration="org.eventb.core.fwd">
+    <org.eventb.core.scAxiom name="'" org.eventb.core.label="axm1" org.eventb.core.predicate="partition(Key,{a},{b},{c},{d})" org.eventb.core.source="/digital-watch/digital_watch_c0.buc|org.eventb.core.contextFile#digital_watch_c0|org.eventb.core.axiom#," org.eventb.core.theorem="false"/>
+    <org.eventb.core.scAxiom name="(" org.eventb.core.label="axm2" org.eventb.core.predicate="partition(Display,{time},{date},{wait},{update},{alarm1},{alarm2},{chime},{stopwatch},{alarms_beep})" org.eventb.core.source="/digital-watch/digital_watch_c0.buc|org.eventb.core.contextFile#digital_watch_c0|org.eventb.core.axiom#7" org.eventb.core.theorem="false"/>
+    <org.eventb.core.scConstant name="a" org.eventb.core.source="/digital-watch/digital_watch_c0.buc|org.eventb.core.contextFile#digital_watch_c0|org.eventb.core.constant#(" org.eventb.core.type="Key"/>
+    <org.eventb.core.scConstant name="b" org.eventb.core.source="/digital-watch/digital_watch_c0.buc|org.eventb.core.contextFile#digital_watch_c0|org.eventb.core.constant#)" org.eventb.core.type="Key"/>
+    <org.eventb.core.scConstant name="c" org.eventb.core.source="/digital-watch/digital_watch_c0.buc|org.eventb.core.contextFile#digital_watch_c0|org.eventb.core.constant#*" org.eventb.core.type="Key"/>
+    <org.eventb.core.scConstant name="d" org.eventb.core.source="/digital-watch/digital_watch_c0.buc|org.eventb.core.contextFile#digital_watch_c0|org.eventb.core.constant#+" org.eventb.core.type="Key"/>
+    <org.eventb.core.scConstant name="chime" org.eventb.core.source="/digital-watch/digital_watch_c0.buc|org.eventb.core.contextFile#digital_watch_c0|org.eventb.core.constant#4" org.eventb.core.type="Display"/>
+    <org.eventb.core.scConstant name="wait" org.eventb.core.source="/digital-watch/digital_watch_c0.buc|org.eventb.core.contextFile#digital_watch_c0|org.eventb.core.constant#0" org.eventb.core.type="Display"/>
+    <org.eventb.core.scConstant name="time" org.eventb.core.source="/digital-watch/digital_watch_c0.buc|org.eventb.core.contextFile#digital_watch_c0|org.eventb.core.constant#." org.eventb.core.type="Display"/>
+    <org.eventb.core.scConstant name="alarm2" org.eventb.core.source="/digital-watch/digital_watch_c0.buc|org.eventb.core.contextFile#digital_watch_c0|org.eventb.core.constant#3" org.eventb.core.type="Display"/>
+    <org.eventb.core.scConstant name="alarm1" org.eventb.core.source="/digital-watch/digital_watch_c0.buc|org.eventb.core.contextFile#digital_watch_c0|org.eventb.core.constant#2" org.eventb.core.type="Display"/>
+    <org.eventb.core.scConstant name="stopwatch" org.eventb.core.source="/digital-watch/digital_watch_c0.buc|org.eventb.core.contextFile#digital_watch_c0|org.eventb.core.constant#5" org.eventb.core.type="Display"/>
+    <org.eventb.core.scCarrierSet name="Key" org.eventb.core.source="/digital-watch/digital_watch_c0.buc|org.eventb.core.contextFile#digital_watch_c0|org.eventb.core.carrierSet#'" org.eventb.core.type="ℙ(Key)"/>
+    <org.eventb.core.scCarrierSet name="Display" org.eventb.core.source="/digital-watch/digital_watch_c0.buc|org.eventb.core.contextFile#digital_watch_c0|org.eventb.core.carrierSet#-" org.eventb.core.type="ℙ(Display)"/>
+    <org.eventb.core.scConstant name="update" org.eventb.core.source="/digital-watch/digital_watch_c0.buc|org.eventb.core.contextFile#digital_watch_c0|org.eventb.core.constant#1" org.eventb.core.type="Display"/>
+    <org.eventb.core.scConstant name="date" org.eventb.core.source="/digital-watch/digital_watch_c0.buc|org.eventb.core.contextFile#digital_watch_c0|org.eventb.core.constant#\/" org.eventb.core.type="Display"/>
+    <org.eventb.core.scConstant name="alarms_beep" org.eventb.core.source="/digital-watch/digital_watch_c0.buc|org.eventb.core.contextFile#digital_watch_c0|org.eventb.core.constant#6" org.eventb.core.type="Display"/>
+</org.eventb.core.scContextFile>

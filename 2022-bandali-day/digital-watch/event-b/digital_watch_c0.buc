@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.contextFile org.eventb.core.comment="The DigitalWatch case study - Event-B model&#10;&#10;Copyright (c) 2018 Ali Abbassi &lt;aabbassi@uwaterloo.ca&gt;&#10;Copyright (c) 2018 Nancy Day &lt;nday@uwaterloo.ca&gt;&#10;Copyright (c) 2020 Amin Bandali &lt;bandali@uwaterloo.ca&gt;&#10;&#10;This file is part of the DigitalWatch Event-B model.&#10;&#10;The DigitalWatch Event-B model is free software: you can redistribute&#10;it and/or modify it under the terms of the GNU General Public License&#10;as published by the Free Software Foundation, either version 3 of the&#10;License, or (at your option) any later version.&#10;&#10;The DigitalWatch Event-B model is distributed in the hope that it will&#10;be useful, but WITHOUT ANY WARRANTY; without even the implied warranty&#10;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU&#10;General Public License for more details.&#10;&#10;You should have received a copy of the GNU General Public License&#10;along with the DigitalWatch Event-B model.  If not, see&#10;&lt;https://www.gnu.org/licenses/&gt;." org.eventb.core.configuration="org.eventb.core.fwd" version="3">
+    <org.eventb.core.carrierSet name="'" org.eventb.core.identifier="Key"/>
+    <org.eventb.core.constant name="(" org.eventb.core.identifier="a"/>
+    <org.eventb.core.constant name=")" org.eventb.core.identifier="b"/>
+    <org.eventb.core.constant name="*" org.eventb.core.identifier="c"/>
+    <org.eventb.core.constant name="+" org.eventb.core.identifier="d"/>
+    <org.eventb.core.axiom name="," org.eventb.core.label="axm1" org.eventb.core.predicate="partition(Key, {a}, {b}, {c}, {d})"/>
+    <org.eventb.core.carrierSet name="-" org.eventb.core.identifier="Display"/>
+    <org.eventb.core.constant name="." org.eventb.core.identifier="time"/>
+    <org.eventb.core.constant name="/" org.eventb.core.identifier="date"/>
+    <org.eventb.core.constant name="0" org.eventb.core.identifier="wait"/>
+    <org.eventb.core.constant name="1" org.eventb.core.identifier="update"/>
+    <org.eventb.core.constant name="2" org.eventb.core.identifier="alarm1"/>
+    <org.eventb.core.constant name="3" org.eventb.core.identifier="alarm2"/>
+    <org.eventb.core.constant name="4" org.eventb.core.identifier="chime"/>
+    <org.eventb.core.constant name="5" org.eventb.core.identifier="stopwatch"/>
+    <org.eventb.core.constant name="6" org.eventb.core.identifier="alarms_beep"/>
+    <org.eventb.core.axiom name="7" org.eventb.core.label="axm2" org.eventb.core.predicate="partition(Display, {time}, {date}, {wait}, {update}, {alarm1}, {alarm2}, {chime}, {stopwatch}, {alarms_beep})"/>
+</org.eventb.core.contextFile>

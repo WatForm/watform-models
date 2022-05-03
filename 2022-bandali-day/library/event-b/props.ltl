@@ -1,0 +1,15 @@
+G(e(Acquire(b1)) => {b1 /: books})
+G({b1 : books} => (e(Discard(b1)) => ({b1 /: dom(loans)} & {b1 : dom(reservations) & reservations(b1)={}})))
+G(e(Lend(b1, m1)) => {m1 : members})
+G(e(Reserve(b1, m1)) => ({m1 /: ran(reservations(b1))} & {b1|->m1 /: loans} & ({b1 : dom(loans)} or {b1 : dom(reservations) & reservations(b1)/={}})))
+G(e(Reserve(b1, m1)) => not({b1|->m1 : loans}))
+G(e(Reserve(b1, m1)) => not({b1 : dom(reservations) & m1 : ran(reservations(b1))}))
+G({b1 : dom(reservations) & reservations(b1)/={}} => not(e(Lend(b1, m1))))
+G({b1 : dom(reservations) & reservations(b1)/={}} => not(e(Renew(b1, m1))))
+G(e(Take(b1, m1)) => {b1 : dom(reservations) & reservations(b1)/={} & reservations(b1)(min(dom(reservations(b1)))) = m1})
+G({b1|->m2 : loans} => not(e(Take(b1, m1))) W {b1|->m2 /: loans})
+
+G({b1 : dom(reservations) & m1 : ran(reservations(b1))} => ([Take(b1, m1)] R e(Cancel(b1, m1))))
+
+G(e(Leave(m1)) => {m1 : members} & {m1 /: ran(loans)} & {union(ran(reservations)) |> {m1} = {}})
+G({!m . (m : members => card(loans |> {m}) <= maxNbLoans)})

@@ -1,0 +1,3 @@
+(WF(ChangeMusicPlaying)) & (SF(Walk) & SF(Sit) & SF(EliminateLoser) & SF(Win)) => F({#p . p : Player & activePlayers = {p}})
+(WF(ChangeMusicPlaying)) & (SF(Walk) & SF(Sit) & SF(EliminateLoser) & SF(Win)) => F(e(Sit))
+(WF(ChangeMusicPlaying)) & (SF(Walk) & SF(Sit) & SF(EliminateLoser) & SF(Win)) => F(G({card(activePlayers) = 1}))

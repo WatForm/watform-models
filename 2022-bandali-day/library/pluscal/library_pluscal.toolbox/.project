@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>library_pluscal</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>toolbox.builder.TLAParserBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>toolbox.natures.TLANature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>library_pluscal.tla</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/library_pluscal.tla</locationURI>
+		</link>
+		<link>
+			<name>utils.tla</name>
+			<type>1</type>
+			<location>/home/bandali/src/git/mmath/models/library/pluscal/utils.tla</location>
+		</link>
+	</linkedResources>
+</projectDescription>

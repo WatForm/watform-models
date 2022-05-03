@@ -1,0 +1,266 @@
+/* The Library case study - Dash model
+
+Copyright (c) 2020 Amin Bandali <bandali@uwaterloo.ca>
+Copyright (c) 2020 Nancy Day <nday@uwaterloo.ca>
+
+This file is part of the Library Dash model.
+
+The Library Dash model is free software: you can redistribute it
+and/or modify it under the terms of the GNU General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+The Library Dash model is distributed in the hope that it will be
+useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with the Library Dash model.  If not, see
+<https://www.gnu.org/licenses/>.
+
+
+The Library management case study is described in
+\cite{DBLP:conf/icfem/FrappierFCCO10} by Frappier et al.
+
+@InProceedings{DBLP:conf/icfem/FrappierFCCO10,
+  author    = {Marc Frappier and Beno{\^{\i}}t Fraikin and Romain
+                  Chossart and Rapha{\"{e}}l Chane{-}Yack{-}Fa and
+                  Mohammed Ouenzar},
+  title     = {Comparison of Model Checking Tools for Information
+                  Systems},
+  year      = 2010,
+  booktitle = {Formal Methods and Software Engineering - 12th
+                  International Conference on Formal Engineering
+                  Methods, {ICFEM} 2010, Shanghai, China, November
+                  17-19, 2010. Proceedings},
+  pages     = {581-596},
+  doi       = {10.1007/978-3-642-16901-4\_38},
+  url       = {https://doi.org/10.1007/978-3-642-16901-4\_38},
+  crossref  = {DBLP:conf/icfem/2010},
+  timestamp = {Tue, 14 May 2019 10:00:50 +0200},
+  biburl    = {https://dblp.org/rec/bib/conf/icfem/FrappierFCCO10},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+The Library Dash model is an adaptation of the Alloy one by
+Frappier et al.
+
+This model has appeared in the following publications:
+
+@mastersthesis{bandali2020,
+  type      = {{MMath} thesis},
+  author    = {Amin Bandali},
+  title     = {{A Comprehensive Study of Declarative Modelling Languages}},
+  school    = "University of Waterloo, David R. Cheriton School of Computer Science",
+  year      = 2020,
+  month     = {July},
+  publisher = "UWSpace",
+  url       = {http://hdl.handle.net/10012/16059},
+  note      = {\url{http://hdl.handle.net/10012/16059} and
+                  \url{https://bndl.org/mmath}},
+  pdf       = {https://p.bndl.org/bandali-mmath-thesis.pdf}
+}
+
+*/
+
+open util/sequniv
+
+one sig Const {
+    maxNbLoans: Int
+}
+
+sig MemberID, BookID {}
+
+conc state Library {
+    env in_m: lone MemberID
+    env in_b: lone BookID
+    members: set MemberID
+    books: set BookID
+    loans: books one -> one (members)
+    reservations: books one -> one (seq members)
+
+    invariant maxNbLoans {
+        Const.maxNbLoans = 7
+    }
+
+    trans Acquire {
+        when !(in_b in books)
+        do books' = books + in_b
+    }
+
+    trans Cancel {
+        when {
+            in_m in members
+            in_b in books
+            one (Int->in_m & reservations[in_b])
+        }
+        do reservations'[in_b] = delete[(reservations[in_b]),
+                                        (idxOf[(reservations[in_b]), in_m])]
+    }
+
+    trans Discard {
+        when {
+            in_b in books
+            no loans[in_b]
+            no reservations[in_b]
+        }
+        do books' = books - in_b
+    }
+
+    trans Join {
+        when !(in_m in members)
+        do members' = members + in_m
+    }
+
+    trans Leave {
+        when {
+            in_m in members
+            no loans.in_m
+            no (Int->in_m & reservations[in_b])
+        }
+        do members' = members - in_m
+    }
+
+    trans Lend {
+        when {
+            in_m in members
+            in_b in books
+            all m: members | no loans.m & in_b
+            no reservations[in_b]
+            #(loans.in_m) < Const.maxNbLoans
+        }
+        do loans' = loans + in_b->in_m
+    }
+
+    trans Renew {
+        when {
+            in_m in members
+            in_b in books
+            in_b->in_m in loans
+            no reservations[in_b]
+        }
+    }
+
+    trans Reserve {
+        when {
+            in_m in members
+            in_b in books
+            !(in_b->in_m in loans)
+            no Int->in_m & reservations[in_b]
+            (some loans[in_b] or (not isEmpty[(reservations[in_b])]))
+        }
+        do reservations'[in_b] = add[(reservations[in_b]), in_m]
+    }
+
+    trans Return {
+        when {
+            in_b in books
+            some loans[in_b]
+        }
+        do loans' = loans - in_b->(loans[in_b])
+    }
+
+    trans Take {
+        when {
+            in_m in members
+            in_b in books
+            no loans[in_b]
+            #(loans.in_m) < Const.maxNbLoans
+            #(reservations[in_b]) > 0
+            first[(reservations[in_b])] = in_m
+        }
+        do {
+            loans' = loans + in_b->in_m
+            reservations'[in_b] = delete[(reservations[in_b]),
+                                         (idxOf[(reservations[in_b]), in_m])]
+        }
+    }
+
+    init {
+        no members
+        no books
+        no loans
+        no reservations
+    }
+}
+
+{escape}
+// run operation for 8 Snapshot, 0 EventLabel, 3 Patient, 4 Medication
+
+check assert_ltl_2 {
+    all s: Snapshot | pre_Library_Acquire[s] => not(s.Library_in_b in s.Library_books)
+} for 8 Snapshot, 0 EventLabel, 3 MemberID, 3 BookID expect 0
+
+check assert_ltl_3 {
+    all s: Snapshot |
+        (s.Library_in_b in s.Library_books and pre_Library_Discard[s]) =>
+            (no (s.Library_in_b).(s.Library_loans) and
+             no (s.Library_in_b).(s.Library_reservations))
+} for 8 Snapshot, 0 EventLabel, 3 MemberID, 3 BookID expect 0
+
+check assert_ltl_4 {
+    all s: Snapshot | pre_Library_Lend[s] => s.Library_in_m in s.Library_members
+} for 8 Snapshot, 0 EventLabel, 3 MemberID, 3 BookID expect 0
+
+check assert_ltl_5 {
+    all s: Snapshot | pre_Library_Reserve[s] =>
+        ((no (s.Library_reservations).(s.Library_in_m)) and
+         not (s.Library_in_m in s.Library_loans[s.Library_in_b]) and
+         ((some ((s.Library_in_b).(s.Library_loans))) or
+          (no (s.Library_in_b).(s.Library_reservations))))
+} for 8 Snapshot, 0 EventLabel, 3 MemberID, 3 BookID expect 0
+
+check assert_ltl_6 {
+    all s: Snapshot | pre_Library_Reserve[s] =>
+        not (s.Library_in_m in s.Library_loans[s.Library_in_b])
+} for 8 Snapshot, 0 EventLabel, 3 MemberID, 3 BookID expect 0
+
+check assert_ltl_7 {
+    all s: Snapshot | pre_Library_Reserve[s] =>
+        no ((s.Library_reservations).(s.Library_in_m))
+} for 8 Snapshot, 0 EventLabel, 3 MemberID, 3 BookID expect 0
+
+check assert_ltl_8 {
+    all s: Snapshot | (some ((s.Library_in_b).(s.Library_reservations)) =>
+        not(pre_Library_Lend[s]))
+} for 8 Snapshot, 0 EventLabel, 3 MemberID, 3 BookID expect 0
+
+check assert_ltl_9 {
+    all s: Snapshot | (some ((s.Library_in_b).(s.Library_reservations)) =>
+        not(pre_Library_Renew[s]))
+} for 8 Snapshot, 0 EventLabel, 3 MemberID, 3 BookID expect 0
+
+check assert_ltl_10 {
+    all s: Snapshot | pre_Library_Take[s] =>
+        ((some (s.Library_reservations[s.Library_in_b])) and
+         first[(s.Library_reservations[s.Library_in_b])] = s.Library_in_m)
+} for 8 Snapshot, 0 EventLabel, 3 MemberID, 3 BookID expect 0
+
+check assert_ltl_11 {
+    all s: Snapshot {
+        all b: s.Library_books {
+            (some s.Library_loans[b]) =>
+                not(pre_Library_Take[s] and b = s.Library_in_b)
+        }
+        (pre_Library_Take[s] =>
+            (no s.Library_loans[s.Library_in_b]))
+    }
+} for 8 Snapshot, 0 EventLabel, 3 MemberID, 3 BookID expect 0
+
+check assert_ltl_13 {
+    all s: Snapshot | pre_Library_Leave[s] =>
+        ((s.Library_in_m in s.Library_members) and
+         (no ((s.Library_loans).(s.Library_in_m))) and
+         (no ((s.Library_reservations).(s.Library_in_m))))
+} for 8 Snapshot, 0 EventLabel, 3 MemberID, 3 BookID expect 0
+{/escape}
+assert assert_ltl_14 {
+    ag(ef(Library/in_m not in Library/members))
+}
+check assert_ltl_14 for 8 Snapshot, 0 EventLabel, 3 MemberID, 3 BookID expect 0
+{escape}
+check assert_ltl_15 {
+    all s: Snapshot, m: s.Library_members | #(s.Library_loans.m) <= Const.maxNbLoans
+} for 8 Snapshot, 0 EventLabel, 3 MemberID, 3 BookID expect 0
+{/escape}

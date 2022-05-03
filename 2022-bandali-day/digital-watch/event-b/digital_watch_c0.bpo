@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.poFile org.eventb.core.poStamp="1">
+    <org.eventb.core.poPredicateSet name="ABSHYP" org.eventb.core.poStamp="1">
+        <org.eventb.core.poIdentifier name="Key" org.eventb.core.type="ℙ(Key)"/>
+        <org.eventb.core.poIdentifier name="Display" org.eventb.core.type="ℙ(Display)"/>
+        <org.eventb.core.poIdentifier name="a" org.eventb.core.type="Key"/>
+        <org.eventb.core.poIdentifier name="b" org.eventb.core.type="Key"/>
+        <org.eventb.core.poIdentifier name="c" org.eventb.core.type="Key"/>
+        <org.eventb.core.poIdentifier name="d" org.eventb.core.type="Key"/>
+        <org.eventb.core.poIdentifier name="chime" org.eventb.core.type="Display"/>
+        <org.eventb.core.poIdentifier name="wait" org.eventb.core.type="Display"/>
+        <org.eventb.core.poIdentifier name="time" org.eventb.core.type="Display"/>
+        <org.eventb.core.poIdentifier name="alarm2" org.eventb.core.type="Display"/>
+        <org.eventb.core.poIdentifier name="alarm1" org.eventb.core.type="Display"/>
+        <org.eventb.core.poIdentifier name="stopwatch" org.eventb.core.type="Display"/>
+        <org.eventb.core.poIdentifier name="update" org.eventb.core.type="Display"/>
+        <org.eventb.core.poIdentifier name="date" org.eventb.core.type="Display"/>
+        <org.eventb.core.poIdentifier name="alarms_beep" org.eventb.core.type="Display"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="ALLHYP" org.eventb.core.parentSet="/digital-watch/digital_watch_c0.bpo|org.eventb.core.poFile#digital_watch_c0|org.eventb.core.poPredicateSet#ABSHYP" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="partition(Key,{a},{b},{c},{d})" org.eventb.core.source="/digital-watch/digital_watch_c0.buc|org.eventb.core.contextFile#digital_watch_c0|org.eventb.core.axiom#,"/>
+        <org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="partition(Display,{time},{date},{wait},{update},{alarm1},{alarm2},{chime},{stopwatch},{alarms_beep})" org.eventb.core.source="/digital-watch/digital_watch_c0.buc|org.eventb.core.contextFile#digital_watch_c0|org.eventb.core.axiom#7"/>
+    </org.eventb.core.poPredicateSet>
+</org.eventb.core.poFile>

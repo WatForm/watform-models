@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.contextFile org.eventb.core.comment="The Musical Chairs case study - Event-B model&#10;&#10;Copyright (c) 2018 Jose Serna &lt;jserna@uwaterloo.ca&gt;&#10;Copyright (c) 2018 Nancy Day &lt;nday@uwaterloo.ca&gt;&#10;Copyright (c) 2020 Amin Bandali &lt;bandali@uwaterloo.ca&gt;&#10;&#10;This file is part of the Musical Chairs Event-B model.&#10;&#10;The Musical Chairs Event-B model is free software: you can&#10;redistribute it and/or modify it under the terms of the GNU General&#10;Public License as published by the Free Software Foundation, either&#10;version 3 of the License, or (at your option) any later version.&#10;&#10;The Musical Chairs Event-B model is distributed in the hope that it&#10;will be useful, but WITHOUT ANY WARRANTY; without even the implied&#10;warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See&#10;the GNU General Public License for more details.&#10;&#10;You should have received a copy of the GNU General Public License&#10;along with the Musical Chairs Event-B model.  If not, see&#10;&lt;https://www.gnu.org/licenses/&gt;." org.eventb.core.configuration="org.eventb.core.fwd" version="3">
+    <org.eventb.core.carrierSet name="'" org.eventb.core.identifier="Player"/>
+    <org.eventb.core.axiom name="," org.eventb.core.label="axm1" org.eventb.core.predicate="card(Player) = card(Chair) + 1"/>
+    <org.eventb.core.carrierSet name="-" org.eventb.core.identifier="Chair"/>
+    <org.eventb.core.carrierSet name="2" org.eventb.core.identifier="State"/>
+    <org.eventb.core.constant name="3" org.eventb.core.identifier="start"/>
+    <org.eventb.core.constant name="4" org.eventb.core.identifier="walking"/>
+    <org.eventb.core.constant name="5" org.eventb.core.identifier="sitting"/>
+    <org.eventb.core.constant name="6" org.eventb.core.identifier="won"/>
+    <org.eventb.core.axiom name="7" org.eventb.core.label="axm2" org.eventb.core.predicate="partition(State, {start}, {walking}, {sitting}, {won})"/>
+</org.eventb.core.contextFile>

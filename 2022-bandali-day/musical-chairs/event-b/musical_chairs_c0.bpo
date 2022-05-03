@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.poFile org.eventb.core.poStamp="1">
+    <org.eventb.core.poPredicateSet name="ABSHYP" org.eventb.core.poStamp="1">
+        <org.eventb.core.poIdentifier name="State" org.eventb.core.type="ℙ(State)"/>
+        <org.eventb.core.poIdentifier name="Player" org.eventb.core.type="ℙ(Player)"/>
+        <org.eventb.core.poIdentifier name="Chair" org.eventb.core.type="ℙ(Chair)"/>
+        <org.eventb.core.poIdentifier name="start" org.eventb.core.type="State"/>
+        <org.eventb.core.poIdentifier name="won" org.eventb.core.type="State"/>
+        <org.eventb.core.poIdentifier name="sitting" org.eventb.core.type="State"/>
+        <org.eventb.core.poIdentifier name="walking" org.eventb.core.type="State"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poSequent name="axm1/WD" org.eventb.core.accurate="true" org.eventb.core.poDesc="Well-definedness of Axiom" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/musical-chairs/musical_chairs_c0.bpo|org.eventb.core.poFile#musical_chairs_c0|org.eventb.core.poPredicateSet#ABSHYP"/>
+        <org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="finite(Player)∧finite(Chair)" org.eventb.core.source="/musical-chairs/musical_chairs_c0.buc|org.eventb.core.contextFile#musical_chairs_c0|org.eventb.core.axiom#,"/>
+        <org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/musical-chairs/musical_chairs_c0.buc|org.eventb.core.contextFile#musical_chairs_c0|org.eventb.core.axiom#,"/>
+        <org.eventb.core.poSelHint name="SEQHYS" org.eventb.core.poSelHintFst="/musical-chairs/musical_chairs_c0.bpo|org.eventb.core.poFile#musical_chairs_c0|org.eventb.core.poPredicateSet#ABSHYP" org.eventb.core.poSelHintSnd="/musical-chairs/musical_chairs_c0.bpo|org.eventb.core.poFile#musical_chairs_c0|org.eventb.core.poPredicateSet#ABSHYP"/>
+    </org.eventb.core.poSequent>
+    <org.eventb.core.poPredicateSet name="ALLHYP" org.eventb.core.parentSet="/musical-chairs/musical_chairs_c0.bpo|org.eventb.core.poFile#musical_chairs_c0|org.eventb.core.poPredicateSet#ABSHYP" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="card(Player)=card(Chair)+1" org.eventb.core.source="/musical-chairs/musical_chairs_c0.buc|org.eventb.core.contextFile#musical_chairs_c0|org.eventb.core.axiom#,"/>
+        <org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="partition(State,{start},{walking},{sitting},{won})" org.eventb.core.source="/musical-chairs/musical_chairs_c0.buc|org.eventb.core.contextFile#musical_chairs_c0|org.eventb.core.axiom#7"/>
+    </org.eventb.core.poPredicateSet>
+</org.eventb.core.poFile>
