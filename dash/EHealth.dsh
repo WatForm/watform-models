@@ -2,7 +2,7 @@
  * Title: EHealth.dsh
  * Authors: Jose Serna - jserna@uwaterloo.ca
  * Created: 2018-06-20
- * Last modified: 2022-01-31
+ * Updated for use in the Alloy Analyzer (extended with Dash): 2022-01-31
  *
  * Notes: Adaptation to DASH of original model developed in TLA.
  *        This model uses env declarations inside the main state to represent
@@ -12,6 +12,10 @@
  *        Technical Report EECS-2017-02
  *
  ******************************************************************************/
+
+fact {
+one Patient
+}
 
  sig Patient {}
  sig Medication {}
@@ -100,11 +104,9 @@ conc state EHealthSystem {
 /* The 'run reachabilityAxiom' command checks whether all the snapshots considered during
 analysis are reachable from an initial snapshot. A Snapshot scope of 1 is the minimum
 required for an instance. */
-run reachabilityAxiom for 1 Snapshot, 0 EventLabel, 3 Patient, 3 Medication
-        expect 1
+run reachabilityAxiom for 1 Snapshot, 0 EventLabel, 3 Patient, 3 Medication expect 1
 
 /* The 'run operationsAxiom' that every transition defined in a model is 
    represented by a pair of snapshots in the transition relation. A Snapshot 
    scope of 8 is the minimum required for an instance. */
-run operationsAxiom for 8 Snapshot, 0 EventLabel, 3 Patient, 3 Medication
-        expect 1
+run operationsAxiom for 8 Snapshot, 0 EventLabel, 3 Patient, 3 Medication expect 1

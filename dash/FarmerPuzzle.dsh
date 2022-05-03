@@ -2,7 +2,7 @@
  * Title: farmer.dsh
  * Authors: Jose Serna
  * Created: 2018-06-11
- * Last modified: 2022-01-31
+ * Updated for use in the Alloy Analyzer (extended with Dash): 2022-02-25
  *
  * Notes: Adaptation to DASH from the original model available in the Alloy's
  *        libraries
@@ -64,12 +64,14 @@ conc state Puzzle {
 pred ctl_solve  {
       ctl_mc[ef[{ s: Snapshot | (s.Puzzle_far) = Object}]]
 }
+run ctl_solve for 8 Snapshot, 0 EventLabel expect 1
 
 /* This property states that the same Object cannot be in both the near and far variable at any Snapshot  */
 assert ctl_no_quantum_objects  {
         ctl_mc[ag[{ s: Snapshot | (no x : Object
          | x in (s.Puzzle_near) and x in (s.Puzzle_far))}]]
 }
+check ctl_no_quantum_objects for 8 Snapshot, 0 EventLabel expect 0
 
 /* Please comment out the commands below if the Generate Signiface Axioms Option is turned OFF in the Menubar under Options */
 

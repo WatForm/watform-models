@@ -2,7 +2,7 @@
  * Title: BitCounter.dsh
  * Authors: Jose Serna
  * Created: 14-04-2018
- * Updated for use in the Alloy Analyzer (extended with Dash): 2022-02-10
+ * Updated for use in the Alloy Analyzer (extended with Dash): 2022-02-24
  *
  * Notes: Two bit counter model taken from Shahram's PhD thesis
  *
@@ -11,6 +11,7 @@
  *        https://cs.uwaterloo.ca/~nday/pdf/theses/2011-esmaeilsabzali-phd-thesis.pdf
  *
  ******************************************************************************/
+open util/ordering[Snapshot] as snapshot
 
 conc state Counter {
     env event Tk0 {}
@@ -18,44 +19,48 @@ conc state Counter {
     conc state Bit1 {
         event Tk1 {}
 
-        default state Bit11 {
-    		trans T1 {
-            		on Tk0
-            		goto Bit12
-        	}
-	}
+        default state Bit11 {}
+        state Bit12 {}
 
-        state Bit12 {
-	        trans T2 {
-                     on Tk0
-                     goto Bit11
-                     send Tk1
-               }
+        trans T1 {
+            from Bit1/Bit11
+            on Tk0
+            goto Bit12
+        }
+
+        trans T2 {
+            from Bit12
+            on Tk0
+            goto Bit11
+            send Tk1
         }
     }
+    
     conc state Bit2 {
         event Done {}
 
-        default state Bit21 {
-        	trans T3 {
-                      on Bit1/Tk1
-            		goto Bit22
-        	}
-	}
-       state Bit22 {
-              trans T4 {
-                     on Bit1/Tk1
-                     goto Bit21
-                     send Done
-              }
-       }
+        default state Bit21 {}
+        state Bit22 {}
+        
+        trans T3 {
+            from Bit21
+            on Bit1/Tk1
+            goto Bit22
+        }
+
+        trans T4 {
+            from Bit22
+            on Bit1/Tk1
+            goto Bit21
+            send Done
+        }
     }
 }
 
-// These require the  Generate Significance axioms option to be enabled
-run reachabilityAxiom for 7 Snapshot, exactly 2 EventLabel
+// These require the Generate Significance axioms option to be enabled
+//run reachabilityAxiom for 7 Snapshot, exactly 2 EventLabel
 
-run operationsAxiom for 7 Snapshot, exactly 2 EventLabel
+//run operationsAxiom for 7 Snapshot, exactly 2 EventLabel
 
 // Because the above are satisfied, 
 // the bitcounter has a significant scope of 7 Snapshots
@@ -84,14 +89,14 @@ assert ctl_final_bitStatus {
 }
 check ctl_final_bitStatus for 7 Snapshot, exactly 2 EventLabel expect 0
 
-//  if the event Tk0 is generated, then eventually a transition is taken from a stable state
+//  if the event Tk0 is generated, then eventually a transition is taken
 assert model_responsive {
-    all s: Snapshot | Counter_Tk0 in s.events  =>
-       some s_next: s.*nextStep | s_next.stable = True and
-                    (Counter_Bit1_Bit11_T1 in s_next.taken or
-                    Counter_Bit1_Bit12_T2 in s_next.taken or
-                    Counter_Bit2_Bit21_T3 in s_next.taken or
-                    Counter_Bit2_Bit22_T4 in s_next.taken)
+    all s: Snapshot | Counter_Tk0 in s.events and some s.next =>
+        some s_next: s.*(snapshot/next) | s_next.stable = True and
+                    (Counter_Bit1_T1 in s_next.taken or
+                    Counter_Bit1_T2 in s_next.taken or
+                    Counter_Bit2_T3 in s_next.taken or
+                    Counter_Bit2_T4 in s_next.taken)
 }
 check model_responsive for 7 Snapshot, exactly 2 EventLabel expect 0
 
@@ -101,12 +106,12 @@ assert ctl_model_responsive {
         ag[
             imp_ctl[
                 {s: Snapshot| Counter_Tk0 in s.events},
-                ef[{s: Snapshot |
+                af[{s: Snapshot |
                     s.stable = True and
-                    (Counter_Bit1_Bit11_T1 in s.taken or
-                    Counter_Bit1_Bit12_T2 in s.taken or
-                    Counter_Bit2_Bit21_T3 in s.taken or
-                    Counter_Bit2_Bit22_T4 in s.taken)
+                    (Counter_Bit1_T1 in s.taken or
+                    Counter_Bit1_T2 in s.taken or
+                    Counter_Bit2_T3 in s.taken or
+                    Counter_Bit2_T4 in s.taken)
                 }]
             ]
         ]
