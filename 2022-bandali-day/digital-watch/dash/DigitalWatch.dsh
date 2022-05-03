@@ -1,7 +1,7 @@
 /* The DigitalWatch case study - Dash model
 
 Copyright (c) 2018 Jose Serna <jserna@uwaterloo.ca>
-Copyright (c) 2018 Nancy Day <nday@uwaterloo.ca>
+Copyright (c) 2018,2022 Nancy Day <nday@uwaterloo.ca>
 
 This file is part of the DigitalWatch Dash model.
 
@@ -192,24 +192,20 @@ This model has appeared in the following publications:
     }
  }
 
-{escape}
+
 // Significant model
-//run significance for 10 Snapshot, exactly 10 EventLabel
+run significance for 10 Snapshot
 
 // *********************** Eventually time ************************//
-    pred eventually_time {
-        ctl_mc[
-            ag[
-                imp_ctl[{ s : Snapshot | DigitalWatch_press_a in s.events},
-                    ef[ex[{s: Snapshot | DigitalWatch_Main_Displays_Time in s.conf }]]
-                ]
+pred eventually_time {
+    ctl_mc[
+        ag[
+            imp_ctl[{ s : Snapshot | DigitalWatch_press_a in s.events},
+                ef[ex[{s: Snapshot | DigitalWatch_Main_Displays_Time in s.conf }]]
             ]
         ]
-    }
-    run eventually_time for 10 Snapshot, exactly 10 EventLabel
+    ]
+}
 
-    assert check_eventually_time {
-        eventually_time
-    }
-    check check_eventually_time for 10 Snapshot, exactly 10 EventLabel expect 0
-{/escape}
+check eventually_time for 10 Snapshot expect 0
+

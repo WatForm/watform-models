@@ -79,6 +79,7 @@ TODO
 
 */
 
+// must run with TCMC option turned on for translation to Alloy
 
 enum HandleStatus {UP, DOWN}
 enum DoorStatus {CLOSED, OPENING, OPEN, CLOSING}
@@ -143,21 +144,45 @@ conc state LandingGear {
 
 
 assert R11_bis {
-    ag(ag(LandingGear/handle = DOWN) implies
-        af(LandingGear/gears = EXTENDED and LandingGear/doors = CLOSED))
+    ctl_mc[
+     ag[
+        imp_ctl[
+            ag[{s:Snapshot | LandingGear_handle = DOWN)],
+            af[{s:Snapshot | LandingGear_gears = EXTENDED and LandingGear_doors = CLOSED}]
+        ]
+     ]
+    ]        
 }
 
 assert R12_bis {
-    ag(ag(LandingGear/handle = UP) implies
-        af(LandingGear/gears = RETRACTED and LandingGear/doors = CLOSED))
+    ctl_mc[
+     ag[
+        imp_ctl[
+            ag[{s:Snapshot | LandingGear_handle = UP)],
+            af[{s:Snapshot | LandingGear_gears = RETRACTED and LandingGear_doors = CLOSED}]
+        ]
+     ]
+    ]   
 }
 
 assert R21 {
-    ag(ag(LandingGear/handle = DOWN) implies
-        ax(ag(LandingGear/gears != RETRACTING)))
+    ctl_mc[
+     ag[
+        imp_ctl[
+            ag[{s:Snapshot | LandingGear_handle = DOWN)],
+            ax[ag[{s:Snapshot | LandingGear_gears = RETRACTING}]]
+        ]
+     ]
+    ] 
 }
 
 assert R22 {
-    ag(ag(LandingGear/handle = UP) implies
-        ax(ag(LandingGear/gears != EXTENDING)))
+    ctl_mc[
+     ag[
+        imp_ctl[
+            ag[{s:Snapshot | LandingGear_handle = UP)],
+            ax[ag[{s:Snapshot | LandingGear_gears != EXTENDING}]]
+        ]
+     ]
+    ] 
 }

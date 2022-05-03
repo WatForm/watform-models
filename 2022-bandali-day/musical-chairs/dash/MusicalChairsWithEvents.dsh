@@ -140,7 +140,7 @@ conc state Game {
      state End {}
 }
 
-{escape}
+
      // Get a significant instance
      run significance for exactly 3 Players , exactly 2 Chairs ,
         exactly 8 Snapshot, 2 EventLabel
@@ -180,4 +180,4 @@ conc state Game {
     }
     check infiniteLiveness for exactly 3 Players , exactly 2 Chairs ,
         exactly 8 Snapshot, 2 EventLabel
-{/escape}
+

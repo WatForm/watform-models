@@ -1,7 +1,7 @@
 /* The EHealth case study - Dash model
 
 Copyright (c) 2018 Jose Serna <jserna@uwaterloo.ca>
-Copyright (c) 2018 Nancy Day <nday@uwaterloo.ca>
+Copyright (c) 2018,2022 Nancy Day <nday@uwaterloo.ca>
 
 This file is part of the EHealth Dash model.
 
@@ -160,6 +160,6 @@ conc state EHealthSystem {
     }
 }
 
-{escape}
-    run operation for 8 Snapshot, 0 EventLabel, 3 Patient, 4 Medication
-{/escape}
+
+run reachabilityAxiom for exactly 8 Snapshot, 3 Patient, 4 Medication
+
