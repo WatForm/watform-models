@@ -1,0 +1,72 @@
+open util/ring[Identifier] as P0
+
+conc state System {
+	elected: set Identifier
+
+	conc state Process [Identifier] {
+		succ: one Identifier
+		token: buf[Identifier]
+
+		default state Electing {
+			trans PassToken {
+				when {
+					no elected
+					some token.elems
+					lt[this, token.firstElem]
+				}
+				do {
+					Process[nextRing[this]]/token.addFirst[token.firstElem] // Pass the token
+					all others: Identifier - nextRing[this] | Process[others]/token' = Process[others]/token
+				}
+			}
+
+			trans ConsumeToken {
+				when {
+					no elected
+					some token.elems
+					gt[this, token.firstElem]
+				}
+				do {
+					token.removeFirst // Consume the Token
+				}
+			}			
+
+			trans ElectLeader {
+				when {
+					no elected
+					token.firstElem = this
+				}
+				do {
+					elected' =  this // Elect Leader
+				}
+				goto Elected
+			}
+		}
+
+		state Elected {}
+
+		init {
+			one token
+			Process[nextRing[this]]/token.firstElem = this
+		}
+	}
+
+	init {
+		no elected
+	}
+}
+
+
+assert eventuallyLeaderElected {
+	some s: Snapshot | some s.System_elected
+}
+
+assert electedHasHighestIdentifier {
+    (one s: one Snapshot | one s.System_elected and (s.System_elected) in P0/last)
+}
+
+check eventuallyLeaderElected for exactly 13 Snapshot, exactly 6 Identifier, exactly 6 token
+check eventuallyLeaderElected for 15 Snapshot, exactly 7 Identifier, exactly 7 token
+check electedHasHighestIdentifier for 13 Snapshot, exactly 6 Identifier, exactly 6 token
+check electedHasHighestIdentifier for 15 Snapshot, exactly 7 Identifier, exactly 7 token
+

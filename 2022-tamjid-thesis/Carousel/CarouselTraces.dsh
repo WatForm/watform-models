@@ -1,0 +1,253 @@
+abstract sig Response {}
+one sig Commit, Abort extends Response{}
+
+sig Key, Value {}
+sig Transaction {
+	 // The Coordinator managing this transaction
+	coordinator: lone CoordinatorID,
+	 // Updated keys and values
+	key: Key -> Value
+}
+
+fact {
+	all t: Transaction | one t.key // Limit each transaction to updating one key only
+}
+
+conc state Carousel {
+	conc state Client [ClientID] {
+		response: lone Response //Commit or Abort Decision from the Co-ordinator
+		data: Key -> one Value
+		txn: lone Transaction
+		transToSend: set Transaction
+
+		default state Reading {
+			trans ReadAndPrepare {
+				when {
+					some c: CoordinatorID | no Coordinator[c]/currentTxn // There is a coordinator that is not currently handling a transaction
+				}
+				do {
+					one t: transToSend, c: CoordinatorID | all leader: PartLdrID | {
+						txn' = t
+						Coordinator[c]/client' = this // Inform the coordinator of the client making the request
+						no Coordinator[c]/currentTxn // It should not be managing another transaction
+						Coordinator[c]/currentTxn' = t // Inform coordinator of transaction
+
+						t.coordinator = c // Store the coordinator information for the respective transaction (to be used by partition leaders)
+						PartitionLeader[leader]/currentTxn.add[t]  // Store the transaction to be processed by a participant leader
+						transToSend' = transToSend - t
+						all others: CoordinatorID - c | Coordinator[others]/client' = Coordinator[others]/client
+						all others: CoordinatorID - c | Coordinator[others]/currentTxn' = Coordinator[others]/currentTxn
+					}
+				}
+				goto Waiting
+			}
+		}
+		
+		// Wait for a decision from the Coordinator
+		state Waiting {
+			trans FinalizeCommit {
+				when {
+					(one response) and
+					Commit in response // Decision to commit
+				}
+				do { 
+					data' = txn.key // Replicate data for consensus group of servers
+					txn' = {none}
+					no response'
+				}
+				goto Reading
+			}
+
+			trans FinalizeAbort {
+				when {
+					(one response) and
+					Abort in response
+				}
+				do { 
+					txn' = {none}
+					no response'
+				}
+				goto Reading
+			}
+		}
+
+		init {
+			no response
+			some data
+			no txn
+			#transToSend = 2
+		}
+	}
+
+	conc state Coordinator [CoordinatorID] {
+		currentTxn: lone Transaction
+		client: lone ClientID
+		info: Key -> one Value
+		coord_responses: PartLdrID -> one Response
+
+		action Reset [no info' and no currentTxn' and no client' and no coord_responses'] {}
+		
+		default state Replicate {
+			trans Replicating { 	// Replicate Transaction information after receiving it from a client
+				when one currentTxn
+				do { 
+					info' = currentTxn.key
+				}
+				goto WaitForResponse
+			}
+		}
+	
+		// Wait for responses from the ParitionLeaders
+		state WaitForResponse {
+			trans StartCommit {
+				when { 
+					#coord_responses = #PartLdrID // All Partition Leaders have responded
+					! (Abort in PartLdrID.coord_responses) // None of the Partition Leaders aborted
+				}
+				do {
+					Client[client]/response' = Commit
+					all others: ClientID - client | Client[others]/response' = Client[others]/response
+					all leader: PartLdrID | PartitionLeader[leader]/response' = currentTxn -> Commit 
+                                        Reset
+				}
+			}
+
+			trans StartAbort {
+				 // One of the Partition Leader has aborted the transaction
+				when (some coord_responses and Abort in PartLdrID.coord_responses)
+				do {
+					Client[client]/response' = Abort
+					all others: ClientID - client | Client[others]/response' = Client[others]/response
+					Reset
+				}
+			}
+		}
+
+		init {
+			no client
+			no coord_responses
+			no info
+			no currentTxn
+		}
+	}
+	
+	// Partition Leaders
+	conc state PartitionLeader [PartLdrID] {
+		currentTxn: buf[Transaction] // Requests that not been prepared. They can either be committed or aborted
+		pendingTxn: buf[Transaction] // Requests that have been committed
+		response: Transaction -> one Response // Response from a Coordinator regarding a Commit or Abort decision
+		data: Key -> one Value
+	
+		default state Waiting {
+			trans PrepareCommit { // Commit a transaction if the keys it modifies do not have a conflict with pending requests
+				when {
+					(some currentTxn.elems and no response) // There is a new transaction
+					!( (currentTxn.firstElem).key.Value in (pendingTxn.elems.key).Value) // The new transaction does not conflict with pending transactions
+				}
+				do {
+					pendingTxn.add[currentTxn.firstElem] // Add this transaction to the pending list of transactions
+					currentTxn.removeFirst // Remove the current transaction
+				}
+				goto Commit // Start the commit phase
+			}
+
+			trans PrepareAbort { // Abort a transaction if the keys it modifies has a conflict with pending requests
+				when {
+					some currentTxn.elems
+					( (currentTxn.firstElem).key.Value in (pendingTxn.elems.key).Value)
+				}
+				goto Abort
+			}
+
+			trans FinalizeCommit { // Finalize a Commit
+				when {
+					(Commit in Transaction.response) // A Coordinator has requested to Commit
+				}
+				do {
+					no response' // Clear out responses
+					pendingTxn.removeFirst // Remove the Committed transaction from the Pending List
+					data' = data ++ (response.Response.key) // Update the data based on the Read-Write values
+				}
+			}
+		}
+
+		// Send a Prepare decision to the coordinator
+		state Commit {
+			trans CommitTransaction {
+				do {
+					//Inform the coordinator the first pending transaction about the Prepare (Commit) decision
+					Coordinator[(pendingTxn.firstElem).coordinator]/coord_responses' = 
+						Coordinator[(pendingTxn.firstElem).coordinator]/coord_responses + (this -> Commit) 
+					all others: CoordinatorID - (pendingTxn.firstElem).coordinator | Coordinator[others]/coord_responses' = Coordinator[others]/coord_responses
+				}
+				goto Waiting
+			}
+		}
+
+		// Send an Abort decision to the coordinator
+		state Abort {
+			trans AbortTransaction {
+				do {
+					currentTxn.removeFirst
+					Coordinator[currentTxn.firstElem.coordinator]/coord_responses' =  Coordinator[currentTxn.firstElem.coordinator]/coord_responses + (this -> Abort)
+					no response'
+					all others: CoordinatorID - (pendingTxn.firstElem).coordinator | Coordinator[others]/coord_responses' = Coordinator[others]/coord_responses
+				}
+				goto Waiting
+			}
+		}
+
+		init {
+			all disj p, q: PartLdrID | p.data = q.data
+			all disj p, q: PartLdrID | p.pendingTxn = q.pendingTxn
+			no response
+			one pendingTxn
+			no currentTxn
+		}
+	}
+}
+
+pred operationsAxiom {
+	some s, s_next: Snapshot | {
+	     (some p: one ClientID | Carousel_Client_Reading_ReadAndPrepare[s, s_next, p]) //2 Snapshots
+	    (some p: one ClientID | Carousel_Client_Waiting_FinalizeCommit[s, s_next, p]) //11 Snapshots
+	    (some p: one ClientID | Carousel_Client_Waiting_FinalizeAbort[s, s_next, p]) //17 Snapshots
+	    (some p: one CoordinatorID | Carousel_Coordinator_Replicate_Replicating[s, s_next, p]) //3 Snapshots
+	    (some p: one CoordinatorID | Carousel_Coordinator_WaitForResponse_StartCommit[s, s_next, p]) //10 Snapshots
+	    (some p: one CoordinatorID | Carousel_Coordinator_WaitForResponse_StartAbort[s, s_next, p]) //16 Snapshots
+	    (some p: one PartLdrID | Carousel_PartitionLeader_Waiting_PrepareCommit[s, s_next, p]) //3 Snapshots
+	    (some p: one PartLdrID | Carousel_PartitionLeader_Waiting_PrepareAbort[s, s_next, p]) //12 Snapshots
+	    (some p: one PartLdrID | Carousel_PartitionLeader_Waiting_FinalizeCommit[s, s_next, p]) //12 Snapshots
+	    (some p: one PartLdrID | Carousel_PartitionLeader_Commit_CommitTransaction[s, s_next, p]) //9 Snapshots
+	    (some p: one PartLdrID | Carousel_PartitionLeader_Abort_AbortTransaction[s, s_next, p]) //15 Snapshots
+	}
+}
+
+assert bothFinalize {
+    (some s0: one Snapshot,c: one ClientID,p: one PartLdrID | Carousel_PartitionLeader_Commit in p. (s0.(Snapshot <: conf1)) and
+        (some s1: one Snapshot | Carousel_Client_Waiting_FinalizeCommit in c. (s1.(Snapshot <: taken1))))
+}
+
+assert bothAbort {
+    (some s0: one Snapshot,c: one ClientID,p: one PartLdrID | Carousel_PartitionLeader_Abort in p. (s0.(Snapshot <: conf1)) and
+        (some s1: one Snapshot | Carousel_Client_Waiting_FinalizeAbort in c. (s1.(Snapshot <: taken1))))
+}
+
+assert commitUpdatesData {
+    (some s0: one Snapshot, c: one CoordinatorID | Carousel_Coordinator_WaitForResponse_StartCommit in c.(s0.(Snapshot <: taken1)) and
+        (some s1: one Snapshot | all p: PartLdrID | c.(s1.Carousel_Coordinator_info) in p.(s1.Carousel_PartitionLeader_data) ))
+}
+
+assert cannotBothCommitAndAbort {
+    (no s0: one Snapshot | one disj p0, p1: PartLdrID | (Carousel_PartitionLeader_Waiting_FinalizeCommit in (p0.(s0.(Snapshot <: taken1))) and (Carousel_PartitionLeader_Abort in p1.(s0.(Snapshot <: conf1)))))
+}
+
+check bothFinalize for 23 Snapshot, exactly 3 Key, exactly 2 Value, exactly 4 Transaction, exactly 2 ClientID, exactly 2 CoordinatorID, exactly 2 PartLdrID, 3 currentTxn, 3 pendingTxn
+check bothFinalize for 30 Snapshot, exactly 3 Key, exactly 2 Value, exactly 4 Transaction, exactly 2 ClientID, exactly 2 CoordinatorID, exactly 3 PartLdrID, 3 currentTxn, 3 pendingTxn
+check bothAbort for 23 Snapshot, exactly 3 Key, exactly 2 Value, exactly 4 Transaction, exactly 2 ClientID, exactly 2 CoordinatorID, exactly 2 PartLdrID, 3 currentTxn, 3 pendingTxn
+check bothAbort for 30 Snapshot, exactly 3 Key, exactly 2 Value, exactly 4 Transaction, exactly 2 ClientID, exactly 2 CoordinatorID, exactly 3 PartLdrID, 3 currentTxn, 3 pendingTxn
+check cannotBothCommitAndAbort for 23 Snapshot, exactly 3 Key, exactly 2 Value, exactly 4 Transaction, exactly 2 ClientID, exactly 2 CoordinatorID, exactly 2 PartLdrID, 3 currentTxn, 3 pendingTxn
+check cannotBothCommitAndAbort for 30 Snapshot, exactly 3 Key, exactly 2 Value, exactly 4 Transaction, exactly 2 ClientID, exactly 2 CoordinatorID, exactly 3 PartLdrID, 3 currentTxn, 3 pendingTxn
+check commitUpdatesData for 23 Snapshot, exactly 3 Key, exactly 2 Value, exactly 4 Transaction, exactly 2 ClientID, exactly 2 CoordinatorID, exactly 2 PartLdrID, 3 currentTxn, 3 pendingTxn
+check commitUpdatesData for 30 Snapshot, exactly 3 Key, exactly 2 Value, exactly 4 Transaction, exactly 2 ClientID, exactly 2 CoordinatorID, exactly 3 PartLdrID, 3 currentTxn, 3 pendingTxn
+
