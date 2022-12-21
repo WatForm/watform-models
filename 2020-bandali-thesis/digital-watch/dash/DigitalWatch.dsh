@@ -192,7 +192,6 @@ This model has appeared in the following publications:
     }
  }
 
-{escape}
 // Significant model
 //run significance for 10 Snapshot, exactly 10 EventLabel
 
@@ -212,4 +211,4 @@ This model has appeared in the following publications:
         eventually_time
     }
     check check_eventually_time for 10 Snapshot, exactly 10 EventLabel expect 0
-{/escape}
+
