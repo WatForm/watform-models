@@ -160,6 +160,5 @@ conc state EHealthSystem {
     }
 }
 
-{escape}
-    run operation for 8 Snapshot, 0 EventLabel, 3 Patient, 4 Medication
-{/escape}
+run operation for 8 Snapshot, 0 EventLabel, 3 Patient, 4 Medication
+
