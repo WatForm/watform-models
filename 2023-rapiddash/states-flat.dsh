@@ -13,7 +13,7 @@ conc state Top {
 	}
 	state s2 {
 		trans t3 {
-			goto s3
+			goto s1
 		}
 	}
 }

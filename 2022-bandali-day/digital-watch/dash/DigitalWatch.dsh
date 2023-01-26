@@ -193,15 +193,17 @@ This model has appeared in the following publications:
  }
 
 
-// Significant model
-run significance for 10 Snapshot
+// Significant model is 10 snapshots
 
 // *********************** Eventually time ************************//
+
+// remember to set Option in Alloy to use TCMC
+
 pred eventually_time {
     ctl_mc[
         ag[
-            imp_ctl[{ s : Snapshot | DigitalWatch_press_a in s.events},
-                ef[ex[{s: Snapshot | DigitalWatch_Main_Displays_Time in s.conf }]]
+            imp_ctl[{ s : Snapshot | DigitalWatch_press_a in s.events0},
+                ef[ex[{s: Snapshot | DigitalWatch_Main_Displays_Time in s.conf0 }]]
             ]
         ]
     ]
