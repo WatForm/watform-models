@@ -202,7 +202,7 @@ This model has appeared in the following publications:
 pred eventually_time {
     ctl_mc[
         ag[
-            imp_ctl[{ s : Snapshot | DigitalWatch_press_a in s.events0},
+            imp_[{ s : Snapshot | DigitalWatch_press_a in s.events0},
                 ef[ex[{s: Snapshot | DigitalWatch_Main_Displays_Time in s.conf0 }]]
             ]
         ]

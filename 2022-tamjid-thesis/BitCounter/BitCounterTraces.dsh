@@ -58,6 +58,8 @@ conc state Counter {
 	}
 }
 
+// remember to have traces option set
+
 assert allBitsInBit0 {
 	some s: Snapshot | Counter_Done in s.events0 and
 		(some p: PID | Counter_Bit_Bit1 !in p.(s.conf1))

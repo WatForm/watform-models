@@ -58,6 +58,8 @@ conc state Counter {
 	}
 }
 
+// remember to have Electrum option set 
+
 assert allBitsInBit0 {
 	eventually Counter_Done in events0 and 
 		(some p: PID | Counter_Bit_Bit1 in p.(conf1))

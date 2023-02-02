@@ -35,7 +35,7 @@ conc state System {
 			trans Fail {
 				when {
 					// We cannot fail if it would leave a member with no successors
-					all n: Node - this | some (members - this) & (Node[n]/frst + Node[n]/scnd)
+					all n: Node - this | some (members - this) & (N[n]/frst + N[n]/scnd)
 				}
 				do {
 					members' = members - this

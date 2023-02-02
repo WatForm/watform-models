@@ -58,6 +58,8 @@ conc state Counter {
 	}
 }
 
+// remember to have TCMC option set 
+
 assert ctl_allBitsInBit0 {
         ctl_mc[af[{ s: Snapshot | Counter_Done in s.events0 and 
 		(all p: PID | Counter_Bit_Bit1 in p.(s.conf1)) }]]

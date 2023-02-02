@@ -228,6 +228,8 @@ assert cannotBothCommitAndAbort {
 	=> always (Carousel_PartitionLeader_Abort !in p1.(Identifiers <: conf1)))
 }
 
+// remember to have electrum option set
+
 check bothFinalize for 23 steps, exactly 3 Key, exactly 2 Value, exactly 4 Transaction, exactly 2 ClientID, exactly 2 CoordinatorID, exactly 2 PartLdrID, 3 currentTxn, 3 pendingTxn
 check bothFinalize for 30 steps, exactly 3 Key, exactly 2 Value, exactly 4 Transaction, exactly 2 ClientID, exactly 2 CoordinatorID, exactly 3 PartLdrID, 3 currentTxn, 3 pendingTxn
 check bothAbort for 23 steps, exactly 3 Key, exactly 2 Value, exactly 4 Transaction, exactly 2 ClientID, exactly 2 CoordinatorID, exactly 2 PartLdrID, 3 currentTxn, 3 pendingTxn
