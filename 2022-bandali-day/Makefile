@@ -1,2 +1,2 @@
 clean:
-	\rm -rf */*.als
+	\rm -rf */*/*.als
