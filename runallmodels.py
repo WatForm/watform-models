@@ -22,7 +22,7 @@ uppertimethreshold = 200
 stop_on_first_fail = False
 
 # output/err won't be printed
-quiet = True 
+quiet = False 
 
 # NO CONFIGURATION BELOW THIS LINE ---------------------------
 
