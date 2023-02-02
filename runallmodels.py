@@ -9,8 +9,8 @@
 
 # set path toexecutable
 exe = "java -jar /Users/nday/UW/github/org.alloytools.alloy/org.alloytools.alloy.dashbuild/target/org.alloytools.alloy.dashbuild.jar"
-options = "-m traces"
-ext = "-traces.dsh"
+options = "-m electrum"
+ext = "-electrum.dsh"
 
 # set path to tests to run
 # usually either whole archive or one year
@@ -20,6 +20,9 @@ locn = "./2022-tamjid-thesis/"
 uppertimethreshold = 200
 
 stop_on_first_fail = False
+
+# output/err won't be printed
+quiet = True 
 
 # NO CONFIGURATION BELOW THIS LINE ---------------------------
 
@@ -53,8 +56,9 @@ for filename in listoffiles:
     cnt = cnt + 1
     file_object = open(filename, 'r')
     # parse errors come to stderr
-    print("----------------")
-    print("Running: "+exe+" "+options + " " + filename)
+    if not quiet:
+        print("----------------")
+        print("Running: "+exe+" "+options + " " + filename)
     with subprocess.Popen(exe+' '+options+' '+"'"+filename+"'", stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True,shell=True) as p:
         try: 
             # output is the output stream from calling george on the file
@@ -65,14 +69,13 @@ for filename in listoffiles:
         except subprocess.TimeoutExpired:
             p.kill()
             (output, err) = p.communicate()
-            rc = GEORGE_TIMEOUT
             errlist.append(filename)
         except Exception as ex:
             (output, err) = p.communicate()
-            rc = EXCEPTION
             errlist.append(file)
-    print(output)
-    print(err)    
+    if not quiet:
+        print(output)
+        print(err)    
     if errlist != 0 and stop_on_first_fail:
         break
             
