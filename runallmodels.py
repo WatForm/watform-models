@@ -1,7 +1,7 @@
 #!/usr/local/bin/python3
 
 # make this file executable and run "./runallmodels.py"
-
+  
 
 # This script runs a binary with options on all models with a certain extension
 
