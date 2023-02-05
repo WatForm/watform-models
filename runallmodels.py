@@ -8,13 +8,13 @@
 # CONFIGURATION -----------------------------
 
 # set path toexecutable
-exe = "java -jar /Users/nday/UW/github/org.alloytools.alloy/org.alloytools.alloy.dashbuild/target/org.alloytools.alloy.dashbuild.jar"
-options = "-m electrum"
-ext = "-electrum.dsh"
+exe = "java  -jar /Users/nday/UW/github/org.alloytools.alloy/org.alloytools.alloy.dashbuild/target/org.alloytools.alloy.dashbuild.jar"
+options = "-m tcmc"
+ext = "-tcmc.dsh"
 
 # set path to tests to run
 # usually either whole archive or one year
-locn = "./2022-tamjid-thesis/"
+locn = "./2022-tamjid-thesis"
 
 # seconds
 uppertimethreshold = 200
@@ -39,6 +39,7 @@ errlist = []
 
 myinputpath = locn
 print("Checking files within: "+myinputpath)
+print("With options: "+options)
 print("With extension: " + ext)
 if os.path.exists(myinputpath):
     listoffiles = []

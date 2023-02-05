@@ -50,7 +50,7 @@ conc state HeatingSystem {
 		}
 	
 		conc state Controller {
-			controllerOn: one Bool
+			controllerOn: one Identifier
 			condition heatRequested [some r: Identifier | Functioning/Room[r]/requestHeat = True] {}
 			condition noHeatRequested [no r: Identifier |  Functioning/Room[r]/requestHeat = True] {}
 
