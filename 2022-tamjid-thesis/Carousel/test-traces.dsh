@@ -1,0 +1,23 @@
+sig Transaction {}
+one sig T extends Transaction {}
+one sig L extends PartLdrID {}
+
+conc state Carousel {
+	conc state Client [ClientID] {
+
+		default state Reading {
+			trans ReadAndPrepare {
+				do {
+						PartitionLeader[L]/currentTxn.add[T]  
+				}
+			}
+		}
+	}
+
+	
+	// Partition Leaders
+	conc state PartitionLeader [PartLdrID] {
+		currentTxn: buf[Transaction] 
+
+	}
+}

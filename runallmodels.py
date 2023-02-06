@@ -9,8 +9,8 @@
 
 # set path toexecutable
 exe = "java  -jar /Users/nday/UW/github/org.alloytools.alloy/org.alloytools.alloy.dashbuild/target/org.alloytools.alloy.dashbuild.jar"
-options = "-m tcmc"
-ext = "-tcmc.dsh"
+options = "-m traces"
+ext = "-traces.dsh"
 
 # set path to tests to run
 # usually either whole archive or one year
@@ -56,6 +56,7 @@ else:
 for filename in listoffiles:
     cnt = cnt + 1
     file_object = open(filename, 'r')
+    msg = ""
     # parse errors come to stderr
     if not quiet:
         print("----------------")
@@ -70,13 +71,24 @@ for filename in listoffiles:
         except subprocess.TimeoutExpired:
             p.kill()
             (output, err) = p.communicate()
+            rc = p.returncode
             errlist.append(filename)
+            msg = "Timeout"
         except Exception as ex:
             (output, err) = p.communicate()
+            rc = p.returncode
             errlist.append(file)
+            msg = "Exception"
     if not quiet:
         print(output)
-        print(err)    
+        # print(err)  
+        # remove the silly error message
+        for l in err.splitlines():
+            if not(l.startswith("SLF4J:")):
+                print(l)        
+        print("Return code: " + str(rc))  
+        if msg != "":
+            Print("Msg: "+ msg)
     if errlist != 0 and stop_on_first_fail:
         break
             
