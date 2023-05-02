@@ -38,8 +38,8 @@ sig Snapshot {
 
 pred DistributedTreeSpanning_N_Assigned_sendMessage_pre[s : one Snapshot, pNode : one Node] {
   { pNode -> DistributedTreeSpanning/N/Assigned } in s. (conf1)
-  ! {DistributedTreeSpanning in scopesUsed0}
-  ! {{ pNode -> DistributedTreeSpanning/N } in scopesUsed1}
+  ! {DistributedTreeSpanning in s. (scopesUsed0)}
+  ! {{ pNode -> DistributedTreeSpanning/N } in s. (scopesUsed1)}
 }
 
 
@@ -55,8 +55,14 @@ pred DistributedTreeSpanning_N_Assigned_sendMessage_post[s : one Snapshot, sNext
 )
 }
 
-pred DistributedTreeSpanning_N_Assigned_sendMessage_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred DistributedTreeSpanning_N_Assigned_sendMessage_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pNode : one Node, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pNode -> DistributedTreeSpanning/N/Assigned } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {DistributedTreeSpanning in scope0} and
+    ! {{ pNode -> DistributedTreeSpanning/N } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred DistributedTreeSpanning_N_Assigned_sendMessage[s : one Snapshot, sNext : one Snapshot, pNode : one Node] {
@@ -66,8 +72,8 @@ pred DistributedTreeSpanning_N_Assigned_sendMessage[s : one Snapshot, sNext : on
 
 pred DistributedTreeSpanning_N_Unassigned_RootAssign_pre[s : one Snapshot, pNode : one Node] {
   { pNode -> DistributedTreeSpanning/N/Unassigned } in s. (conf1)
-  ! {DistributedTreeSpanning in scopesUsed0}
-  ! {{ pNode -> DistributedTreeSpanning/N } in scopesUsed1}
+  ! {DistributedTreeSpanning in s. (scopesUsed0)}
+  ! {{ pNode -> DistributedTreeSpanning/N } in s. (scopesUsed1)}
 }
 
 
@@ -83,8 +89,14 @@ pred DistributedTreeSpanning_N_Unassigned_RootAssign_post[s : one Snapshot, sNex
 )
 }
 
-pred DistributedTreeSpanning_N_Unassigned_RootAssign_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred DistributedTreeSpanning_N_Unassigned_RootAssign_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pNode : one Node, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pNode -> DistributedTreeSpanning/N/Unassigned } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {DistributedTreeSpanning in scope0} and
+    ! {{ pNode -> DistributedTreeSpanning/N } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred DistributedTreeSpanning_N_Unassigned_RootAssign[s : one Snapshot, sNext : one Snapshot, pNode : one Node] {
@@ -94,8 +106,8 @@ pred DistributedTreeSpanning_N_Unassigned_RootAssign[s : one Snapshot, sNext : o
 
 pred DistributedTreeSpanning_N_Unassigned_NodeAssign_pre[s : one Snapshot, pNode : one Node] {
   { pNode -> DistributedTreeSpanning/N/Unassigned } in s. (conf1)
-  ! {DistributedTreeSpanning in scopesUsed0}
-  ! {{ pNode -> DistributedTreeSpanning/N } in scopesUsed1}
+  ! {DistributedTreeSpanning in s. (scopesUsed0)}
+  ! {{ pNode -> DistributedTreeSpanning/N } in s. (scopesUsed1)}
 }
 
 
@@ -111,8 +123,14 @@ pred DistributedTreeSpanning_N_Unassigned_NodeAssign_post[s : one Snapshot, sNex
 )
 }
 
-pred DistributedTreeSpanning_N_Unassigned_NodeAssign_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred DistributedTreeSpanning_N_Unassigned_NodeAssign_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pNode : one Node, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pNode -> DistributedTreeSpanning/N/Unassigned } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {DistributedTreeSpanning in scope0} and
+    ! {{ pNode -> DistributedTreeSpanning/N } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred DistributedTreeSpanning_N_Unassigned_NodeAssign[s : one Snapshot, sNext : one Snapshot, pNode : one Node] {
@@ -120,10 +138,10 @@ pred DistributedTreeSpanning_N_Unassigned_NodeAssign[s : one Snapshot, sNext : o
   pNode. (sNext. (s. (DistributedTreeSpanning_N_Unassigned_NodeAssign_post)))
 }
 
-pred testIfNextStable[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (DistributedTreeSpanning_N_Assigned_sendMessage_enabledAfterStep))))}
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (DistributedTreeSpanning_N_Unassigned_RootAssign_enabledAfterStep))))}
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (DistributedTreeSpanning_N_Unassigned_NodeAssign_enabledAfterStep))))}
+pred testIfNextStable[s : one Snapshot, sNext : one Snapshot, scope0 : one AllEvents, scope1 : one AllEvents] {
+  ! {scope1. (scope0. (sNext. (s. (DistributedTreeSpanning_N_Assigned_sendMessage_enabledAfterStep))))}
+  ! {scope1. (scope0. (sNext. (s. (DistributedTreeSpanning_N_Unassigned_RootAssign_enabledAfterStep))))}
+  ! {scope1. (scope0. (sNext. (s. (DistributedTreeSpanning_N_Unassigned_NodeAssign_enabledAfterStep))))}
 }
 
 pred small_step[s : one Snapshot, sNext : one Snapshot] {

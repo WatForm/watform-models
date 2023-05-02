@@ -28,8 +28,8 @@ sig Snapshot {
 
 pred Counter_Bit_currentBitToBit1_pre[s : one Snapshot, pPID : one PID] {
   { pPID -> Counter/Bit/Bit2 } in s. (conf1)
-  ! {Counter in scopesUsed0}
-  ! {{ pPID -> Counter/Bit } in scopesUsed1}
+  ! {Counter in s. (scopesUsed0)}
+  ! {{ pPID -> Counter/Bit } in s. (scopesUsed1)}
   (s. (stable) = boolean/True => 
     Counter/Tk0 in { s. (events0) & AllEnvironmentalEvents }
  else {
@@ -63,8 +63,13 @@ pred Counter_Bit_currentBitToBit1_post[s : one Snapshot, sNext : one Snapshot, p
 )
 }
 
-pred Counter_Bit_currentBitToBit1_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, events0 : one AllEvents, scopesUsed1 : one StateLabel, events1 : one AllEvents] {
+pred Counter_Bit_currentBitToBit1_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pPID : one PID, scope0 : one StateLabel, genEvents0 : one AllEvents, scope1 : one StateLabel, genEvents1 : one AllEvents] {
   { pPID -> Counter/Bit/Bit2 } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    boolean/False
+ else {
+    Counter/Tk0 in { s. (events0) + genEvents0 } }
+)
 }
 
 pred Counter_Bit_currentBitToBit1[s : one Snapshot, sNext : one Snapshot, pPID : one PID] {
@@ -74,8 +79,8 @@ pred Counter_Bit_currentBitToBit1[s : one Snapshot, sNext : one Snapshot, pPID :
 
 pred Counter_Bit_lastBitDone_pre[s : one Snapshot, pPID : one PID] {
   { pPID -> Counter/Bit/Bit2 } in s. (conf1)
-  ! {Counter in scopesUsed0}
-  ! {{ pPID -> Counter/Bit } in scopesUsed1}
+  ! {Counter in s. (scopesUsed0)}
+  ! {{ pPID -> Counter/Bit } in s. (scopesUsed1)}
   (s. (stable) = boolean/True => 
     { pPID -> Counter/Bit/Tk1 } in { s. (events1) & AllEnvironmentalEvents }
  else {
@@ -109,8 +114,15 @@ pred Counter_Bit_lastBitDone_post[s : one Snapshot, sNext : one Snapshot, pPID :
 )
 }
 
-pred Counter_Bit_lastBitDone_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, events0 : one AllEvents, scopesUsed1 : one StateLabel, events1 : one AllEvents] {
+pred Counter_Bit_lastBitDone_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pPID : one PID, scope0 : one StateLabel, genEvents0 : one AllEvents, scope1 : one StateLabel, genEvents1 : one AllEvents] {
   { pPID -> Counter/Bit/Bit2 } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {Counter in scope0} and
+    ! {{ pPID -> Counter/Bit } in scope1} and
+    { pPID -> Counter/Bit/Tk1 } in { { s. (events1) & AllEnvironmentalEvents } + genEvents1 }
+ else {
+    { pPID -> Counter/Bit/Tk1 } in { s. (events1) + genEvents1 } }
+)
 }
 
 pred Counter_Bit_lastBitDone[s : one Snapshot, sNext : one Snapshot, pPID : one PID] {
@@ -120,8 +132,8 @@ pred Counter_Bit_lastBitDone[s : one Snapshot, sNext : one Snapshot, pPID : one 
 
 pred Counter_Bit_currentBitToBit2_pre[s : one Snapshot, pPID : one PID] {
   { pPID -> Counter/Bit/Bit1 } in s. (conf1)
-  ! {Counter in scopesUsed0}
-  ! {{ pPID -> Counter/Bit } in scopesUsed1}
+  ! {Counter in s. (scopesUsed0)}
+  ! {{ pPID -> Counter/Bit } in s. (scopesUsed1)}
   (s. (stable) = boolean/True => 
     Counter/Tk0 in { s. (events0) & AllEnvironmentalEvents }
  else {
@@ -155,8 +167,13 @@ pred Counter_Bit_currentBitToBit2_post[s : one Snapshot, sNext : one Snapshot, p
 )
 }
 
-pred Counter_Bit_currentBitToBit2_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, events0 : one AllEvents, scopesUsed1 : one StateLabel, events1 : one AllEvents] {
+pred Counter_Bit_currentBitToBit2_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pPID : one PID, scope0 : one StateLabel, genEvents0 : one AllEvents, scope1 : one StateLabel, genEvents1 : one AllEvents] {
   { pPID -> Counter/Bit/Bit1 } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    boolean/False
+ else {
+    Counter/Tk0 in { s. (events0) + genEvents0 } }
+)
 }
 
 pred Counter_Bit_currentBitToBit2[s : one Snapshot, sNext : one Snapshot, pPID : one PID] {
@@ -166,8 +183,8 @@ pred Counter_Bit_currentBitToBit2[s : one Snapshot, sNext : one Snapshot, pPID :
 
 pred Counter_Bit_nextBitToBit1_pre[s : one Snapshot, pPID : one PID] {
   { pPID -> Counter/Bit/Bit2 } in s. (conf1)
-  ! {Counter in scopesUsed0}
-  ! {{ pPID -> Counter/Bit } in scopesUsed1}
+  ! {Counter in s. (scopesUsed0)}
+  ! {{ pPID -> Counter/Bit } in s. (scopesUsed1)}
   (s. (stable) = boolean/True => 
     { pPID -> Counter/Bit/Tk1 } in { s. (events1) & AllEnvironmentalEvents }
  else {
@@ -201,8 +218,15 @@ pred Counter_Bit_nextBitToBit1_post[s : one Snapshot, sNext : one Snapshot, pPID
 )
 }
 
-pred Counter_Bit_nextBitToBit1_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, events0 : one AllEvents, scopesUsed1 : one StateLabel, events1 : one AllEvents] {
+pred Counter_Bit_nextBitToBit1_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pPID : one PID, scope0 : one StateLabel, genEvents0 : one AllEvents, scope1 : one StateLabel, genEvents1 : one AllEvents] {
   { pPID -> Counter/Bit/Bit2 } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {Counter in scope0} and
+    ! {{ pPID -> Counter/Bit } in scope1} and
+    { pPID -> Counter/Bit/Tk1 } in { { s. (events1) & AllEnvironmentalEvents } + genEvents1 }
+ else {
+    { pPID -> Counter/Bit/Tk1 } in { s. (events1) + genEvents1 } }
+)
 }
 
 pred Counter_Bit_nextBitToBit1[s : one Snapshot, sNext : one Snapshot, pPID : one PID] {
@@ -212,8 +236,8 @@ pred Counter_Bit_nextBitToBit1[s : one Snapshot, sNext : one Snapshot, pPID : on
 
 pred Counter_Bit_nextBitToBit2_pre[s : one Snapshot, pPID : one PID] {
   { pPID -> Counter/Bit/Bit1 } in s. (conf1)
-  ! {Counter in scopesUsed0}
-  ! {{ pPID -> Counter/Bit } in scopesUsed1}
+  ! {Counter in s. (scopesUsed0)}
+  ! {{ pPID -> Counter/Bit } in s. (scopesUsed1)}
   (s. (stable) = boolean/True => 
     { pPID -> Counter/Bit/Tk1 } in { s. (events1) & AllEnvironmentalEvents }
  else {
@@ -247,8 +271,15 @@ pred Counter_Bit_nextBitToBit2_post[s : one Snapshot, sNext : one Snapshot, pPID
 )
 }
 
-pred Counter_Bit_nextBitToBit2_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, events0 : one AllEvents, scopesUsed1 : one StateLabel, events1 : one AllEvents] {
+pred Counter_Bit_nextBitToBit2_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pPID : one PID, scope0 : one StateLabel, genEvents0 : one AllEvents, scope1 : one StateLabel, genEvents1 : one AllEvents] {
   { pPID -> Counter/Bit/Bit1 } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {Counter in scope0} and
+    ! {{ pPID -> Counter/Bit } in scope1} and
+    { pPID -> Counter/Bit/Tk1 } in { { s. (events1) & AllEnvironmentalEvents } + genEvents1 }
+ else {
+    { pPID -> Counter/Bit/Tk1 } in { s. (events1) + genEvents1 } }
+)
 }
 
 pred Counter_Bit_nextBitToBit2[s : one Snapshot, sNext : one Snapshot, pPID : one PID] {
@@ -256,12 +287,12 @@ pred Counter_Bit_nextBitToBit2[s : one Snapshot, sNext : one Snapshot, pPID : on
   pPID. (sNext. (s. (Counter_Bit_nextBitToBit2_post)))
 }
 
-pred testIfNextStable[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, events0 : one AllEvents, scopesUsed1 : one StateLabel, events1 : one AllEvents] {
-  ! {events1. (scopesUsed1. (events0. (scopesUsed0. (sNext. (s. (Counter_Bit_currentBitToBit1_enabledAfterStep))))))}
-  ! {events1. (scopesUsed1. (events0. (scopesUsed0. (sNext. (s. (Counter_Bit_lastBitDone_enabledAfterStep))))))}
-  ! {events1. (scopesUsed1. (events0. (scopesUsed0. (sNext. (s. (Counter_Bit_currentBitToBit2_enabledAfterStep))))))}
-  ! {events1. (scopesUsed1. (events0. (scopesUsed0. (sNext. (s. (Counter_Bit_nextBitToBit1_enabledAfterStep))))))}
-  ! {events1. (scopesUsed1. (events0. (scopesUsed0. (sNext. (s. (Counter_Bit_nextBitToBit2_enabledAfterStep))))))}
+pred testIfNextStable[s : one Snapshot, sNext : one Snapshot, scope0 : one AllEvents, genEvents0 : one AllEvents, scope1 : one AllEvents, genEvents1 : one AllEvents] {
+  ! {genEvents1. (scope1. (genEvents0. (scope0. (sNext. (s. (Counter_Bit_currentBitToBit1_enabledAfterStep))))))}
+  ! {genEvents1. (scope1. (genEvents0. (scope0. (sNext. (s. (Counter_Bit_lastBitDone_enabledAfterStep))))))}
+  ! {genEvents1. (scope1. (genEvents0. (scope0. (sNext. (s. (Counter_Bit_currentBitToBit2_enabledAfterStep))))))}
+  ! {genEvents1. (scope1. (genEvents0. (scope0. (sNext. (s. (Counter_Bit_nextBitToBit1_enabledAfterStep))))))}
+  ! {genEvents1. (scope1. (genEvents0. (scope0. (sNext. (s. (Counter_Bit_nextBitToBit2_enabledAfterStep))))))}
 }
 
 pred small_step[s : one Snapshot, sNext : one Snapshot] {

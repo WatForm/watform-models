@@ -48,8 +48,8 @@ sig Snapshot {
 
 pred System_Controller_SendingDownRequest_pre[s : one Snapshot] {
   System/Controller/Sending in s. (conf0)
-  ! {System in scopesUsed0}
-  ! {System/Controller in scopesUsed0}
+  ! {System in s. (scopesUsed0)}
+  ! {System/Controller in s. (scopesUsed0)}
 }
 
 
@@ -65,8 +65,14 @@ pred System_Controller_SendingDownRequest_post[s : one Snapshot, sNext : one Sna
 )
 }
 
-pred System_Controller_SendingDownRequest_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred System_Controller_SendingDownRequest_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scope0 : one StateLabel, scope1 : one StateLabel] {
   System/Controller/Sending in sNext. (conf0)
+  (s. (stable) = boolean/True => 
+    ! {System in scope0} and
+    ! {System/Controller in scope0}
+ else {
+    boolean/True }
+)
 }
 
 pred System_Controller_SendingDownRequest[s : one Snapshot, sNext : one Snapshot] {
@@ -76,8 +82,8 @@ pred System_Controller_SendingDownRequest[s : one Snapshot, sNext : one Snapshot
 
 pred System_Elevator_MovingUp_ChangeDirToDown_pre[s : one Snapshot, pPID : one PID] {
   { pPID -> System/Elevator/MovingUp } in s. (conf1)
-  ! {System in scopesUsed0}
-  ! {{ pPID -> System/Elevator } in scopesUsed1}
+  ! {System in s. (scopesUsed0)}
+  ! {{ pPID -> System/Elevator } in s. (scopesUsed1)}
 }
 
 
@@ -93,8 +99,14 @@ pred System_Elevator_MovingUp_ChangeDirToDown_post[s : one Snapshot, sNext : one
 )
 }
 
-pred System_Elevator_MovingUp_ChangeDirToDown_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred System_Elevator_MovingUp_ChangeDirToDown_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pPID : one PID, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pPID -> System/Elevator/MovingUp } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {System in scope0} and
+    ! {{ pPID -> System/Elevator } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred System_Elevator_MovingUp_ChangeDirToDown[s : one Snapshot, sNext : one Snapshot, pPID : one PID] {
@@ -104,8 +116,8 @@ pred System_Elevator_MovingUp_ChangeDirToDown[s : one Snapshot, sNext : one Snap
 
 pred System_Elevator_Idle_Move_pre[s : one Snapshot, pPID : one PID] {
   { pPID -> System/Elevator/Idle } in s. (conf1)
-  ! {System in scopesUsed0}
-  ! {{ pPID -> System/Elevator } in scopesUsed1}
+  ! {System in s. (scopesUsed0)}
+  ! {{ pPID -> System/Elevator } in s. (scopesUsed1)}
 }
 
 
@@ -121,8 +133,14 @@ pred System_Elevator_Idle_Move_post[s : one Snapshot, sNext : one Snapshot, pPID
 )
 }
 
-pred System_Elevator_Idle_Move_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred System_Elevator_Idle_Move_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pPID : one PID, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pPID -> System/Elevator/Idle } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {System in scope0} and
+    ! {{ pPID -> System/Elevator } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred System_Elevator_Idle_Move[s : one Snapshot, sNext : one Snapshot, pPID : one PID] {
@@ -132,8 +150,8 @@ pred System_Elevator_Idle_Move[s : one Snapshot, sNext : one Snapshot, pPID : on
 
 pred System_Elevator_MovingDown_Idle_pre[s : one Snapshot, pPID : one PID] {
   { pPID -> System/Elevator/MovingDown } in s. (conf1)
-  ! {System in scopesUsed0}
-  ! {{ pPID -> System/Elevator } in scopesUsed1}
+  ! {System in s. (scopesUsed0)}
+  ! {{ pPID -> System/Elevator } in s. (scopesUsed1)}
 }
 
 
@@ -149,8 +167,14 @@ pred System_Elevator_MovingDown_Idle_post[s : one Snapshot, sNext : one Snapshot
 )
 }
 
-pred System_Elevator_MovingDown_Idle_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred System_Elevator_MovingDown_Idle_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pPID : one PID, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pPID -> System/Elevator/MovingDown } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {System in scope0} and
+    ! {{ pPID -> System/Elevator } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred System_Elevator_MovingDown_Idle[s : one Snapshot, sNext : one Snapshot, pPID : one PID] {
@@ -160,8 +184,8 @@ pred System_Elevator_MovingDown_Idle[s : one Snapshot, sNext : one Snapshot, pPI
 
 pred System_Elevator_MovingDown_MoveDown_pre[s : one Snapshot, pPID : one PID] {
   { pPID -> System/Elevator/MovingDown } in s. (conf1)
-  ! {System in scopesUsed0}
-  ! {{ pPID -> System/Elevator } in scopesUsed1}
+  ! {System in s. (scopesUsed0)}
+  ! {{ pPID -> System/Elevator } in s. (scopesUsed1)}
 }
 
 
@@ -177,8 +201,14 @@ pred System_Elevator_MovingDown_MoveDown_post[s : one Snapshot, sNext : one Snap
 )
 }
 
-pred System_Elevator_MovingDown_MoveDown_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred System_Elevator_MovingDown_MoveDown_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pPID : one PID, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pPID -> System/Elevator/MovingDown } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {System in scope0} and
+    ! {{ pPID -> System/Elevator } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred System_Elevator_MovingDown_MoveDown[s : one Snapshot, sNext : one Snapshot, pPID : one PID] {
@@ -188,8 +218,8 @@ pred System_Elevator_MovingDown_MoveDown[s : one Snapshot, sNext : one Snapshot,
 
 pred System_Elevator_Idle_DefaultToGround_pre[s : one Snapshot, pPID : one PID] {
   { pPID -> System/Elevator/Idle } in s. (conf1)
-  ! {System in scopesUsed0}
-  ! {{ pPID -> System/Elevator } in scopesUsed1}
+  ! {System in s. (scopesUsed0)}
+  ! {{ pPID -> System/Elevator } in s. (scopesUsed1)}
 }
 
 
@@ -205,8 +235,14 @@ pred System_Elevator_Idle_DefaultToGround_post[s : one Snapshot, sNext : one Sna
 )
 }
 
-pred System_Elevator_Idle_DefaultToGround_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred System_Elevator_Idle_DefaultToGround_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pPID : one PID, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pPID -> System/Elevator/Idle } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {System in scope0} and
+    ! {{ pPID -> System/Elevator } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred System_Elevator_Idle_DefaultToGround[s : one Snapshot, sNext : one Snapshot, pPID : one PID] {
@@ -216,8 +252,8 @@ pred System_Elevator_Idle_DefaultToGround[s : one Snapshot, sNext : one Snapshot
 
 pred System_Elevator_MovingUp_MoveUp_pre[s : one Snapshot, pPID : one PID] {
   { pPID -> System/Elevator/MovingUp } in s. (conf1)
-  ! {System in scopesUsed0}
-  ! {{ pPID -> System/Elevator } in scopesUsed1}
+  ! {System in s. (scopesUsed0)}
+  ! {{ pPID -> System/Elevator } in s. (scopesUsed1)}
 }
 
 
@@ -233,8 +269,14 @@ pred System_Elevator_MovingUp_MoveUp_post[s : one Snapshot, sNext : one Snapshot
 )
 }
 
-pred System_Elevator_MovingUp_MoveUp_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred System_Elevator_MovingUp_MoveUp_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pPID : one PID, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pPID -> System/Elevator/MovingUp } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {System in scope0} and
+    ! {{ pPID -> System/Elevator } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred System_Elevator_MovingUp_MoveUp[s : one Snapshot, sNext : one Snapshot, pPID : one PID] {
@@ -244,8 +286,8 @@ pred System_Elevator_MovingUp_MoveUp[s : one Snapshot, sNext : one Snapshot, pPI
 
 pred System_Elevator_MovingUp_Idle_pre[s : one Snapshot, pPID : one PID] {
   { pPID -> System/Elevator/MovingUp } in s. (conf1)
-  ! {System in scopesUsed0}
-  ! {{ pPID -> System/Elevator } in scopesUsed1}
+  ! {System in s. (scopesUsed0)}
+  ! {{ pPID -> System/Elevator } in s. (scopesUsed1)}
 }
 
 
@@ -261,8 +303,14 @@ pred System_Elevator_MovingUp_Idle_post[s : one Snapshot, sNext : one Snapshot, 
 )
 }
 
-pred System_Elevator_MovingUp_Idle_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred System_Elevator_MovingUp_Idle_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pPID : one PID, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pPID -> System/Elevator/MovingUp } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {System in scope0} and
+    ! {{ pPID -> System/Elevator } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred System_Elevator_MovingUp_Idle[s : one Snapshot, sNext : one Snapshot, pPID : one PID] {
@@ -272,8 +320,8 @@ pred System_Elevator_MovingUp_Idle[s : one Snapshot, sNext : one Snapshot, pPID 
 
 pred System_Elevator_MovingDown_ElevatorInCalled_pre[s : one Snapshot, pPID : one PID] {
   { pPID -> System/Elevator/MovingDown } in s. (conf1)
-  ! {System in scopesUsed0}
-  ! {{ pPID -> System/Elevator } in scopesUsed1}
+  ! {System in s. (scopesUsed0)}
+  ! {{ pPID -> System/Elevator } in s. (scopesUsed1)}
 }
 
 
@@ -289,8 +337,14 @@ pred System_Elevator_MovingDown_ElevatorInCalled_post[s : one Snapshot, sNext : 
 )
 }
 
-pred System_Elevator_MovingDown_ElevatorInCalled_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred System_Elevator_MovingDown_ElevatorInCalled_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pPID : one PID, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pPID -> System/Elevator/MovingDown } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {System in scope0} and
+    ! {{ pPID -> System/Elevator } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred System_Elevator_MovingDown_ElevatorInCalled[s : one Snapshot, sNext : one Snapshot, pPID : one PID] {
@@ -300,8 +354,8 @@ pred System_Elevator_MovingDown_ElevatorInCalled[s : one Snapshot, sNext : one S
 
 pred System_Elevator_MovingDown_ChangeDirToUp_pre[s : one Snapshot, pPID : one PID] {
   { pPID -> System/Elevator/MovingDown } in s. (conf1)
-  ! {System in scopesUsed0}
-  ! {{ pPID -> System/Elevator } in scopesUsed1}
+  ! {System in s. (scopesUsed0)}
+  ! {{ pPID -> System/Elevator } in s. (scopesUsed1)}
 }
 
 
@@ -317,8 +371,14 @@ pred System_Elevator_MovingDown_ChangeDirToUp_post[s : one Snapshot, sNext : one
 )
 }
 
-pred System_Elevator_MovingDown_ChangeDirToUp_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred System_Elevator_MovingDown_ChangeDirToUp_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pPID : one PID, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pPID -> System/Elevator/MovingDown } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {System in scope0} and
+    ! {{ pPID -> System/Elevator } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred System_Elevator_MovingDown_ChangeDirToUp[s : one Snapshot, sNext : one Snapshot, pPID : one PID] {
@@ -328,8 +388,8 @@ pred System_Elevator_MovingDown_ChangeDirToUp[s : one Snapshot, sNext : one Snap
 
 pred System_Controller_SendingUpRequest_pre[s : one Snapshot] {
   System/Controller/Sending in s. (conf0)
-  ! {System in scopesUsed0}
-  ! {System/Controller in scopesUsed0}
+  ! {System in s. (scopesUsed0)}
+  ! {System/Controller in s. (scopesUsed0)}
 }
 
 
@@ -345,8 +405,14 @@ pred System_Controller_SendingUpRequest_post[s : one Snapshot, sNext : one Snaps
 )
 }
 
-pred System_Controller_SendingUpRequest_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred System_Controller_SendingUpRequest_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scope0 : one StateLabel, scope1 : one StateLabel] {
   System/Controller/Sending in sNext. (conf0)
+  (s. (stable) = boolean/True => 
+    ! {System in scope0} and
+    ! {System/Controller in scope0}
+ else {
+    boolean/True }
+)
 }
 
 pred System_Controller_SendingUpRequest[s : one Snapshot, sNext : one Snapshot] {
@@ -356,8 +422,8 @@ pred System_Controller_SendingUpRequest[s : one Snapshot, sNext : one Snapshot] 
 
 pred System_Elevator_MovingUp_ElevatorInCalled_pre[s : one Snapshot, pPID : one PID] {
   { pPID -> System/Elevator/MovingUp } in s. (conf1)
-  ! {System in scopesUsed0}
-  ! {{ pPID -> System/Elevator } in scopesUsed1}
+  ! {System in s. (scopesUsed0)}
+  ! {{ pPID -> System/Elevator } in s. (scopesUsed1)}
 }
 
 
@@ -373,8 +439,14 @@ pred System_Elevator_MovingUp_ElevatorInCalled_post[s : one Snapshot, sNext : on
 )
 }
 
-pred System_Elevator_MovingUp_ElevatorInCalled_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred System_Elevator_MovingUp_ElevatorInCalled_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pPID : one PID, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pPID -> System/Elevator/MovingUp } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {System in scope0} and
+    ! {{ pPID -> System/Elevator } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred System_Elevator_MovingUp_ElevatorInCalled[s : one Snapshot, sNext : one Snapshot, pPID : one PID] {
@@ -382,19 +454,19 @@ pred System_Elevator_MovingUp_ElevatorInCalled[s : one Snapshot, sNext : one Sna
   pPID. (sNext. (s. (System_Elevator_MovingUp_ElevatorInCalled_post)))
 }
 
-pred testIfNextStable[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (System_Controller_SendingDownRequest_enabledAfterStep))))}
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (System_Elevator_MovingUp_ChangeDirToDown_enabledAfterStep))))}
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (System_Elevator_Idle_Move_enabledAfterStep))))}
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (System_Elevator_MovingDown_Idle_enabledAfterStep))))}
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (System_Elevator_MovingDown_MoveDown_enabledAfterStep))))}
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (System_Elevator_Idle_DefaultToGround_enabledAfterStep))))}
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (System_Elevator_MovingUp_MoveUp_enabledAfterStep))))}
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (System_Elevator_MovingUp_Idle_enabledAfterStep))))}
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (System_Elevator_MovingDown_ElevatorInCalled_enabledAfterStep))))}
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (System_Elevator_MovingDown_ChangeDirToUp_enabledAfterStep))))}
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (System_Controller_SendingUpRequest_enabledAfterStep))))}
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (System_Elevator_MovingUp_ElevatorInCalled_enabledAfterStep))))}
+pred testIfNextStable[s : one Snapshot, sNext : one Snapshot, scope0 : one AllEvents, scope1 : one AllEvents] {
+  ! {scope1. (scope0. (sNext. (s. (System_Controller_SendingDownRequest_enabledAfterStep))))}
+  ! {scope1. (scope0. (sNext. (s. (System_Elevator_MovingUp_ChangeDirToDown_enabledAfterStep))))}
+  ! {scope1. (scope0. (sNext. (s. (System_Elevator_Idle_Move_enabledAfterStep))))}
+  ! {scope1. (scope0. (sNext. (s. (System_Elevator_MovingDown_Idle_enabledAfterStep))))}
+  ! {scope1. (scope0. (sNext. (s. (System_Elevator_MovingDown_MoveDown_enabledAfterStep))))}
+  ! {scope1. (scope0. (sNext. (s. (System_Elevator_Idle_DefaultToGround_enabledAfterStep))))}
+  ! {scope1. (scope0. (sNext. (s. (System_Elevator_MovingUp_MoveUp_enabledAfterStep))))}
+  ! {scope1. (scope0. (sNext. (s. (System_Elevator_MovingUp_Idle_enabledAfterStep))))}
+  ! {scope1. (scope0. (sNext. (s. (System_Elevator_MovingDown_ElevatorInCalled_enabledAfterStep))))}
+  ! {scope1. (scope0. (sNext. (s. (System_Elevator_MovingDown_ChangeDirToUp_enabledAfterStep))))}
+  ! {scope1. (scope0. (sNext. (s. (System_Controller_SendingUpRequest_enabledAfterStep))))}
+  ! {scope1. (scope0. (sNext. (s. (System_Elevator_MovingUp_ElevatorInCalled_enabledAfterStep))))}
 }
 
 pred small_step[s : one Snapshot, sNext : one Snapshot] {

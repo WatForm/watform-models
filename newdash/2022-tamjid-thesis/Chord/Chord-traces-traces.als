@@ -107,8 +107,8 @@ sig Snapshot {
 
 pred System_N_Live_StabilizeFromPrdc_pre[s : one Snapshot, pNode : one Node] {
   { pNode -> System/N/Live } in s. (conf1)
-  ! {System in scopesUsed0}
-  ! {{ pNode -> System/N } in scopesUsed1}
+  ! {System in s. (scopesUsed0)}
+  ! {{ pNode -> System/N } in s. (scopesUsed1)}
 }
 
 
@@ -124,8 +124,14 @@ pred System_N_Live_StabilizeFromPrdc_post[s : one Snapshot, sNext : one Snapshot
 )
 }
 
-pred System_N_Live_StabilizeFromPrdc_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred System_N_Live_StabilizeFromPrdc_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pNode : one Node, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pNode -> System/N/Live } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {System in scope0} and
+    ! {{ pNode -> System/N } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred System_N_Live_StabilizeFromPrdc[s : one Snapshot, sNext : one Snapshot, pNode : one Node] {
@@ -135,8 +141,8 @@ pred System_N_Live_StabilizeFromPrdc[s : one Snapshot, sNext : one Snapshot, pNo
 
 pred System_N_Live_Flush_pre[s : one Snapshot, pNode : one Node] {
   { pNode -> System/N/Live } in s. (conf1)
-  ! {System in scopesUsed0}
-  ! {{ pNode -> System/N } in scopesUsed1}
+  ! {System in s. (scopesUsed0)}
+  ! {{ pNode -> System/N } in s. (scopesUsed1)}
 }
 
 
@@ -152,8 +158,14 @@ pred System_N_Live_Flush_post[s : one Snapshot, sNext : one Snapshot, pNode : on
 )
 }
 
-pred System_N_Live_Flush_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred System_N_Live_Flush_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pNode : one Node, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pNode -> System/N/Live } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {System in scope0} and
+    ! {{ pNode -> System/N } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred System_N_Live_Flush[s : one Snapshot, sNext : one Snapshot, pNode : one Node] {
@@ -163,8 +175,8 @@ pred System_N_Live_Flush[s : one Snapshot, sNext : one Snapshot, pNode : one Nod
 
 pred System_N_Live_Fail_pre[s : one Snapshot, pNode : one Node] {
   { pNode -> System/N/Live } in s. (conf1)
-  ! {System in scopesUsed0}
-  ! {{ pNode -> System/N } in scopesUsed1}
+  ! {System in s. (scopesUsed0)}
+  ! {{ pNode -> System/N } in s. (scopesUsed1)}
 }
 
 
@@ -180,8 +192,14 @@ pred System_N_Live_Fail_post[s : one Snapshot, sNext : one Snapshot, pNode : one
 )
 }
 
-pred System_N_Live_Fail_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred System_N_Live_Fail_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pNode : one Node, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pNode -> System/N/Live } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {System in scope0} and
+    ! {{ pNode -> System/N } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred System_N_Live_Fail[s : one Snapshot, sNext : one Snapshot, pNode : one Node] {
@@ -191,8 +209,8 @@ pred System_N_Live_Fail[s : one Snapshot, sNext : one Snapshot, pNode : one Node
 
 pred System_N_Live_StabilizeFromSucc_pre[s : one Snapshot, pNode : one Node] {
   { pNode -> System/N/Live } in s. (conf1)
-  ! {System in scopesUsed0}
-  ! {{ pNode -> System/N } in scopesUsed1}
+  ! {System in s. (scopesUsed0)}
+  ! {{ pNode -> System/N } in s. (scopesUsed1)}
 }
 
 
@@ -208,8 +226,14 @@ pred System_N_Live_StabilizeFromSucc_post[s : one Snapshot, sNext : one Snapshot
 )
 }
 
-pred System_N_Live_StabilizeFromSucc_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred System_N_Live_StabilizeFromSucc_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pNode : one Node, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pNode -> System/N/Live } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {System in scope0} and
+    ! {{ pNode -> System/N } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred System_N_Live_StabilizeFromSucc[s : one Snapshot, sNext : one Snapshot, pNode : one Node] {
@@ -219,8 +243,8 @@ pred System_N_Live_StabilizeFromSucc[s : one Snapshot, sNext : one Snapshot, pNo
 
 pred System_N_Live_Rectify_pre[s : one Snapshot, pNode : one Node] {
   { pNode -> System/N/Live } in s. (conf1)
-  ! {System in scopesUsed0}
-  ! {{ pNode -> System/N } in scopesUsed1}
+  ! {System in s. (scopesUsed0)}
+  ! {{ pNode -> System/N } in s. (scopesUsed1)}
 }
 
 
@@ -236,8 +260,14 @@ pred System_N_Live_Rectify_post[s : one Snapshot, sNext : one Snapshot, pNode : 
 )
 }
 
-pred System_N_Live_Rectify_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred System_N_Live_Rectify_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pNode : one Node, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pNode -> System/N/Live } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {System in scope0} and
+    ! {{ pNode -> System/N } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred System_N_Live_Rectify[s : one Snapshot, sNext : one Snapshot, pNode : one Node] {
@@ -247,8 +277,8 @@ pred System_N_Live_Rectify[s : one Snapshot, sNext : one Snapshot, pNode : one N
 
 pred System_N_Failed_Join_pre[s : one Snapshot, pNode : one Node] {
   { pNode -> System/N/Failed } in s. (conf1)
-  ! {System in scopesUsed0}
-  ! {{ pNode -> System/N } in scopesUsed1}
+  ! {System in s. (scopesUsed0)}
+  ! {{ pNode -> System/N } in s. (scopesUsed1)}
 }
 
 
@@ -264,8 +294,14 @@ pred System_N_Failed_Join_post[s : one Snapshot, sNext : one Snapshot, pNode : o
 )
 }
 
-pred System_N_Failed_Join_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred System_N_Failed_Join_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pNode : one Node, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pNode -> System/N/Failed } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {System in scope0} and
+    ! {{ pNode -> System/N } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred System_N_Failed_Join[s : one Snapshot, sNext : one Snapshot, pNode : one Node] {
@@ -273,13 +309,13 @@ pred System_N_Failed_Join[s : one Snapshot, sNext : one Snapshot, pNode : one No
   pNode. (sNext. (s. (System_N_Failed_Join_post)))
 }
 
-pred testIfNextStable[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (System_N_Live_StabilizeFromPrdc_enabledAfterStep))))}
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (System_N_Live_Flush_enabledAfterStep))))}
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (System_N_Live_Fail_enabledAfterStep))))}
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (System_N_Live_StabilizeFromSucc_enabledAfterStep))))}
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (System_N_Live_Rectify_enabledAfterStep))))}
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (System_N_Failed_Join_enabledAfterStep))))}
+pred testIfNextStable[s : one Snapshot, sNext : one Snapshot, scope0 : one AllEvents, scope1 : one AllEvents] {
+  ! {scope1. (scope0. (sNext. (s. (System_N_Live_StabilizeFromPrdc_enabledAfterStep))))}
+  ! {scope1. (scope0. (sNext. (s. (System_N_Live_Flush_enabledAfterStep))))}
+  ! {scope1. (scope0. (sNext. (s. (System_N_Live_Fail_enabledAfterStep))))}
+  ! {scope1. (scope0. (sNext. (s. (System_N_Live_StabilizeFromSucc_enabledAfterStep))))}
+  ! {scope1. (scope0. (sNext. (s. (System_N_Live_Rectify_enabledAfterStep))))}
+  ! {scope1. (scope0. (sNext. (s. (System_N_Failed_Join_enabledAfterStep))))}
 }
 
 pred small_step[s : one Snapshot, sNext : one Snapshot] {

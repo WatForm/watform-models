@@ -76,8 +76,8 @@ sig Snapshot {
 
 pred HeatingSystem_Functioning_Controller_Off_T8_pre[s : one Snapshot] {
   HeatingSystem/Functioning/Controller/Off in s. (conf0)
-  ! {HeatingSystem in scopesUsed0}
-  ! {HeatingSystem/Functioning/Controller in scopesUsed0}
+  ! {HeatingSystem in s. (scopesUsed0)}
+  ! {HeatingSystem/Functioning/Controller in s. (scopesUsed0)}
   (s. (stable) = boolean/True => 
     HeatingSystem/heatSwitchOn in { s. (events0) & AllEnvironmentalEvents }
  else {
@@ -111,8 +111,13 @@ pred HeatingSystem_Functioning_Controller_Off_T8_post[s : one Snapshot, sNext : 
 )
 }
 
-pred HeatingSystem_Functioning_Controller_Off_T8_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, events0 : one AllEvents, scopesUsed1 : one StateLabel, events1 : one AllEvents] {
+pred HeatingSystem_Functioning_Controller_Off_T8_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scope0 : one StateLabel, genEvents0 : one AllEvents, scope1 : one StateLabel, genEvents1 : one AllEvents] {
   HeatingSystem/Functioning/Controller/Off in sNext. (conf0)
+  (s. (stable) = boolean/True => 
+    boolean/False
+ else {
+    HeatingSystem/heatSwitchOn in { s. (events0) + genEvents0 } }
+)
 }
 
 pred HeatingSystem_Functioning_Controller_Off_T8[s : one Snapshot, sNext : one Snapshot] {
@@ -122,8 +127,8 @@ pred HeatingSystem_Functioning_Controller_Off_T8[s : one Snapshot, sNext : one S
 
 pred HeatingSystem_Functioning_Controller_On_Heater_Active_T10_pre[s : one Snapshot] {
   HeatingSystem/Functioning/Controller/On/Heater_Active in s. (conf0)
-  ! {HeatingSystem in scopesUsed0}
-  ! {HeatingSystem/Functioning/Controller in scopesUsed0}
+  ! {HeatingSystem in s. (scopesUsed0)}
+  ! {HeatingSystem/Functioning/Controller in s. (scopesUsed0)}
 }
 
 
@@ -152,8 +157,14 @@ pred HeatingSystem_Functioning_Controller_On_Heater_Active_T10_post[s : one Snap
 )
 }
 
-pred HeatingSystem_Functioning_Controller_On_Heater_Active_T10_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, events0 : one AllEvents, scopesUsed1 : one StateLabel, events1 : one AllEvents] {
+pred HeatingSystem_Functioning_Controller_On_Heater_Active_T10_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scope0 : one StateLabel, genEvents0 : one AllEvents, scope1 : one StateLabel, genEvents1 : one AllEvents] {
   HeatingSystem/Functioning/Controller/On/Heater_Active in sNext. (conf0)
+  (s. (stable) = boolean/True => 
+    ! {HeatingSystem in scope0} and
+    ! {HeatingSystem/Functioning/Controller in scope0}
+ else {
+    boolean/True }
+)
 }
 
 pred HeatingSystem_Functioning_Controller_On_Heater_Active_T10[s : one Snapshot, sNext : one Snapshot] {
@@ -163,7 +174,7 @@ pred HeatingSystem_Functioning_Controller_On_Heater_Active_T10[s : one Snapshot,
 
 pred HeatingSystem_Functioning_Controller_On_Heater_Active_T11_pre[s : one Snapshot] {
   HeatingSystem/Functioning/Controller/On/Heater_Active in s. (conf0)
-  ! {HeatingSystem in scopesUsed0}
+  ! {HeatingSystem in s. (scopesUsed0)}
   (s. (stable) = boolean/True => 
     HeatingSystem/furnaceFault in { s. (events0) & AllEnvironmentalEvents }
  else {
@@ -197,8 +208,13 @@ pred HeatingSystem_Functioning_Controller_On_Heater_Active_T11_post[s : one Snap
 )
 }
 
-pred HeatingSystem_Functioning_Controller_On_Heater_Active_T11_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, events0 : one AllEvents, scopesUsed1 : one StateLabel, events1 : one AllEvents] {
+pred HeatingSystem_Functioning_Controller_On_Heater_Active_T11_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scope0 : one StateLabel, genEvents0 : one AllEvents, scope1 : one StateLabel, genEvents1 : one AllEvents] {
   HeatingSystem/Functioning/Controller/On/Heater_Active in sNext. (conf0)
+  (s. (stable) = boolean/True => 
+    boolean/False
+ else {
+    HeatingSystem/furnaceFault in { s. (events0) + genEvents0 } }
+)
 }
 
 pred HeatingSystem_Functioning_Controller_On_Heater_Active_T11[s : one Snapshot, sNext : one Snapshot] {
@@ -208,8 +224,8 @@ pred HeatingSystem_Functioning_Controller_On_Heater_Active_T11[s : one Snapshot,
 
 pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running_T4_pre[s : one Snapshot] {
   HeatingSystem/Functioning/Furnace/Furnace_Normal/Furnace_Running in s. (conf0)
-  ! {HeatingSystem in scopesUsed0}
-  ! {HeatingSystem/Functioning/Furnace in scopesUsed0}
+  ! {HeatingSystem in s. (scopesUsed0)}
+  ! {HeatingSystem/Functioning/Furnace in s. (scopesUsed0)}
   (s. (stable) = boolean/True => 
     HeatingSystem/deactivate in { s. (events0) & AllEnvironmentalEvents }
  else {
@@ -243,8 +259,15 @@ pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running_T4_post[s 
 )
 }
 
-pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running_T4_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, events0 : one AllEvents, scopesUsed1 : one StateLabel, events1 : one AllEvents] {
+pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running_T4_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scope0 : one StateLabel, genEvents0 : one AllEvents, scope1 : one StateLabel, genEvents1 : one AllEvents] {
   HeatingSystem/Functioning/Furnace/Furnace_Normal/Furnace_Running in sNext. (conf0)
+  (s. (stable) = boolean/True => 
+    ! {HeatingSystem in scope0} and
+    ! {HeatingSystem/Functioning/Furnace in scope0} and
+    HeatingSystem/deactivate in { { s. (events0) & AllEnvironmentalEvents } + genEvents0 }
+ else {
+    HeatingSystem/deactivate in { s. (events0) + genEvents0 } }
+)
 }
 
 pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running_T4[s : one Snapshot, sNext : one Snapshot] {
@@ -254,7 +277,7 @@ pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running_T4[s : one
 
 pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running_T5_pre[s : one Snapshot] {
   HeatingSystem/Functioning/Furnace/Furnace_Normal/Furnace_Running in s. (conf0)
-  ! {HeatingSystem in scopesUsed0}
+  ! {HeatingSystem in s. (scopesUsed0)}
   (s. (stable) = boolean/True => 
     HeatingSystem/furnaceFault in { s. (events0) & AllEnvironmentalEvents }
  else {
@@ -288,8 +311,13 @@ pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running_T5_post[s 
 )
 }
 
-pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running_T5_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, events0 : one AllEvents, scopesUsed1 : one StateLabel, events1 : one AllEvents] {
+pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running_T5_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scope0 : one StateLabel, genEvents0 : one AllEvents, scope1 : one StateLabel, genEvents1 : one AllEvents] {
   HeatingSystem/Functioning/Furnace/Furnace_Normal/Furnace_Running in sNext. (conf0)
+  (s. (stable) = boolean/True => 
+    boolean/False
+ else {
+    HeatingSystem/furnaceFault in { s. (events0) + genEvents0 } }
+)
 }
 
 pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running_T5[s : one Snapshot, sNext : one Snapshot] {
@@ -299,8 +327,8 @@ pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running_T5[s : one
 
 pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Activating_T3_pre[s : one Snapshot] {
   HeatingSystem/Functioning/Furnace/Furnace_Normal/Furnace_Activating in s. (conf0)
-  ! {HeatingSystem in scopesUsed0}
-  ! {HeatingSystem/Functioning/Furnace in scopesUsed0}
+  ! {HeatingSystem in s. (scopesUsed0)}
+  ! {HeatingSystem/Functioning/Furnace in s. (scopesUsed0)}
 }
 
 
@@ -329,8 +357,14 @@ pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Activating_T3_post
 )
 }
 
-pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Activating_T3_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, events0 : one AllEvents, scopesUsed1 : one StateLabel, events1 : one AllEvents] {
+pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Activating_T3_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scope0 : one StateLabel, genEvents0 : one AllEvents, scope1 : one StateLabel, genEvents1 : one AllEvents] {
   HeatingSystem/Functioning/Furnace/Furnace_Normal/Furnace_Activating in sNext. (conf0)
+  (s. (stable) = boolean/True => 
+    ! {HeatingSystem in scope0} and
+    ! {HeatingSystem/Functioning/Furnace in scope0}
+ else {
+    boolean/True }
+)
 }
 
 pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Activating_T3[s : one Snapshot, sNext : one Snapshot] {
@@ -340,8 +374,8 @@ pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Activating_T3[s : 
 
 pred HeatingSystem_Functioning_Room_No_Heat_Request_Idle_No_Heat_coolRoom_pre[s : one Snapshot, pIdentifier : one Identifier] {
   { pIdentifier -> HeatingSystem/Functioning/Room/No_Heat_Request/Idle_No_Heat } in s. (conf1)
-  ! {HeatingSystem in scopesUsed0}
-  ! {{ pIdentifier -> HeatingSystem/Functioning/Room } in scopesUsed1}
+  ! {HeatingSystem in s. (scopesUsed0)}
+  ! {{ pIdentifier -> HeatingSystem/Functioning/Room } in s. (scopesUsed1)}
 }
 
 
@@ -370,8 +404,14 @@ pred HeatingSystem_Functioning_Room_No_Heat_Request_Idle_No_Heat_coolRoom_post[s
 )
 }
 
-pred HeatingSystem_Functioning_Room_No_Heat_Request_Idle_No_Heat_coolRoom_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, events0 : one AllEvents, scopesUsed1 : one StateLabel, events1 : one AllEvents] {
+pred HeatingSystem_Functioning_Room_No_Heat_Request_Idle_No_Heat_coolRoom_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pIdentifier : one Identifier, scope0 : one StateLabel, genEvents0 : one AllEvents, scope1 : one StateLabel, genEvents1 : one AllEvents] {
   { pIdentifier -> HeatingSystem/Functioning/Room/No_Heat_Request/Idle_No_Heat } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {HeatingSystem in scope0} and
+    ! {{ pIdentifier -> HeatingSystem/Functioning/Room } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred HeatingSystem_Functioning_Room_No_Heat_Request_Idle_No_Heat_coolRoom[s : one Snapshot, sNext : one Snapshot, pIdentifier : one Identifier] {
@@ -381,8 +421,8 @@ pred HeatingSystem_Functioning_Room_No_Heat_Request_Idle_No_Heat_coolRoom[s : on
 
 pred HeatingSystem_Functioning_Room_No_Heat_Request_Idle_No_Heat_T12_pre[s : one Snapshot, pIdentifier : one Identifier] {
   { pIdentifier -> HeatingSystem/Functioning/Room/No_Heat_Request/Idle_No_Heat } in s. (conf1)
-  ! {HeatingSystem in scopesUsed0}
-  ! {{ pIdentifier -> HeatingSystem/Functioning/Room } in scopesUsed1}
+  ! {HeatingSystem in s. (scopesUsed0)}
+  ! {{ pIdentifier -> HeatingSystem/Functioning/Room } in s. (scopesUsed1)}
 }
 
 
@@ -411,8 +451,14 @@ pred HeatingSystem_Functioning_Room_No_Heat_Request_Idle_No_Heat_T12_post[s : on
 )
 }
 
-pred HeatingSystem_Functioning_Room_No_Heat_Request_Idle_No_Heat_T12_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, events0 : one AllEvents, scopesUsed1 : one StateLabel, events1 : one AllEvents] {
+pred HeatingSystem_Functioning_Room_No_Heat_Request_Idle_No_Heat_T12_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pIdentifier : one Identifier, scope0 : one StateLabel, genEvents0 : one AllEvents, scope1 : one StateLabel, genEvents1 : one AllEvents] {
   { pIdentifier -> HeatingSystem/Functioning/Room/No_Heat_Request/Idle_No_Heat } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {HeatingSystem in scope0} and
+    ! {{ pIdentifier -> HeatingSystem/Functioning/Room } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred HeatingSystem_Functioning_Room_No_Heat_Request_Idle_No_Heat_T12[s : one Snapshot, sNext : one Snapshot, pIdentifier : one Identifier] {
@@ -422,8 +468,8 @@ pred HeatingSystem_Functioning_Room_No_Heat_Request_Idle_No_Heat_T12[s : one Sna
 
 pred HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T17_pre[s : one Snapshot, pIdentifier : one Identifier] {
   { pIdentifier -> HeatingSystem/Functioning/Room/Heat_Requested/Wait_For_Cool } in s. (conf1)
-  ! {HeatingSystem in scopesUsed0}
-  ! {{ pIdentifier -> HeatingSystem/Functioning/Room } in scopesUsed1}
+  ! {HeatingSystem in s. (scopesUsed0)}
+  ! {{ pIdentifier -> HeatingSystem/Functioning/Room } in s. (scopesUsed1)}
   (s. (stable) = boolean/True => 
     { pIdentifier -> HeatingSystem/Functioning/Room/waitedForCool } in { s. (events1) & AllEnvironmentalEvents }
  else {
@@ -457,8 +503,13 @@ pred HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T17_post[s : on
 )
 }
 
-pred HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T17_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, events0 : one AllEvents, scopesUsed1 : one StateLabel, events1 : one AllEvents] {
+pred HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T17_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pIdentifier : one Identifier, scope0 : one StateLabel, genEvents0 : one AllEvents, scope1 : one StateLabel, genEvents1 : one AllEvents] {
   { pIdentifier -> HeatingSystem/Functioning/Room/Heat_Requested/Wait_For_Cool } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    boolean/False
+ else {
+    { pIdentifier -> HeatingSystem/Functioning/Room/waitedForCool } in { s. (events1) + genEvents1 } }
+)
 }
 
 pred HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T17[s : one Snapshot, sNext : one Snapshot, pIdentifier : one Identifier] {
@@ -468,8 +519,8 @@ pred HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T17[s : one Sna
 
 pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Off_T1_pre[s : one Snapshot] {
   HeatingSystem/Functioning/Furnace/Furnace_Normal/Furnace_Off in s. (conf0)
-  ! {HeatingSystem in scopesUsed0}
-  ! {HeatingSystem/Functioning/Furnace in scopesUsed0}
+  ! {HeatingSystem in s. (scopesUsed0)}
+  ! {HeatingSystem/Functioning/Furnace in s. (scopesUsed0)}
   (s. (stable) = boolean/True => 
     HeatingSystem/activate in { s. (events0) & AllEnvironmentalEvents }
  else {
@@ -503,8 +554,15 @@ pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Off_T1_post[s : on
 )
 }
 
-pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Off_T1_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, events0 : one AllEvents, scopesUsed1 : one StateLabel, events1 : one AllEvents] {
+pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Off_T1_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scope0 : one StateLabel, genEvents0 : one AllEvents, scope1 : one StateLabel, genEvents1 : one AllEvents] {
   HeatingSystem/Functioning/Furnace/Furnace_Normal/Furnace_Off in sNext. (conf0)
+  (s. (stable) = boolean/True => 
+    ! {HeatingSystem in scope0} and
+    ! {HeatingSystem/Functioning/Furnace in scope0} and
+    HeatingSystem/activate in { { s. (events0) & AllEnvironmentalEvents } + genEvents0 }
+ else {
+    HeatingSystem/activate in { s. (events0) + genEvents0 } }
+)
 }
 
 pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Off_T1[s : one Snapshot, sNext : one Snapshot] {
@@ -514,8 +572,8 @@ pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Off_T1[s : one Sna
 
 pred HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T16_pre[s : one Snapshot, pIdentifier : one Identifier] {
   { pIdentifier -> HeatingSystem/Functioning/Room/Heat_Requested/Wait_For_Cool } in s. (conf1)
-  ! {HeatingSystem in scopesUsed0}
-  ! {{ pIdentifier -> HeatingSystem/Functioning/Room } in scopesUsed1}
+  ! {HeatingSystem in s. (scopesUsed0)}
+  ! {{ pIdentifier -> HeatingSystem/Functioning/Room } in s. (scopesUsed1)}
 }
 
 
@@ -544,8 +602,14 @@ pred HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T16_post[s : on
 )
 }
 
-pred HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T16_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, events0 : one AllEvents, scopesUsed1 : one StateLabel, events1 : one AllEvents] {
+pred HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T16_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pIdentifier : one Identifier, scope0 : one StateLabel, genEvents0 : one AllEvents, scope1 : one StateLabel, genEvents1 : one AllEvents] {
   { pIdentifier -> HeatingSystem/Functioning/Room/Heat_Requested/Wait_For_Cool } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {HeatingSystem in scope0} and
+    ! {{ pIdentifier -> HeatingSystem/Functioning/Room } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T16[s : one Snapshot, sNext : one Snapshot, pIdentifier : one Identifier] {
@@ -555,7 +619,7 @@ pred HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T16[s : one Sna
 
 pred HeatingSystem_ERROR_T19_pre[s : one Snapshot] {
   HeatingSystem/ERROR in s. (conf0)
-  ! {HeatingSystem in scopesUsed0}
+  ! {HeatingSystem in s. (scopesUsed0)}
   (s. (stable) = boolean/True => 
     HeatingSystem/heatSwitchOn in { s. (events0) & AllEnvironmentalEvents }
  else {
@@ -589,8 +653,13 @@ pred HeatingSystem_ERROR_T19_post[s : one Snapshot, sNext : one Snapshot] {
 )
 }
 
-pred HeatingSystem_ERROR_T19_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, events0 : one AllEvents, scopesUsed1 : one StateLabel, events1 : one AllEvents] {
+pred HeatingSystem_ERROR_T19_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scope0 : one StateLabel, genEvents0 : one AllEvents, scope1 : one StateLabel, genEvents1 : one AllEvents] {
   HeatingSystem/ERROR in sNext. (conf0)
+  (s. (stable) = boolean/True => 
+    boolean/False
+ else {
+    HeatingSystem/heatSwitchOn in { s. (events0) + genEvents0 } }
+)
 }
 
 pred HeatingSystem_ERROR_T19[s : one Snapshot, sNext : one Snapshot] {
@@ -600,8 +669,8 @@ pred HeatingSystem_ERROR_T19[s : one Snapshot, sNext : one Snapshot] {
 
 pred HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T18_pre[s : one Snapshot, pIdentifier : one Identifier] {
   { pIdentifier -> HeatingSystem/Functioning/Room/Heat_Requested/Wait_For_Cool } in s. (conf1)
-  ! {HeatingSystem in scopesUsed0}
-  ! {{ pIdentifier -> HeatingSystem/Functioning/Room } in scopesUsed1}
+  ! {HeatingSystem in s. (scopesUsed0)}
+  ! {{ pIdentifier -> HeatingSystem/Functioning/Room } in s. (scopesUsed1)}
   (s. (stable) = boolean/True => 
     { pIdentifier -> HeatingSystem/Functioning/Room/waitedForCool } in { s. (events1) & AllEnvironmentalEvents }
  else {
@@ -635,8 +704,13 @@ pred HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T18_post[s : on
 )
 }
 
-pred HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T18_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, events0 : one AllEvents, scopesUsed1 : one StateLabel, events1 : one AllEvents] {
+pred HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T18_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pIdentifier : one Identifier, scope0 : one StateLabel, genEvents0 : one AllEvents, scope1 : one StateLabel, genEvents1 : one AllEvents] {
   { pIdentifier -> HeatingSystem/Functioning/Room/Heat_Requested/Wait_For_Cool } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    boolean/False
+ else {
+    { pIdentifier -> HeatingSystem/Functioning/Room/waitedForCool } in { s. (events1) + genEvents1 } }
+)
 }
 
 pred HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T18[s : one Snapshot, sNext : one Snapshot, pIdentifier : one Identifier] {
@@ -646,8 +720,8 @@ pred HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T18[s : one Sna
 
 pred HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T14_pre[s : one Snapshot, pIdentifier : one Identifier] {
   { pIdentifier -> HeatingSystem/Functioning/Room/No_Heat_Request/Wait_For_Heat } in s. (conf1)
-  ! {HeatingSystem in scopesUsed0}
-  ! {{ pIdentifier -> HeatingSystem/Functioning/Room } in scopesUsed1}
+  ! {HeatingSystem in s. (scopesUsed0)}
+  ! {{ pIdentifier -> HeatingSystem/Functioning/Room } in s. (scopesUsed1)}
   (s. (stable) = boolean/True => 
     { pIdentifier -> HeatingSystem/Functioning/Room/waitedForWarmth } in { s. (events1) & AllEnvironmentalEvents }
  else {
@@ -681,8 +755,13 @@ pred HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T14_post[s : o
 )
 }
 
-pred HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T14_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, events0 : one AllEvents, scopesUsed1 : one StateLabel, events1 : one AllEvents] {
+pred HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T14_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pIdentifier : one Identifier, scope0 : one StateLabel, genEvents0 : one AllEvents, scope1 : one StateLabel, genEvents1 : one AllEvents] {
   { pIdentifier -> HeatingSystem/Functioning/Room/No_Heat_Request/Wait_For_Heat } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    boolean/False
+ else {
+    { pIdentifier -> HeatingSystem/Functioning/Room/waitedForWarmth } in { s. (events1) + genEvents1 } }
+)
 }
 
 pred HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T14[s : one Snapshot, sNext : one Snapshot, pIdentifier : one Identifier] {
@@ -692,8 +771,8 @@ pred HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T14[s : one Sn
 
 pred HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T15_pre[s : one Snapshot, pIdentifier : one Identifier] {
   { pIdentifier -> HeatingSystem/Functioning/Room/No_Heat_Request/Wait_For_Heat } in s. (conf1)
-  ! {HeatingSystem in scopesUsed0}
-  ! {{ pIdentifier -> HeatingSystem/Functioning/Room } in scopesUsed1}
+  ! {HeatingSystem in s. (scopesUsed0)}
+  ! {{ pIdentifier -> HeatingSystem/Functioning/Room } in s. (scopesUsed1)}
 }
 
 
@@ -722,8 +801,14 @@ pred HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T15_post[s : o
 )
 }
 
-pred HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T15_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, events0 : one AllEvents, scopesUsed1 : one StateLabel, events1 : one AllEvents] {
+pred HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T15_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pIdentifier : one Identifier, scope0 : one StateLabel, genEvents0 : one AllEvents, scope1 : one StateLabel, genEvents1 : one AllEvents] {
   { pIdentifier -> HeatingSystem/Functioning/Room/No_Heat_Request/Wait_For_Heat } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {HeatingSystem in scope0} and
+    ! {{ pIdentifier -> HeatingSystem/Functioning/Room } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T15[s : one Snapshot, sNext : one Snapshot, pIdentifier : one Identifier] {
@@ -733,8 +818,8 @@ pred HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T15[s : one Sn
 
 pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Activating_T2_pre[s : one Snapshot] {
   HeatingSystem/Functioning/Furnace/Furnace_Normal/Furnace_Activating in s. (conf0)
-  ! {HeatingSystem in scopesUsed0}
-  ! {HeatingSystem/Functioning/Furnace in scopesUsed0}
+  ! {HeatingSystem in s. (scopesUsed0)}
+  ! {HeatingSystem/Functioning/Furnace in s. (scopesUsed0)}
   (s. (stable) = boolean/True => 
     HeatingSystem/deactivate in { s. (events0) & AllEnvironmentalEvents }
  else {
@@ -768,8 +853,15 @@ pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Activating_T2_post
 )
 }
 
-pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Activating_T2_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, events0 : one AllEvents, scopesUsed1 : one StateLabel, events1 : one AllEvents] {
+pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Activating_T2_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scope0 : one StateLabel, genEvents0 : one AllEvents, scope1 : one StateLabel, genEvents1 : one AllEvents] {
   HeatingSystem/Functioning/Furnace/Furnace_Normal/Furnace_Activating in sNext. (conf0)
+  (s. (stable) = boolean/True => 
+    ! {HeatingSystem in scope0} and
+    ! {HeatingSystem/Functioning/Furnace in scope0} and
+    HeatingSystem/deactivate in { { s. (events0) & AllEnvironmentalEvents } + genEvents0 }
+ else {
+    HeatingSystem/deactivate in { s. (events0) + genEvents0 } }
+)
 }
 
 pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Activating_T2[s : one Snapshot, sNext : one Snapshot] {
@@ -779,8 +871,8 @@ pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Activating_T2[s : 
 
 pred HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_T15_pre[s : one Snapshot, pIdentifier : one Identifier] {
   { pIdentifier -> HeatingSystem/Functioning/Room/Heat_Requested/Idle_Heating } in s. (conf1)
-  ! {HeatingSystem in scopesUsed0}
-  ! {{ pIdentifier -> HeatingSystem/Functioning/Room } in scopesUsed1}
+  ! {HeatingSystem in s. (scopesUsed0)}
+  ! {{ pIdentifier -> HeatingSystem/Functioning/Room } in s. (scopesUsed1)}
 }
 
 
@@ -809,8 +901,14 @@ pred HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_T15_post[s : one
 )
 }
 
-pred HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_T15_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, events0 : one AllEvents, scopesUsed1 : one StateLabel, events1 : one AllEvents] {
+pred HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_T15_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pIdentifier : one Identifier, scope0 : one StateLabel, genEvents0 : one AllEvents, scope1 : one StateLabel, genEvents1 : one AllEvents] {
   { pIdentifier -> HeatingSystem/Functioning/Room/Heat_Requested/Idle_Heating } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {HeatingSystem in scope0} and
+    ! {{ pIdentifier -> HeatingSystem/Functioning/Room } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_T15[s : one Snapshot, sNext : one Snapshot, pIdentifier : one Identifier] {
@@ -820,8 +918,8 @@ pred HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_T15[s : one Snap
 
 pred HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T13_pre[s : one Snapshot, pIdentifier : one Identifier] {
   { pIdentifier -> HeatingSystem/Functioning/Room/No_Heat_Request/Wait_For_Heat } in s. (conf1)
-  ! {HeatingSystem in scopesUsed0}
-  ! {{ pIdentifier -> HeatingSystem/Functioning/Room } in scopesUsed1}
+  ! {HeatingSystem in s. (scopesUsed0)}
+  ! {{ pIdentifier -> HeatingSystem/Functioning/Room } in s. (scopesUsed1)}
 }
 
 
@@ -850,8 +948,14 @@ pred HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T13_post[s : o
 )
 }
 
-pred HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T13_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, events0 : one AllEvents, scopesUsed1 : one StateLabel, events1 : one AllEvents] {
+pred HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T13_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pIdentifier : one Identifier, scope0 : one StateLabel, genEvents0 : one AllEvents, scope1 : one StateLabel, genEvents1 : one AllEvents] {
   { pIdentifier -> HeatingSystem/Functioning/Room/No_Heat_Request/Wait_For_Heat } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {HeatingSystem in scope0} and
+    ! {{ pIdentifier -> HeatingSystem/Functioning/Room } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T13[s : one Snapshot, sNext : one Snapshot, pIdentifier : one Identifier] {
@@ -861,8 +965,8 @@ pred HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T13[s : one Sn
 
 pred HeatingSystem_Functioning_Controller_On_Idle_T9_pre[s : one Snapshot] {
   HeatingSystem/Functioning/Controller/On/Idle in s. (conf0)
-  ! {HeatingSystem in scopesUsed0}
-  ! {HeatingSystem/Functioning/Controller in scopesUsed0}
+  ! {HeatingSystem in s. (scopesUsed0)}
+  ! {HeatingSystem/Functioning/Controller in s. (scopesUsed0)}
 }
 
 
@@ -891,8 +995,14 @@ pred HeatingSystem_Functioning_Controller_On_Idle_T9_post[s : one Snapshot, sNex
 )
 }
 
-pred HeatingSystem_Functioning_Controller_On_Idle_T9_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, events0 : one AllEvents, scopesUsed1 : one StateLabel, events1 : one AllEvents] {
+pred HeatingSystem_Functioning_Controller_On_Idle_T9_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scope0 : one StateLabel, genEvents0 : one AllEvents, scope1 : one StateLabel, genEvents1 : one AllEvents] {
   HeatingSystem/Functioning/Controller/On/Idle in sNext. (conf0)
+  (s. (stable) = boolean/True => 
+    ! {HeatingSystem in scope0} and
+    ! {HeatingSystem/Functioning/Controller in scope0}
+ else {
+    boolean/True }
+)
 }
 
 pred HeatingSystem_Functioning_Controller_On_Idle_T9[s : one Snapshot, sNext : one Snapshot] {
@@ -902,8 +1012,8 @@ pred HeatingSystem_Functioning_Controller_On_Idle_T9[s : one Snapshot, sNext : o
 
 pred HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_heatRoom_pre[s : one Snapshot, pIdentifier : one Identifier] {
   { pIdentifier -> HeatingSystem/Functioning/Room/Heat_Requested/Idle_Heating } in s. (conf1)
-  ! {HeatingSystem in scopesUsed0}
-  ! {{ pIdentifier -> HeatingSystem/Functioning/Room } in scopesUsed1}
+  ! {HeatingSystem in s. (scopesUsed0)}
+  ! {{ pIdentifier -> HeatingSystem/Functioning/Room } in s. (scopesUsed1)}
 }
 
 
@@ -932,8 +1042,14 @@ pred HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_heatRoom_post[s 
 )
 }
 
-pred HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_heatRoom_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, events0 : one AllEvents, scopesUsed1 : one StateLabel, events1 : one AllEvents] {
+pred HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_heatRoom_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pIdentifier : one Identifier, scope0 : one StateLabel, genEvents0 : one AllEvents, scope1 : one StateLabel, genEvents1 : one AllEvents] {
   { pIdentifier -> HeatingSystem/Functioning/Room/Heat_Requested/Idle_Heating } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {HeatingSystem in scope0} and
+    ! {{ pIdentifier -> HeatingSystem/Functioning/Room } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_heatRoom[s : one Snapshot, sNext : one Snapshot, pIdentifier : one Identifier] {
@@ -941,27 +1057,27 @@ pred HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_heatRoom[s : one
   pIdentifier. (sNext. (s. (HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_heatRoom_post)))
 }
 
-pred testIfNextStable[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, events0 : one AllEvents, scopesUsed1 : one StateLabel, events1 : one AllEvents] {
-  ! {events1. (scopesUsed1. (events0. (scopesUsed0. (sNext. (s. (HeatingSystem_Functioning_Controller_Off_T8_enabledAfterStep))))))}
-  ! {events1. (scopesUsed1. (events0. (scopesUsed0. (sNext. (s. (HeatingSystem_Functioning_Controller_On_Heater_Active_T10_enabledAfterStep))))))}
-  ! {events1. (scopesUsed1. (events0. (scopesUsed0. (sNext. (s. (HeatingSystem_Functioning_Controller_On_Heater_Active_T11_enabledAfterStep))))))}
-  ! {events1. (scopesUsed1. (events0. (scopesUsed0. (sNext. (s. (HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running_T4_enabledAfterStep))))))}
-  ! {events1. (scopesUsed1. (events0. (scopesUsed0. (sNext. (s. (HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running_T5_enabledAfterStep))))))}
-  ! {events1. (scopesUsed1. (events0. (scopesUsed0. (sNext. (s. (HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Activating_T3_enabledAfterStep))))))}
-  ! {events1. (scopesUsed1. (events0. (scopesUsed0. (sNext. (s. (HeatingSystem_Functioning_Room_No_Heat_Request_Idle_No_Heat_coolRoom_enabledAfterStep))))))}
-  ! {events1. (scopesUsed1. (events0. (scopesUsed0. (sNext. (s. (HeatingSystem_Functioning_Room_No_Heat_Request_Idle_No_Heat_T12_enabledAfterStep))))))}
-  ! {events1. (scopesUsed1. (events0. (scopesUsed0. (sNext. (s. (HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T17_enabledAfterStep))))))}
-  ! {events1. (scopesUsed1. (events0. (scopesUsed0. (sNext. (s. (HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Off_T1_enabledAfterStep))))))}
-  ! {events1. (scopesUsed1. (events0. (scopesUsed0. (sNext. (s. (HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T16_enabledAfterStep))))))}
-  ! {events1. (scopesUsed1. (events0. (scopesUsed0. (sNext. (s. (HeatingSystem_ERROR_T19_enabledAfterStep))))))}
-  ! {events1. (scopesUsed1. (events0. (scopesUsed0. (sNext. (s. (HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T18_enabledAfterStep))))))}
-  ! {events1. (scopesUsed1. (events0. (scopesUsed0. (sNext. (s. (HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T14_enabledAfterStep))))))}
-  ! {events1. (scopesUsed1. (events0. (scopesUsed0. (sNext. (s. (HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T15_enabledAfterStep))))))}
-  ! {events1. (scopesUsed1. (events0. (scopesUsed0. (sNext. (s. (HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Activating_T2_enabledAfterStep))))))}
-  ! {events1. (scopesUsed1. (events0. (scopesUsed0. (sNext. (s. (HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_T15_enabledAfterStep))))))}
-  ! {events1. (scopesUsed1. (events0. (scopesUsed0. (sNext. (s. (HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T13_enabledAfterStep))))))}
-  ! {events1. (scopesUsed1. (events0. (scopesUsed0. (sNext. (s. (HeatingSystem_Functioning_Controller_On_Idle_T9_enabledAfterStep))))))}
-  ! {events1. (scopesUsed1. (events0. (scopesUsed0. (sNext. (s. (HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_heatRoom_enabledAfterStep))))))}
+pred testIfNextStable[s : one Snapshot, sNext : one Snapshot, scope0 : one AllEvents, genEvents0 : one AllEvents, scope1 : one AllEvents, genEvents1 : one AllEvents] {
+  ! {genEvents1. (scope1. (genEvents0. (scope0. (sNext. (s. (HeatingSystem_Functioning_Controller_Off_T8_enabledAfterStep))))))}
+  ! {genEvents1. (scope1. (genEvents0. (scope0. (sNext. (s. (HeatingSystem_Functioning_Controller_On_Heater_Active_T10_enabledAfterStep))))))}
+  ! {genEvents1. (scope1. (genEvents0. (scope0. (sNext. (s. (HeatingSystem_Functioning_Controller_On_Heater_Active_T11_enabledAfterStep))))))}
+  ! {genEvents1. (scope1. (genEvents0. (scope0. (sNext. (s. (HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running_T4_enabledAfterStep))))))}
+  ! {genEvents1. (scope1. (genEvents0. (scope0. (sNext. (s. (HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running_T5_enabledAfterStep))))))}
+  ! {genEvents1. (scope1. (genEvents0. (scope0. (sNext. (s. (HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Activating_T3_enabledAfterStep))))))}
+  ! {genEvents1. (scope1. (genEvents0. (scope0. (sNext. (s. (HeatingSystem_Functioning_Room_No_Heat_Request_Idle_No_Heat_coolRoom_enabledAfterStep))))))}
+  ! {genEvents1. (scope1. (genEvents0. (scope0. (sNext. (s. (HeatingSystem_Functioning_Room_No_Heat_Request_Idle_No_Heat_T12_enabledAfterStep))))))}
+  ! {genEvents1. (scope1. (genEvents0. (scope0. (sNext. (s. (HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T17_enabledAfterStep))))))}
+  ! {genEvents1. (scope1. (genEvents0. (scope0. (sNext. (s. (HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Off_T1_enabledAfterStep))))))}
+  ! {genEvents1. (scope1. (genEvents0. (scope0. (sNext. (s. (HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T16_enabledAfterStep))))))}
+  ! {genEvents1. (scope1. (genEvents0. (scope0. (sNext. (s. (HeatingSystem_ERROR_T19_enabledAfterStep))))))}
+  ! {genEvents1. (scope1. (genEvents0. (scope0. (sNext. (s. (HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T18_enabledAfterStep))))))}
+  ! {genEvents1. (scope1. (genEvents0. (scope0. (sNext. (s. (HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T14_enabledAfterStep))))))}
+  ! {genEvents1. (scope1. (genEvents0. (scope0. (sNext. (s. (HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T15_enabledAfterStep))))))}
+  ! {genEvents1. (scope1. (genEvents0. (scope0. (sNext. (s. (HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Activating_T2_enabledAfterStep))))))}
+  ! {genEvents1. (scope1. (genEvents0. (scope0. (sNext. (s. (HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_T15_enabledAfterStep))))))}
+  ! {genEvents1. (scope1. (genEvents0. (scope0. (sNext. (s. (HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T13_enabledAfterStep))))))}
+  ! {genEvents1. (scope1. (genEvents0. (scope0. (sNext. (s. (HeatingSystem_Functioning_Controller_On_Idle_T9_enabledAfterStep))))))}
+  ! {genEvents1. (scope1. (genEvents0. (scope0. (sNext. (s. (HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_heatRoom_enabledAfterStep))))))}
 }
 
 pred small_step[s : one Snapshot, sNext : one Snapshot] {

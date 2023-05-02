@@ -33,8 +33,8 @@ sig Snapshot {
 
 pred System_Process_Electing_ConsumeToken_pre[s : one Snapshot, pIdentifier : one Identifier] {
   { pIdentifier -> System/Process/Electing } in s. (conf1)
-  ! {System in scopesUsed0}
-  ! {{ pIdentifier -> System/Process } in scopesUsed1}
+  ! {System in s. (scopesUsed0)}
+  ! {{ pIdentifier -> System/Process } in s. (scopesUsed1)}
 }
 
 
@@ -50,8 +50,14 @@ pred System_Process_Electing_ConsumeToken_post[s : one Snapshot, sNext : one Sna
 )
 }
 
-pred System_Process_Electing_ConsumeToken_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred System_Process_Electing_ConsumeToken_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pIdentifier : one Identifier, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pIdentifier -> System/Process/Electing } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {System in scope0} and
+    ! {{ pIdentifier -> System/Process } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred System_Process_Electing_ConsumeToken[s : one Snapshot, sNext : one Snapshot, pIdentifier : one Identifier] {
@@ -61,8 +67,8 @@ pred System_Process_Electing_ConsumeToken[s : one Snapshot, sNext : one Snapshot
 
 pred System_Process_Electing_PassToken_pre[s : one Snapshot, pIdentifier : one Identifier] {
   { pIdentifier -> System/Process/Electing } in s. (conf1)
-  ! {System in scopesUsed0}
-  ! {{ pIdentifier -> System/Process } in scopesUsed1}
+  ! {System in s. (scopesUsed0)}
+  ! {{ pIdentifier -> System/Process } in s. (scopesUsed1)}
 }
 
 
@@ -78,8 +84,14 @@ pred System_Process_Electing_PassToken_post[s : one Snapshot, sNext : one Snapsh
 )
 }
 
-pred System_Process_Electing_PassToken_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred System_Process_Electing_PassToken_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pIdentifier : one Identifier, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pIdentifier -> System/Process/Electing } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {System in scope0} and
+    ! {{ pIdentifier -> System/Process } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred System_Process_Electing_PassToken[s : one Snapshot, sNext : one Snapshot, pIdentifier : one Identifier] {
@@ -89,8 +101,8 @@ pred System_Process_Electing_PassToken[s : one Snapshot, sNext : one Snapshot, p
 
 pred System_Process_Electing_ElectLeader_pre[s : one Snapshot, pIdentifier : one Identifier] {
   { pIdentifier -> System/Process/Electing } in s. (conf1)
-  ! {System in scopesUsed0}
-  ! {{ pIdentifier -> System/Process } in scopesUsed1}
+  ! {System in s. (scopesUsed0)}
+  ! {{ pIdentifier -> System/Process } in s. (scopesUsed1)}
 }
 
 
@@ -106,8 +118,14 @@ pred System_Process_Electing_ElectLeader_post[s : one Snapshot, sNext : one Snap
 )
 }
 
-pred System_Process_Electing_ElectLeader_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred System_Process_Electing_ElectLeader_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pIdentifier : one Identifier, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pIdentifier -> System/Process/Electing } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {System in scope0} and
+    ! {{ pIdentifier -> System/Process } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred System_Process_Electing_ElectLeader[s : one Snapshot, sNext : one Snapshot, pIdentifier : one Identifier] {
@@ -115,10 +133,10 @@ pred System_Process_Electing_ElectLeader[s : one Snapshot, sNext : one Snapshot,
   pIdentifier. (sNext. (s. (System_Process_Electing_ElectLeader_post)))
 }
 
-pred testIfNextStable[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (System_Process_Electing_ConsumeToken_enabledAfterStep))))}
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (System_Process_Electing_PassToken_enabledAfterStep))))}
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (System_Process_Electing_ElectLeader_enabledAfterStep))))}
+pred testIfNextStable[s : one Snapshot, sNext : one Snapshot, scope0 : one AllEvents, scope1 : one AllEvents] {
+  ! {scope1. (scope0. (sNext. (s. (System_Process_Electing_ConsumeToken_enabledAfterStep))))}
+  ! {scope1. (scope0. (sNext. (s. (System_Process_Electing_PassToken_enabledAfterStep))))}
+  ! {scope1. (scope0. (sNext. (s. (System_Process_Electing_ElectLeader_enabledAfterStep))))}
 }
 
 pred small_step[s : one Snapshot, sNext : one Snapshot] {

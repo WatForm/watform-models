@@ -54,8 +54,8 @@ sig Snapshot {
 
 pred Carousel_Client_Waiting_FinalizeCommit_pre[s : one Snapshot, pClientID : one ClientID] {
   { pClientID -> Carousel/Client/Waiting } in s. (conf1)
-  ! {Carousel in scopesUsed0}
-  ! {{ pClientID -> Carousel/Client } in scopesUsed1}
+  ! {Carousel in s. (scopesUsed0)}
+  ! {{ pClientID -> Carousel/Client } in s. (scopesUsed1)}
 }
 
 
@@ -71,8 +71,14 @@ pred Carousel_Client_Waiting_FinalizeCommit_post[s : one Snapshot, sNext : one S
 )
 }
 
-pred Carousel_Client_Waiting_FinalizeCommit_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred Carousel_Client_Waiting_FinalizeCommit_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pClientID : one ClientID, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pClientID -> Carousel/Client/Waiting } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {Carousel in scope0} and
+    ! {{ pClientID -> Carousel/Client } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred Carousel_Client_Waiting_FinalizeCommit[s : one Snapshot, sNext : one Snapshot, pClientID : one ClientID] {
@@ -82,8 +88,8 @@ pred Carousel_Client_Waiting_FinalizeCommit[s : one Snapshot, sNext : one Snapsh
 
 pred Carousel_PartitionLeader_Abort_AbortTransaction_pre[s : one Snapshot, pPartLdrID : one PartLdrID] {
   { pPartLdrID -> Carousel/PartitionLeader/Abort } in s. (conf1)
-  ! {Carousel in scopesUsed0}
-  ! {{ pPartLdrID -> Carousel/PartitionLeader } in scopesUsed1}
+  ! {Carousel in s. (scopesUsed0)}
+  ! {{ pPartLdrID -> Carousel/PartitionLeader } in s. (scopesUsed1)}
 }
 
 
@@ -99,8 +105,14 @@ pred Carousel_PartitionLeader_Abort_AbortTransaction_post[s : one Snapshot, sNex
 )
 }
 
-pred Carousel_PartitionLeader_Abort_AbortTransaction_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred Carousel_PartitionLeader_Abort_AbortTransaction_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pPartLdrID : one PartLdrID, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pPartLdrID -> Carousel/PartitionLeader/Abort } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {Carousel in scope0} and
+    ! {{ pPartLdrID -> Carousel/PartitionLeader } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred Carousel_PartitionLeader_Abort_AbortTransaction[s : one Snapshot, sNext : one Snapshot, pPartLdrID : one PartLdrID] {
@@ -110,8 +122,8 @@ pred Carousel_PartitionLeader_Abort_AbortTransaction[s : one Snapshot, sNext : o
 
 pred Carousel_Client_Reading_ReadAndPrepare_pre[s : one Snapshot, pClientID : one ClientID] {
   { pClientID -> Carousel/Client/Reading } in s. (conf1)
-  ! {Carousel in scopesUsed0}
-  ! {{ pClientID -> Carousel/Client } in scopesUsed1}
+  ! {Carousel in s. (scopesUsed0)}
+  ! {{ pClientID -> Carousel/Client } in s. (scopesUsed1)}
 }
 
 
@@ -127,8 +139,14 @@ pred Carousel_Client_Reading_ReadAndPrepare_post[s : one Snapshot, sNext : one S
 )
 }
 
-pred Carousel_Client_Reading_ReadAndPrepare_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred Carousel_Client_Reading_ReadAndPrepare_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pClientID : one ClientID, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pClientID -> Carousel/Client/Reading } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {Carousel in scope0} and
+    ! {{ pClientID -> Carousel/Client } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred Carousel_Client_Reading_ReadAndPrepare[s : one Snapshot, sNext : one Snapshot, pClientID : one ClientID] {
@@ -138,8 +156,8 @@ pred Carousel_Client_Reading_ReadAndPrepare[s : one Snapshot, sNext : one Snapsh
 
 pred Carousel_Coordinator_WaitForResponse_StartAbort_pre[s : one Snapshot, pCoordinatorID : one CoordinatorID] {
   { pCoordinatorID -> Carousel/Coordinator/WaitForResponse } in s. (conf1)
-  ! {Carousel in scopesUsed0}
-  ! {{ pCoordinatorID -> Carousel/Coordinator } in scopesUsed1}
+  ! {Carousel in s. (scopesUsed0)}
+  ! {{ pCoordinatorID -> Carousel/Coordinator } in s. (scopesUsed1)}
 }
 
 
@@ -155,8 +173,14 @@ pred Carousel_Coordinator_WaitForResponse_StartAbort_post[s : one Snapshot, sNex
 )
 }
 
-pred Carousel_Coordinator_WaitForResponse_StartAbort_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred Carousel_Coordinator_WaitForResponse_StartAbort_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pCoordinatorID : one CoordinatorID, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pCoordinatorID -> Carousel/Coordinator/WaitForResponse } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {Carousel in scope0} and
+    ! {{ pCoordinatorID -> Carousel/Coordinator } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred Carousel_Coordinator_WaitForResponse_StartAbort[s : one Snapshot, sNext : one Snapshot, pCoordinatorID : one CoordinatorID] {
@@ -166,8 +190,8 @@ pred Carousel_Coordinator_WaitForResponse_StartAbort[s : one Snapshot, sNext : o
 
 pred Carousel_PartitionLeader_Waiting_PrepareCommit_pre[s : one Snapshot, pPartLdrID : one PartLdrID] {
   { pPartLdrID -> Carousel/PartitionLeader/Waiting } in s. (conf1)
-  ! {Carousel in scopesUsed0}
-  ! {{ pPartLdrID -> Carousel/PartitionLeader } in scopesUsed1}
+  ! {Carousel in s. (scopesUsed0)}
+  ! {{ pPartLdrID -> Carousel/PartitionLeader } in s. (scopesUsed1)}
 }
 
 
@@ -183,8 +207,14 @@ pred Carousel_PartitionLeader_Waiting_PrepareCommit_post[s : one Snapshot, sNext
 )
 }
 
-pred Carousel_PartitionLeader_Waiting_PrepareCommit_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred Carousel_PartitionLeader_Waiting_PrepareCommit_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pPartLdrID : one PartLdrID, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pPartLdrID -> Carousel/PartitionLeader/Waiting } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {Carousel in scope0} and
+    ! {{ pPartLdrID -> Carousel/PartitionLeader } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred Carousel_PartitionLeader_Waiting_PrepareCommit[s : one Snapshot, sNext : one Snapshot, pPartLdrID : one PartLdrID] {
@@ -194,8 +224,8 @@ pred Carousel_PartitionLeader_Waiting_PrepareCommit[s : one Snapshot, sNext : on
 
 pred Carousel_Coordinator_WaitForResponse_StartCommit_pre[s : one Snapshot, pCoordinatorID : one CoordinatorID] {
   { pCoordinatorID -> Carousel/Coordinator/WaitForResponse } in s. (conf1)
-  ! {Carousel in scopesUsed0}
-  ! {{ pCoordinatorID -> Carousel/Coordinator } in scopesUsed1}
+  ! {Carousel in s. (scopesUsed0)}
+  ! {{ pCoordinatorID -> Carousel/Coordinator } in s. (scopesUsed1)}
 }
 
 
@@ -211,8 +241,14 @@ pred Carousel_Coordinator_WaitForResponse_StartCommit_post[s : one Snapshot, sNe
 )
 }
 
-pred Carousel_Coordinator_WaitForResponse_StartCommit_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred Carousel_Coordinator_WaitForResponse_StartCommit_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pCoordinatorID : one CoordinatorID, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pCoordinatorID -> Carousel/Coordinator/WaitForResponse } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {Carousel in scope0} and
+    ! {{ pCoordinatorID -> Carousel/Coordinator } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred Carousel_Coordinator_WaitForResponse_StartCommit[s : one Snapshot, sNext : one Snapshot, pCoordinatorID : one CoordinatorID] {
@@ -222,8 +258,8 @@ pred Carousel_Coordinator_WaitForResponse_StartCommit[s : one Snapshot, sNext : 
 
 pred Carousel_Client_Waiting_FinalizeAbort_pre[s : one Snapshot, pClientID : one ClientID] {
   { pClientID -> Carousel/Client/Waiting } in s. (conf1)
-  ! {Carousel in scopesUsed0}
-  ! {{ pClientID -> Carousel/Client } in scopesUsed1}
+  ! {Carousel in s. (scopesUsed0)}
+  ! {{ pClientID -> Carousel/Client } in s. (scopesUsed1)}
 }
 
 
@@ -239,8 +275,14 @@ pred Carousel_Client_Waiting_FinalizeAbort_post[s : one Snapshot, sNext : one Sn
 )
 }
 
-pred Carousel_Client_Waiting_FinalizeAbort_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred Carousel_Client_Waiting_FinalizeAbort_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pClientID : one ClientID, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pClientID -> Carousel/Client/Waiting } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {Carousel in scope0} and
+    ! {{ pClientID -> Carousel/Client } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred Carousel_Client_Waiting_FinalizeAbort[s : one Snapshot, sNext : one Snapshot, pClientID : one ClientID] {
@@ -250,8 +292,8 @@ pred Carousel_Client_Waiting_FinalizeAbort[s : one Snapshot, sNext : one Snapsho
 
 pred Carousel_PartitionLeader_Waiting_FinalizeCommit_pre[s : one Snapshot, pPartLdrID : one PartLdrID] {
   { pPartLdrID -> Carousel/PartitionLeader/Waiting } in s. (conf1)
-  ! {Carousel in scopesUsed0}
-  ! {{ pPartLdrID -> Carousel/PartitionLeader } in scopesUsed1}
+  ! {Carousel in s. (scopesUsed0)}
+  ! {{ pPartLdrID -> Carousel/PartitionLeader } in s. (scopesUsed1)}
 }
 
 
@@ -267,8 +309,14 @@ pred Carousel_PartitionLeader_Waiting_FinalizeCommit_post[s : one Snapshot, sNex
 )
 }
 
-pred Carousel_PartitionLeader_Waiting_FinalizeCommit_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred Carousel_PartitionLeader_Waiting_FinalizeCommit_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pPartLdrID : one PartLdrID, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pPartLdrID -> Carousel/PartitionLeader/Waiting } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {Carousel in scope0} and
+    ! {{ pPartLdrID -> Carousel/PartitionLeader } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred Carousel_PartitionLeader_Waiting_FinalizeCommit[s : one Snapshot, sNext : one Snapshot, pPartLdrID : one PartLdrID] {
@@ -278,8 +326,8 @@ pred Carousel_PartitionLeader_Waiting_FinalizeCommit[s : one Snapshot, sNext : o
 
 pred Carousel_PartitionLeader_Waiting_PrepareAbort_pre[s : one Snapshot, pPartLdrID : one PartLdrID] {
   { pPartLdrID -> Carousel/PartitionLeader/Waiting } in s. (conf1)
-  ! {Carousel in scopesUsed0}
-  ! {{ pPartLdrID -> Carousel/PartitionLeader } in scopesUsed1}
+  ! {Carousel in s. (scopesUsed0)}
+  ! {{ pPartLdrID -> Carousel/PartitionLeader } in s. (scopesUsed1)}
 }
 
 
@@ -295,8 +343,14 @@ pred Carousel_PartitionLeader_Waiting_PrepareAbort_post[s : one Snapshot, sNext 
 )
 }
 
-pred Carousel_PartitionLeader_Waiting_PrepareAbort_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred Carousel_PartitionLeader_Waiting_PrepareAbort_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pPartLdrID : one PartLdrID, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pPartLdrID -> Carousel/PartitionLeader/Waiting } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {Carousel in scope0} and
+    ! {{ pPartLdrID -> Carousel/PartitionLeader } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred Carousel_PartitionLeader_Waiting_PrepareAbort[s : one Snapshot, sNext : one Snapshot, pPartLdrID : one PartLdrID] {
@@ -306,8 +360,8 @@ pred Carousel_PartitionLeader_Waiting_PrepareAbort[s : one Snapshot, sNext : one
 
 pred Carousel_Coordinator_Replicate_Replicating_pre[s : one Snapshot, pCoordinatorID : one CoordinatorID] {
   { pCoordinatorID -> Carousel/Coordinator/Replicate } in s. (conf1)
-  ! {Carousel in scopesUsed0}
-  ! {{ pCoordinatorID -> Carousel/Coordinator } in scopesUsed1}
+  ! {Carousel in s. (scopesUsed0)}
+  ! {{ pCoordinatorID -> Carousel/Coordinator } in s. (scopesUsed1)}
 }
 
 
@@ -323,8 +377,14 @@ pred Carousel_Coordinator_Replicate_Replicating_post[s : one Snapshot, sNext : o
 )
 }
 
-pred Carousel_Coordinator_Replicate_Replicating_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred Carousel_Coordinator_Replicate_Replicating_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pCoordinatorID : one CoordinatorID, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pCoordinatorID -> Carousel/Coordinator/Replicate } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {Carousel in scope0} and
+    ! {{ pCoordinatorID -> Carousel/Coordinator } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred Carousel_Coordinator_Replicate_Replicating[s : one Snapshot, sNext : one Snapshot, pCoordinatorID : one CoordinatorID] {
@@ -334,8 +394,8 @@ pred Carousel_Coordinator_Replicate_Replicating[s : one Snapshot, sNext : one Sn
 
 pred Carousel_PartitionLeader_Commit_CommitTransaction_pre[s : one Snapshot, pPartLdrID : one PartLdrID] {
   { pPartLdrID -> Carousel/PartitionLeader/Commit } in s. (conf1)
-  ! {Carousel in scopesUsed0}
-  ! {{ pPartLdrID -> Carousel/PartitionLeader } in scopesUsed1}
+  ! {Carousel in s. (scopesUsed0)}
+  ! {{ pPartLdrID -> Carousel/PartitionLeader } in s. (scopesUsed1)}
 }
 
 
@@ -351,8 +411,14 @@ pred Carousel_PartitionLeader_Commit_CommitTransaction_post[s : one Snapshot, sN
 )
 }
 
-pred Carousel_PartitionLeader_Commit_CommitTransaction_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+pred Carousel_PartitionLeader_Commit_CommitTransaction_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, pPartLdrID : one PartLdrID, scope0 : one StateLabel, scope1 : one StateLabel] {
   { pPartLdrID -> Carousel/PartitionLeader/Commit } in sNext. (conf1)
+  (s. (stable) = boolean/True => 
+    ! {Carousel in scope0} and
+    ! {{ pPartLdrID -> Carousel/PartitionLeader } in scope1}
+ else {
+    boolean/True }
+)
 }
 
 pred Carousel_PartitionLeader_Commit_CommitTransaction[s : one Snapshot, sNext : one Snapshot, pPartLdrID : one PartLdrID] {
@@ -360,18 +426,18 @@ pred Carousel_PartitionLeader_Commit_CommitTransaction[s : one Snapshot, sNext :
   pPartLdrID. (sNext. (s. (Carousel_PartitionLeader_Commit_CommitTransaction_post)))
 }
 
-pred testIfNextStable[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (Carousel_Client_Waiting_FinalizeCommit_enabledAfterStep))))}
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (Carousel_PartitionLeader_Abort_AbortTransaction_enabledAfterStep))))}
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (Carousel_Client_Reading_ReadAndPrepare_enabledAfterStep))))}
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (Carousel_Coordinator_WaitForResponse_StartAbort_enabledAfterStep))))}
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (Carousel_PartitionLeader_Waiting_PrepareCommit_enabledAfterStep))))}
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (Carousel_Coordinator_WaitForResponse_StartCommit_enabledAfterStep))))}
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (Carousel_Client_Waiting_FinalizeAbort_enabledAfterStep))))}
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (Carousel_PartitionLeader_Waiting_FinalizeCommit_enabledAfterStep))))}
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (Carousel_PartitionLeader_Waiting_PrepareAbort_enabledAfterStep))))}
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (Carousel_Coordinator_Replicate_Replicating_enabledAfterStep))))}
-  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (Carousel_PartitionLeader_Commit_CommitTransaction_enabledAfterStep))))}
+pred testIfNextStable[s : one Snapshot, sNext : one Snapshot, scope0 : one AllEvents, scope1 : one AllEvents] {
+  ! {scope1. (scope0. (sNext. (s. (Carousel_Client_Waiting_FinalizeCommit_enabledAfterStep))))}
+  ! {scope1. (scope0. (sNext. (s. (Carousel_PartitionLeader_Abort_AbortTransaction_enabledAfterStep))))}
+  ! {scope1. (scope0. (sNext. (s. (Carousel_Client_Reading_ReadAndPrepare_enabledAfterStep))))}
+  ! {scope1. (scope0. (sNext. (s. (Carousel_Coordinator_WaitForResponse_StartAbort_enabledAfterStep))))}
+  ! {scope1. (scope0. (sNext. (s. (Carousel_PartitionLeader_Waiting_PrepareCommit_enabledAfterStep))))}
+  ! {scope1. (scope0. (sNext. (s. (Carousel_Coordinator_WaitForResponse_StartCommit_enabledAfterStep))))}
+  ! {scope1. (scope0. (sNext. (s. (Carousel_Client_Waiting_FinalizeAbort_enabledAfterStep))))}
+  ! {scope1. (scope0. (sNext. (s. (Carousel_PartitionLeader_Waiting_FinalizeCommit_enabledAfterStep))))}
+  ! {scope1. (scope0. (sNext. (s. (Carousel_PartitionLeader_Waiting_PrepareAbort_enabledAfterStep))))}
+  ! {scope1. (scope0. (sNext. (s. (Carousel_Coordinator_Replicate_Replicating_enabledAfterStep))))}
+  ! {scope1. (scope0. (sNext. (s. (Carousel_PartitionLeader_Commit_CommitTransaction_enabledAfterStep))))}
 }
 
 pred small_step[s : one Snapshot, sNext : one Snapshot] {
