@@ -1,4 +1,4 @@
 all:
 	./runallmodels.py
 clean:
-	\rm -rf */*.als
+	\rm -rf */*.als */*/*.als */*/*/*.als
