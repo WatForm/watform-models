@@ -1,0 +1,134 @@
+open util/traces[Level] as nodeLevel
+
+open util/boolean
+open util/ordering[Snapshot] as Snapshot
+
+sig Level {}
+
+assert noCycles {
+	(all s: Snapshot | all n: Node -  s.DistrubedTreeSpanning_root | n !in n.(^(~(s.DistrubedTreeSpanning_N_parent))))
+}
+
+assert topologyOverAllNodes {
+	some s: Snapshot | all n: Node | some n.(s.DistrubedTreeSpanning_N_level)
+}
+
+check noCycles for 9 Snapshot, exactly 4 Node, exactly 4 Level
+check noCycles for 11 Snapshot, exactly 5 Node, exactly 5 Level
+check noCycles for 13 Snapshot, exactly 6 Node, exactly 6 Level
+check topologyOverAllNodes for 9 Snapshot, exactly 4 Node, exactly 4 Level
+check topologyOverAllNodes for 11 Snapshot, exactly 5 Node, exactly 5 Level
+check topologyOverAllNodes for 13 Snapshot, exactly 6 Node, exactly 6 Level
+abstract sig StateLabel {}
+sig DistrubedTreeSpanning extends StateLabel {} 
+one sig DistrubedTreeSpanning_N extends DistrubedTreeSpanning {} 
+one sig DistrubedTreeSpanning_N_Unassigned extends DistrubedTreeSpanning_N {} 
+one sig DistrubedTreeSpanning_N_Assigned extends DistrubedTreeSpanning_N {} 
+
+abstract sig Identifiers {}
+sig Node extends Identifiers {} 
+
+sig Snapshot {
+  scopesUsed0 : set StateLabel,
+  conf0 : set StateLabel,
+  scopesUsed1 : Identifiers -> Identifiers -> StateLabel,
+  conf1 : Identifiers -> Identifiers -> StateLabel,
+  stable : one boolean/Bool
+}
+
+pred DistrubedTreeSpanning_N_Assigned_sendMessage_pre[s : one Snapshot, pNode : one Node] {
+  { pNode -> DistrubedTreeSpanning/N/Assigned } in s. (conf1)
+  ! {DistrubedTreeSpanning in scopesUsed0}
+  ! {{ pNode -> DistrubedTreeSpanning/N } in scopesUsed1}
+}
+
+
+pred DistrubedTreeSpanning_N_Assigned_sendMessage_post[s : one Snapshot, sNext : one Snapshot, pNode : one Node] {
+  sNext. (conf0) = s. (conf0)
+  sNext. (conf1) = { { s. (conf1) - { pNode -> DistrubedTreeSpanning/N/Assigned } } + { pNode -> DistrubedTreeSpanning/N/Assigned } }
+  (pNode -> DistrubedTreeSpanning/N. (none. (sNext. (s. (testIfNextStable)))) => 
+    sNext. (stable) = boolean/True and
+    (s. (stable) = boolean/True =>  boolean/True  else { boolean/True } )
+ else {
+    sNext. (stable) = boolean/False and
+    (s. (stable) = boolean/True =>  boolean/True  else { boolean/True } ) }
+)
+}
+
+pred DistrubedTreeSpanning_N_Assigned_sendMessage_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+  { pNode -> DistrubedTreeSpanning/N/Assigned } in sNext. (conf1)
+}
+
+pred DistrubedTreeSpanning_N_Assigned_sendMessage[s : one Snapshot, sNext : one Snapshot, pNode : one Node] {
+  pNode. (s. (DistrubedTreeSpanning_N_Assigned_sendMessage_pre))
+  pNode. (sNext. (s. (DistrubedTreeSpanning_N_Assigned_sendMessage_post)))
+}
+
+pred DistrubedTreeSpanning_N_Unassigned_RootAssign_pre[s : one Snapshot, pNode : one Node] {
+  { pNode -> DistrubedTreeSpanning/N/Unassigned } in s. (conf1)
+  ! {DistrubedTreeSpanning in scopesUsed0}
+  ! {{ pNode -> DistrubedTreeSpanning/N } in scopesUsed1}
+}
+
+
+pred DistrubedTreeSpanning_N_Unassigned_RootAssign_post[s : one Snapshot, sNext : one Snapshot, pNode : one Node] {
+  sNext. (conf0) = s. (conf0)
+  sNext. (conf1) = { { s. (conf1) - { pNode -> DistrubedTreeSpanning/N/Unassigned } - { pNode -> DistrubedTreeSpanning/N/Assigned } } + { pNode -> DistrubedTreeSpanning/N/Assigned } }
+  (pNode -> DistrubedTreeSpanning/N. (none. (sNext. (s. (testIfNextStable)))) => 
+    sNext. (stable) = boolean/True and
+    (s. (stable) = boolean/True =>  boolean/True  else { boolean/True } )
+ else {
+    sNext. (stable) = boolean/False and
+    (s. (stable) = boolean/True =>  boolean/True  else { boolean/True } ) }
+)
+}
+
+pred DistrubedTreeSpanning_N_Unassigned_RootAssign_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+  { pNode -> DistrubedTreeSpanning/N/Unassigned } in sNext. (conf1)
+}
+
+pred DistrubedTreeSpanning_N_Unassigned_RootAssign[s : one Snapshot, sNext : one Snapshot, pNode : one Node] {
+  pNode. (s. (DistrubedTreeSpanning_N_Unassigned_RootAssign_pre))
+  pNode. (sNext. (s. (DistrubedTreeSpanning_N_Unassigned_RootAssign_post)))
+}
+
+pred DistrubedTreeSpanning_N_Unassigned_NodeAssign_pre[s : one Snapshot, pNode : one Node] {
+  { pNode -> DistrubedTreeSpanning/N/Unassigned } in s. (conf1)
+  ! {DistrubedTreeSpanning in scopesUsed0}
+  ! {{ pNode -> DistrubedTreeSpanning/N } in scopesUsed1}
+}
+
+
+pred DistrubedTreeSpanning_N_Unassigned_NodeAssign_post[s : one Snapshot, sNext : one Snapshot, pNode : one Node] {
+  sNext. (conf0) = s. (conf0)
+  sNext. (conf1) = { { s. (conf1) - { pNode -> DistrubedTreeSpanning/N/Unassigned } - { pNode -> DistrubedTreeSpanning/N/Assigned } } + { pNode -> DistrubedTreeSpanning/N/Assigned } }
+  (pNode -> DistrubedTreeSpanning/N. (none. (sNext. (s. (testIfNextStable)))) => 
+    sNext. (stable) = boolean/True and
+    (s. (stable) = boolean/True =>  boolean/True  else { boolean/True } )
+ else {
+    sNext. (stable) = boolean/False and
+    (s. (stable) = boolean/True =>  boolean/True  else { boolean/True } ) }
+)
+}
+
+pred DistrubedTreeSpanning_N_Unassigned_NodeAssign_enabledAfterStep[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+  { pNode -> DistrubedTreeSpanning/N/Unassigned } in sNext. (conf1)
+}
+
+pred DistrubedTreeSpanning_N_Unassigned_NodeAssign[s : one Snapshot, sNext : one Snapshot, pNode : one Node] {
+  pNode. (s. (DistrubedTreeSpanning_N_Unassigned_NodeAssign_pre))
+  pNode. (sNext. (s. (DistrubedTreeSpanning_N_Unassigned_NodeAssign_post)))
+}
+
+pred testIfNextStable[s : one Snapshot, sNext : one Snapshot, scopesUsed0 : one StateLabel, scopesUsed1 : one StateLabel] {
+  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (DistrubedTreeSpanning_N_Assigned_sendMessage_enabledAfterStep))))}
+  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (DistrubedTreeSpanning_N_Unassigned_RootAssign_enabledAfterStep))))}
+  ! {scopesUsed1. (scopesUsed0. (sNext. (s. (DistrubedTreeSpanning_N_Unassigned_NodeAssign_enabledAfterStep))))}
+}
+
+pred small_step[s : one Snapshot, sNext : one Snapshot] {
+  (some pNode: one Node | { pNode. (sNext. (s. (DistrubedTreeSpanning_N_Assigned_sendMessage))) or
+    pNode. (sNext. (s. (DistrubedTreeSpanning_N_Unassigned_RootAssign))) or
+    pNode. (sNext. (s. (DistrubedTreeSpanning_N_Unassigned_NodeAssign))) })
+}
+

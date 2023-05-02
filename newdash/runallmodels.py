@@ -8,13 +8,14 @@
 # CONFIGURATION -----------------------------
 
 # set path toexecutable
-exe = "java  -jar /Users/nday/UW/github/org.alloytools.alloy/org.alloytools.alloy.dashbuild/target/org.alloytools.alloy.dashbuild.jar"
-options = "-m traces"
-ext = "-traces.dsh"
+exe = "java -cp /Users/nday/UW/github/org.alloytools.alloy/org.alloytools.alloy.dist/target/org.alloytools.alloy.dist.jar ca.uwaterloo.watform.dash4whole.Dash"
+options = "-t -m traces"
+#ext = "-tcmc.dsh"
+ext = ".dsh"
 
 # set path to tests to run
 # usually either whole archive or one year
-locn = "./2022-tamjid-thesis"
+locn = "./"
 
 # seconds
 uppertimethreshold = 200
@@ -46,7 +47,7 @@ if os.path.exists(myinputpath):
     # r=root, d=directories, f = files
     for r, d, f in os.walk(myinputpath):
         for file in f:
-            if file.endswith(ext):
+            if ext == "" or file.endswith(ext):
                 listoffiles.append(os.path.join(r, file))
     listoffiles.sort()
 else:
@@ -66,7 +67,7 @@ for filename in listoffiles:
             # output is the output stream from calling george on the file
             (output, err) = p.communicate(timeout=uppertimethreshold)
             rc = p.returncode
-            if rc != 0:
+            if rc != 0 and not(filename.endswith("-error.dsh")):
                 errlist.append(filename)
         except subprocess.TimeoutExpired:
             p.kill()
@@ -77,8 +78,9 @@ for filename in listoffiles:
         except Exception as ex:
             (output, err) = p.communicate()
             rc = p.returncode
-            errlist.append(file)
-            msg = "Exception"
+            if not(filename.endswith("-error.dsh")):
+                errlist.append(filename)
+                msg = "Exception"
     if not quiet:
         print(output)
         # print(err)  
@@ -88,7 +90,7 @@ for filename in listoffiles:
                 print(l)        
         print("Return code: " + str(rc))  
         if msg != "":
-            Print("Msg: "+ msg)
+            print("Msg: "+ msg)
     if errlist != 0 and stop_on_first_fail:
         break
             

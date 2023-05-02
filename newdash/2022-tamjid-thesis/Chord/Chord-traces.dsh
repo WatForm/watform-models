@@ -1,0 +1,225 @@
+open util/ordering[Node] as node
+
+abstract sig Status {}
+one sig Stabilizing, Rectifying extends Status{}
+
+pred between [n1, nb, n2: Node] {
+	     lt[n1,n2] =>   ( lt[n1,nb] && lt[nb,n2] )
+             else ( lt[n1,nb] || lt[nb,n2] )  }
+
+// Returns the first node if current node is the last Node in the ordering
+fun nextNode [n: Node] : lone Node  {
+	{m: Node | no node/next[n] implies m = node/first
+		else m = node/next[n]
+	}
+}
+
+// Returns the previous node in the ordering
+fun prevNode [n: Node] : lone Node  {
+	{m: Node | no node/prev[n] implies m = node/last
+		else m = node/prev[n]
+	}
+}
+
+state System {
+	members: Node
+
+	conc N [Node] {
+		frst: lone Node
+		scnd: lone Node
+		prdc: lone Node
+		status: Status
+		saved: lone Node
+
+		default state Live {
+			trans Fail {
+				when {
+					// We cannot fail if it would leave a member with no successors
+					all n: Node - this | some (members - this) & (N[n]/frst + N[n]/scnd)
+				}
+				do {
+					members' = members - this
+					frst' = {none}
+					scnd' = {none}
+					prdc' = {none}
+					status' = {none}
+				}
+				goto Failed
+			}
+
+			trans StabilizeFromSucc {
+				when {
+					no status
+				}
+				do {
+					// The Sucessor is dead
+					frst !in members implies {
+						frst' = scnd
+						scnd' = nextNode[scnd]
+						all n: Node | N[n]/status' = N[n]/status
+						all n: Node | N[n]/saved' = N[n]/saved
+					// The sucessor is a member
+					} else {
+						frst' = frst 
+						scnd' = N[frst]/frst
+						// The sucessor's predecessor is better
+						(some N[frst]/prdc and between[this, N[frst]/prdc, frst] and (N[frst]/prdc in members)) => {
+							status' = Stabilizing
+							saved' = N[frst]/prdc
+							all n: Node - this | N[n]/status' = N[n]/status
+							all n: Node - this | N[n]/saved' = N[n]/saved
+						} else (this !in N[frst]/prdc) => {
+							N[frst]/status' = Rectifying
+							N[frst]/saved' = this
+							all n: Node - frst | N[n]/status' = N[n]/status
+							all n: Node - frst | N[n]/saved' = N[n]/saved
+						} else {
+							all n: Node | N[n]/status' = N[n]/status
+							all n: Node | N[n]/saved' = N[n]/saved
+						}
+					}
+				}
+			}
+
+			trans StabilizeFromPrdc {
+				when {
+					this in members
+					status = Stabilizing
+					between[this, saved, frst]
+				}
+				do {
+					no status'
+					no saved'
+					// The Successor's Predecessor is dead
+					saved !in members implies {
+						frst' = frst
+						scnd' = scnd
+						all n: Node - this | N[n]/status' = N[n]/status
+						all n: Node - this | N[n]/saved' = N[n]/saved
+					// The Successor's Predecessor is a member
+					} else {
+						frst' = saved
+						scnd' = N[saved]/frst
+						N[saved]/status' = Rectifying
+						N[saved]/saved' = this
+						all n: Node - saved - this | N[n]/status' = N[n]/status
+						all n: Node - saved - this | N[n]/saved' = N[n]/saved
+					}
+				}
+			}
+
+			trans Rectify {
+				when {
+					this in members
+					status = Rectifying
+				}
+				do {
+					(between[prdc, saved, this] or prdc !in members or no prdc) => {prdc' = saved}
+					else {
+						prdc' = prdc
+					}
+				}
+			}
+
+			trans Flush {
+				when {
+					this in members
+					prdc !in members
+				}
+				do {
+					prdc' = {none}
+				}
+			}
+		}
+
+		state Failed {
+			trans Join {
+				when {
+					this !in members
+				}
+				do {
+					members' = members + this
+				}
+				goto Live
+			}
+		}
+
+		init {
+			no status
+			no saved
+			frst = nextNode[this]
+			scnd = nextNode[frst]
+			prdc = prevNode[this]
+		}
+	}
+
+	init {
+		// All Nodes are members initially
+		Node in members
+	}
+}
+
+
+fact alwaysThreeMembers {
+	all s: Snapshot | {#(s.System_members) >= 3}
+}
+
+/******************************************* FUNCTIONS FOR CHECKING PROPERTIES ******************************************/
+
+// Returns a tuple (Node, Node) where the second element is a Live successor of the first element
+fun succ [s: Snapshot] : Node -> Node {
+	{ m1, m2: s.System_members | m1.(s.System_N_frst) in s.System_members => (m2 = m1.(s.System_N_frst)) else (m2 = m1.(s.System_N_scnd)) }
+}
+
+// Returns the members that form a ring
+fun ring [s: Snapshot] : some Node { {m: s.System_members | m in m.^(succ[s])} }
+
+fun appendages[s: Snapshot] : set Node { s.System_members - ring[s]  }
+
+/******************************************* PROPERTIES ******************************************/
+
+// Members form atleast one ring
+pred atLeastOneRing [s: Snapshot] {
+	some ring[s]
+}
+
+// Members form atmost one ring
+pred atMostOneRing [s: Snapshot] {
+	(all m1, m2: ring[s] | m1 in m2.^(succ[s]))
+}
+
+// Members are ordered
+pred orderedRing[s: Snapshot] { 
+	all disj m1, m2, mb: ring[s] |
+		m2 = m1.^(succ[s]) implies not between[m1, mb, m2] 
+}
+
+// Member successors are ordered
+pred orderedSuccessors[s: Snapshot] {
+	(all m: s.System_members | between[m, m.(s.System_N_frst), m.(s.System_N_scnd)])
+}
+
+pred connectedAppendages[s: Snapshot] {
+	(all m1: appendages[s] | some m2: ring[s] | m2 in m1.^(succ[s]))
+}
+
+pred valid[s: Snapshot] {
+	atLeastOneRing[s]
+	atMostOneRing[s]
+	orderedSuccessors[s]
+	connectedAppendages[s]
+	orderedRing[s]
+}
+
+assert ideal {
+	(one s0: Snapshot | all nexts: nexts[s0] | {
+		((System_N_Failed_Join + System_N_Live_Fail) !in Identifiers.(nexts.taken1)) =>
+		some s1: nexts | {
+			valid[s1]
+			no appendages[s1]
+			(s1.System_N_frst) = ~(s1.System_N_prdc) }
+	})
+}
+
+check ideal for exactly 15 Snapshot, exactly 4 Node
+check ideal for exactly 15 Snapshot, exactly 5 Node

@@ -1,0 +1,213 @@
+/* The DigitalWatch case study - Dash model
+
+Copyright (c) 2018 Jose Serna <jserna@uwaterloo.ca>
+Copyright (c) 2018,2022 Nancy Day <nday@uwaterloo.ca>
+
+This file is part of the DigitalWatch Dash model.
+
+The DigitalWatch Dash model is free software: you can redistribute it
+and/or modify it under the terms of the GNU General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+The DigitalWatch Dash model is distributed in the hope that it will be
+useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with the DigitalWatch Dash model.  If not, see
+<https://www.gnu.org/licenses/>.
+
+
+The DigitalWatch case study is described
+in~\cite{DBLP:journals/scp/Harel87} by Harel.  The DigitalWatch Dash
+model is an adaptation of the original model(s) presented there.
+
+@Article{DBLP:journals/scp/Harel87,
+  author    = {David Harel},
+  title     = {Statecharts: {A} Visual Formalism for Complex Systems},
+  year      = 1987,
+  volume    = 8,
+  number    = 3,
+  pages     = {231-274},
+  doi       = {10.1016/0167-6423(87)90035-9},
+  url       = {https://doi.org/10.1016/0167-6423(87)90035-9},
+  journal   = {Sci. Comput. Program.},
+  timestamp = {Wed, 14 Nov 2018 10:21:28 +0100},
+  biburl    = {https://dblp.org/rec/bib/journals/scp/Harel87},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+This model has appeared in the following publications:
+
+@inproceedings{DBLP:conf/re/AbbassiBDS18,
+  author    = {Ali Abbassi and
+               Amin Bandali and
+               Nancy A. Day and
+               Jos{\'{e}} Serna},
+  editor    = {Ana Moreira and
+               Gunter Mussbacher and
+               Jo{\~{a}}o Ara{\'{u}}jo and
+               Pablo S{\'{a}}nchez},
+  title     = {A Comparison of the Declarative Modelling Languages B, Dash, and {TLA+}},
+  booktitle = {8th {IEEE} International Model-Driven Requirements Engineering Workshop,
+               MoDRE@RE 2018, Banff, AB, Canada, August 20, 2018},
+  pages     = {11--20},
+  publisher = {{IEEE} Computer Society},
+  year      = {2018},
+  url       = {https://doi.org/10.1109/MoDRE.2018.00008},
+  doi       = {10.1109/MoDRE.2018.00008},
+  timestamp = {Wed, 16 Oct 2019 14:14:56 +0200},
+  biburl    = {https://dblp.org/rec/conf/re/AbbassiBDS18.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@mastersthesis{bandali2020,
+  type      = {{MMath} thesis},
+  author    = {Amin Bandali},
+  title     = {{A Comprehensive Study of Declarative Modelling Languages}},
+  school    = "University of Waterloo, David R. Cheriton School of Computer Science",
+  year      = 2020,
+  month     = {July},
+  publisher = "UWSpace",
+  url       = {http://hdl.handle.net/10012/16059},
+  note      = {\url{http://hdl.handle.net/10012/16059} and
+                  \url{https://bndl.org/mmath}},
+  pdf       = {https://p.bndl.org/bandali-mmath-thesis.pdf}
+}
+
+*/
+
+ state DigitalWatch {
+    event press_a {}
+    event release_a {}
+    event press_b {}
+    event release_b {}
+    event press_c {}
+    event release_c {}
+    event press_d {}
+    event release_d {}
+
+    conc Light {
+        default state Off {
+            trans light_on {
+                on press_b
+                goto On
+            }
+        }
+
+        state On {
+            trans light_off {
+                on release_b
+                goto Off
+            }
+        }
+    }
+
+    conc Main {
+        default state Displays {
+            default state Time {
+                trans show_date {
+                    on press_d
+                    goto Date
+                }
+
+                trans try_update {
+                    on press_c
+                    goto Wait
+                }
+
+                trans go2alarm1 {
+                    on press_a
+                    goto Alarm1
+                }
+            }
+
+           state Date {
+                event waited_2_min {}
+                trans show_time {
+                    on press_d
+                    goto Time
+                }
+
+                trans return_to_time {
+                    on waited_2_min
+                    goto Time
+                }
+            }
+
+            state Wait {
+                event waited_2_sec {}
+                trans show_time {
+                    on release_c
+                    goto Time
+                }
+
+                trans show_update {
+                    on waited_2_sec
+                    goto Update
+                }
+            }
+
+            state Update {
+                trans show_time {
+                    on press_b
+                    goto Time
+                }
+            }
+
+            state Alarm1 {
+                trans go2alarm2 {
+                    on press_a
+                    goto Alarm2
+                }
+            }
+
+            state Alarm2 {
+                trans go2chime {
+                    on press_a
+                    goto Chime
+                }
+            }
+
+            state Chime {
+                trans go2Stopwatch {
+                    on press_a
+                    goto StopWatch
+                }
+            }
+
+            state StopWatch {
+                trans go2Time {
+                    on press_a
+                    goto Time
+                }
+            }
+        }
+
+        state Alarms_Beep {
+
+        }
+    }
+ }
+
+
+// Significant model is 10 snapshots
+
+// *********************** Eventually time ************************//
+
+// remember to set Option in Alloy to use TCMC
+
+pred eventually_time {
+    ctl_mc[
+        ag[
+            imp_[{ s : Snapshot | DigitalWatch_press_a in s.events0},
+                ef[ex[{s: Snapshot | DigitalWatch_Main_Displays_Time in s.conf0 }]]
+            ]
+        ]
+    ]
+}
+
+check eventually_time for 10 Snapshot expect 0
+

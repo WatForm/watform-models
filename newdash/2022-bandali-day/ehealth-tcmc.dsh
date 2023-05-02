@@ -1,0 +1,167 @@
+/* The EHealth case study - Dash model
+
+Copyright (c) 2018 Jose Serna <jserna@uwaterloo.ca>
+Copyright (c) 2018,2022 Nancy Day <nday@uwaterloo.ca>
+
+This file is part of the EHealth Dash model.
+
+The EHealth Dash model is free software: you can redistribute it
+and/or modify it under the terms of the GNU General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+The EHealth Dash model is distributed in the hope that it will be
+useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with the EHealth Dash model.  If not, see
+<https://www.gnu.org/licenses/>.
+
+
+The EHealth case study is described in Prof. Jonathan S. Ostroff's
+technical report~\cite{ostroff2017} and used for teaching EECS 4312,
+the Software Engineering Requirements course, at York University,
+Toronto, Canada.
+
+@techreport{ostroff2017,
+  author      = {Jonathan S. Ostroff},
+  title       = {Validating Software via Abstract State Specifications},
+  year        = {2017},
+  number      = {EECS-2017-02},
+  institution = {York University},
+  url         = {http://www.eecs.yorku.ca/research/techreports/2017/?abstract=EECS-2017-02}
+}
+
+The EHealth Dash model is an adaptation of the TLA+ one by Bandali,
+itself based on the snippets presented by
+Prof. Ostroff~\cite{ostroff2017}.
+
+This model has appeared in the following publications:
+
+@inproceedings{DBLP:conf/re/AbbassiBDS18,
+  author    = {Ali Abbassi and
+               Amin Bandali and
+               Nancy A. Day and
+               Jos{\'{e}} Serna},
+  editor    = {Ana Moreira and
+               Gunter Mussbacher and
+               Jo{\~{a}}o Ara{\'{u}}jo and
+               Pablo S{\'{a}}nchez},
+  title     = {A Comparison of the Declarative Modelling Languages B, Dash, and {TLA+}},
+  booktitle = {8th {IEEE} International Model-Driven Requirements Engineering Workshop,
+               MoDRE@RE 2018, Banff, AB, Canada, August 20, 2018},
+  pages     = {11--20},
+  publisher = {{IEEE} Computer Society},
+  year      = {2018},
+  url       = {https://doi.org/10.1109/MoDRE.2018.00008},
+  doi       = {10.1109/MoDRE.2018.00008},
+  timestamp = {Wed, 16 Oct 2019 14:14:56 +0200},
+  biburl    = {https://dblp.org/rec/conf/re/AbbassiBDS18.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@mastersthesis{bandali2020,
+  type      = {{MMath} thesis},
+  author    = {Amin Bandali},
+  title     = {{A Comprehensive Study of Declarative Modelling Languages}},
+  school    = "University of Waterloo, David R. Cheriton School of Computer Science",
+  year      = 2020,
+  month     = {July},
+  publisher = "UWSpace",
+  url       = {http://hdl.handle.net/10012/16059},
+  note      = {\url{http://hdl.handle.net/10012/16059} and
+                  \url{https://bndl.org/mmath}},
+  pdf       = {https://p.bndl.org/bandali-mmath-thesis.pdf}
+}
+
+*/
+
+ sig Patient {}
+ sig Medication {}
+
+state EHealthSystem {
+    env in_p: lone Patient
+    env in_m1, in_m2: lone Medication
+    medications: set Medication
+    patients: set Patient
+    prescriptions: Patient -> set Medication
+    interactions: Medication -> set Medication
+
+    invariant symmetry {
+        all m1, m2: Medication |
+            m1 -> m2  in interactions iff m2 -> m1 in interactions
+    }
+
+    invariant no_self_interaction {
+        all m: medications | not (m -> m in interactions)
+    }
+
+    invariant safe_prescriptions {
+        all m1, m2: medications, p: patients |
+            m1 -> m2 in interactions =>
+                !((p -> m1 in prescriptions) and (p -> m2 in prescriptions))
+    }
+
+    trans add_patient {
+        when !(in_p in patients)
+        do patients' = patients + in_p
+    }
+
+    trans add_medication {
+        when !(in_m1 in medications)
+        do medications' = medications + in_m1
+    }
+
+    trans add_interaction {
+        when {
+            in_m1 != in_m2 
+            (!(in_m1 -> in_m2 in interactions) and !(in_m2 -> in_m1 in interactions))
+            in_m1 in medications
+            in_m2 in medications
+        }
+        do interactions' = interactions + {in_m1->in_m2 + in_m2->in_m1}
+    }
+
+    trans add_prescription {
+        when {
+                in_p in patients
+                !(in_p->in_m1 in prescriptions)
+                all x: in_p.prescriptions| 
+                    !(in_m1->x in interactions)
+            }
+        do prescriptions' = prescriptions + in_p->in_m1
+    }
+
+    trans remove_interaction {
+        when {
+            in_m1 in medications
+            in_m2 in medications
+            in_m1 -> in_m2 in interactions
+        }
+        do interactions' = interactions - {in_m1->in_m2 + in_m2->in_m1}
+    }
+
+    trans remove_prescription {
+        when {
+            in_p in patients
+            in_m1 in medications
+            in_p->in_m1 in prescriptions
+        }
+        do prescriptions' = prescriptions - in_p->in_m1
+    }
+
+    init {
+        no medications
+        no prescriptions
+        no patients
+        no interactions
+    }
+}
+
+
+// reachabilityFact is always included 
+
+run {} for exactly 8 Snapshot, 3 Patient, 4 Medication
+
