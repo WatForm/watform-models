@@ -23,7 +23,7 @@ state Counter {
 			on Tk0
 			when this in current
 			goto Bit1
-			send Tk1[P0/next[this]]
+			send Bit[P0/next[this]]/Tk1
 		}
 
 		trans nextBitToBit2 {

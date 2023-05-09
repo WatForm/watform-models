@@ -28,7 +28,7 @@ state Carousel {
 				do {
 					one t: transToSend, c: CoordinatorID | all leader: PartLdrID | {
 						txn' = t
-						Coordinator[c]/client' = this // Inform the coordinator of the client making the request
+						Coordinator[c]/client' = thisClientID // Inform the coordinator of the client making the request
 						no Coordinator[c]/currentTxn // It should not be managing another transaction
 						Coordinator[c]/currentTxn' = t // Inform coordinator of transaction
 
@@ -177,7 +177,7 @@ state Carousel {
 				do {
 					//Inform the coordinator the first pending transaction about the Prepare (Commit) decision
 					Coordinator[(pendingTxn.firstElem).coordinator]/coord_responses' = 
-						Coordinator[(pendingTxn.firstElem).coordinator]/coord_responses + (this -> Commit) 
+						Coordinator[(pendingTxn.firstElem).coordinator]/coord_responses + (thisPartLdrID -> Commit) 
 					all others: CoordinatorID - (pendingTxn.firstElem).coordinator | Coordinator[others]/coord_responses' = Coordinator[others]/coord_responses
 				}
 				goto Waiting
@@ -189,7 +189,7 @@ state Carousel {
 			trans AbortTransaction {
 				do {
 					currentTxn.removeFirst
-					Coordinator[currentTxn.firstElem.coordinator]/coord_responses' =  Coordinator[currentTxn.firstElem.coordinator]/coord_responses + (this -> Abort)
+					Coordinator[currentTxn.firstElem.coordinator]/coord_responses' =  Coordinator[currentTxn.firstElem.coordinator]/coord_responses + (thisPartLdrID -> Abort)
 					no response'
 					all others: CoordinatorID - (pendingTxn.firstElem).coordinator | Coordinator[others]/coord_responses' = Coordinator[others]/coord_responses
 				}
