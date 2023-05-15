@@ -1,0 +1,44 @@
+
+assert R11_bis {
+    ctl_mc[
+     ag[
+        imp_ctl[
+            ag[{s:Snapshot | LandingGear_handle = DOWN}],
+            af[{s:Snapshot | LandingGear_gears = EXTENDED and LandingGear_doors = CLOSED}]
+        ]
+     ]
+    ]        
+}
+
+assert R12_bis {
+    ctl_mc[
+     ag[
+        imp_ctl[
+            ag[{s:Snapshot | LandingGear_handle = UP}],
+            af[{s:Snapshot | LandingGear_gears = RETRACTED and LandingGear_doors = CLOSED}]
+        ]
+     ]
+    ]   
+}
+
+assert R21 {
+    ctl_mc[
+     ag[
+        imp_ctl[
+            ag[{s:Snapshot | LandingGear_handle = DOWN}],
+            ax[ag[{s:Snapshot | LandingGear_gears = RETRACTING}]]
+        ]
+     ]
+    ] 
+}
+
+assert R22 {
+    ctl_mc[
+     ag[
+        imp_ctl[
+            ag[{s:Snapshot | LandingGear_handle = UP}],
+            ax[ag[{s:Snapshot | LandingGear_gears != EXTENDING}]]
+        ]
+     ]
+    ] 
+}

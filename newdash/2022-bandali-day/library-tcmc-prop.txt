@@ -1,0 +1,79 @@
+
+// run operation for 8 Snapshot, 3 Patient, 4 Medication
+
+check assert_ltl_2 {
+    all s: Snapshot | pre_Library_Acquire[s] => not(s.Library_in_b in s.Library_books)
+} for 8 Snapshot, 3 MemberID, 3 BookID expect 0
+
+check assert_ltl_3 {
+    all s: Snapshot |
+        (s.Library_in_b in s.Library_books and pre_Library_Discard[s]) =>
+            (no (s.Library_in_b).(s.Library_loans) and
+             no (s.Library_in_b).(s.Library_reservations))
+} for 8 Snapshot,3 MemberID, 3 BookID expect 0
+
+check assert_ltl_4 {
+    all s: Snapshot | pre_Library_Lend[s] => s.Library_in_m in s.Library_members
+} for 8 Snapshot,3 MemberID, 3 BookID expect 0
+
+check assert_ltl_5 {
+    all s: Snapshot | pre_Library_Reserve[s] =>
+        ((no (s.Library_reservations).(s.Library_in_m)) and
+         not (s.Library_in_m in s.Library_loans[s.Library_in_b]) and
+         ((some ((s.Library_in_b).(s.Library_loans))) or
+          (no (s.Library_in_b).(s.Library_reservations))))
+} for 8 Snapshot, 3 MemberID, 3 BookID expect 0
+
+check assert_ltl_6 {
+    all s: Snapshot | pre_Library_Reserve[s] =>
+        not (s.Library_in_m in s.Library_loans[s.Library_in_b])
+} for 8 Snapshot, 0 EventLabel, 3 MemberID, 3 BookID expect 0
+
+check assert_ltl_7 {
+    all s: Snapshot | pre_Library_Reserve[s] =>
+        no ((s.Library_reservations).(s.Library_in_m))
+} for 8 Snapshot, 0 EventLabel, 3 MemberID, 3 BookID expect 0
+
+check assert_ltl_8 {
+    all s: Snapshot | (some ((s.Library_in_b).(s.Library_reservations)) =>
+        not(pre_Library_Lend[s]))
+} for 8 Snapshot, 0 EventLabel, 3 MemberID, 3 BookID expect 0
+
+check assert_ltl_9 {
+    all s: Snapshot | (some ((s.Library_in_b).(s.Library_reservations)) =>
+        not(pre_Library_Renew[s]))
+} for 8 Snapshot, 0 EventLabel, 3 MemberID, 3 BookID expect 0
+
+check assert_ltl_10 {
+    all s: Snapshot | pre_Library_Take[s] =>
+        ((some (s.Library_reservations[s.Library_in_b])) and
+         first[(s.Library_reservations[s.Library_in_b])] = s.Library_in_m)
+} for 8 Snapshot, 3 MemberID, 3 BookID expect 0
+
+check assert_ltl_11 {
+    all s: Snapshot {
+        all b: s.Library_books {
+            (some s.Library_loans[b]) =>
+                not(pre_Library_Take[s] and b = s.Library_in_b)
+        }
+        (pre_Library_Take[s] =>
+            (no s.Library_loans[s.Library_in_b]))
+    }
+} for 8 Snapshot, 3 MemberID, 3 BookID expect 0
+
+check assert_ltl_13 {
+    all s: Snapshot | pre_Library_Leave[s] =>
+        ((s.Library_in_m in s.Library_members) and
+         (no ((s.Library_loans).(s.Library_in_m))) and
+         (no ((s.Library_reservations).(s.Library_in_m))))
+} for 8 Snapshot, 3 MemberID, 3 BookID expect 0
+
+assert assert_ctl_14 {
+    ctl_mc[ag [{ s : Snapshot | ef [{s:Snapshot | s.Library_in_m not in s.Library_members}]}]]
+}
+check assert_ctl_14 for 8 Snapshot, 3 MemberID, 3 BookID expect 0
+
+check assert_ltl_15 {
+    all s: Snapshot, m: s.Library_members | #(s.Library_loans.m) <= Const.maxNbLoans
+} for 8 Snapshot,  3 MemberID, 3 BookID expect 0
+

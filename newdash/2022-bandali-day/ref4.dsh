@@ -82,6 +82,7 @@ TODO
 
 open util/boolean
 
+enum LandingSet {FRONT, LEFT, RIGHT}
 enum HandleStatus {UP, DOWN}
 enum DoorStatus {CLOSED, OPENING, OPEN, CLOSING}
 enum GearStatus {RETRACTED, EXTENDING, EXTENDED, RETRACTING}
@@ -113,10 +114,12 @@ pred close_door[d1, d2: DoorStatus,
         and odev2 = odev1
     }
     else d1 = CLOSING implies {
-        d2 = CLOSED
-        and gev2 = False
-        and cdev2 = False
-        and odev2 = odev1
+        doors_closed = True implies {
+            d2 = CLOSED
+            and gev2 = False
+            and cdev2 = False
+            and odev2 = odev1
+        }
     }
     else d1 = OPENING implies {
         d2 = CLOSING
@@ -124,6 +127,50 @@ pred close_door[d1, d2: DoorStatus,
         and cdev2 = True
         and odev2 = False
     }
+}
+
+pred gears_extended[] {
+    all s: LandingSet | LandingGear/f_gears_extended[s]
+}
+
+pred gears_retracted[] {
+    all s: LandingSet | LandingGear/f_gears_retracted[s]
+}
+
+pred doors_closed[] {
+    all s: LandingSet | LandingGear/f_doors_closed[s]
+}
+
+pred doors_open[] {
+    all s: LandingSet | LandingGear/f_doors_open[s]
+}
+
+pred a_gear_extended[] {
+    some s: LandingSet | LandingGear/f_gears_extended[s]
+}
+
+pred a_gear_retracted[] {
+    some s: LandingSet | LandingGear/f_gears_retracted[s]
+}
+
+pred a_door_closed[] {
+    some s: LandingSet | LandingGear/f_doors_closed[s]
+}
+
+pred a_door_open[] {
+    some s: LandingSet | LandingGear/f_doors_open[s]
+}
+
+pred green_light[] {
+    LandingGear/gears = EXTENDED
+}
+
+pred orange_light[] {
+    LandingGear/gears = EXTENDING or LandingGear/gears = RETRACTING
+}
+
+pred red_light[] {
+    LandingGear/anomaly
 }
 
 state LandingGear {
@@ -137,8 +184,25 @@ state LandingGear {
     retract_gears_electro_valve: one Bool
     extend_gears_electro_valve: one Bool
 
+    // === sensors ===
+    // gears_extended is true if the corresponding gear is locked in
+    // the extended position and false in other cases
+    env f_gears_extended: LandingSet one -> one Bool
+    // gears_retracted is true if the corresponding gear is locked in
+    // the retracted position and false in other cases
+    env f_gears_retracted: LandingSet one -> one Bool
+    // doors_closed is true if and only if the corresponding door is
+    // locked closed
+    env f_doors_closed: LandingSet one -> one Bool
+    // doors_open is true if and only if the corresponding door is
+    // locked open
+    env f_doors_open: LandingSet one -> one Bool
+
+    env timeout: one Bool
+    anomaly: one Bool
+
     trans retraction_sequence {
-        when handle = UP
+        when (not(anomaly) and handle = UP)
         do {
             gears != RETRACTED implies {
                 doors = CLOSED implies {
@@ -152,8 +216,10 @@ state LandingGear {
                     and open_doors_electro_valve' = True
                 }
                 else doors = OPENING implies {
-                    doors' = OPEN
-                    open_doors_electro_valve' = False
+                    doors_open = True implies {
+                        doors' = OPEN
+                        open_doors_electro_valve' = False
+                    }
                 }
                 else doors = OPEN implies {
                     gears = EXTENDED implies {
@@ -161,8 +227,10 @@ state LandingGear {
                         and retract_gears_electro_valve' = True
                     }
                     else gears = RETRACTING implies {
-                        gears' = RETRACTED
-                        and retract_gears_electro_valve' = False
+                        gears_retracted = True implies {
+                            gears' = RETRACTED
+                            and retract_gears_electro_valve' = False
+                        }
                     }
                     else gears = EXTENDING implies {
                         gears' = RETRACTING
@@ -182,7 +250,7 @@ state LandingGear {
     }
 
     trans outgoing_sequence {
-        when handle != UP
+        when (not(anomaly) and handle != UP)
         do {
             gears != EXTENDED implies {
                 doors = CLOSED implies {
@@ -191,8 +259,10 @@ state LandingGear {
                     and open_doors_electro_valve' = True
                 }
                 else doors = OPENING implies {
-                    doors' = OPEN
-                    and open_doors_electro_valve' = False
+                    doors_open = True implies {
+                        doors' = OPEN
+                        and open_doors_electro_valve' = False
+                    }
                 }
                 else doors = OPEN implies {
                     gears = RETRACTED implies {
@@ -200,8 +270,10 @@ state LandingGear {
                         and extend_gears_electro_valve' = True
                     }
                     else gears = EXTENDING implies {
-                        gears' = EXTENDED
-                        and extend_gears_electro_valve' = False
+                        gears_extended = True implies {
+                            gears' = EXTENDED
+                            and extend_gears_electro_valve' = False
+                        }
                     }
                     else gears = RETRACTING implies {
                         gears' = EXTENDING
@@ -217,6 +289,42 @@ state LandingGear {
                             close_doors_electro_valve',
                             open_doors_electro_valve,
                             open_doors_electro_valve']
+        }
+    }
+
+    trans health_monitoring {
+        do {
+            (open_doors_electro_valve = True
+             and a_door_closed
+             and timeout = True) implies anomaly' = True
+        
+            (open_doors_electro_valve = True
+             and not(doors_open)
+             and timeout = True) implies anomaly' = True
+
+            (close_doors_electro_valve = True
+             and a_door_open
+             and timeout = True) implies anomaly' = True
+
+            (close_doors_electro_valve = True
+             and not(doors_closed)
+             and timeout = True) implies anomaly' = True
+
+            (retract_gears_electro_valve = True
+             and a_gear_extended
+             and timeout = True) implies anomaly' = True
+        
+            (retract_gears_electro_valve = True
+             and not(gears_retracted)
+             and timeout = True) implies anomaly' = True
+
+            (extend_gears_electro_valve = True
+             and a_gear_retracted
+             and timeout = True) implies anomaly' = True
+
+            (extend_gears_electro_valve = True
+             and not(gears_extended)
+             and timeout = True) implies anomaly' = True
         }
     }
 
@@ -236,57 +344,6 @@ state LandingGear {
         close_doors_electro_valve = False
         retract_gears_electro_valve = False
         extend_gears_electro_valve = False
+        anomaly = False
     }
-}
-
-
-assert R11_bis {
-    ag[ag[imp_e[(LandingGear/handle = DOWN),
-        af[LandingGear/gears = EXTENDED and LandingGear/doors = CLOSED]]]]
-}
-
-assert R12_bis {
-    ag[ag[imp_e[(LandingGear/handle = UP),
-        af[LandingGear/gears = RETRACTED and LandingGear/doors = CLOSED]]]]
-}
-
-assert R21 {
-    ag[ag[imp_e[(LandingGear/handle = DOWN),
-        ax[ag[LandingGear/gears != RETRACTING]]]]]
-}
-
-assert R22 {
-    ag[ag[imp_e[(LandingGear/handle = UP),
-        ax[ag[LandingGear/gears != EXTENDING]]]]]
-}
-
-assert R31 {
-    ag[imp_e[(LandingGear/extend_gears_electro_valve = True
-        or LandingGear/retract_gears_electro_valve = True),
-            (LandingGear/doors = OPEN)]]
-}
-
-assert R32 {
-    ag[imp_[(LandingGear/open_doors_electro_valve = True
-        or LandingGear/close_doors_electro_valve = True),
-            (LandingGear/gears = RETRACTED
-                     or LandingGear/gears = EXTENDED)]]
-}
-
-assert R41 {
-    ag[not(LandingGear/open_doors_electro_valve = True
-           and LandingGear/close_doors_electro_valve = True)]
-}
-
-assert R42 {
-    ag[not(LandingGear/extend_gears_electro_valve = True
-           and LandingGear/retract_gears_electro_valve = True)]
-}
-
-assert R51 {
-    ag[imp_e[(LandingGear/open_doors_electro_valve = True
-        or LandingGear/close_doors_electro_valve = True
-        or LandingGear/extend_gears_electro_valve = True
-        or LandingGear/retract_gears_electro_valve = True),
-       (LandingGear/general_electro_valve = True)]]
 }

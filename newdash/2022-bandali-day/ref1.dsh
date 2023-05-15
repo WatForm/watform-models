@@ -82,7 +82,6 @@ TODO
 
 open util/boolean
 
-enum LandingSet {FRONT, LEFT, RIGHT}
 enum HandleStatus {UP, DOWN}
 enum DoorStatus {CLOSED, OPENING, OPEN, CLOSING}
 enum GearStatus {RETRACTED, EXTENDING, EXTENDED, RETRACTING}
@@ -114,12 +113,10 @@ pred close_door[d1, d2: DoorStatus,
         and odev2 = odev1
     }
     else d1 = CLOSING implies {
-        doors_closed = True implies {
-            d2 = CLOSED
-            and gev2 = False
-            and cdev2 = False
-            and odev2 = odev1
-        }
+        d2 = CLOSED
+        and gev2 = False
+        and cdev2 = False
+        and odev2 = odev1
     }
     else d1 = OPENING implies {
         d2 = CLOSING
@@ -127,22 +124,6 @@ pred close_door[d1, d2: DoorStatus,
         and cdev2 = True
         and odev2 = False
     }
-}
-
-pred gears_extended[] {
-    all s: LandingSet | LandingGear/f_gears_extended[s]
-}
-
-pred gears_retracted[] {
-    all s: LandingSet | LandingGear/f_gears_retracted[s]
-}
-
-pred doors_closed[] {
-    all s: LandingSet | LandingGear/f_doors_closed[s]
-}
-
-pred doors_open[] {
-    all s: LandingSet | LandingGear/f_doors_open[s]
 }
 
 state LandingGear {
@@ -155,20 +136,6 @@ state LandingGear {
     close_doors_electro_valve: one Bool
     retract_gears_electro_valve: one Bool
     extend_gears_electro_valve: one Bool
-
-    // === sensors ===
-    // gears_extended is true if the corresponding gear is locked in
-    // the extended position and false in other cases
-    env f_gears_extended: LandingSet one -> one Bool
-    // gears_retracted is true if the corresponding gear is locked in
-    // the retracted position and false in other cases
-    env f_gears_retracted: LandingSet one -> one Bool
-    // doors_closed is true if and only if the corresponding door is
-    // locked closed
-    env f_doors_closed: LandingSet one -> one Bool
-    // doors_open is true if and only if the corresponding door is
-    // locked open
-    env f_doors_open: LandingSet one -> one Bool
 
     trans retraction_sequence {
         when handle = UP
@@ -185,10 +152,8 @@ state LandingGear {
                     and open_doors_electro_valve' = True
                 }
                 else doors = OPENING implies {
-                    doors_open = True implies {
-                        doors' = OPEN
-                        open_doors_electro_valve' = False
-                    }
+                    doors' = OPEN
+                    open_doors_electro_valve' = False
                 }
                 else doors = OPEN implies {
                     gears = EXTENDED implies {
@@ -196,10 +161,8 @@ state LandingGear {
                         and retract_gears_electro_valve' = True
                     }
                     else gears = RETRACTING implies {
-                        gears_retracted = True implies {
-                            gears' = RETRACTED
-                            and retract_gears_electro_valve' = False
-                        }
+                        gears' = RETRACTED
+                        and retract_gears_electro_valve' = False
                     }
                     else gears = EXTENDING implies {
                         gears' = RETRACTING
@@ -228,10 +191,8 @@ state LandingGear {
                     and open_doors_electro_valve' = True
                 }
                 else doors = OPENING implies {
-                    doors_open = True implies {
-                        doors' = OPEN
-                        and open_doors_electro_valve' = False
-                    }
+                    doors' = OPEN
+                    and open_doors_electro_valve' = False
                 }
                 else doors = OPEN implies {
                     gears = RETRACTED implies {
@@ -239,10 +200,8 @@ state LandingGear {
                         and extend_gears_electro_valve' = True
                     }
                     else gears = EXTENDING implies {
-                        gears_extended = True implies {
-                            gears' = EXTENDED
-                            and extend_gears_electro_valve' = False
-                        }
+                        gears' = EXTENDED
+                        and extend_gears_electro_valve' = False
                     }
                     else gears = RETRACTING implies {
                         gears' = EXTENDING
@@ -280,54 +239,3 @@ state LandingGear {
     }
 }
 
-
-assert R11_bis {
-    ag[imp_[ag[LandingGear/handle = DOWN],
-        af[LandingGear/gears = EXTENDED and LandingGear/doors = CLOSED]]]
-}
-
-assert R12_bis {
-    ag[imp_[ag[LandingGear/handle = UP],
-        af[LandingGear/gears = RETRACTED and LandingGear/doors = CLOSED]]]
-}
-
-assert R21 {
-    ag[imp_[ag[LandingGear/handle = DOWN],
-        ax[ag[LandingGear/gears != RETRACTING]]]]
-}
-
-assert R22 {
-    ag[imp_[ag[LandingGear/handle = UP],
-        ax[ag[LandingGear/gears != EXTENDING]]]]
-}
-
-assert R31 {
-    ag[(LandingGear/extend_gears_electro_valve = True
-        or LandingGear/retract_gears_electro_valve = True)
-            implies LandingGear/doors = OPEN]
-}
-
-assert R32 {
-    ag[(LandingGear/open_doors_electro_valve = True
-        or LandingGear/close_doors_electro_valve = True)
-            implies (LandingGear/gears = RETRACTED
-                     or LandingGear/gears = EXTENDED)]
-}
-
-assert R41 {
-    ag[not(LandingGear/open_doors_electro_valve = True
-           and LandingGear/close_doors_electro_valve = True)]
-}
-
-assert R42 {
-    ag[not(LandingGear/extend_gears_electro_valve = True
-           and LandingGear/retract_gears_electro_valve = True)]
-}
-
-assert R51 {
-    ag[(LandingGear/open_doors_electro_valve = True
-        or LandingGear/close_doors_electro_valve = True
-        or LandingGear/extend_gears_electro_valve = True
-        or LandingGear/retract_gears_electro_valve = True)
-       implies LandingGear/general_electro_valve = True]
-}

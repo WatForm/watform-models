@@ -1,0 +1,109 @@
+
+// Jose's syntactic sugar had to be removed
+// inner "and" is okay b/c its propositional
+assert R11_bis {
+    ag[imp_e[ag[LandingGear/handle = DOWN],
+        af[LandingGear/gears = EXTENDED and LandingGear/doors = CLOSED]]]
+}
+
+assert R12_bis {
+    ag[imp_e[ag[LandingGear/handle = UP],
+        af[LandingGear/gears = RETRACTED and LandingGear/doors = CLOSED]]]
+}
+
+assert R21 {
+    ag[imp_e[ag[LandingGear/handle = DOWN],
+        ax[ag[LandingGear/gears != RETRACTING]]]]
+}
+
+assert R22 {
+    ag[imp_e[ag[LandingGear/handle = UP,
+        ax[ag[LandingGear/gears != EXTENDING]]]]]
+}
+
+assert R31 {
+    ag[imp_e[(LandingGear/extend_gears_electro_valve = True
+        or LandingGear/retract_gears_electro_valve = True),
+            LandingGear/doors = OPEN]]
+}
+
+assert R32 {
+    ag[imp_e[(LandingGear/open_doors_electro_valve = True
+        or LandingGear/close_doors_electro_valve = True),
+            (LandingGear/gears = RETRACTED
+                     or LandingGear/gears = EXTENDED)]]
+}
+
+assert R41 {
+    ag[not(LandingGear/open_doors_electro_valve = True
+           and LandingGear/close_doors_electro_valve = True)]
+}
+
+assert R42 {
+    ag[not(LandingGear/extend_gears_electro_valve = True
+           and LandingGear/retract_gears_electro_valve = True)]
+}
+
+assert R51 {
+    ag[imp_e[(LandingGear/open_doors_electro_valve = True
+        or LandingGear/close_doors_electro_valve = True
+        or LandingGear/extend_gears_electro_valve = True
+        or LandingGear/retract_gears_electro_valve = True),
+       LandingGear/general_electro_valve = True]]
+}
+
+assert R61 {
+    ag[imp_e[(LandingGear/open_doors_electro_valve = True
+        and a_door_closed
+        and LandingGear/timeout = True),
+       ax[ag[LandingGear/anomaly]]]]
+}
+
+assert R62 {
+    ag[imp_e[(LandingGear/close_doors_electro_valve = True
+        and a_door_open
+        and LandingGear/timeout = True),
+       ax[ag[LandingGear/anomaly]]]]
+}
+
+assert R63 {
+    ag[imp_e[(LandingGear/retract_gears_electro_valve = True
+        and a_gear_extended
+        and LandingGear/timeout = True),
+       ax[ag[LandingGear/anomaly]]]]
+}
+
+assert R64 {
+    ag[imp_e[(LandingGear/extend_gears_electro_valve = True
+        and a_gear_retracted
+        and LandingGear/timeout = True),
+       ax[ag[LandingGear/anomaly]]]]
+}
+
+assert R71 {
+    ag[imp_e[(LandingGear/open_doors_electro_valve = True
+        and not(doors_open)
+        and LandingGear/timeout = True),
+       ax[ag[LandingGear/anomaly]]]]
+}
+
+assert R72 {
+    ag[imp_e[(LandingGear/close_doors_electro_valve = True
+        and not(doors_closed)
+        and LandingGear/timeout = True),
+       ax[ag[LandingGear/anomaly]]]]
+}
+
+assert R73 {
+    ag[imp_e[(LandingGear/retract_gears_electro_valve = True
+        and not(gears_retracted)
+        and LandingGear/timeout = True),
+       ax[ag[LandingGear/anomaly]]]]
+}
+
+assert R74 {
+    ag[imp_e[(LandingGear/extend_gears_electro_valve = True
+        and not(gears_extended)
+        and LandingGear/timeout = True),
+       ax[ag[LandingGear/anomaly]]]]
+}

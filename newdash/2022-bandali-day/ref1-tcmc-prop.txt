@@ -1,0 +1,51 @@
+
+assert R11_bis {
+    ag[ag[imp_e[(LandingGear/handle = DOWN),
+        af[LandingGear/gears = EXTENDED and LandingGear/doors = CLOSED]]]]
+}
+
+assert R12_bis {
+    ag[ag[imp_e[(LandingGear/handle = UP),
+        af[LandingGear/gears = RETRACTED and LandingGear/doors = CLOSED]]]]
+}
+
+assert R21 {
+    ag[ag[imp_e[(LandingGear/handle = DOWN),
+        ax[ag[LandingGear/gears != RETRACTING]]]]]
+}
+
+assert R22 {
+    ag[ag[imp_e[(LandingGear/handle = UP),
+        ax[ag[LandingGear/gears != EXTENDING]]]]]
+}
+
+assert R31 {
+    ag[imp_e[(LandingGear/extend_gears_electro_valve = True
+        or LandingGear/retract_gears_electro_valve = True),
+            (LandingGear/doors = OPEN)]]
+}
+
+assert R32 {
+    ag[imp_[(LandingGear/open_doors_electro_valve = True
+        or LandingGear/close_doors_electro_valve = True),
+            (LandingGear/gears = RETRACTED
+                     or LandingGear/gears = EXTENDED)]]
+}
+
+assert R41 {
+    ag[not(LandingGear/open_doors_electro_valve = True
+           and LandingGear/close_doors_electro_valve = True)]
+}
+
+assert R42 {
+    ag[not(LandingGear/extend_gears_electro_valve = True
+           and LandingGear/retract_gears_electro_valve = True)]
+}
+
+assert R51 {
+    ag[imp_e[(LandingGear/open_doors_electro_valve = True
+        or LandingGear/close_doors_electro_valve = True
+        or LandingGear/extend_gears_electro_valve = True
+        or LandingGear/retract_gears_electro_valve = True),
+       (LandingGear/general_electro_valve = True)]]
+}
