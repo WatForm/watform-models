@@ -1,0 +1,40 @@
+
+     // Get a significant instance
+     run significance for exactly 3 Players , exactly 2 Chairs ,
+        exactly 8 Snapshot, 2 EventLabel
+
+/******************************* PROPERTIES ***********************************/
+
+/********************************* SAFETY *************************************/
+    assert safety {
+        // number of players is walways 1 greater than number of chairs
+        ctl_mc[ ag[{ s : Snapshot |
+            #s.Game_activePlayers = (#s.Game_activeChairs).plus[1]}]]
+    }
+    check safety for exactly 3 Players , exactly 2 Chairs ,
+        exactly 8 Snapshot, 2 EventLabel
+
+/******************************** EXISTENTIAL *********************************/
+    one sig Alice extends Players {}
+    pred existential {
+        // Alice wins in some instance
+        ctl_mc[ef[{ s : Snapshot |
+            Game_End in s.conf and s.Game_activePlayers = Alice }]]
+    }
+    run existential for exactly 3 Players , exactly 2 Chairs ,
+        exactly 8 Snapshot, 2 EventLabel
+
+/******************************* FINITE LIVENESS ******************************/
+    assert finiteLiveness {
+        ctl_mc[af [{ s : Snapshot | Game_Sitting in s.conf }]]
+    }
+    check finiteLiveness for exactly 3 Players , exactly 2 Chairs ,
+        exactly 8 Snapshot, 2 EventLabel
+
+/**************************** INFINITE LIVENESS *******************************/
+    assert infiniteLiveness {
+        // number of players eventually always reaches and remains at 1
+        ctl_mc[af[ag[{ s : Snapshot | #s.Game_activePlayers = 1}]]]
+    }
+    check infiniteLiveness for exactly 3 Players , exactly 2 Chairs ,
+        exactly 8 Snapshot, 2 EventLabel

@@ -1,0 +1,15 @@
+
+assert noCycles {
+	always (all n: Node -  Variables.DistrubedTreeSpanning_root | n !in n.(^(~(DistrubedTreeSpanning_N_parent))))
+}
+
+assert topologyOverAllNodes {
+	eventually (all n: Node | some n.(DistrubedTreeSpanning_N_level))
+}
+
+check noCycles for 9 steps, exactly 4 Node, exactly 4 Level
+check noCycles for 11 steps, exactly 5 Node, exactly 5 Level
+check noCycles for 13 steps, exactly 6 Node, exactly 6 Level
+check topologyOverAllNodes for 9 steps, exactly 4 Node, exactly 4 Level
+check topologyOverAllNodes for 11 steps, exactly 5 Node, exactly 5 Level
+check topologyOverAllNodes for 13 steps, exactly 6 Node, exactly 6 Level

@@ -1,0 +1,64 @@
+
+fact alwaysThreeMembers {
+	all s: Snapshot | {#(s.System_members) >= 3}
+}
+
+/******************************************* FUNCTIONS FOR CHECKING PROPERTIES ******************************************/
+
+// Returns a tuple (Node, Node) where the second element is a Live successor of the first element
+fun succ [s: Snapshot] : Node -> Node {
+	{ m1, m2: s.System_members | m1.(s.System_N_frst) in s.System_members => (m2 = m1.(s.System_N_frst)) else (m2 = m1.(s.System_N_scnd)) }
+}
+
+// Returns the members that form a ring
+fun ring [s: Snapshot] : some Node { {m: s.System_members | m in m.^(succ[s])} }
+
+fun appendages[s: Snapshot] : set Node { s.System_members - ring[s]  }
+
+/******************************************* PROPERTIES ******************************************/
+
+// Members form atleast one ring
+pred atLeastOneRing [s: Snapshot] {
+	some ring[s]
+}
+
+// Members form atmost one ring
+pred atMostOneRing [s: Snapshot] {
+	(all m1, m2: ring[s] | m1 in m2.^(succ[s]))
+}
+
+// Members are ordered
+pred orderedRing[s: Snapshot] { 
+	all disj m1, m2, mb: ring[s] |
+		m2 = m1.^(succ[s]) implies not between[m1, mb, m2] 
+}
+
+// Member successors are ordered
+pred orderedSuccessors[s: Snapshot] {
+	(all m: s.System_members | between[m, m.(s.System_N_frst), m.(s.System_N_scnd)])
+}
+
+pred connectedAppendages[s: Snapshot] {
+	(all m1: appendages[s] | some m2: ring[s] | m2 in m1.^(succ[s]))
+}
+
+pred valid[s: Snapshot] {
+	atLeastOneRing[s]
+	atMostOneRing[s]
+	orderedSuccessors[s]
+	connectedAppendages[s]
+	orderedRing[s]
+}
+
+assert ideal {
+	(one s0: Snapshot | all nexts: nexts[s0] | {
+		((System_N_Failed_Join + System_N_Live_Fail) !in Identifiers.(nexts.taken1)) =>
+		some s1: nexts | {
+			valid[s1]
+			no appendages[s1]
+			(s1.System_N_frst) = ~(s1.System_N_prdc) }
+	})
+}
+
+check ideal for exactly 15 Snapshot, exactly 4 Node
+check ideal for exactly 15 Snapshot, exactly 5 Node

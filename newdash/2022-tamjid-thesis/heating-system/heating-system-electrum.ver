@@ -1,0 +1,16 @@
+
+assert FurnaceActivates {
+	always (HeatingSystem_ERROR !in conf0) => 
+	eventually (HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Activating_T3 in taken0)
+}
+
+assert heaterOnIfNotDesiredTemp{
+    (eventually (HeatingSystem_ERROR in conf0)) => 
+    (always (some p0: one Identifier | lt[p0.(HeatingSystem_Functioning_Room_actualTemp), p0.(HeatingSystem_Functioning_Room_actualTemp)] => 
+	(HeatingSystem_Functioning_Controller_On_Heater_Active in conf0)))
+}
+
+check FurnaceActivates for 25 steps, exactly 2 Identifier, exactly 4 Temp
+check FurnaceActivates for 30 steps, exactly 3 Identifier, exactly 4 Temp
+check heaterOnIfNotDesiredTemp for 25 steps, exactly 2 Identifier, exactly 4 Temp
+check heaterOnIfNotDesiredTemp for 30 steps, exactly 3 Identifier, exactly 4 Temp

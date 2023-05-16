@@ -1,0 +1,16 @@
+
+assert FurnaceActivates {
+	(no s0: Snapshot | (HeatingSystem_ERROR in s0.conf0)) => 
+	(some s1: Snapshot | HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Activating_T3 in s1.taken0)
+}
+
+assert heaterOnIfNotDesiredTemp{
+    (no s0: Snapshot | (HeatingSystem_ERROR in s0.conf0)) =>
+    (some s0: one Snapshot,p0: one Identifier | lt[p0.(s0.HeatingSystem_Functioning_Room_actualTemp), p0.(s0.HeatingSystem_Functioning_Room_actualTemp)] => 
+	(some s1: nexts[s0] | HeatingSystem_Functioning_Controller_On_Heater_Active in s1.conf0))
+}
+
+check heaterOnIfNotDesiredTemp for 25 Snapshot, exactly 2 Identifier, exactly 4 Temp
+check heaterOnIfNotDesiredTemp for 30 Snapshot, exactly 3 Identifier, exactly 4 Temp
+check FurnaceActivates for 25 Snapshot, exactly 2 Identifier, exactly 4 Temp
+check FurnaceActivates for 30 Snapshot, exactly 3 Identifier, exactly 4 Temp

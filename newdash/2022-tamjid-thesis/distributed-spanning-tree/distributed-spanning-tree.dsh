@@ -1,0 +1,59 @@
+open util/ordering[Level] as nodeLevel
+
+sig Level {}
+
+state DistrubedTreeSpanning {
+	root: one Node
+
+	conc N [Node] {
+	        level: lone Level
+	        parent: lone Node
+		message: Node -> Level
+
+	        default state Unassigned {
+			trans RootAssign {
+				when {
+					this in root
+				}
+				do {
+					level' = nodeLevel/first
+					parent' = this
+				}
+				goto Assigned
+			}
+
+			trans NodeAssign {
+				when {
+					some message
+				}
+				do {
+					level' = nodeLevel/next[Node.message]
+					parent' = message.Level
+				}
+				goto Assigned
+			}
+		}
+
+		state Assigned {
+			trans sendMessage {
+				when {
+					some n: Node | no N[n]/level
+				}
+				do {
+					some n: Node - this | {
+						no N[n]/message
+						N[n]/message' = this -> level
+						all others: Node - n | N[others]/message' = N[others]/message
+					}
+				}
+			}
+		}
+
+		init {
+			no level
+			no parent
+			no message
+		}
+	}
+}
+

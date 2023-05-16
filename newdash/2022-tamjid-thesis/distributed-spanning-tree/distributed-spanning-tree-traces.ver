@@ -1,0 +1,15 @@
+
+assert noCycles {
+	(all s: Snapshot | all n: Node -  s.DistrubedTreeSpanning_root | n !in n.(^(~(s.DistrubedTreeSpanning_N_parent))))
+}
+
+assert topologyOverAllNodes {
+	some s: Snapshot | all n: Node | some n.(s.DistrubedTreeSpanning_N_level)
+}
+
+check noCycles for 9 Snapshot, exactly 4 Node, exactly 4 Level
+check noCycles for 11 Snapshot, exactly 5 Node, exactly 5 Level
+check noCycles for 13 Snapshot, exactly 6 Node, exactly 6 Level
+check topologyOverAllNodes for 9 Snapshot, exactly 4 Node, exactly 4 Level
+check topologyOverAllNodes for 11 Snapshot, exactly 5 Node, exactly 5 Level
+check topologyOverAllNodes for 13 Snapshot, exactly 6 Node, exactly 6 Level

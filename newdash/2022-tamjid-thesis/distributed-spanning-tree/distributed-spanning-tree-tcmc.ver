@@ -1,0 +1,15 @@
+
+assert ctl_noCycles  {
+	ctl_mc[ag[{ s: Snapshot | all n: Node -  s.DistrubedTreeSpanning_root | n !in n.(^(~(s.DistrubedTreeSpanning_N_parent)))}]]
+}
+
+assert ctl_topologyOverAllNodes {
+	ctl_mc[eg[{ s: Snapshot | all n: Node | some n.(s.DistrubedTreeSpanning_N_level)}]]
+}
+
+check ctl_noCycles for 9 Snapshot, exactly 4 Node, exactly 4 Level, 1 PathNode
+check ctl_noCycles for 11 Snapshot, exactly 5 Node, exactly 5 Level, 1 PathNode
+check ctl_noCycles for 13 Snapshot, exactly 6 Node, exactly 6 Level, 1 PathNode
+check ctl_topologyOverAllNodes for 9 Snapshot, exactly 4 Node, exactly 4 Level, 1 PathNode
+check ctl_topologyOverAllNodes for 11 Snapshot, exactly 5 Node, exactly 5 Level, 1 PathNode
+check ctl_topologyOverAllNodes for 13 Snapshot, exactly 6 Node, exactly 6 Level, 1 PathNode

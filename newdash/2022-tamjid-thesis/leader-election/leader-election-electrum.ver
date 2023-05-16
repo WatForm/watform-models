@@ -1,0 +1,12 @@
+assert eventuallyLeaderElected {
+	eventually (some System_elected)
+}
+
+assert electedHasHighestIdentifier {
+    eventually (some System_elected and Variables.System_elected in P0/last)
+}
+
+check eventuallyLeaderElected for 13 steps, exactly 6 Identifier, 6 token
+check eventuallyLeaderElected for 15 steps, exactly 7 Identifier, 7 token
+check electedHasHighestIdentifier for 13 steps, exactly 6 Identifier, 6 token
+check electedHasHighestIdentifier for 15 steps, exactly 7 Identifier, 7 token

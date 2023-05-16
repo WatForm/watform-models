@@ -1,0 +1,15 @@
+
+assert allCallsAreEventuallySend {
+	some s: Snapshot | no s.(Snapshot <: System_Controller_callToSend)
+}
+
+assert closestElevatorHasCall {
+	some s: Snapshot | one e0: PID, f: Floor | (f in e0.(s.System_Elevator_called) and (e0.(s.System_Elevator_direction) = Up)
+		and	(no e1: PID - e0 | (between[e0.(s.System_Elevator_current), e1.(s.System_Elevator_current), f] 
+				and e1.(s.System_Elevator_direction) = Up)) )
+}
+
+check allCallsAreEventuallySend for 17 Snapshot, exactly 3 PID, exactly 4 Floor
+check allCallsAreEventuallySend for 17 Snapshot, exactly 4 PID, exactly 4 Floor
+check closestElevatorHasCall for 17 Snapshot, exactly 3 PID, exactly 4 Floor
+check closestElevatorHasCall for 17 Snapshot, exactly 4 PID, exactly 4 Floor

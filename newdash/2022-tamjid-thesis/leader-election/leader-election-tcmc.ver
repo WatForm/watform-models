@@ -1,0 +1,11 @@
+
+assert ctl_eventuallyLeaderElected {
+	ctl_mc[af[{s: Snapshot | some s.System_elected}]]
+}
+
+assert ctl_electedHasHighestIdentifier {
+    ctl_mc[af[{s: one Snapshot | some s.System_elected => (s.System_elected) in P0/last}]]
+}
+
+check ctl_electedHasHighestIdentifier for exactly 13 Snapshot, exactly 6 Identifier, exactly 6 token, 1 PathNode
+check ctl_electedHasHighestIdentifier for exactly 15 Snapshot, exactly 7 Identifier, exactly 7 token, 1 PathNode

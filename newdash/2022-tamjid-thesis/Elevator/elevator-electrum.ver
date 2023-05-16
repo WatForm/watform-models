@@ -1,0 +1,16 @@
+
+assert allCallsAreEventuallySend {
+	eventually no System_Controller_callToSend
+}
+
+assert closestElevatorHasCall {
+	always (one e0: PID, f: Floor | (f in e0.(System_Elevator_called) and (e0.(System_Elevator_direction) = Up)
+		and	(no e1: PID - e0 | (between[e0.(System_Elevator_current), e1.(System_Elevator_current), f] 
+				and e1.(System_Elevator_direction) = Up)) )
+	)
+}
+
+//check allCallsAreEventuallySend for exactly 17 steps, exactly 3 PID, exactly 4 Floor
+//check allCallsAreEventuallySend for exactly 17 steps, exactly 4 PID, exactly 4 Floor
+check closestElevatorHasCall for exactly 17 steps, exactly 3 PID, exactly 4 Floor
+check closestElevatorHasCall for exactly 17 steps, exactly 4 PID, exactly 4 Floor

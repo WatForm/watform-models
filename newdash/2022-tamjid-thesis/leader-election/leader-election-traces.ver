@@ -1,0 +1,13 @@
+
+assert eventuallyLeaderElected {
+	some s: Snapshot | some s.System_elected
+}
+
+assert electedHasHighestIdentifier {
+    (one s: one Snapshot | one s.System_elected and (s.System_elected) in P0/last)
+}
+
+check eventuallyLeaderElected for exactly 13 Snapshot, exactly 6 Identifier, exactly 6 token
+check eventuallyLeaderElected for 15 Snapshot, exactly 7 Identifier, exactly 7 token
+check electedHasHighestIdentifier for 13 Snapshot, exactly 6 Identifier, exactly 6 token
+check electedHasHighestIdentifier for 15 Snapshot, exactly 7 Identifier, exactly 7 token

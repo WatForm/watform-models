@@ -1,0 +1,16 @@
+
+assert ctl_allCallsAreEventuallySend { 
+	ctl_mc[af[{s: one Snapshot | no s.(Snapshot <: System_Controller_callToSend)}]]
+}
+
+assert ctl_closestElevatorHasCall {
+    ctl_mc[af[{s: one Snapshot | (one e0: one PID,f: one Floor | f in e0. (s.(Snapshot <: System_Elevator_called)) and
+            e0. (s.(Snapshot <: System_Elevator_direction)) = Up => (
+            (no e1: one PID - e0 | between[e0. (s.(Snapshot <: System_Elevator_current)), e1. (s.(Snapshot <: System_Elevator_current)), f] and
+                e1. (s.(Snapshot <: System_Elevator_direction)) = Up))) }]]
+}
+
+//check ctl_allCallsAreEventuallySend for 17 Snapshot, exactly 3 PID, exactly 4 Floor, 1 PathNode
+//check ctl_allCallsAreEventuallySend for 17 Snapshot, exactly 4 PID, exactly 4 Floor, 1 PathNode
+check ctl_closestElevatorHasCall for 17 Snapshot, exactly 3 PID, exactly 4 Floor, 1 PathNode
+check ctl_closestElevatorHasCall for 17 Snapshot, exactly 4 PID, exactly 4 Floor, 1 PathNode
