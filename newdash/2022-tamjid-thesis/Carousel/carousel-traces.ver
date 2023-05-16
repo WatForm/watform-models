@@ -1,0 +1,30 @@
+assert bothFinalize {
+    (some s0: one Snapshot,c: one ClientID,p: one PartLdrID | Carousel_PartitionLeader_Commit in p. (s0.(Snapshot <: conf1)) and
+        (some s1: one Snapshot | Carousel_Client_Waiting_FinalizeCommit in c. (s1.(Snapshot <: taken1))))
+}
+
+assert bothAbort {
+    (some s0: one Snapshot,c: one ClientID,p: one PartLdrID | Carousel_PartitionLeader_Abort in p. (s0.(Snapshot <: conf1)) and
+        (some s1: one Snapshot | Carousel_Client_Waiting_FinalizeAbort in c. (s1.(Snapshot <: taken1))))
+}
+
+assert commitUpdatesData {
+    (some s0: one Snapshot, c: one CoordinatorID | Carousel_Coordinator_WaitForResponse_StartCommit in c.(s0.(Snapshot <: taken1)) and
+        (some s1: one Snapshot | all p: PartLdrID | c.(s1.Carousel_Coordinator_info) in p.(s1.Carousel_PartitionLeader_data) ))
+}
+
+assert cannotBothCommitAndAbort {
+    (no s0: one Snapshot | one disj p0, p1: PartLdrID | (Carousel_PartitionLeader_Waiting_FinalizeCommit in (p0.(s0.(Snapshot <: taken1))) and (Carousel_PartitionLeader_Abort in p1.(s0.(Snapshot <: conf1)))))
+}
+
+// remember to have traces option set
+
+check bothFinalize for 23 Snapshot, exactly 3 Key, exactly 2 Value, exactly 4 Transaction, exactly 2 ClientID, exactly 2 CoordinatorID, exactly 2 PartLdrID, 3 currentTxn, 3 pendingTxn
+check bothFinalize for 30 Snapshot, exactly 3 Key, exactly 2 Value, exactly 4 Transaction, exactly 2 ClientID, exactly 2 CoordinatorID, exactly 3 PartLdrID, 3 currentTxn, 3 pendingTxn
+check bothAbort for 23 Snapshot, exactly 3 Key, exactly 2 Value, exactly 4 Transaction, exactly 2 ClientID, exactly 2 CoordinatorID, exactly 2 PartLdrID, 3 currentTxn, 3 pendingTxn
+check bothAbort for 30 Snapshot, exactly 3 Key, exactly 2 Value, exactly 4 Transaction, exactly 2 ClientID, exactly 2 CoordinatorID, exactly 3 PartLdrID, 3 currentTxn, 3 pendingTxn
+check cannotBothCommitAndAbort for 23 Snapshot, exactly 3 Key, exactly 2 Value, exactly 4 Transaction, exactly 2 ClientID, exactly 2 CoordinatorID, exactly 2 PartLdrID, 3 currentTxn, 3 pendingTxn
+check cannotBothCommitAndAbort for 30 Snapshot, exactly 3 Key, exactly 2 Value, exactly 4 Transaction, exactly 2 ClientID, exactly 2 CoordinatorID, exactly 3 PartLdrID, 3 currentTxn, 3 pendingTxn
+check commitUpdatesData for 23 Snapshot, exactly 3 Key, exactly 2 Value, exactly 4 Transaction, exactly 2 ClientID, exactly 2 CoordinatorID, exactly 2 PartLdrID, 3 currentTxn, 3 pendingTxn
+check commitUpdatesData for 30 Snapshot, exactly 3 Key, exactly 2 Value, exactly 4 Transaction, exactly 2 ClientID, exactly 2 CoordinatorID, exactly 3 PartLdrID, 3 currentTxn, 3 pendingTxn
+

@@ -1,0 +1,9 @@
+// remember to have Electrum option set 
+
+assert allBitsInBit0 {
+	eventually Counter_Done in events0 and 
+		(some p: PID | Counter_Bit_Bit1 in p.(conf1))
+}
+
+check allBitsInBit0 for 12 steps, exactly 3 PID
+check allBitsInBit0 for 20 steps, exactly 4 PID

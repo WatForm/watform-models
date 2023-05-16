@@ -1,0 +1,33 @@
+
+assert bothFinalize {
+    always (some c: one ClientID, p: one PartLdrID | Carousel_PartitionLeader_Commit in (p.(Identifiers <: conf1)) => (
+        eventually always (Carousel_Client_Waiting_FinalizeCommit in c. (Identifiers <: taken1))))
+}
+
+
+assert bothAbort {
+    always  (some c: one ClientID,p: one PartLdrID | Carousel_PartitionLeader_Abort in p. ((Identifiers <: conf1)) => eventually always {
+       (Carousel_Client_Waiting_FinalizeAbort in c. ((Identifiers <: taken1)))})
+}
+
+assert commitUpdatesData {
+    always (some c: one CoordinatorID | Carousel_Coordinator_WaitForResponse_StartCommit in c.(Identifiers <: taken1) => eventually always
+        (all p: PartLdrID | c.(Carousel_Coordinator_info) in p.(Carousel_PartitionLeader_data)))
+}
+
+assert cannotBothCommitAndAbort {
+    always (one disj p0, p1: PartLdrID | (Carousel_PartitionLeader_Waiting_FinalizeCommit in (p0.(Identifiers <: taken1))) 
+	=> always (Carousel_PartitionLeader_Abort !in p1.(Identifiers <: conf1)))
+}
+
+// remember to have electrum option set
+
+check bothFinalize for 23 steps, exactly 3 Key, exactly 2 Value, exactly 4 Transaction, exactly 2 ClientID, exactly 2 CoordinatorID, exactly 2 PartLdrID, 3 currentTxn, 3 pendingTxn
+check bothFinalize for 30 steps, exactly 3 Key, exactly 2 Value, exactly 4 Transaction, exactly 2 ClientID, exactly 2 CoordinatorID, exactly 3 PartLdrID, 3 currentTxn, 3 pendingTxn
+check bothAbort for 23 steps, exactly 3 Key, exactly 2 Value, exactly 4 Transaction, exactly 2 ClientID, exactly 2 CoordinatorID, exactly 2 PartLdrID, 3 currentTxn, 3 pendingTxn
+check bothAbort for 30 steps, exactly 3 Key, exactly 2 Value, exactly 4 Transaction, exactly 2 ClientID, exactly 2 CoordinatorID, exactly 3 PartLdrID, 3 currentTxn, 3 pendingTxn
+check cannotBothCommitAndAbort for 23 steps, exactly 3 Key, exactly 2 Value, exactly 4 Transaction, exactly 2 ClientID, exactly 2 CoordinatorID, exactly 2 PartLdrID, 3 currentTxn, 3 pendingTxn
+check cannotBothCommitAndAbort for 30 steps, exactly 3 Key, exactly 2 Value, exactly 4 Transaction, exactly 2 ClientID, exactly 2 CoordinatorID, exactly 3 PartLdrID, 3 currentTxn, 3 pendingTxn
+check commitUpdatesData for 23 steps, exactly 3 Key, exactly 2 Value, exactly 4 Transaction, exactly 2 ClientID, exactly 2 CoordinatorID, exactly 2 PartLdrID, 3 currentTxn, 3 pendingTxn
+check commitUpdatesData for 30 steps, exactly 3 Key, exactly 2 Value, exactly 4 Transaction, exactly 2 ClientID, exactly 2 CoordinatorID, exactly 3 PartLdrID, 3 currentTxn, 3 pendingTxn
+

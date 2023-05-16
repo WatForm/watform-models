@@ -1,0 +1,9 @@
+// remember to have traces option set
+
+assert allBitsInBit0 {
+	some s: Snapshot | Counter_Done in s.events0 and
+		(some p: PID | Counter_Bit_Bit1 !in p.(s.conf1))
+}
+
+check allBitsInBit0 for 12 Snapshot, exactly 3 PID
+check allBitsInBit0 for 20 Snapshot, exactly 4 PID
