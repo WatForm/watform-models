@@ -41,7 +41,9 @@ state DistrubedTreeSpanning {
 				}
 				do {
 					some n: Node - this | {
+						// The sister Node has not received a message
 						no N[n]/message
+						// Send the sister Node a message with "this" Node's identifier and Level
 						N[n]/message' = this -> level
 						all others: Node - n | N[others]/message' = N[others]/message
 					}
