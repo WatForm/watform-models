@@ -51,8 +51,8 @@ state HeatingSystem {
 	
 		conc Controller {
 			controllerOn: one Bool
-			condition heatRequested [some r: Identifier | Functioning/Room[r]/requestHeat = True] {}
-			condition noHeatRequested [no r: Identifier |  Functioning/Room[r]/requestHeat = True] {}
+			//condition heatRequested [some r: Identifier | Functioning/Room[r]/requestHeat = True] {}
+			//condition noHeatRequested [no r: Identifier |  Functioning/Room[r]/requestHeat = True] {}
 
 			default state Off {
 				trans T8 {
@@ -66,14 +66,14 @@ state HeatingSystem {
 			state On {
 				default state Idle {
 					trans T9 {
-						when heatRequested
+						when { some r: Identifier | Functioning/Room[r]/requestHeat = True }
 						send activate
 						goto Heater_Active
 					}
 				}
 				state Heater_Active {
 					trans T10 {
-						when noHeatRequested
+						when { no r: Identifier |  Functioning/Room[r]/requestHeat = True }
 						send deactivate
 						goto Idle
 					}

@@ -113,7 +113,7 @@ pred close_door[d1, d2: DoorStatus,
         and odev2 = odev1
     }
     else d1 = CLOSING implies {
-        LandingGear/doors_closed = True implies {
+        LandingGear_doors_closed = True implies {
             d2 = CLOSED
             and gev2 = False
             and cdev2 = False

@@ -1,0 +1,997 @@
+/*
+   Automatically created via translation of a Dash model to Alloy
+   on 2023-05-18 09:59:27
+*/
+
+open util/ordering[Floor]
+
+open util/boolean
+open util/traces[DshSnapshot] as DshSnapshot
+
+sig Floor {}
+abstract sig Direction {}
+one sig Up, Down extends Direction {}
+
+pred between [n1, nb, n2: Floor] {
+	     lt[n1,n2] =>   ( lt[n1,nb] && lt[nb,n2] )
+             else ( lt[n1,nb] || lt[nb,n2] )  }
+
+abstract sig DshStates {}
+abstract sig System extends DshStates {} 
+abstract sig System_Controller extends System {} 
+one sig System_Controller_Sending extends System_Controller {} 
+abstract sig System_Elevator extends System {} 
+one sig System_Elevator_MovingUp extends System_Elevator {} 
+one sig System_Elevator_MovingDown extends System_Elevator {} 
+one sig System_Elevator_Idle extends System_Elevator {} 
+
+abstract sig DshIds {}
+sig PID extends DshIds {} 
+
+sig DshSnapshot {
+  dsh_sc_used0: set DshStates,
+  dsh_conf0: set DshStates,
+  dsh_sc_used1: DshIds -> DshStates,
+  dsh_conf1: DshIds -> DshStates,
+  dsh_stable: one boolean/Bool,
+  System_Controller_callToSend: Floor -> Direction,
+  System_Elevator_direction: PID -> one Direction,
+  System_Elevator_called: PID -> set Floor,
+  System_Elevator_current: PID -> one Floor
+}
+
+pred dsh_initial [s: one DshSnapshot, pPID: one PID] {
+  (all pPID: one
+  PID | no
+          (pPID . (s . System_Elevator_called)) and
+          (pPID . (s . System_Elevator_current)) =
+            (Floor.min) and
+          (pPID . (s . System_Elevator_direction)) = Up and
+          (# (s . System_Controller_callToSend)) = (3) and
+          Up !in (Floor.(s . System_Controller_callToSend)))
+}
+
+pred System_Controller_SendingDownRequest_pre [s: one DshSnapshot] {
+  some (System_Controller_Sending & (s . dsh_conf0))
+  Down in (Floor.(s . System_Controller_callToSend))
+  ! (System in (s . dsh_sc_used0))
+  ! (System_Controller in (s . dsh_sc_used0))
+}
+
+
+pred System_Controller_SendingDownRequest_post [s: one DshSnapshot, sn: one DshSnapshot] {
+  (sn . dsh_conf0) =
+  (((s . dsh_conf0) - System_Controller_Sending) +
+     System_Controller_Sending)
+  (sn . dsh_conf1) = (s . dsh_conf1)
+  ((some p: PID,f: (s . System_Controller_callToSend).Down | (p
+                                                              .
+                                                              (s
+                                                                 .
+                                                                 System_Elevator_current)).(f.lte) and
+                                                             (p
+                                                                .
+                                                                (s
+                                                                   .
+                                                                   System_Elevator_direction))
+                                                               =
+                                                               Down))=>
+    (one e0: PID,f: (s . System_Controller_callToSend).Down | (e0
+                                                                 .
+                                                                 (s
+                                                                    .
+                                                                    System_Elevator_direction))
+                                                                =
+                                                                Down and
+                                                                f.((e0
+                                                                      .
+                                                                      (s
+                                                                         .
+                                                                         System_Elevator_current)).gte) and
+                                                                (e0
+                                                                   .
+                                                                   (sn
+                                                                      .
+                                                                      System_Elevator_called))
+                                                                  =
+                                                                  ((e0
+                                                                      .
+                                                                      (s
+                                                                         .
+                                                                         System_Elevator_called))
+                                                                     +
+                                                                     f) and
+                                                                (sn
+                                                                   .
+                                                                   System_Controller_callToSend)
+                                                                  =
+                                                                  ((s
+                                                                      .
+                                                                      System_Controller_callToSend)
+                                                                     -
+                                                                     (f
+                                                                        ->
+                                                                        Down)) and
+                                                                (no e1: PID
+                                                                          -
+                                                                          e0 | (e1
+                                                                                  .
+                                                                                  (s
+                                                                                     .
+                                                                                     System_Elevator_direction))
+                                                                                 =
+                                                                                 Down and
+                                                                                 (e1
+                                                                                    .
+                                                                                    (s
+                                                                                       .
+                                                                                       System_Elevator_current)).((e0
+                                                                                                                     .
+                                                                                                                     (s
+                                                                                                                        .
+                                                                                                                        System_Elevator_current)).(f.between))) and
+                                                                (all others: PID
+                                                                               -
+                                                                               e0 | (others
+                                                                                       .
+                                                                                       (sn
+                                                                                          .
+                                                                                          System_Elevator_called))
+                                                                                      =
+                                                                                      (others
+                                                                                         .
+                                                                                         (s
+                                                                                            .
+                                                                                            System_Elevator_called))))
+  else
+    (one e0: PID,f: (s . System_Controller_callToSend).Direction | (e0
+                                                                      .
+                                                                      (sn
+                                                                         .
+                                                                         System_Elevator_called))
+                                                                     =
+                                                                     ((e0
+                                                                         .
+                                                                         (s
+                                                                            .
+                                                                            System_Elevator_called))
+                                                                        +
+                                                                        f) and
+                                                                     (sn
+                                                                        .
+                                                                        System_Controller_callToSend)
+                                                                       =
+                                                                       ((s
+                                                                           .
+                                                                           System_Controller_callToSend)
+                                                                          -
+                                                                          (f
+                                                                             ->
+                                                                             (f.(s
+                                                                                   .
+                                                                                   System_Controller_callToSend)))) and
+                                                                     (all others: PID
+                                                                                    -
+                                                                                    e0 | (others
+                                                                                            .
+                                                                                            (sn
+                                                                                               .
+                                                                                               System_Elevator_called))
+                                                                                           =
+                                                                                           (others
+                                                                                              .
+                                                                                              (s
+                                                                                                 .
+                                                                                                 System_Elevator_called))))
+
+  (none . (System_Controller . (sn . (s . _testIfNextStable))))=>
+    ((sn . dsh_stable) = boolean/True and
+       { (s . dsh_stable) = boolean/True or
+           !
+           ((s . dsh_stable) = boolean/True) })
+  else
+    ((sn . dsh_stable) = boolean/False and
+       { (s . dsh_stable) = boolean/True or
+           !
+           ((s . dsh_stable) = boolean/True) })
+
+}
+
+pred System_Controller_SendingDownRequest_enabledAfterStep [s: one DshSnapshot, sn: one DshSnapshot, dsh_scp0: DshStates, dsh_scp1: DshIds -> DshStates] {
+  some (System_Controller_Sending & (sn . dsh_conf0))
+  { (s . dsh_stable) = boolean/True and
+    !
+    (System in dsh_scp0) and
+    !
+    (System_Controller in dsh_scp0) or
+    !
+    ((s . dsh_stable) = boolean/True) }
+}
+
+pred System_Controller_SendingDownRequest [s: one DshSnapshot, sn: one DshSnapshot] {
+  s . System_Controller_SendingDownRequest_pre
+  sn . (s . System_Controller_SendingDownRequest_post)
+}
+
+pred System_Elevator_MovingUp_ChangeDirToDown_pre [s: one DshSnapshot, pPID: one PID] {
+  some ((pPID -> System_Elevator_MovingUp) & (s . dsh_conf1))
+  some
+  (pPID . (s . System_Elevator_called)) and
+  no
+  (((pPID . (s . System_Elevator_current)).nexts) &
+     (pPID . (s . System_Elevator_called))) and
+  some
+  (((pPID . (s . System_Elevator_current)).prevs) &
+     (pPID . (s . System_Elevator_called))) and
+  (pPID . (s . System_Elevator_current)) !in
+    (pPID . (s . System_Elevator_called))
+  ! (System in (s . dsh_sc_used0))
+  ! ((pPID -> System_Elevator) in (s . dsh_sc_used1))
+}
+
+
+pred System_Elevator_MovingUp_ChangeDirToDown_post [s: one DshSnapshot, sn: one DshSnapshot, pPID: one PID] {
+  (sn . dsh_conf0) = (s . dsh_conf0)
+  (sn . dsh_conf1) =
+  (((s . dsh_conf1) - (pPID -> System_Elevator_MovingDown))
+     + (pPID -> System_Elevator_MovingDown))
+  (pPID . (sn . System_Elevator_direction)) = Down
+  ((pPID -> System_Elevator) .
+   (none . (sn . (s . _testIfNextStable))))=>
+    ((sn . dsh_stable) = boolean/True and
+       { (s . dsh_stable) = boolean/True or
+           !
+           ((s . dsh_stable) = boolean/True) })
+  else
+    ((sn . dsh_stable) = boolean/False and
+       { (s . dsh_stable) = boolean/True or
+           !
+           ((s . dsh_stable) = boolean/True) })
+
+}
+
+pred System_Elevator_MovingUp_ChangeDirToDown_enabledAfterStep [s: one DshSnapshot, sn: one DshSnapshot, pPID: one PID, dsh_scp0: DshStates, dsh_scp1: DshIds -> DshStates] {
+  some ((pPID -> System_Elevator_MovingUp) & (sn . dsh_conf1))
+  { (s . dsh_stable) = boolean/True and
+    !
+    (System in dsh_scp0) and
+    !
+    ((pPID -> System_Elevator) in dsh_scp1) or
+    !
+    ((s . dsh_stable) = boolean/True) }
+}
+
+pred System_Elevator_MovingUp_ChangeDirToDown [s: one DshSnapshot, sn: one DshSnapshot, pPID: one PID] {
+  pPID . (s . System_Elevator_MovingUp_ChangeDirToDown_pre)
+  pPID .
+  (sn . (s . System_Elevator_MovingUp_ChangeDirToDown_post))
+}
+
+pred System_Elevator_Idle_Move_pre [s: one DshSnapshot, pPID: one PID] {
+  some ((pPID -> System_Elevator_Idle) & (s . dsh_conf1))
+  some (pPID . (s . System_Elevator_called))
+  ! (System in (s . dsh_sc_used0))
+  ! ((pPID -> System_Elevator) in (s . dsh_sc_used1))
+}
+
+
+pred System_Elevator_Idle_Move_post [s: one DshSnapshot, sn: one DshSnapshot, pPID: one PID] {
+  (sn . dsh_conf0) = (s . dsh_conf0)
+  (sn . dsh_conf1) =
+  (((s . dsh_conf1) - (pPID -> System_Elevator_MovingUp)) +
+     (pPID -> System_Elevator_MovingUp))
+  ((pPID -> System_Elevator) .
+   (none . (sn . (s . _testIfNextStable))))=>
+    ((sn . dsh_stable) = boolean/True and
+       { (s . dsh_stable) = boolean/True or
+           !
+           ((s . dsh_stable) = boolean/True) })
+  else
+    ((sn . dsh_stable) = boolean/False and
+       { (s . dsh_stable) = boolean/True or
+           !
+           ((s . dsh_stable) = boolean/True) })
+
+}
+
+pred System_Elevator_Idle_Move_enabledAfterStep [s: one DshSnapshot, sn: one DshSnapshot, pPID: one PID, dsh_scp0: DshStates, dsh_scp1: DshIds -> DshStates] {
+  some ((pPID -> System_Elevator_Idle) & (sn . dsh_conf1))
+  { (s . dsh_stable) = boolean/True and
+    !
+    (System in dsh_scp0) and
+    !
+    ((pPID -> System_Elevator) in dsh_scp1) or
+    !
+    ((s . dsh_stable) = boolean/True) }
+}
+
+pred System_Elevator_Idle_Move [s: one DshSnapshot, sn: one DshSnapshot, pPID: one PID] {
+  pPID . (s . System_Elevator_Idle_Move_pre)
+  pPID . (sn . (s . System_Elevator_Idle_Move_post))
+}
+
+pred System_Elevator_MovingDown_Idle_pre [s: one DshSnapshot, pPID: one PID] {
+  some
+((pPID -> System_Elevator_MovingDown) & (s . dsh_conf1))
+  no (pPID . (s . System_Elevator_called))
+  ! (System in (s . dsh_sc_used0))
+  ! ((pPID -> System_Elevator) in (s . dsh_sc_used1))
+}
+
+
+pred System_Elevator_MovingDown_Idle_post [s: one DshSnapshot, sn: one DshSnapshot, pPID: one PID] {
+  (sn . dsh_conf0) = (s . dsh_conf0)
+  (sn . dsh_conf1) =
+  (((s . dsh_conf1) - (pPID -> System_Elevator_Idle)) +
+     (pPID -> System_Elevator_Idle))
+  ((pPID -> System_Elevator) .
+   (none . (sn . (s . _testIfNextStable))))=>
+    ((sn . dsh_stable) = boolean/True and
+       { (s . dsh_stable) = boolean/True or
+           !
+           ((s . dsh_stable) = boolean/True) })
+  else
+    ((sn . dsh_stable) = boolean/False and
+       { (s . dsh_stable) = boolean/True or
+           !
+           ((s . dsh_stable) = boolean/True) })
+
+}
+
+pred System_Elevator_MovingDown_Idle_enabledAfterStep [s: one DshSnapshot, sn: one DshSnapshot, pPID: one PID, dsh_scp0: DshStates, dsh_scp1: DshIds -> DshStates] {
+  some
+((pPID -> System_Elevator_MovingDown) & (sn . dsh_conf1))
+  { (s . dsh_stable) = boolean/True and
+    !
+    (System in dsh_scp0) and
+    !
+    ((pPID -> System_Elevator) in dsh_scp1) or
+    !
+    ((s . dsh_stable) = boolean/True) }
+}
+
+pred System_Elevator_MovingDown_Idle [s: one DshSnapshot, sn: one DshSnapshot, pPID: one PID] {
+  pPID . (s . System_Elevator_MovingDown_Idle_pre)
+  pPID . (sn . (s . System_Elevator_MovingDown_Idle_post))
+}
+
+pred System_Elevator_MovingDown_MoveDown_pre [s: one DshSnapshot, pPID: one PID] {
+  some
+((pPID -> System_Elevator_MovingDown) & (s . dsh_conf1))
+  some
+  (pPID . (s . System_Elevator_called)) and
+  (pPID . (s . System_Elevator_direction)) = Down and
+  some
+  (((pPID . (s . System_Elevator_current)).prevs) &
+     (pPID . (s . System_Elevator_called))) and
+  (pPID . (s . System_Elevator_current)) !in
+    (pPID . (s . System_Elevator_called))
+  ! (System in (s . dsh_sc_used0))
+  ! ((pPID -> System_Elevator) in (s . dsh_sc_used1))
+}
+
+
+pred System_Elevator_MovingDown_MoveDown_post [s: one DshSnapshot, sn: one DshSnapshot, pPID: one PID] {
+  (sn . dsh_conf0) = (s . dsh_conf0)
+  (sn . dsh_conf1) =
+  (((s . dsh_conf1) - (pPID -> System_Elevator_MovingDown))
+     + (pPID -> System_Elevator_MovingDown))
+  (pPID . (sn . System_Elevator_current)) =
+  ((((pPID . (s . System_Elevator_current)).prevs) &
+      (pPID . (s . System_Elevator_called))).max) and
+  (pPID . (sn . System_Elevator_called)) =
+    ((pPID . (s . System_Elevator_called)) -
+       (pPID . (sn . System_Elevator_current)))
+  ((pPID -> System_Elevator) .
+   (none . (sn . (s . _testIfNextStable))))=>
+    ((sn . dsh_stable) = boolean/True and
+       { (s . dsh_stable) = boolean/True or
+           !
+           ((s . dsh_stable) = boolean/True) })
+  else
+    ((sn . dsh_stable) = boolean/False and
+       { (s . dsh_stable) = boolean/True or
+           !
+           ((s . dsh_stable) = boolean/True) })
+
+}
+
+pred System_Elevator_MovingDown_MoveDown_enabledAfterStep [s: one DshSnapshot, sn: one DshSnapshot, pPID: one PID, dsh_scp0: DshStates, dsh_scp1: DshIds -> DshStates] {
+  some
+((pPID -> System_Elevator_MovingDown) & (sn . dsh_conf1))
+  { (s . dsh_stable) = boolean/True and
+    !
+    (System in dsh_scp0) and
+    !
+    ((pPID -> System_Elevator) in dsh_scp1) or
+    !
+    ((s . dsh_stable) = boolean/True) }
+}
+
+pred System_Elevator_MovingDown_MoveDown [s: one DshSnapshot, sn: one DshSnapshot, pPID: one PID] {
+  pPID . (s . System_Elevator_MovingDown_MoveDown_pre)
+  pPID . (sn . (s . System_Elevator_MovingDown_MoveDown_post))
+}
+
+pred System_Elevator_Idle_DefaultToGround_pre [s: one DshSnapshot, pPID: one PID] {
+  some ((pPID -> System_Elevator_Idle) & (s . dsh_conf1))
+  no
+  (pPID . (s . System_Elevator_called)) and
+  (Floor.min) !in (pPID . (s . System_Elevator_current))
+  ! (System in (s . dsh_sc_used0))
+  ! ((pPID -> System_Elevator) in (s . dsh_sc_used1))
+}
+
+
+pred System_Elevator_Idle_DefaultToGround_post [s: one DshSnapshot, sn: one DshSnapshot, pPID: one PID] {
+  (sn . dsh_conf0) = (s . dsh_conf0)
+  (sn . dsh_conf1) =
+  (((s . dsh_conf1) - (pPID -> System_Elevator_Idle)) +
+     (pPID -> System_Elevator_Idle))
+  (pPID . (sn . System_Elevator_current)) = (Floor.min)
+  ((pPID -> System_Elevator) .
+   (none . (sn . (s . _testIfNextStable))))=>
+    ((sn . dsh_stable) = boolean/True and
+       { (s . dsh_stable) = boolean/True or
+           !
+           ((s . dsh_stable) = boolean/True) })
+  else
+    ((sn . dsh_stable) = boolean/False and
+       { (s . dsh_stable) = boolean/True or
+           !
+           ((s . dsh_stable) = boolean/True) })
+
+}
+
+pred System_Elevator_Idle_DefaultToGround_enabledAfterStep [s: one DshSnapshot, sn: one DshSnapshot, pPID: one PID, dsh_scp0: DshStates, dsh_scp1: DshIds -> DshStates] {
+  some ((pPID -> System_Elevator_Idle) & (sn . dsh_conf1))
+  { (s . dsh_stable) = boolean/True and
+    !
+    (System in dsh_scp0) and
+    !
+    ((pPID -> System_Elevator) in dsh_scp1) or
+    !
+    ((s . dsh_stable) = boolean/True) }
+}
+
+pred System_Elevator_Idle_DefaultToGround [s: one DshSnapshot, sn: one DshSnapshot, pPID: one PID] {
+  pPID . (s . System_Elevator_Idle_DefaultToGround_pre)
+  pPID .
+  (sn . (s . System_Elevator_Idle_DefaultToGround_post))
+}
+
+pred System_Elevator_MovingUp_MoveUp_pre [s: one DshSnapshot, pPID: one PID] {
+  some ((pPID -> System_Elevator_MovingUp) & (s . dsh_conf1))
+  some
+  (pPID . (s . System_Elevator_called)) and
+  (pPID . (s . System_Elevator_direction)) = Up and
+  some
+  (((pPID . (s . System_Elevator_current)).nexts) &
+     (pPID . (s . System_Elevator_called))) and
+  (pPID . (s . System_Elevator_current)) !in
+    (pPID . (s . System_Elevator_called))
+  ! (System in (s . dsh_sc_used0))
+  ! ((pPID -> System_Elevator) in (s . dsh_sc_used1))
+}
+
+
+pred System_Elevator_MovingUp_MoveUp_post [s: one DshSnapshot, sn: one DshSnapshot, pPID: one PID] {
+  (sn . dsh_conf0) = (s . dsh_conf0)
+  (sn . dsh_conf1) =
+  (((s . dsh_conf1) - (pPID -> System_Elevator_MovingUp)) +
+     (pPID -> System_Elevator_MovingUp))
+  (pPID . (sn . System_Elevator_current)) =
+  ((((pPID . (s . System_Elevator_current)).nexts) &
+      (pPID . (s . System_Elevator_called))).min) and
+  (pPID . (sn . System_Elevator_called)) =
+    ((pPID . (s . System_Elevator_called)) -
+       (pPID . (sn . System_Elevator_current)))
+  ((pPID -> System_Elevator) .
+   (none . (sn . (s . _testIfNextStable))))=>
+    ((sn . dsh_stable) = boolean/True and
+       { (s . dsh_stable) = boolean/True or
+           !
+           ((s . dsh_stable) = boolean/True) })
+  else
+    ((sn . dsh_stable) = boolean/False and
+       { (s . dsh_stable) = boolean/True or
+           !
+           ((s . dsh_stable) = boolean/True) })
+
+}
+
+pred System_Elevator_MovingUp_MoveUp_enabledAfterStep [s: one DshSnapshot, sn: one DshSnapshot, pPID: one PID, dsh_scp0: DshStates, dsh_scp1: DshIds -> DshStates] {
+  some ((pPID -> System_Elevator_MovingUp) & (sn . dsh_conf1))
+  { (s . dsh_stable) = boolean/True and
+    !
+    (System in dsh_scp0) and
+    !
+    ((pPID -> System_Elevator) in dsh_scp1) or
+    !
+    ((s . dsh_stable) = boolean/True) }
+}
+
+pred System_Elevator_MovingUp_MoveUp [s: one DshSnapshot, sn: one DshSnapshot, pPID: one PID] {
+  pPID . (s . System_Elevator_MovingUp_MoveUp_pre)
+  pPID . (sn . (s . System_Elevator_MovingUp_MoveUp_post))
+}
+
+pred System_Elevator_MovingUp_Idle_pre [s: one DshSnapshot, pPID: one PID] {
+  some ((pPID -> System_Elevator_MovingUp) & (s . dsh_conf1))
+  no (pPID . (s . System_Elevator_called))
+  ! (System in (s . dsh_sc_used0))
+  ! ((pPID -> System_Elevator) in (s . dsh_sc_used1))
+}
+
+
+pred System_Elevator_MovingUp_Idle_post [s: one DshSnapshot, sn: one DshSnapshot, pPID: one PID] {
+  (sn . dsh_conf0) = (s . dsh_conf0)
+  (sn . dsh_conf1) =
+  (((s . dsh_conf1) - (pPID -> System_Elevator_Idle)) +
+     (pPID -> System_Elevator_Idle))
+  (pPID . (s . System_Elevator_current)) = (Floor.min)
+  ((pPID -> System_Elevator) .
+   (none . (sn . (s . _testIfNextStable))))=>
+    ((sn . dsh_stable) = boolean/True and
+       { (s . dsh_stable) = boolean/True or
+           !
+           ((s . dsh_stable) = boolean/True) })
+  else
+    ((sn . dsh_stable) = boolean/False and
+       { (s . dsh_stable) = boolean/True or
+           !
+           ((s . dsh_stable) = boolean/True) })
+
+}
+
+pred System_Elevator_MovingUp_Idle_enabledAfterStep [s: one DshSnapshot, sn: one DshSnapshot, pPID: one PID, dsh_scp0: DshStates, dsh_scp1: DshIds -> DshStates] {
+  some ((pPID -> System_Elevator_MovingUp) & (sn . dsh_conf1))
+  { (s . dsh_stable) = boolean/True and
+    !
+    (System in dsh_scp0) and
+    !
+    ((pPID -> System_Elevator) in dsh_scp1) or
+    !
+    ((s . dsh_stable) = boolean/True) }
+}
+
+pred System_Elevator_MovingUp_Idle [s: one DshSnapshot, sn: one DshSnapshot, pPID: one PID] {
+  pPID . (s . System_Elevator_MovingUp_Idle_pre)
+  pPID . (sn . (s . System_Elevator_MovingUp_Idle_post))
+}
+
+pred System_Elevator_MovingDown_ElevatorInCalled_pre [s: one DshSnapshot, pPID: one PID] {
+  some
+((pPID -> System_Elevator_MovingDown) & (s . dsh_conf1))
+  some
+  (pPID . (s . System_Elevator_called)) and
+  (pPID . (s . System_Elevator_called)) in
+    (pPID . (s . System_Elevator_current))
+  ! (System in (s . dsh_sc_used0))
+  ! ((pPID -> System_Elevator) in (s . dsh_sc_used1))
+}
+
+
+pred System_Elevator_MovingDown_ElevatorInCalled_post [s: one DshSnapshot, sn: one DshSnapshot, pPID: one PID] {
+  (sn . dsh_conf0) = (s . dsh_conf0)
+  (sn . dsh_conf1) =
+  (((s . dsh_conf1) - (pPID -> System_Elevator_MovingDown))
+     + (pPID -> System_Elevator_MovingDown))
+  (pPID . (sn . System_Elevator_called)) =
+  ((pPID . (s . System_Elevator_called)) -
+     (pPID . (s . System_Elevator_current)))
+  ((pPID -> System_Elevator) .
+   (none . (sn . (s . _testIfNextStable))))=>
+    ((sn . dsh_stable) = boolean/True and
+       { (s . dsh_stable) = boolean/True or
+           !
+           ((s . dsh_stable) = boolean/True) })
+  else
+    ((sn . dsh_stable) = boolean/False and
+       { (s . dsh_stable) = boolean/True or
+           !
+           ((s . dsh_stable) = boolean/True) })
+
+}
+
+pred System_Elevator_MovingDown_ElevatorInCalled_enabledAfterStep [s: one DshSnapshot, sn: one DshSnapshot, pPID: one PID, dsh_scp0: DshStates, dsh_scp1: DshIds -> DshStates] {
+  some
+((pPID -> System_Elevator_MovingDown) & (sn . dsh_conf1))
+  { (s . dsh_stable) = boolean/True and
+    !
+    (System in dsh_scp0) and
+    !
+    ((pPID -> System_Elevator) in dsh_scp1) or
+    !
+    ((s . dsh_stable) = boolean/True) }
+}
+
+pred System_Elevator_MovingDown_ElevatorInCalled [s: one DshSnapshot, sn: one DshSnapshot, pPID: one PID] {
+  pPID . (s . System_Elevator_MovingDown_ElevatorInCalled_pre)
+  pPID .
+  (sn .
+     (s . System_Elevator_MovingDown_ElevatorInCalled_post))
+}
+
+pred System_Elevator_MovingDown_ChangeDirToUp_pre [s: one DshSnapshot, pPID: one PID] {
+  some
+((pPID -> System_Elevator_MovingDown) & (s . dsh_conf1))
+  some
+  (pPID . (s . System_Elevator_called)) and
+  no
+  (((pPID . (s . System_Elevator_current)).prevs) &
+     (pPID . (s . System_Elevator_called))) and
+  some
+  (((pPID . (s . System_Elevator_current)).nexts) &
+     (pPID . (s . System_Elevator_called))) and
+  (pPID . (s . System_Elevator_current)) !in
+    (pPID . (s . System_Elevator_called))
+  ! (System in (s . dsh_sc_used0))
+  ! ((pPID -> System_Elevator) in (s . dsh_sc_used1))
+}
+
+
+pred System_Elevator_MovingDown_ChangeDirToUp_post [s: one DshSnapshot, sn: one DshSnapshot, pPID: one PID] {
+  (sn . dsh_conf0) = (s . dsh_conf0)
+  (sn . dsh_conf1) =
+  (((s . dsh_conf1) - (pPID -> System_Elevator_MovingUp)) +
+     (pPID -> System_Elevator_MovingUp))
+  (pPID . (sn . System_Elevator_direction)) = Up
+  ((pPID -> System_Elevator) .
+   (none . (sn . (s . _testIfNextStable))))=>
+    ((sn . dsh_stable) = boolean/True and
+       { (s . dsh_stable) = boolean/True or
+           !
+           ((s . dsh_stable) = boolean/True) })
+  else
+    ((sn . dsh_stable) = boolean/False and
+       { (s . dsh_stable) = boolean/True or
+           !
+           ((s . dsh_stable) = boolean/True) })
+
+}
+
+pred System_Elevator_MovingDown_ChangeDirToUp_enabledAfterStep [s: one DshSnapshot, sn: one DshSnapshot, pPID: one PID, dsh_scp0: DshStates, dsh_scp1: DshIds -> DshStates] {
+  some
+((pPID -> System_Elevator_MovingDown) & (sn . dsh_conf1))
+  { (s . dsh_stable) = boolean/True and
+    !
+    (System in dsh_scp0) and
+    !
+    ((pPID -> System_Elevator) in dsh_scp1) or
+    !
+    ((s . dsh_stable) = boolean/True) }
+}
+
+pred System_Elevator_MovingDown_ChangeDirToUp [s: one DshSnapshot, sn: one DshSnapshot, pPID: one PID] {
+  pPID . (s . System_Elevator_MovingDown_ChangeDirToUp_pre)
+  pPID .
+  (sn . (s . System_Elevator_MovingDown_ChangeDirToUp_post))
+}
+
+pred System_Controller_SendingUpRequest_pre [s: one DshSnapshot] {
+  some (System_Controller_Sending & (s . dsh_conf0))
+  Up in (Floor.(s . System_Controller_callToSend))
+  ! (System in (s . dsh_sc_used0))
+  ! (System_Controller in (s . dsh_sc_used0))
+}
+
+
+pred System_Controller_SendingUpRequest_post [s: one DshSnapshot, sn: one DshSnapshot] {
+  (sn . dsh_conf0) =
+  (((s . dsh_conf0) - System_Controller_Sending) +
+     System_Controller_Sending)
+  (sn . dsh_conf1) = (s . dsh_conf1)
+  ((some p: PID,f: (s . System_Controller_callToSend).Up | f.((p
+                                                               .
+                                                               (s
+                                                                  .
+                                                                  System_Elevator_current)).lte) and
+                                                           (p
+                                                              .
+                                                              (s
+                                                                 .
+                                                                 System_Elevator_direction))
+                                                             =
+                                                             Up))=>
+    (one e0: PID,f: (s . System_Controller_callToSend).Up | (e0
+                                                               .
+                                                               (s
+                                                                  .
+                                                                  System_Elevator_direction))
+                                                              =
+                                                              Up and
+                                                              f.((e0
+                                                                    .
+                                                                    (s
+                                                                       .
+                                                                       System_Elevator_current)).lte) and
+                                                              (e0
+                                                                 .
+                                                                 (sn
+                                                                    .
+                                                                    System_Elevator_called))
+                                                                =
+                                                                ((e0
+                                                                    .
+                                                                    (s
+                                                                       .
+                                                                       System_Elevator_called))
+                                                                   +
+                                                                   f) and
+                                                              (sn
+                                                                 .
+                                                                 System_Controller_callToSend)
+                                                                =
+                                                                ((s
+                                                                    .
+                                                                    System_Controller_callToSend)
+                                                                   -
+                                                                   (f
+                                                                      ->
+                                                                      Up)) and
+                                                              (no e1: PID
+                                                                        -
+                                                                        e0 | (e1
+                                                                                .
+                                                                                (s
+                                                                                   .
+                                                                                   System_Elevator_direction))
+                                                                               =
+                                                                               Up and
+                                                                               f.((e1
+                                                                                     .
+                                                                                     (s
+                                                                                        .
+                                                                                        System_Elevator_current)).((e0
+                                                                                                                      .
+                                                                                                                      (s
+                                                                                                                         .
+                                                                                                                         System_Elevator_current)).between))) and
+                                                              (all others: PID
+                                                                             -
+                                                                             e0 | (others
+                                                                                     .
+                                                                                     (sn
+                                                                                        .
+                                                                                        System_Elevator_called))
+                                                                                    =
+                                                                                    (others
+                                                                                       .
+                                                                                       (s
+                                                                                          .
+                                                                                          System_Elevator_called))))
+  else
+    (one e0: PID,f: (s . System_Controller_callToSend).Direction | (e0
+                                                                      .
+                                                                      (sn
+                                                                         .
+                                                                         System_Elevator_called))
+                                                                     =
+                                                                     ((e0
+                                                                         .
+                                                                         (s
+                                                                            .
+                                                                            System_Elevator_called))
+                                                                        +
+                                                                        f) and
+                                                                     (sn
+                                                                        .
+                                                                        System_Controller_callToSend)
+                                                                       =
+                                                                       ((s
+                                                                           .
+                                                                           System_Controller_callToSend)
+                                                                          -
+                                                                          (f
+                                                                             ->
+                                                                             (f.(s
+                                                                                   .
+                                                                                   System_Controller_callToSend)))) and
+                                                                     (all others: PID
+                                                                                    -
+                                                                                    e0 | (others
+                                                                                            .
+                                                                                            (sn
+                                                                                               .
+                                                                                               System_Elevator_called))
+                                                                                           =
+                                                                                           (others
+                                                                                              .
+                                                                                              (s
+                                                                                                 .
+                                                                                                 System_Elevator_called))))
+
+  (none . (System_Controller . (sn . (s . _testIfNextStable))))=>
+    ((sn . dsh_stable) = boolean/True and
+       { (s . dsh_stable) = boolean/True or
+           !
+           ((s . dsh_stable) = boolean/True) })
+  else
+    ((sn . dsh_stable) = boolean/False and
+       { (s . dsh_stable) = boolean/True or
+           !
+           ((s . dsh_stable) = boolean/True) })
+
+}
+
+pred System_Controller_SendingUpRequest_enabledAfterStep [s: one DshSnapshot, sn: one DshSnapshot, dsh_scp0: DshStates, dsh_scp1: DshIds -> DshStates] {
+  some (System_Controller_Sending & (sn . dsh_conf0))
+  { (s . dsh_stable) = boolean/True and
+    !
+    (System in dsh_scp0) and
+    !
+    (System_Controller in dsh_scp0) or
+    !
+    ((s . dsh_stable) = boolean/True) }
+}
+
+pred System_Controller_SendingUpRequest [s: one DshSnapshot, sn: one DshSnapshot] {
+  s . System_Controller_SendingUpRequest_pre
+  sn . (s . System_Controller_SendingUpRequest_post)
+}
+
+pred System_Elevator_MovingUp_ElevatorInCalled_pre [s: one DshSnapshot, pPID: one PID] {
+  some ((pPID -> System_Elevator_MovingUp) & (s . dsh_conf1))
+  some
+  (pPID . (s . System_Elevator_called)) and
+  (pPID . (s . System_Elevator_called)) in
+    (pPID . (s . System_Elevator_current))
+  ! (System in (s . dsh_sc_used0))
+  ! ((pPID -> System_Elevator) in (s . dsh_sc_used1))
+}
+
+
+pred System_Elevator_MovingUp_ElevatorInCalled_post [s: one DshSnapshot, sn: one DshSnapshot, pPID: one PID] {
+  (sn . dsh_conf0) = (s . dsh_conf0)
+  (sn . dsh_conf1) =
+  (((s . dsh_conf1) - (pPID -> System_Elevator_MovingUp)) +
+     (pPID -> System_Elevator_MovingUp))
+  (pPID . (sn . System_Elevator_called)) =
+  ((pPID . (s . System_Elevator_called)) -
+     (pPID . (s . System_Elevator_current)))
+  ((pPID -> System_Elevator) .
+   (none . (sn . (s . _testIfNextStable))))=>
+    ((sn . dsh_stable) = boolean/True and
+       { (s . dsh_stable) = boolean/True or
+           !
+           ((s . dsh_stable) = boolean/True) })
+  else
+    ((sn . dsh_stable) = boolean/False and
+       { (s . dsh_stable) = boolean/True or
+           !
+           ((s . dsh_stable) = boolean/True) })
+
+}
+
+pred System_Elevator_MovingUp_ElevatorInCalled_enabledAfterStep [s: one DshSnapshot, sn: one DshSnapshot, pPID: one PID, dsh_scp0: DshStates, dsh_scp1: DshIds -> DshStates] {
+  some ((pPID -> System_Elevator_MovingUp) & (sn . dsh_conf1))
+  { (s . dsh_stable) = boolean/True and
+    !
+    (System in dsh_scp0) and
+    !
+    ((pPID -> System_Elevator) in dsh_scp1) or
+    !
+    ((s . dsh_stable) = boolean/True) }
+}
+
+pred System_Elevator_MovingUp_ElevatorInCalled [s: one DshSnapshot, sn: one DshSnapshot, pPID: one PID] {
+  pPID . (s . System_Elevator_MovingUp_ElevatorInCalled_pre)
+  pPID .
+  (sn . (s . System_Elevator_MovingUp_ElevatorInCalled_post))
+}
+
+pred _testIfNextStable [s: one DshSnapshot, sn: one DshSnapshot, dsh_scp0: DshStates, dsh_scp1: DshIds -> DshStates] {
+  !
+(dsh_scp1 .
+   (dsh_scp0 .
+      (sn .
+         (s .
+            System_Controller_SendingDownRequest_enabledAfterStep))))
+  !
+(dsh_scp1 .
+   (dsh_scp0 .
+      (sn .
+         (s .
+            System_Elevator_MovingUp_ChangeDirToDown_enabledAfterStep))))
+  !
+(dsh_scp1 .
+   (dsh_scp0 .
+      (sn . (s . System_Elevator_Idle_Move_enabledAfterStep))))
+  !
+(dsh_scp1 .
+   (dsh_scp0 .
+      (sn .
+         (s .
+            System_Elevator_MovingDown_Idle_enabledAfterStep))))
+  !
+(dsh_scp1 .
+   (dsh_scp0 .
+      (sn .
+         (s .
+            System_Elevator_MovingDown_MoveDown_enabledAfterStep))))
+  !
+(dsh_scp1 .
+   (dsh_scp0 .
+      (sn .
+         (s .
+            System_Elevator_Idle_DefaultToGround_enabledAfterStep))))
+  !
+(dsh_scp1 .
+   (dsh_scp0 .
+      (sn .
+         (s .
+            System_Elevator_MovingUp_MoveUp_enabledAfterStep))))
+  !
+(dsh_scp1 .
+   (dsh_scp0 .
+      (sn .
+         (s . System_Elevator_MovingUp_Idle_enabledAfterStep))))
+  !
+(dsh_scp1 .
+   (dsh_scp0 .
+      (sn .
+         (s .
+            System_Elevator_MovingDown_ElevatorInCalled_enabledAfterStep))))
+  !
+(dsh_scp1 .
+   (dsh_scp0 .
+      (sn .
+         (s .
+            System_Elevator_MovingDown_ChangeDirToUp_enabledAfterStep))))
+  !
+(dsh_scp1 .
+   (dsh_scp0 .
+      (sn .
+         (s .
+            System_Controller_SendingUpRequest_enabledAfterStep))))
+  !
+(dsh_scp1 .
+   (dsh_scp0 .
+      (sn .
+         (s .
+            System_Elevator_MovingUp_ElevatorInCalled_enabledAfterStep))))
+}
+
+pred dsh_small_step [s: one DshSnapshot, sn: one DshSnapshot] {
+  (some pPID: one
+  PID | { sn . (s . System_Controller_SendingDownRequest) or
+            pPID .
+              (sn .
+                 (s .
+                    System_Elevator_MovingUp_ChangeDirToDown)) or
+            pPID . (sn . (s . System_Elevator_Idle_Move)) or
+            pPID .
+              (sn . (s . System_Elevator_MovingDown_Idle)) or
+            pPID .
+              (sn .
+                 (s . System_Elevator_MovingDown_MoveDown)) or
+            pPID .
+              (sn .
+                 (s . System_Elevator_Idle_DefaultToGround)) or
+            pPID .
+              (sn . (s . System_Elevator_MovingUp_MoveUp)) or
+            pPID .
+              (sn . (s . System_Elevator_MovingUp_Idle)) or
+            pPID .
+              (sn .
+                 (s .
+                    System_Elevator_MovingDown_ElevatorInCalled)) or
+            pPID .
+              (sn .
+                 (s .
+                    System_Elevator_MovingDown_ChangeDirToUp)) or
+            sn . (s . System_Controller_SendingUpRequest) or
+            pPID .
+              (sn .
+                 (s .
+                    System_Elevator_MovingUp_ElevatorInCalled)) })
+}
+
+fact dsh_traces_fact {  DshSnapshot/first . dsh_initial
+  (all s: one
+  (DshSnapshot - DshSnapshot/last) | (s . DshSnapshot/next)
+                                       .
+                                       (s . dsh_small_step))
+}
+

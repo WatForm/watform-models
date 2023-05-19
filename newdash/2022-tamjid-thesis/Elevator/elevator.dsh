@@ -14,8 +14,14 @@ state System {
 
 		default state Sending {}
 
-		action SendUpRequest [
-			one e0: PID, f: callToSend.Up | {
+
+
+		trans SendingUpRequest {
+			from Sending
+			when Up in Floor.callToSend
+			do {
+				(some p: PID, f: callToSend.Up | lte[Elevator[p]/current, f] and Elevator[p]/direction = Up) => {
+					one e0: PID, f: callToSend.Up | {
 				// The direction of the Elevator is "Up"
 				Elevator[e0]/direction = Up
 				// The elevator is below the floor that it needs to go to
@@ -28,35 +34,13 @@ state System {
 					between[Elevator[e0]/current, Elevator[e1]/current, f] }
 				all others: PID - e0 | Elevator[others]/called' = Elevator[others]/called
 			}
-		] {}
-
-		action SendDownRequest [
-			one e0: PID, f: callToSend.Down | {
-				Elevator[e0]/direction = Down
-				gte[Elevator[e0]/current, f]
-				Elevator[e0]/called' = Elevator[e0]/called + f
-				callToSend' = callToSend - (f -> Down)
-				no e1: PID - e0 | Elevator[e1]/direction = Down and between[f, Elevator[e0]/current, Elevator[e1]/current]
-				all others: PID - e0 | Elevator[others]/called' = Elevator[others]/called
-			}
-		] {}
-
-		action SendRequest [
-			one e0: PID, f: callToSend.Direction | {
+				} else {
+					one e0: PID, f: callToSend.Direction | {
 				Elevator[e0]/called' = Elevator[e0]/called + f
 				callToSend' = callToSend - (f -> f.callToSend)
 				all others: PID - e0 | Elevator[others]/called' = Elevator[others]/called	
 			}
-		] {}
-
-		trans SendingUpRequest {
-			from Sending
-			when Up in Floor.callToSend
-			do {
-				(some p: PID, f: callToSend.Up | lte[Elevator[p]/current, f] and Elevator[p]/direction = Up) => {
-					SendUpRequest
-				} else {
-					SendRequest
+			
 				}
 			}
 			goto Sending
@@ -67,9 +51,20 @@ state System {
 			when Down in Floor.callToSend
 			do {
 				(some p: PID, f: callToSend.Down | lte[f, Elevator[p]/current] and Elevator[p]/direction = Down) => {
-					SendDownRequest
+					one e0: PID, f: callToSend.Down | {
+				Elevator[e0]/direction = Down
+				gte[Elevator[e0]/current, f]
+				Elevator[e0]/called' = Elevator[e0]/called + f
+				callToSend' = callToSend - (f -> Down)
+				no e1: PID - e0 | Elevator[e1]/direction = Down and between[f, Elevator[e0]/current, Elevator[e1]/current]
+				all others: PID - e0 | Elevator[others]/called' = Elevator[others]/called
+			}
 				} else {
-					SendRequest
+					one e0: PID, f: callToSend.Direction | {
+				Elevator[e0]/called' = Elevator[e0]/called + f
+				callToSend' = callToSend - (f -> f.callToSend)
+				all others: PID - e0 | Elevator[others]/called' = Elevator[others]/called	
+			}
 				}
 			}
 			goto Sending
@@ -195,12 +190,13 @@ state System {
 		        	goto MovingUp
 		    	}
 		}
+		init {
+			no called
+			current = min[Floor]
+			direction = Up
+		}
 	}
 
-	init {
-		no called
-		current = min[Floor]
-		direction = Up
-	}
+
 }
 

@@ -15,8 +15,8 @@ state System {
 					lt[this, token.firstElem]
 				}
 				do {
-					Process[nextRing[this]]/token.addFirst[token.firstElem] // Pass the token
-					all others: Identifier - nextRing[this] | Process[others]/token' = Process[others]/token
+					Process[nextRing[thisIdentifier]]/token.addFirst[token.firstElem] // Pass the token
+					all others: Identifier - nextRing[thisIdentifier] | Process[others]/token' = Process[others]/token
 				}
 			}
 
@@ -24,7 +24,7 @@ state System {
 				when {
 					no elected
 					some token.elems
-					gt[this, token.firstElem]
+					gt[thisIdentifier, token.firstElem]
 				}
 				do {
 					token.removeFirst // Consume the Token
@@ -34,10 +34,10 @@ state System {
 			trans ElectLeader {
 				when {
 					no elected
-					token.firstElem = this
+					token.firstElem = thisIdentifier
 				}
 				do {
-					elected' =  this // Elect Leader
+					elected' =  thisIdentifier // Elect Leader
 				}
 				goto Elected
 			}
@@ -47,7 +47,7 @@ state System {
 
 		init {
 			one token
-			Process[nextRing[this]]/token.firstElem = this
+			Process[nextRing[thisIdentifier]]/token.firstElem = thisIdentifier
 		}
 	}
 
