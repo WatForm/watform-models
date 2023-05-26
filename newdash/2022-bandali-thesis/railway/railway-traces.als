@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-05-26 11:09:26
+   on 2023-05-26 12:20:38
 */
 
 open util/boolean
@@ -122,7 +122,6 @@ sig DshSnapshot {
 
 pred dsh_initial [s: one DshSnapshot] {
   (s . dsh_conf0) = Railway and
-  (s . dsh_stable) = boolean/True and
   (s . Railway_P0) = (0) and
   (s . Railway_P1) = (0) and
   (s . Railway_P2) = (0) and
@@ -133,6 +132,7 @@ pred dsh_initial [s: one DshSnapshot] {
   (s . Railway_P7) = (0) and
   (s . Railway_RA) = (1) and
   (s . Railway_RB) = (1)
+  (s . dsh_stable) = boolean/True
 }
 
 fact inv {  (all s: one

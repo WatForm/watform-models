@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-05-26 11:09:17
+   on 2023-05-26 12:20:28
 */
 
 open util/boolean
@@ -126,7 +126,7 @@ sig DshSnapshot {
 
 pred dsh_initial [s: one DshSnapshot] {
   (s . dsh_conf0) =
-  (DigitalWatch_Light_Off + DigitalWatch_Main_Displays_Time) and
+  (DigitalWatch_Light_Off + DigitalWatch_Main_Displays_Time)
   (s . dsh_stable) = boolean/True
 }
 

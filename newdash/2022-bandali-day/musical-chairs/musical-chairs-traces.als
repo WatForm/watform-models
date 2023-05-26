@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-05-26 11:09:25
+   on 2023-05-26 12:20:37
 */
 
 open util/boolean
@@ -109,13 +109,13 @@ sig DshSnapshot {
 
 pred dsh_initial [s: one DshSnapshot] {
   (s . dsh_conf0) = Game_Start and
-  (s . dsh_stable) = boolean/True and
   (# (s . Game_activePlayers)) > (1) and
   (# (s . Game_activePlayers)) =
     ((1).((# (s . Game_activeChairs)).plus)) and
   (s . Game_activePlayers) = Players and
   (s . Game_activeChairs) = Chairs and
   (s . Game_occupiedChairs) = (none -> none)
+  (s . dsh_stable) = boolean/True
 }
 
 pred Game_Sitting_EliminateLoser_pre [s: one DshSnapshot] {

@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-05-26 11:09:34
+   on 2023-05-26 12:20:45
 */
 
 open util/ring[Identifier] as P0
@@ -36,7 +36,6 @@ pred dsh_initial [s: one DshSnapshot, p0_Identifier: one Identifier] {
                    (Identifier -> System_Process_Electing) and
                  (s . dsh_sc_used1) = none and
                  (s . dsh_events1) in DshEnvEvents and
-                 (s . dsh_stable) = boolean/True and
                  one
                  (p0_Identifier . (s . System_Process_token)) and
                  (((thisIdentifier.nextRing) .
@@ -44,6 +43,7 @@ pred dsh_initial [s: one DshSnapshot, p0_Identifier: one Identifier] {
                    = thisIdentifier and
                  no
                  (s . System_elected))
+  (s . dsh_stable) = boolean/True
 }
 
 pred System_Process_Electing_ConsumeToken_pre [s: one DshSnapshot, p0_Identifier: one Identifier] {

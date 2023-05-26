@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-05-26 11:09:31
+   on 2023-05-26 12:20:42
 */
 
 open util/ordering[Level] as nodeLevel
@@ -38,13 +38,13 @@ pred dsh_initial [s: one DshSnapshot, p0_Node: one Node] {
              (Node -> DistrubedTreeSpanning_N_Unassigned) and
            (s . dsh_sc_used1) = none and
            (s . dsh_events1) in DshEnvEvents and
-           (s . dsh_stable) = boolean/True and
            no
            (p0_Node . (s . DistrubedTreeSpanning_N_level)) and
            no
            (p0_Node . (s . DistrubedTreeSpanning_N_parent)) and
            no
            (p0_Node . (s . DistrubedTreeSpanning_N_message)))
+  (s . dsh_stable) = boolean/True
 }
 
 pred DistrubedTreeSpanning_N_Assigned_sendMessage_pre [s: one DshSnapshot, p0_Node: one Node] {

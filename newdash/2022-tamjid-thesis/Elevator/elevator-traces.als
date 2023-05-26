@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-05-26 11:09:32
+   on 2023-05-26 12:20:43
 */
 
 open util/ordering[Floor]
@@ -46,7 +46,6 @@ pred dsh_initial [s: one DshSnapshot, p0_PID: one PID] {
           (s . dsh_conf1) = (PID -> System_Elevator_Idle) and
           (s . dsh_sc_used1) = none and
           (s . dsh_events1) in DshEnvEvents and
-          (s . dsh_stable) = boolean/True and
           no
           (p0_PID . (s . System_Elevator_called)) and
           (p0_PID . (s . System_Elevator_current)) =
@@ -54,6 +53,7 @@ pred dsh_initial [s: one DshSnapshot, p0_PID: one PID] {
           (p0_PID . (s . System_Elevator_direction)) = Up and
           (# (s . System_Controller_callToSend)) = (3) and
           Up !in (Floor.(s . System_Controller_callToSend)))
+  (s . dsh_stable) = boolean/True
 }
 
 pred System_Controller_SendingDownRequest_pre [s: one DshSnapshot] {

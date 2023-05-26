@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-05-26 11:09:28
+   on 2023-05-26 12:20:39
 */
 
 open util/boolean
@@ -87,7 +87,6 @@ pred dsh_initial [s: one DshSnapshot, p0_ClientID: one ClientID, p1_CoordinatorI
                         Carousel_PartitionLeader_Waiting)) and
                 (s . dsh_sc_used1) = none and
                 (s . dsh_events1) in DshEnvEvents and
-                (s . dsh_stable) = boolean/True and
                 no
                 (p1_CoordinatorID .
                    (s . Carousel_Coordinator_client)) and
@@ -138,6 +137,7 @@ pred dsh_initial [s: one DshSnapshot, p0_ClientID: one ClientID, p1_CoordinatorI
                   (p0_ClientID .
                      (s . Carousel_Client_transToSend))) =
                   (2))
+  (s . dsh_stable) = boolean/True
 }
 
 pred Carousel_Client_Waiting_FinalizeCommit_pre [s: one DshSnapshot, p0_ClientID: one ClientID] {

@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-05-26 11:09:23
+   on 2023-05-26 12:20:35
 */
 
 open util/boolean
@@ -205,7 +205,6 @@ sig DshSnapshot {
 
 pred dsh_initial [s: one DshSnapshot] {
   (s . dsh_conf0) = LandingGear and
-  (s . dsh_stable) = boolean/True and
   (s . LandingGear_doors) = CLOSED and
   (s . LandingGear_gears) = EXTENDED and
   (s . LandingGear_general_electro_valve) = False and
@@ -214,6 +213,7 @@ pred dsh_initial [s: one DshSnapshot] {
   (s . LandingGear_retract_gears_electro_valve) = False and
   (s . LandingGear_extend_gears_electro_valve) = False and
   (s . LandingGear_anomaly) = False
+  (s . dsh_stable) = boolean/True
 }
 
 fact inv {  (all s: one

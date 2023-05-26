@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-05-26 11:09:33
+   on 2023-05-26 12:20:44
 */
 
 open util/ordering[Temp] as temp
@@ -83,7 +83,6 @@ pred dsh_initial [s: one DshSnapshot, p0_Identifier: one Identifier] {
                       HeatingSystem_Functioning_Room_No_Heat_Request_Idle_No_Heat) and
                  (s . dsh_sc_used1) = none and
                  (s . dsh_events1) in DshEnvEvents and
-                 (s . dsh_stable) = boolean/True and
                  (s .
                     HeatingSystem_Functioning_Controller_controllerOn)
                    = False and
@@ -95,6 +94,7 @@ pred dsh_initial [s: one DshSnapshot, p0_Identifier: one Identifier] {
                     (s .
                        HeatingSystem_Functioning_Room_valvePos))
                    = CLOSED)
+  (s . dsh_stable) = boolean/True
 }
 
 pred HeatingSystem_Functioning_Controller_Off_T8_pre [s: one DshSnapshot] {
