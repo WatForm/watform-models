@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-05-18 09:59:20
+   on 2023-05-25 20:50:42
 */
 
 open util/boolean
@@ -108,6 +108,7 @@ sig DshSnapshot {
 }
 
 pred dsh_initial [s: one DshSnapshot] {
+  (s . dsh_conf0) = Game_Start and
   (# (s . Game_activePlayers)) > (1) and
   (# (s . Game_activePlayers)) =
     ((1).((# (s . Game_activeChairs)).plus)) and
@@ -124,7 +125,8 @@ pred Game_Sitting_EliminateLoser_pre [s: one DshSnapshot] {
 
 pred Game_Sitting_EliminateLoser_post [s: one DshSnapshot, sn: one DshSnapshot] {
   (sn . dsh_conf0) =
-  (((s . dsh_conf0) - Game_Start) + Game_Start)
+  ((((((s . dsh_conf0) - Game_Start) - Game_Walking) -
+       Game_Sitting) - Game_End) + Game_Start)
   (sn . Game_activePlayers) =
   (Chairs.(s . Game_occupiedChairs)) and
   (# (sn . Game_activeChairs)) =
@@ -144,7 +146,9 @@ pred Game_Start_DeclareWinner_pre [s: one DshSnapshot] {
 
 
 pred Game_Start_DeclareWinner_post [s: one DshSnapshot, sn: one DshSnapshot] {
-  (sn . dsh_conf0) = (((s . dsh_conf0) - Game_End) + Game_End)
+  (sn . dsh_conf0) =
+  ((((((s . dsh_conf0) - Game_Start) - Game_Walking) -
+       Game_Sitting) - Game_End) + Game_End)
 }
 
 pred Game_Start_DeclareWinner [s: one DshSnapshot, sn: one DshSnapshot] {
@@ -162,7 +166,8 @@ pred Game_Start_Walk_pre [s: one DshSnapshot] {
 
 pred Game_Start_Walk_post [s: one DshSnapshot, sn: one DshSnapshot] {
   (sn . dsh_conf0) =
-  (((s . dsh_conf0) - Game_Walking) + Game_Walking)
+  ((((((s . dsh_conf0) - Game_Start) - Game_Walking) -
+       Game_Sitting) - Game_End) + Game_Walking)
   (sn . Game_occupiedChairs) = (none -> none)
 }
 
@@ -180,7 +185,8 @@ pred Game_Walking_Sit_pre [s: one DshSnapshot] {
 
 pred Game_Walking_Sit_post [s: one DshSnapshot, sn: one DshSnapshot] {
   (sn . dsh_conf0) =
-  (((s . dsh_conf0) - Game_Sitting) + Game_Sitting)
+  ((((((s . dsh_conf0) - Game_Start) - Game_Walking) -
+       Game_Sitting) - Game_End) + Game_Sitting)
   (sn . Game_occupiedChairs) in
   ((s . Game_activeChairs) -> (s . Game_activePlayers)) and
   (sn . Game_activeChairs) = (s . Game_activeChairs) and

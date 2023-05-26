@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-05-18 09:59:14
+   on 2023-05-25 20:50:35
 */
 
 open util/boolean
@@ -111,6 +111,7 @@ sig DshSnapshot {
 }
 
 pred dsh_initial [s: one DshSnapshot] {
+  (s . dsh_conf0) = LandingGear and
   (s . LandingGear_doors) = CLOSED and
   (s . LandingGear_gears) = EXTENDED
 }
