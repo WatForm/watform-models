@@ -1,0 +1,4 @@
+assert R22 {
+    ag(ag(LandingGear/handle = UP) implies
+        ax(ag(LandingGear/gears != EXTENDING)))
+}

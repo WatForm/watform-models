@@ -1,0 +1,4 @@
+assert R22 {
+    ag[imp_[ag[LandingGear/handle = UP],
+        ax[ag[LandingGear/gears != EXTENDING]]]]
+}

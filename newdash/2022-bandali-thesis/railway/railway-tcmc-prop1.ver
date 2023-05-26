@@ -1,0 +1,13 @@
+pred trains_eventually_finish {
+    ef {
+        Railway/P0 = 6
+        Railway/P1 = 6
+        Railway/P2 = 6
+        Railway/P3 = 6
+        Railway/P4 = 6
+        Railway/P5 = 6
+        Railway/P6 = 6
+        Railway/P7 = 6
+    }
+}
+run trains_eventually_finish for 49 Snapshot, 0 EventLabel

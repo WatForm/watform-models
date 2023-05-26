@@ -1,0 +1,5 @@
+assert R31 {
+    ag[imp_e[(LandingGear/extend_gears_electro_valve = True
+        or LandingGear/retract_gears_electro_valve = True),
+            LandingGear/doors = OPEN]]
+}

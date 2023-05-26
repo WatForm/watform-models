@@ -1,0 +1,6 @@
+assert R32 {
+    ag[(LandingGear/open_doors_electro_valve = True
+        or LandingGear/close_doors_electro_valve = True)
+            implies (LandingGear/gears = RETRACTED
+                     or LandingGear/gears = EXTENDED)]
+}

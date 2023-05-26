@@ -1,0 +1,4 @@
+assert R21 {
+    ag(ag(LandingGear/handle = DOWN) implies
+        ax(ag(LandingGear/gears != RETRACTING)))
+}

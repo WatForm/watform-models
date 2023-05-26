@@ -1,0 +1,6 @@
+assert R74 {
+    ag[imp_e[(LandingGear/extend_gears_electro_valve = True
+        and not(gears_extended)
+        and LandingGear/timeout = True),
+       ax[ag[LandingGear/anomaly]]]]
+}

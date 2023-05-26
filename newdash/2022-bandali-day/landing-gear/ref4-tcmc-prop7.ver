@@ -1,0 +1,4 @@
+assert R41 {
+    ag[not(LandingGear/open_doors_electro_valve = True
+           and LandingGear/close_doors_electro_valve = True)]
+}
