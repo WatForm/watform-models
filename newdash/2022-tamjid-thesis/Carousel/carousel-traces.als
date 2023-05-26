@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-05-25 20:50:46
+   on 2023-05-26 11:09:28
 */
 
 open util/boolean
@@ -87,6 +87,7 @@ pred dsh_initial [s: one DshSnapshot, p0_ClientID: one ClientID, p1_CoordinatorI
                         Carousel_PartitionLeader_Waiting)) and
                 (s . dsh_sc_used1) = none and
                 (s . dsh_events1) in DshEnvEvents and
+                (s . dsh_stable) = boolean/True and
                 no
                 (p1_CoordinatorID .
                    (s . Carousel_Coordinator_client)) and

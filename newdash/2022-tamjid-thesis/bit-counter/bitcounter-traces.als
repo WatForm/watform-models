@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-05-25 20:50:44
+   on 2023-05-26 11:09:27
 */
 
 open util/ordering[PID] as P0
@@ -40,6 +40,7 @@ pred dsh_initial [s: one DshSnapshot, p0_PID: one PID] {
           (s . dsh_conf1) = (PID -> Counter_Bit_Bit1) and
           (s . dsh_sc_used1) = none and
           (s . dsh_events1) in DshEnvEvents and
+          (s . dsh_stable) = boolean/True and
           (s . Counter_current) = P0/first)
 }
 

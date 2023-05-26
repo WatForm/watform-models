@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-05-25 20:50:34
+   on 2023-05-26 11:09:18
 */
 
 open util/boolean
@@ -106,6 +106,7 @@ sig DshSnapshot {
 
 pred dsh_initial [s: one DshSnapshot] {
   (s . dsh_conf0) = EHealthSystem and
+  (s . dsh_stable) = boolean/True and
   no
   (s . EHealthSystem_medications) and
   no
