@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-05-26 12:20:36
+   on 2023-05-26 13:58:05
 */
 
 open util/boolean
@@ -106,7 +106,6 @@ pred dsh_initial [s: one DshSnapshot] {
   (s . Library_loans) and
   no
   (s . Library_reservations)
-  (s . dsh_stable) = boolean/True
 }
 
 fact inv {  (all s: one DshSnapshot | (Const.maxNbLoans) = (7))

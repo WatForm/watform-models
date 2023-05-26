@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-05-26 12:20:29
+   on 2023-05-26 13:57:59
 */
 
 open util/boolean
@@ -114,7 +114,6 @@ pred dsh_initial [s: one DshSnapshot] {
   (s . EHealthSystem_patients) and
   no
   (s . EHealthSystem_interactions)
-  (s . dsh_stable) = boolean/True
 }
 
 fact inv {  (all s: one

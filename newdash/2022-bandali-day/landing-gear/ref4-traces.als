@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-05-26 12:20:35
+   on 2023-05-26 13:58:04
 */
 
 open util/boolean
@@ -213,7 +213,6 @@ pred dsh_initial [s: one DshSnapshot] {
   (s . LandingGear_retract_gears_electro_valve) = False and
   (s . LandingGear_extend_gears_electro_valve) = False and
   (s . LandingGear_anomaly) = False
-  (s . dsh_stable) = boolean/True
 }
 
 fact inv {  (all s: one
