@@ -1,0 +1,6 @@
+assert infiniteLiveness {
+        // number of players eventually always reaches and remains at 1
+        ctl_mc[af[ag[{ s : Snapshot | #s.Game_activePlayers = 1}]]]
+    }
+    check infiniteLiveness for exactly 3 Players , exactly 2 Chairs ,
+        exactly 8 Snapshot, 2 EventLabel

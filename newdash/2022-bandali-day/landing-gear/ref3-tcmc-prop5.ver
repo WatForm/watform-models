@@ -1,0 +1,5 @@
+assert R31 {
+    ag[(LandingGear/extend_gears_electro_valve = True
+        or LandingGear/retract_gears_electro_valve = True)
+            implies LandingGear/doors = OPEN]
+}

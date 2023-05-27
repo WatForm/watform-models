@@ -1,0 +1,4 @@
+assert R11_bis {
+    ag[imp_[ag[LandingGear/handle = DOWN],
+        af[LandingGear/gears = EXTENDED and LandingGear/doors = CLOSED]]]
+}

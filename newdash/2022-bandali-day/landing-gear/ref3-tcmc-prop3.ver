@@ -1,0 +1,4 @@
+assert R21 {
+    ag[imp_[ag[LandingGear/handle = DOWN],
+        ax[ag[LandingGear/gears != RETRACTING]]]]
+}

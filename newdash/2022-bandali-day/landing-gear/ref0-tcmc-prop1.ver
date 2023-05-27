@@ -1,0 +1,10 @@
+assert R11_bis {
+    ctl_mc[
+     ag[
+        imp_ctl[
+            ag[{s:Snapshot | LandingGear_handle = DOWN}],
+            af[{s:Snapshot | LandingGear_gears = EXTENDED and LandingGear_doors = CLOSED}]
+        ]
+     ]
+    ]        
+}

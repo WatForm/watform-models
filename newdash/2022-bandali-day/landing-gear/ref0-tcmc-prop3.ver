@@ -1,0 +1,10 @@
+assert R21 {
+    ctl_mc[
+     ag[
+        imp_ctl[
+            ag[{s:Snapshot | LandingGear_handle = DOWN}],
+            ax[ag[{s:Snapshot | LandingGear_gears = RETRACTING}]]
+        ]
+     ]
+    ] 
+}

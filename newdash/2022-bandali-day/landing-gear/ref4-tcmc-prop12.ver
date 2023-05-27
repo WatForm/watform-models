@@ -1,0 +1,6 @@
+assert R63 {
+    ag[imp_e[(LandingGear/retract_gears_electro_valve = True
+        and a_gear_extended
+        and LandingGear/timeout = True),
+       ax[ag[LandingGear/anomaly]]]]
+}

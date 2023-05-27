@@ -1,0 +1,4 @@
+assert R42 {
+    ag[not(LandingGear/extend_gears_electro_valve = True
+           and LandingGear/retract_gears_electro_valve = True)]
+}

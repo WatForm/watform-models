@@ -1,0 +1,4 @@
+assert R11_bis {
+    ag(ag(LandingGear/handle = DOWN) implies
+        af(LandingGear/gears = EXTENDED and LandingGear/doors = CLOSED))
+}

@@ -1,0 +1,6 @@
+assert ctl_allCallsAreEventuallySend { 
+	ctl_mc[af[{s: one Snapshot | no s.(Snapshot <: System_Controller_callToSend)}]]
+}
+
+// check ctl_allCallsAreEventuallySend for 17 Snapshot, exactly 3 PID, exactly 4 Floor, 1 PathNode
+check ctl_allCallsAreEventuallySend for 17 Snapshot, exactly 4 PID, exactly 4 Floor, 1 PathNode

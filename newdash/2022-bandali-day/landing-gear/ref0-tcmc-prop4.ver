@@ -1,0 +1,10 @@
+assert R22 {
+    ctl_mc[
+     ag[
+        imp_ctl[
+            ag[{s:Snapshot | LandingGear_handle = UP}],
+            ax[ag[{s:Snapshot | LandingGear_gears != EXTENDING}]]
+        ]
+     ]
+    ] 
+}

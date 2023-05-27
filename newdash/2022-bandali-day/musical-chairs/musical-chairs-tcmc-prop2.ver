@@ -1,0 +1,8 @@
+one sig Alice extends Players {}
+    pred existential {
+        // Alice wins in some instance
+        ctl_mc[ef[{ s : Snapshot |
+            Game_End in s.conf and s.Game_activePlayers = Alice }]]
+    }
+    run existential for exactly 3 Players , exactly 2 Chairs ,
+        exactly 8 Snapshot, 2 EventLabel

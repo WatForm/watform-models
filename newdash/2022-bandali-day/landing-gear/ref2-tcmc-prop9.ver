@@ -1,0 +1,7 @@
+assert R51 {
+    ag[(LandingGear/open_doors_electro_valve = True
+        or LandingGear/close_doors_electro_valve = True
+        or LandingGear/extend_gears_electro_valve = True
+        or LandingGear/retract_gears_electro_valve = True)
+       implies LandingGear/general_electro_valve = True]
+}
