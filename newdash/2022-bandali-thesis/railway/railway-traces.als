@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-05-27 15:36:53
+   on 2023-05-27 17:38:50
 */
 
 open util/boolean
@@ -96,13 +96,13 @@ sig DshSnapshot {
   dsh_sc_used0: set DshStates,
   dsh_conf0: set DshStates,
   Railway_RA: one
-((((((((0) + (1)) + (2)) + (3)) + (4)) + (5)) + (6)) + (7))
-  + (8),
+((((((((0) + (1)) + (2)) + (3)) + (4)) + (5)) + (6)) + (7)) +
+  (8),
   Railway_P0: one
 ((((((0) + (1)) + (2)) + (3)) + (4)) + (5)) + (6),
   Railway_RB: one
-((((((((0) + (1)) + (2)) + (3)) + (4)) + (5)) + (6)) + (7))
-  + (8),
+((((((((0) + (1)) + (2)) + (3)) + (4)) + (5)) + (6)) + (7)) +
+  (8),
   Railway_P1: one
 ((((((0) + (1)) + (2)) + (3)) + (4)) + (5)) + (6),
   Railway_ct: one Train,
@@ -120,61 +120,62 @@ sig DshSnapshot {
 ((((((0) + (1)) + (2)) + (3)) + (4)) + (5)) + (6)
 }
 
-pred dsh_initial [s: one DshSnapshot] {
-  (s . dsh_conf0) = Railway and
-  (s . Railway_P0) = (0) and
-  (s . Railway_P1) = (0) and
-  (s . Railway_P2) = (0) and
-  (s . Railway_P3) = (0) and
-  (s . Railway_P4) = (0) and
-  (s . Railway_P5) = (0) and
-  (s . Railway_P6) = (0) and
-  (s . Railway_P7) = (0) and
-  (s . Railway_RA) = (1) and
-  (s . Railway_RB) = (1)
+pred dsh_initial [
+	s: one DshSnapshot] {
+  (s.dsh_conf0) = Railway and
+  (s.Railway_P0) = (0) and
+  (s.Railway_P1) = (0) and
+  (s.Railway_P2) = (0) and
+  (s.Railway_P3) = (0) and
+  (s.Railway_P4) = (0) and
+  (s.Railway_P5) = (0) and
+  (s.Railway_P6) = (0) and
+  (s.Railway_P7) = (0) and
+  (s.Railway_RA) = (1) and
+  (s.Railway_RB) = (1)
 }
 
 fact inv {  (all s: one
   DshSnapshot | (Const.T0) =
                   ((((((Int[0] -> s1) + (Int[1] -> s9)) +
-                        (Int[2] -> s10)) + (Int[3] -> s13))
-                      + (Int[4] -> s15)) + (Int[5] -> s20))
-                    + (Int[6] -> s23) and
+                        (Int[2] -> s10)) + (Int[3] -> s13)) +
+                      (Int[4] -> s15)) + (Int[5] -> s20)) +
+                    (Int[6] -> s23) and
                   (Const.T1) =
                     ((((((Int[0] -> s3) + (Int[1] -> s9)) +
-                          (Int[2] -> s10)) + (Int[3] -> s13))
-                        + (Int[4] -> s15)) + (Int[5] -> s20))
-                      + (Int[6] -> s24) and
+                          (Int[2] -> s10)) + (Int[3] -> s13)) +
+                        (Int[4] -> s15)) + (Int[5] -> s20)) +
+                      (Int[6] -> s24) and
                   (Const.T2) =
                     ((((((Int[0] -> s5) + (Int[1] -> s27)) +
-                          (Int[2] -> s11)) + (Int[3] -> s13))
-                        + (Int[4] -> s16)) + (Int[5] -> s20))
-                      + (Int[6] -> s25) and
+                          (Int[2] -> s11)) + (Int[3] -> s13)) +
+                        (Int[4] -> s16)) + (Int[5] -> s20)) +
+                      (Int[6] -> s25) and
                   (Const.T3) =
                     ((((((Int[0] -> s7) + (Int[1] -> s27)) +
-                          (Int[2] -> s11)) + (Int[3] -> s13))
-                        + (Int[4] -> s16)) + (Int[5] -> s20))
-                      + (Int[6] -> s26) and
+                          (Int[2] -> s11)) + (Int[3] -> s13)) +
+                        (Int[4] -> s16)) + (Int[5] -> s20)) +
+                      (Int[6] -> s26) and
                   (Const.T4) =
-                    ((((((Int[0] -> s23) + (Int[1] -> s22))
-                          + (Int[2] -> s17)) +
-                         (Int[3] -> s18)) + (Int[4] -> s11))
-                       + (Int[5] -> s9)) + (Int[6] -> s2) and
+                    ((((((Int[0] -> s23) + (Int[1] -> s22)) +
+                          (Int[2] -> s17)) + (Int[3] -> s18)) +
+                        (Int[4] -> s11)) + (Int[5] -> s9)) +
+                      (Int[6] -> s2) and
                   (Const.T5) =
-                    ((((((Int[0] -> s24) + (Int[1] -> s22))
-                          + (Int[2] -> s17)) +
-                         (Int[3] -> s18)) + (Int[4] -> s11))
-                       + (Int[5] -> s9)) + (Int[6] -> s4) and
+                    ((((((Int[0] -> s24) + (Int[1] -> s22)) +
+                          (Int[2] -> s17)) + (Int[3] -> s18)) +
+                        (Int[4] -> s11)) + (Int[5] -> s9)) +
+                      (Int[6] -> s4) and
                   (Const.T6) =
-                    ((((((Int[0] -> s25) + (Int[1] -> s22))
-                          + (Int[2] -> s17)) +
-                         (Int[3] -> s18)) + (Int[4] -> s12))
-                       + (Int[5] -> s27)) + (Int[6] -> s6) and
+                    ((((((Int[0] -> s25) + (Int[1] -> s22)) +
+                          (Int[2] -> s17)) + (Int[3] -> s18)) +
+                        (Int[4] -> s12)) + (Int[5] -> s27)) +
+                      (Int[6] -> s6) and
                   (Const.T7) =
-                    ((((((Int[0] -> s26) + (Int[1] -> s22))
-                          + (Int[2] -> s17)) +
-                         (Int[3] -> s18)) + (Int[4] -> s12))
-                       + (Int[5] -> s27)) + (Int[6] -> s8) and
+                    ((((((Int[0] -> s26) + (Int[1] -> s22)) +
+                          (Int[2] -> s17)) + (Int[3] -> s18)) +
+                        (Int[4] -> s12)) + (Int[5] -> s27)) +
+                      (Int[6] -> s8) and
                   (Const.A0) =
                     ((((((Int[0] -> Int[0]) +
                            (Int[1] -> Int[0])) +
@@ -305,365 +306,394 @@ fact inv {  (all s: one
                       (Int[6] -> Int[0]))
 }
 
-pred Railway_move_train3_pre [s: one DshSnapshot] {
-  some (Railway & (s . dsh_conf0))
-  (s . Railway_ct) = t3 and
-  (s . Railway_P3) < (6) and
-  (((1).((s . Railway_P3).plus)).(Const.T3)) !=
-    ((s . Railway_P0).(Const.T0)) and
-  (((1).((s . Railway_P3).plus)).(Const.T3)) !=
-    ((s . Railway_P1).(Const.T1)) and
-  (((1).((s . Railway_P3).plus)).(Const.T3)) !=
-    ((s . Railway_P2).(Const.T2)) and
-  (((1).((s . Railway_P3).plus)).(Const.T3)) !=
-    ((s . Railway_P4).(Const.T4)) and
-  (((1).((s . Railway_P3).plus)).(Const.T3)) !=
-    ((s . Railway_P5).(Const.T5)) and
-  (((1).((s . Railway_P3).plus)).(Const.T3)) !=
-    ((s . Railway_P6).(Const.T6)) and
-  (((1).((s . Railway_P3).plus)).(Const.T3)) !=
-    ((s . Railway_P7).(Const.T7)) and
-  (7).(((((1).((s . Railway_P3).plus)).(Const.A3)).((s .
-                                                       Railway_RA).plus)).lte) and
-  (7).(((((1).((s . Railway_P3).plus)).(Const.B3)).((s .
-                                                       Railway_RB).plus)).lte)
-  ! (Railway in (s . dsh_sc_used0))
+pred Railway_move_train3_pre [
+	s: one DshSnapshot] {
+  some (Railway & (s.dsh_conf0))
+  (s.Railway_ct) = t3 and
+  (s.Railway_P3) < (6) and
+  (((1).((s.Railway_P3).plus)).(Const.T3)) !=
+    ((s.Railway_P0).(Const.T0)) and
+  (((1).((s.Railway_P3).plus)).(Const.T3)) !=
+    ((s.Railway_P1).(Const.T1)) and
+  (((1).((s.Railway_P3).plus)).(Const.T3)) !=
+    ((s.Railway_P2).(Const.T2)) and
+  (((1).((s.Railway_P3).plus)).(Const.T3)) !=
+    ((s.Railway_P4).(Const.T4)) and
+  (((1).((s.Railway_P3).plus)).(Const.T3)) !=
+    ((s.Railway_P5).(Const.T5)) and
+  (((1).((s.Railway_P3).plus)).(Const.T3)) !=
+    ((s.Railway_P6).(Const.T6)) and
+  (((1).((s.Railway_P3).plus)).(Const.T3)) !=
+    ((s.Railway_P7).(Const.T7)) and
+  (7).(((((1).((s.Railway_P3).plus)).(Const.A3)).((s.Railway_RA).plus)).lte) and
+  (7).(((((1).((s.Railway_P3).plus)).(Const.B3)).((s.Railway_RB).plus)).lte)
+  !(Railway in (s.dsh_sc_used0))
 }
 
 
-pred Railway_move_train3_post [s: one DshSnapshot, sn: one DshSnapshot] {
-  (sn . dsh_conf0) = (((s . dsh_conf0) - Railway) + Railway)
-  (sn . Railway_P3) = ((1).((s . Railway_P3).plus)) and
-  (sn . Railway_RA) =
-    (((sn . Railway_P3).(Const.A3)).((s . Railway_RA).plus)) and
-  (sn . Railway_RB) =
-    (((sn . Railway_P3).(Const.B3)).((s . Railway_RB).plus))
+pred Railway_move_train3_post [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_conf0) = (((s.dsh_conf0) - Railway) + Railway)
+  (sn.Railway_P3) = ((1).((s.Railway_P3).plus)) and
+  (sn.Railway_RA) =
+    (((sn.Railway_P3).(Const.A3)).((s.Railway_RA).plus)) and
+  (sn.Railway_RB) =
+    (((sn.Railway_P3).(Const.B3)).((s.Railway_RB).plus))
 }
 
-pred Railway_move_train3 [s: one DshSnapshot, sn: one DshSnapshot] {
-  s . Railway_move_train3_pre
-  sn . (s . Railway_move_train3_post)
+pred Railway_move_train3 [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  s.Railway_move_train3_pre
+  sn.(s.Railway_move_train3_post)
 }
 
-pred Railway_move_train2_pre [s: one DshSnapshot] {
-  some (Railway & (s . dsh_conf0))
-  (s . Railway_ct) = t2 and
-  (s . Railway_P2) < (6) and
-  (((1).((s . Railway_P2).plus)).(Const.T2)) !=
-    ((s . Railway_P0).(Const.T0)) and
-  (((1).((s . Railway_P2).plus)).(Const.T2)) !=
-    ((s . Railway_P1).(Const.T1)) and
-  (((1).((s . Railway_P2).plus)).(Const.T2)) !=
-    ((s . Railway_P3).(Const.T3)) and
-  (((1).((s . Railway_P2).plus)).(Const.T2)) !=
-    ((s . Railway_P4).(Const.T4)) and
-  (((1).((s . Railway_P2).plus)).(Const.T2)) !=
-    ((s . Railway_P5).(Const.T5)) and
-  (((1).((s . Railway_P2).plus)).(Const.T2)) !=
-    ((s . Railway_P6).(Const.T6)) and
-  (((1).((s . Railway_P2).plus)).(Const.T2)) !=
-    ((s . Railway_P7).(Const.T7)) and
-  (7).(((((1).((s . Railway_P2).plus)).(Const.A2)).((s .
-                                                       Railway_RA).plus)).lte) and
-  (7).(((((1).((s . Railway_P2).plus)).(Const.B2)).((s .
-                                                       Railway_RB).plus)).lte)
-  ! (Railway in (s . dsh_sc_used0))
-}
-
-
-pred Railway_move_train2_post [s: one DshSnapshot, sn: one DshSnapshot] {
-  (sn . dsh_conf0) = (((s . dsh_conf0) - Railway) + Railway)
-  (sn . Railway_P2) = ((1).((s . Railway_P2).plus)) and
-  (sn . Railway_RA) =
-    (((sn . Railway_P2).(Const.A2)).((s . Railway_RA).plus)) and
-  (sn . Railway_RB) =
-    (((sn . Railway_P2).(Const.B2)).((s . Railway_RB).plus))
-}
-
-pred Railway_move_train2 [s: one DshSnapshot, sn: one DshSnapshot] {
-  s . Railway_move_train2_pre
-  sn . (s . Railway_move_train2_post)
-}
-
-pred Railway_move_train1_pre [s: one DshSnapshot] {
-  some (Railway & (s . dsh_conf0))
-  (s . Railway_ct) = t1 and
-  (s . Railway_P1) < (6) and
-  (((1).((s . Railway_P1).plus)).(Const.T1)) !=
-    ((s . Railway_P0).(Const.T0)) and
-  (((1).((s . Railway_P1).plus)).(Const.T1)) !=
-    ((s . Railway_P2).(Const.T2)) and
-  (((1).((s . Railway_P1).plus)).(Const.T1)) !=
-    ((s . Railway_P3).(Const.T3)) and
-  (((1).((s . Railway_P1).plus)).(Const.T1)) !=
-    ((s . Railway_P4).(Const.T4)) and
-  (((1).((s . Railway_P1).plus)).(Const.T1)) !=
-    ((s . Railway_P5).(Const.T5)) and
-  (((1).((s . Railway_P1).plus)).(Const.T1)) !=
-    ((s . Railway_P6).(Const.T6)) and
-  (((1).((s . Railway_P1).plus)).(Const.T1)) !=
-    ((s . Railway_P7).(Const.T7)) and
-  (7).(((((1).((s . Railway_P1).plus)).(Const.A1)).((s .
-                                                       Railway_RA).plus)).lte) and
-  (7).(((((1).((s . Railway_P1).plus)).(Const.B1)).((s .
-                                                       Railway_RB).plus)).lte)
-  ! (Railway in (s . dsh_sc_used0))
+pred Railway_move_train2_pre [
+	s: one DshSnapshot] {
+  some (Railway & (s.dsh_conf0))
+  (s.Railway_ct) = t2 and
+  (s.Railway_P2) < (6) and
+  (((1).((s.Railway_P2).plus)).(Const.T2)) !=
+    ((s.Railway_P0).(Const.T0)) and
+  (((1).((s.Railway_P2).plus)).(Const.T2)) !=
+    ((s.Railway_P1).(Const.T1)) and
+  (((1).((s.Railway_P2).plus)).(Const.T2)) !=
+    ((s.Railway_P3).(Const.T3)) and
+  (((1).((s.Railway_P2).plus)).(Const.T2)) !=
+    ((s.Railway_P4).(Const.T4)) and
+  (((1).((s.Railway_P2).plus)).(Const.T2)) !=
+    ((s.Railway_P5).(Const.T5)) and
+  (((1).((s.Railway_P2).plus)).(Const.T2)) !=
+    ((s.Railway_P6).(Const.T6)) and
+  (((1).((s.Railway_P2).plus)).(Const.T2)) !=
+    ((s.Railway_P7).(Const.T7)) and
+  (7).(((((1).((s.Railway_P2).plus)).(Const.A2)).((s.Railway_RA).plus)).lte) and
+  (7).(((((1).((s.Railway_P2).plus)).(Const.B2)).((s.Railway_RB).plus)).lte)
+  !(Railway in (s.dsh_sc_used0))
 }
 
 
-pred Railway_move_train1_post [s: one DshSnapshot, sn: one DshSnapshot] {
-  (sn . dsh_conf0) = (((s . dsh_conf0) - Railway) + Railway)
-  (sn . Railway_P1) = ((1).((s . Railway_P1).plus)) and
-  (sn . Railway_RA) =
-    (((sn . Railway_P1).(Const.A1)).((s . Railway_RA).plus)) and
-  (sn . Railway_RB) =
-    (((sn . Railway_P1).(Const.B1)).((s . Railway_RB).plus))
+pred Railway_move_train2_post [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_conf0) = (((s.dsh_conf0) - Railway) + Railway)
+  (sn.Railway_P2) = ((1).((s.Railway_P2).plus)) and
+  (sn.Railway_RA) =
+    (((sn.Railway_P2).(Const.A2)).((s.Railway_RA).plus)) and
+  (sn.Railway_RB) =
+    (((sn.Railway_P2).(Const.B2)).((s.Railway_RB).plus))
 }
 
-pred Railway_move_train1 [s: one DshSnapshot, sn: one DshSnapshot] {
-  s . Railway_move_train1_pre
-  sn . (s . Railway_move_train1_post)
+pred Railway_move_train2 [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  s.Railway_move_train2_pre
+  sn.(s.Railway_move_train2_post)
 }
 
-pred Railway_move_train0_pre [s: one DshSnapshot] {
-  some (Railway & (s . dsh_conf0))
-  (s . Railway_ct) = t0 and
-  (s . Railway_P0) < (6) and
-  (((1).((s . Railway_P0).plus)).(Const.T0)) !=
-    ((s . Railway_P1).(Const.T1)) and
-  (((1).((s . Railway_P0).plus)).(Const.T0)) !=
-    ((s . Railway_P2).(Const.T2)) and
-  (((1).((s . Railway_P0).plus)).(Const.T0)) !=
-    ((s . Railway_P3).(Const.T3)) and
-  (((1).((s . Railway_P0).plus)).(Const.T0)) !=
-    ((s . Railway_P4).(Const.T4)) and
-  (((1).((s . Railway_P0).plus)).(Const.T0)) !=
-    ((s . Railway_P5).(Const.T5)) and
-  (((1).((s . Railway_P0).plus)).(Const.T0)) !=
-    ((s . Railway_P6).(Const.T6)) and
-  (((1).((s . Railway_P0).plus)).(Const.T0)) !=
-    ((s . Railway_P7).(Const.T7)) and
-  (7).(((((1).((s . Railway_P0).plus)).(Const.A0)).((s .
-                                                       Railway_RA).plus)).lte) and
-  (7).(((((1).((s . Railway_P0).plus)).(Const.B0)).((s .
-                                                       Railway_RB).plus)).lte)
-  ! (Railway in (s . dsh_sc_used0))
-}
-
-
-pred Railway_move_train0_post [s: one DshSnapshot, sn: one DshSnapshot] {
-  (sn . dsh_conf0) = (((s . dsh_conf0) - Railway) + Railway)
-  (sn . Railway_P0) = ((1).((s . Railway_P0).plus)) and
-  (sn . Railway_RA) =
-    (((sn . Railway_P0).(Const.A0)).((s . Railway_RA).plus)) and
-  (sn . Railway_RB) =
-    (((sn . Railway_P0).(Const.B0)).((s . Railway_RB).plus))
-}
-
-pred Railway_move_train0 [s: one DshSnapshot, sn: one DshSnapshot] {
-  s . Railway_move_train0_pre
-  sn . (s . Railway_move_train0_post)
-}
-
-pred Railway_move_train7_pre [s: one DshSnapshot] {
-  some (Railway & (s . dsh_conf0))
-  (s . Railway_ct) = t7 and
-  (s . Railway_P7) < (6) and
-  (((1).((s . Railway_P7).plus)).(Const.T7)) !=
-    ((s . Railway_P0).(Const.T0)) and
-  (((1).((s . Railway_P7).plus)).(Const.T7)) !=
-    ((s . Railway_P1).(Const.T1)) and
-  (((1).((s . Railway_P7).plus)).(Const.T7)) !=
-    ((s . Railway_P2).(Const.T2)) and
-  (((1).((s . Railway_P7).plus)).(Const.T7)) !=
-    ((s . Railway_P3).(Const.T3)) and
-  (((1).((s . Railway_P7).plus)).(Const.T7)) !=
-    ((s . Railway_P4).(Const.T4)) and
-  (((1).((s . Railway_P7).plus)).(Const.T7)) !=
-    ((s . Railway_P5).(Const.T5)) and
-  (((1).((s . Railway_P7).plus)).(Const.T7)) !=
-    ((s . Railway_P6).(Const.T6)) and
-  (7).(((((1).((s . Railway_P7).plus)).(Const.A7)).((s .
-                                                       Railway_RA).plus)).lte) and
-  (7).(((((1).((s . Railway_P7).plus)).(Const.B7)).((s .
-                                                       Railway_RB).plus)).lte)
-  ! (Railway in (s . dsh_sc_used0))
+pred Railway_move_train1_pre [
+	s: one DshSnapshot] {
+  some (Railway & (s.dsh_conf0))
+  (s.Railway_ct) = t1 and
+  (s.Railway_P1) < (6) and
+  (((1).((s.Railway_P1).plus)).(Const.T1)) !=
+    ((s.Railway_P0).(Const.T0)) and
+  (((1).((s.Railway_P1).plus)).(Const.T1)) !=
+    ((s.Railway_P2).(Const.T2)) and
+  (((1).((s.Railway_P1).plus)).(Const.T1)) !=
+    ((s.Railway_P3).(Const.T3)) and
+  (((1).((s.Railway_P1).plus)).(Const.T1)) !=
+    ((s.Railway_P4).(Const.T4)) and
+  (((1).((s.Railway_P1).plus)).(Const.T1)) !=
+    ((s.Railway_P5).(Const.T5)) and
+  (((1).((s.Railway_P1).plus)).(Const.T1)) !=
+    ((s.Railway_P6).(Const.T6)) and
+  (((1).((s.Railway_P1).plus)).(Const.T1)) !=
+    ((s.Railway_P7).(Const.T7)) and
+  (7).(((((1).((s.Railway_P1).plus)).(Const.A1)).((s.Railway_RA).plus)).lte) and
+  (7).(((((1).((s.Railway_P1).plus)).(Const.B1)).((s.Railway_RB).plus)).lte)
+  !(Railway in (s.dsh_sc_used0))
 }
 
 
-pred Railway_move_train7_post [s: one DshSnapshot, sn: one DshSnapshot] {
-  (sn . dsh_conf0) = (((s . dsh_conf0) - Railway) + Railway)
-  (sn . Railway_P7) = ((1).((s . Railway_P7).plus)) and
-  (sn . Railway_RA) =
-    (((sn . Railway_P7).(Const.A7)).((s . Railway_RA).plus)) and
-  (sn . Railway_RB) =
-    (((sn . Railway_P7).(Const.B7)).((s . Railway_RB).plus))
+pred Railway_move_train1_post [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_conf0) = (((s.dsh_conf0) - Railway) + Railway)
+  (sn.Railway_P1) = ((1).((s.Railway_P1).plus)) and
+  (sn.Railway_RA) =
+    (((sn.Railway_P1).(Const.A1)).((s.Railway_RA).plus)) and
+  (sn.Railway_RB) =
+    (((sn.Railway_P1).(Const.B1)).((s.Railway_RB).plus))
 }
 
-pred Railway_move_train7 [s: one DshSnapshot, sn: one DshSnapshot] {
-  s . Railway_move_train7_pre
-  sn . (s . Railway_move_train7_post)
+pred Railway_move_train1 [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  s.Railway_move_train1_pre
+  sn.(s.Railway_move_train1_post)
 }
 
-pred Railway_move_train6_pre [s: one DshSnapshot] {
-  some (Railway & (s . dsh_conf0))
-  (s . Railway_ct) = t6 and
-  (s . Railway_P6) < (6) and
-  (((1).((s . Railway_P6).plus)).(Const.T6)) !=
-    ((s . Railway_P0).(Const.T0)) and
-  (((1).((s . Railway_P6).plus)).(Const.T6)) !=
-    ((s . Railway_P1).(Const.T1)) and
-  (((1).((s . Railway_P6).plus)).(Const.T6)) !=
-    ((s . Railway_P2).(Const.T2)) and
-  (((1).((s . Railway_P6).plus)).(Const.T6)) !=
-    ((s . Railway_P3).(Const.T3)) and
-  (((1).((s . Railway_P6).plus)).(Const.T6)) !=
-    ((s . Railway_P4).(Const.T4)) and
-  (((1).((s . Railway_P6).plus)).(Const.T6)) !=
-    ((s . Railway_P5).(Const.T5)) and
-  (((1).((s . Railway_P6).plus)).(Const.T6)) !=
-    ((s . Railway_P7).(Const.T7)) and
-  (7).(((((1).((s . Railway_P6).plus)).(Const.A6)).((s .
-                                                       Railway_RA).plus)).lte) and
-  (7).(((((1).((s . Railway_P6).plus)).(Const.B6)).((s .
-                                                       Railway_RB).plus)).lte)
-  ! (Railway in (s . dsh_sc_used0))
-}
-
-
-pred Railway_move_train6_post [s: one DshSnapshot, sn: one DshSnapshot] {
-  (sn . dsh_conf0) = (((s . dsh_conf0) - Railway) + Railway)
-  (sn . Railway_P6) = ((1).((s . Railway_P6).plus)) and
-  (sn . Railway_RA) =
-    (((sn . Railway_P6).(Const.A6)).((s . Railway_RA).plus)) and
-  (sn . Railway_RB) =
-    (((sn . Railway_P6).(Const.B6)).((s . Railway_RB).plus))
-}
-
-pred Railway_move_train6 [s: one DshSnapshot, sn: one DshSnapshot] {
-  s . Railway_move_train6_pre
-  sn . (s . Railway_move_train6_post)
-}
-
-pred Railway_move_train5_pre [s: one DshSnapshot] {
-  some (Railway & (s . dsh_conf0))
-  (s . Railway_ct) = t5 and
-  (s . Railway_P5) < (6) and
-  (((1).((s . Railway_P5).plus)).(Const.T5)) !=
-    ((s . Railway_P0).(Const.T0)) and
-  (((1).((s . Railway_P5).plus)).(Const.T5)) !=
-    ((s . Railway_P1).(Const.T1)) and
-  (((1).((s . Railway_P5).plus)).(Const.T5)) !=
-    ((s . Railway_P2).(Const.T2)) and
-  (((1).((s . Railway_P5).plus)).(Const.T5)) !=
-    ((s . Railway_P3).(Const.T3)) and
-  (((1).((s . Railway_P5).plus)).(Const.T5)) !=
-    ((s . Railway_P4).(Const.T4)) and
-  (((1).((s . Railway_P5).plus)).(Const.T5)) !=
-    ((s . Railway_P6).(Const.T6)) and
-  (((1).((s . Railway_P5).plus)).(Const.T5)) !=
-    ((s . Railway_P7).(Const.T7)) and
-  (7).(((((1).((s . Railway_P5).plus)).(Const.A5)).((s .
-                                                       Railway_RA).plus)).lte) and
-  (7).(((((1).((s . Railway_P5).plus)).(Const.B5)).((s .
-                                                       Railway_RB).plus)).lte)
-  ! (Railway in (s . dsh_sc_used0))
+pred Railway_move_train0_pre [
+	s: one DshSnapshot] {
+  some (Railway & (s.dsh_conf0))
+  (s.Railway_ct) = t0 and
+  (s.Railway_P0) < (6) and
+  (((1).((s.Railway_P0).plus)).(Const.T0)) !=
+    ((s.Railway_P1).(Const.T1)) and
+  (((1).((s.Railway_P0).plus)).(Const.T0)) !=
+    ((s.Railway_P2).(Const.T2)) and
+  (((1).((s.Railway_P0).plus)).(Const.T0)) !=
+    ((s.Railway_P3).(Const.T3)) and
+  (((1).((s.Railway_P0).plus)).(Const.T0)) !=
+    ((s.Railway_P4).(Const.T4)) and
+  (((1).((s.Railway_P0).plus)).(Const.T0)) !=
+    ((s.Railway_P5).(Const.T5)) and
+  (((1).((s.Railway_P0).plus)).(Const.T0)) !=
+    ((s.Railway_P6).(Const.T6)) and
+  (((1).((s.Railway_P0).plus)).(Const.T0)) !=
+    ((s.Railway_P7).(Const.T7)) and
+  (7).(((((1).((s.Railway_P0).plus)).(Const.A0)).((s.Railway_RA).plus)).lte) and
+  (7).(((((1).((s.Railway_P0).plus)).(Const.B0)).((s.Railway_RB).plus)).lte)
+  !(Railway in (s.dsh_sc_used0))
 }
 
 
-pred Railway_move_train5_post [s: one DshSnapshot, sn: one DshSnapshot] {
-  (sn . dsh_conf0) = (((s . dsh_conf0) - Railway) + Railway)
-  (sn . Railway_P5) = ((1).((s . Railway_P5).plus)) and
-  (sn . Railway_RA) =
-    (((sn . Railway_P5).(Const.A5)).((s . Railway_RA).plus)) and
-  (sn . Railway_RB) =
-    (((sn . Railway_P5).(Const.B5)).((s . Railway_RB).plus))
+pred Railway_move_train0_post [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_conf0) = (((s.dsh_conf0) - Railway) + Railway)
+  (sn.Railway_P0) = ((1).((s.Railway_P0).plus)) and
+  (sn.Railway_RA) =
+    (((sn.Railway_P0).(Const.A0)).((s.Railway_RA).plus)) and
+  (sn.Railway_RB) =
+    (((sn.Railway_P0).(Const.B0)).((s.Railway_RB).plus))
 }
 
-pred Railway_move_train5 [s: one DshSnapshot, sn: one DshSnapshot] {
-  s . Railway_move_train5_pre
-  sn . (s . Railway_move_train5_post)
+pred Railway_move_train0 [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  s.Railway_move_train0_pre
+  sn.(s.Railway_move_train0_post)
 }
 
-pred Railway_move_train4_pre [s: one DshSnapshot] {
-  some (Railway & (s . dsh_conf0))
-  (s . Railway_ct) = t4 and
-  (s . Railway_P4) < (6) and
-  (((1).((s . Railway_P4).plus)).(Const.T4)) !=
-    ((s . Railway_P0).(Const.T0)) and
-  (((1).((s . Railway_P4).plus)).(Const.T4)) !=
-    ((s . Railway_P1).(Const.T1)) and
-  (((1).((s . Railway_P4).plus)).(Const.T4)) !=
-    ((s . Railway_P2).(Const.T2)) and
-  (((1).((s . Railway_P4).plus)).(Const.T4)) !=
-    ((s . Railway_P3).(Const.T3)) and
-  (((1).((s . Railway_P4).plus)).(Const.T4)) !=
-    ((s . Railway_P5).(Const.T5)) and
-  (((1).((s . Railway_P4).plus)).(Const.T4)) !=
-    ((s . Railway_P6).(Const.T6)) and
-  (((1).((s . Railway_P4).plus)).(Const.T4)) !=
-    ((s . Railway_P7).(Const.T7)) and
-  (7).(((((1).((s . Railway_P4).plus)).(Const.A4)).((s .
-                                                       Railway_RA).plus)).lte) and
-  (7).(((((1).((s . Railway_P4).plus)).(Const.B4)).((s .
-                                                       Railway_RB).plus)).lte)
-  ! (Railway in (s . dsh_sc_used0))
-}
-
-
-pred Railway_move_train4_post [s: one DshSnapshot, sn: one DshSnapshot] {
-  (sn . dsh_conf0) = (((s . dsh_conf0) - Railway) + Railway)
-  (sn . Railway_P4) = ((1).((s . Railway_P4).plus)) and
-  (sn . Railway_RA) =
-    (((sn . Railway_P4).(Const.A4)).((s . Railway_RA).plus)) and
-  (sn . Railway_RB) =
-    (((sn . Railway_P4).(Const.B4)).((s . Railway_RB).plus))
-}
-
-pred Railway_move_train4 [s: one DshSnapshot, sn: one DshSnapshot] {
-  s . Railway_move_train4_pre
-  sn . (s . Railway_move_train4_post)
-}
-
-pred Railway_choose_train_pre [s: one DshSnapshot] {
-  some (Railway & (s . dsh_conf0))
-  ! (Railway in (s . dsh_sc_used0))
+pred Railway_move_train7_pre [
+	s: one DshSnapshot] {
+  some (Railway & (s.dsh_conf0))
+  (s.Railway_ct) = t7 and
+  (s.Railway_P7) < (6) and
+  (((1).((s.Railway_P7).plus)).(Const.T7)) !=
+    ((s.Railway_P0).(Const.T0)) and
+  (((1).((s.Railway_P7).plus)).(Const.T7)) !=
+    ((s.Railway_P1).(Const.T1)) and
+  (((1).((s.Railway_P7).plus)).(Const.T7)) !=
+    ((s.Railway_P2).(Const.T2)) and
+  (((1).((s.Railway_P7).plus)).(Const.T7)) !=
+    ((s.Railway_P3).(Const.T3)) and
+  (((1).((s.Railway_P7).plus)).(Const.T7)) !=
+    ((s.Railway_P4).(Const.T4)) and
+  (((1).((s.Railway_P7).plus)).(Const.T7)) !=
+    ((s.Railway_P5).(Const.T5)) and
+  (((1).((s.Railway_P7).plus)).(Const.T7)) !=
+    ((s.Railway_P6).(Const.T6)) and
+  (7).(((((1).((s.Railway_P7).plus)).(Const.A7)).((s.Railway_RA).plus)).lte) and
+  (7).(((((1).((s.Railway_P7).plus)).(Const.B7)).((s.Railway_RB).plus)).lte)
+  !(Railway in (s.dsh_sc_used0))
 }
 
 
-pred Railway_choose_train_post [s: one DshSnapshot, sn: one DshSnapshot] {
-  (sn . dsh_conf0) = (((s . dsh_conf0) - Railway) + Railway)
-  { (s . Railway_ct) = t0 and (sn . Railway_ct) = t1 or
-    (s . Railway_ct) = t1 and (sn . Railway_ct) = t2 or
-    (s . Railway_ct) = t2 and (sn . Railway_ct) = t3 or
-    (s . Railway_ct) = t3 and (sn . Railway_ct) = t4 or
-    (s . Railway_ct) = t4 and (sn . Railway_ct) = t5 or
-    (s . Railway_ct) = t5 and (sn . Railway_ct) = t6 or
-    (s . Railway_ct) = t6 and (sn . Railway_ct) = t7 or
-    (s . Railway_ct) = t7 and (sn . Railway_ct) = t0 }
+pred Railway_move_train7_post [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_conf0) = (((s.dsh_conf0) - Railway) + Railway)
+  (sn.Railway_P7) = ((1).((s.Railway_P7).plus)) and
+  (sn.Railway_RA) =
+    (((sn.Railway_P7).(Const.A7)).((s.Railway_RA).plus)) and
+  (sn.Railway_RB) =
+    (((sn.Railway_P7).(Const.B7)).((s.Railway_RB).plus))
 }
 
-pred Railway_choose_train [s: one DshSnapshot, sn: one DshSnapshot] {
-  s . Railway_choose_train_pre
-  sn . (s . Railway_choose_train_post)
+pred Railway_move_train7 [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  s.Railway_move_train7_pre
+  sn.(s.Railway_move_train7_post)
 }
 
-pred dsh_small_step [s: one DshSnapshot, sn: one DshSnapshot] {
-  { sn . (s . Railway_move_train3) or
-    sn . (s . Railway_move_train2) or
-    sn . (s . Railway_move_train1) or
-    sn . (s . Railway_move_train0) or
-    sn . (s . Railway_move_train7) or
-    sn . (s . Railway_move_train6) or
-    sn . (s . Railway_move_train5) or
-    sn . (s . Railway_move_train4) or
-    sn . (s . Railway_choose_train) }
+pred Railway_move_train6_pre [
+	s: one DshSnapshot] {
+  some (Railway & (s.dsh_conf0))
+  (s.Railway_ct) = t6 and
+  (s.Railway_P6) < (6) and
+  (((1).((s.Railway_P6).plus)).(Const.T6)) !=
+    ((s.Railway_P0).(Const.T0)) and
+  (((1).((s.Railway_P6).plus)).(Const.T6)) !=
+    ((s.Railway_P1).(Const.T1)) and
+  (((1).((s.Railway_P6).plus)).(Const.T6)) !=
+    ((s.Railway_P2).(Const.T2)) and
+  (((1).((s.Railway_P6).plus)).(Const.T6)) !=
+    ((s.Railway_P3).(Const.T3)) and
+  (((1).((s.Railway_P6).plus)).(Const.T6)) !=
+    ((s.Railway_P4).(Const.T4)) and
+  (((1).((s.Railway_P6).plus)).(Const.T6)) !=
+    ((s.Railway_P5).(Const.T5)) and
+  (((1).((s.Railway_P6).plus)).(Const.T6)) !=
+    ((s.Railway_P7).(Const.T7)) and
+  (7).(((((1).((s.Railway_P6).plus)).(Const.A6)).((s.Railway_RA).plus)).lte) and
+  (7).(((((1).((s.Railway_P6).plus)).(Const.B6)).((s.Railway_RB).plus)).lte)
+  !(Railway in (s.dsh_sc_used0))
 }
 
-fact dsh_traces_fact {  DshSnapshot/first . dsh_initial
+
+pred Railway_move_train6_post [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_conf0) = (((s.dsh_conf0) - Railway) + Railway)
+  (sn.Railway_P6) = ((1).((s.Railway_P6).plus)) and
+  (sn.Railway_RA) =
+    (((sn.Railway_P6).(Const.A6)).((s.Railway_RA).plus)) and
+  (sn.Railway_RB) =
+    (((sn.Railway_P6).(Const.B6)).((s.Railway_RB).plus))
+}
+
+pred Railway_move_train6 [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  s.Railway_move_train6_pre
+  sn.(s.Railway_move_train6_post)
+}
+
+pred Railway_move_train5_pre [
+	s: one DshSnapshot] {
+  some (Railway & (s.dsh_conf0))
+  (s.Railway_ct) = t5 and
+  (s.Railway_P5) < (6) and
+  (((1).((s.Railway_P5).plus)).(Const.T5)) !=
+    ((s.Railway_P0).(Const.T0)) and
+  (((1).((s.Railway_P5).plus)).(Const.T5)) !=
+    ((s.Railway_P1).(Const.T1)) and
+  (((1).((s.Railway_P5).plus)).(Const.T5)) !=
+    ((s.Railway_P2).(Const.T2)) and
+  (((1).((s.Railway_P5).plus)).(Const.T5)) !=
+    ((s.Railway_P3).(Const.T3)) and
+  (((1).((s.Railway_P5).plus)).(Const.T5)) !=
+    ((s.Railway_P4).(Const.T4)) and
+  (((1).((s.Railway_P5).plus)).(Const.T5)) !=
+    ((s.Railway_P6).(Const.T6)) and
+  (((1).((s.Railway_P5).plus)).(Const.T5)) !=
+    ((s.Railway_P7).(Const.T7)) and
+  (7).(((((1).((s.Railway_P5).plus)).(Const.A5)).((s.Railway_RA).plus)).lte) and
+  (7).(((((1).((s.Railway_P5).plus)).(Const.B5)).((s.Railway_RB).plus)).lte)
+  !(Railway in (s.dsh_sc_used0))
+}
+
+
+pred Railway_move_train5_post [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_conf0) = (((s.dsh_conf0) - Railway) + Railway)
+  (sn.Railway_P5) = ((1).((s.Railway_P5).plus)) and
+  (sn.Railway_RA) =
+    (((sn.Railway_P5).(Const.A5)).((s.Railway_RA).plus)) and
+  (sn.Railway_RB) =
+    (((sn.Railway_P5).(Const.B5)).((s.Railway_RB).plus))
+}
+
+pred Railway_move_train5 [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  s.Railway_move_train5_pre
+  sn.(s.Railway_move_train5_post)
+}
+
+pred Railway_move_train4_pre [
+	s: one DshSnapshot] {
+  some (Railway & (s.dsh_conf0))
+  (s.Railway_ct) = t4 and
+  (s.Railway_P4) < (6) and
+  (((1).((s.Railway_P4).plus)).(Const.T4)) !=
+    ((s.Railway_P0).(Const.T0)) and
+  (((1).((s.Railway_P4).plus)).(Const.T4)) !=
+    ((s.Railway_P1).(Const.T1)) and
+  (((1).((s.Railway_P4).plus)).(Const.T4)) !=
+    ((s.Railway_P2).(Const.T2)) and
+  (((1).((s.Railway_P4).plus)).(Const.T4)) !=
+    ((s.Railway_P3).(Const.T3)) and
+  (((1).((s.Railway_P4).plus)).(Const.T4)) !=
+    ((s.Railway_P5).(Const.T5)) and
+  (((1).((s.Railway_P4).plus)).(Const.T4)) !=
+    ((s.Railway_P6).(Const.T6)) and
+  (((1).((s.Railway_P4).plus)).(Const.T4)) !=
+    ((s.Railway_P7).(Const.T7)) and
+  (7).(((((1).((s.Railway_P4).plus)).(Const.A4)).((s.Railway_RA).plus)).lte) and
+  (7).(((((1).((s.Railway_P4).plus)).(Const.B4)).((s.Railway_RB).plus)).lte)
+  !(Railway in (s.dsh_sc_used0))
+}
+
+
+pred Railway_move_train4_post [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_conf0) = (((s.dsh_conf0) - Railway) + Railway)
+  (sn.Railway_P4) = ((1).((s.Railway_P4).plus)) and
+  (sn.Railway_RA) =
+    (((sn.Railway_P4).(Const.A4)).((s.Railway_RA).plus)) and
+  (sn.Railway_RB) =
+    (((sn.Railway_P4).(Const.B4)).((s.Railway_RB).plus))
+}
+
+pred Railway_move_train4 [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  s.Railway_move_train4_pre
+  sn.(s.Railway_move_train4_post)
+}
+
+pred Railway_choose_train_pre [
+	s: one DshSnapshot] {
+  some (Railway & (s.dsh_conf0))
+  !(Railway in (s.dsh_sc_used0))
+}
+
+
+pred Railway_choose_train_post [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_conf0) = (((s.dsh_conf0) - Railway) + Railway)
+  { (s.Railway_ct) = t0 and (sn.Railway_ct) = t1 or
+    (s.Railway_ct) = t1 and (sn.Railway_ct) = t2 or
+    (s.Railway_ct) = t2 and (sn.Railway_ct) = t3 or
+    (s.Railway_ct) = t3 and (sn.Railway_ct) = t4 or
+    (s.Railway_ct) = t4 and (sn.Railway_ct) = t5 or
+    (s.Railway_ct) = t5 and (sn.Railway_ct) = t6 or
+    (s.Railway_ct) = t6 and (sn.Railway_ct) = t7 or
+    (s.Railway_ct) = t7 and (sn.Railway_ct) = t0 }
+}
+
+pred Railway_choose_train [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  s.Railway_choose_train_pre
+  sn.(s.Railway_choose_train_post)
+}
+
+pred dsh_small_step [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  { sn.(s.Railway_move_train3) or
+    sn.(s.Railway_move_train2) or
+    sn.(s.Railway_move_train1) or
+    sn.(s.Railway_move_train0) or
+    sn.(s.Railway_move_train7) or
+    sn.(s.Railway_move_train6) or
+    sn.(s.Railway_move_train5) or
+    sn.(s.Railway_move_train4) or
+    sn.(s.Railway_choose_train) }
+}
+
+fact dsh_traces_fact {  DshSnapshot/first.dsh_initial
   (all s: one
-  (DshSnapshot - DshSnapshot/last) | (s . DshSnapshot/next)
-                                       .
-                                       (s . dsh_small_step))
+  (DshSnapshot - DshSnapshot/last) | (s.DshSnapshot/next).(s.dsh_small_step))
 }
 

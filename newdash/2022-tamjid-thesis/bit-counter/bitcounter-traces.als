@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-05-27 15:36:54
+   on 2023-05-27 17:38:51
 */
 
 open util/ordering[PID] as P0
@@ -34,448 +34,471 @@ sig DshSnapshot {
   Counter_current: one PID
 }
 
-pred dsh_initial [s: one DshSnapshot, p0_PID: one PID] {
+pred dsh_initial [
+	s: one DshSnapshot,
+	p0_PID: one PID] {
   (all p0_PID: one
-  PID | (s . dsh_conf0) = none and
-          (s . dsh_conf1) = (PID -> Counter_Bit_Bit1) and
-          (s . dsh_sc_used1) = none and
-          (s . dsh_events1) in DshEnvEvents and
-          (s . Counter_current) = P0/first)
-  (s . dsh_stable) = boolean/True
+  PID | (s.dsh_conf0) = none and
+          (s.dsh_conf1) = (PID -> Counter_Bit_Bit1) and
+          (s.dsh_sc_used1) = (none -> none) and
+          ((s.dsh_events1) :> DshIntEvents) = (none -> none) and
+          (s.Counter_current) = P0/first)
+  (s.dsh_stable) = boolean/True
 }
 
-pred Counter_Bit_currentBitToBit1_pre [s: one DshSnapshot, p0_PID: one PID] {
-  some ((p0_PID -> Counter_Bit_Bit2) & (s . dsh_conf1))
-  thisPID in (s . Counter_current)
-  ! (Counter in (s . dsh_sc_used0))
-  ! ((p0_PID -> Counter_Bit) in (s . dsh_sc_used1))
-  ((s . dsh_stable) = boolean/True)=>
-    (Counter_Tk0 in ((s . dsh_events0) :> DshEnvEvents))
+pred Counter_Bit_currentBitToBit1_pre [
+	s: one DshSnapshot,
+	p0_PID: one PID] {
+  some ((p0_PID -> Counter_Bit_Bit2) & (s.dsh_conf1))
+  thisPID in (s.Counter_current)
+  !(Counter in (s.dsh_sc_used0))
+  !((p0_PID -> Counter_Bit) in (s.dsh_sc_used1))
+  ((s.dsh_stable) = boolean/True)=>
+    (Counter_Tk0 in ((s.dsh_events0) :> DshEnvEvents))
   else
-    (Counter_Tk0 in (s . dsh_events0))
+    (Counter_Tk0 in (s.dsh_events0))
 
 }
 
 
-pred Counter_Bit_currentBitToBit1_post [s: one DshSnapshot, sn: one DshSnapshot, p0_PID: one PID] {
-  (sn . dsh_conf0) = (s . dsh_conf0)
-  (sn . dsh_conf1) =
-  ((((s . dsh_conf1) - (p0_PID -> Counter_Bit_Bit1)) -
+pred Counter_Bit_currentBitToBit1_post [
+	s: one DshSnapshot,
+	sn: one DshSnapshot,
+	p0_PID: one PID] {
+  (sn.dsh_conf0) = (s.dsh_conf0)
+  (sn.dsh_conf1) =
+  ((((s.dsh_conf1) - (p0_PID -> Counter_Bit_Bit1)) -
       (p0_PID -> Counter_Bit_Bit2)) +
      (p0_PID -> Counter_Bit_Bit1))
-  (((thisPID.P0/next) -> Counter_Bit_Tk1) .
-   ((p0_PID -> Counter_Bit) .
-      (none .
-         (none . (p0_PID . (sn . (s . _testIfNextStable)))))))=>
-    ((sn . dsh_stable) = boolean/True and
-       (sn . dsh_sc_used0) = none and
-       (sn . dsh_sc_used1) = none and
-       ((s . dsh_stable) = boolean/True)=>
-           (((sn . dsh_events0) :> DshIntEvents) = none and
-              ((sn . dsh_events1) :> DshIntEvents) =
+  (((thisPID.P0/next) -> Counter_Bit_Tk1).((p0_PID ->
+                                            Counter_Bit).(none.(none.(p0_PID.(sn.(s._testIfNextStable)))))))=>
+    ((sn.dsh_stable) = boolean/True and
+       (sn.dsh_sc_used0) = none and
+       (sn.dsh_sc_used1) = none and
+       ((s.dsh_stable) = boolean/True)=>
+           (((sn.dsh_events0) :> DshIntEvents) = none and
+              ((sn.dsh_events1) :> DshIntEvents) =
                 ((thisPID.P0/next) -> Counter_Bit_Tk1))
          else
-           (((sn . dsh_events0) :> DshIntEvents) =
-              ((s . dsh_events0) :> DshIntEvents) and
-              ((sn . dsh_events1) :> DshIntEvents) =
+           (((sn.dsh_events0) :> DshIntEvents) =
+              ((s.dsh_events0) :> DshIntEvents) and
+              ((sn.dsh_events1) :> DshIntEvents) =
                 (((thisPID.P0/next) -> Counter_Bit_Tk1) +
-                   ((s . dsh_events1) :> DshIntEvents)))
+                   ((s.dsh_events1) :> DshIntEvents)))
        )
   else
-    ((sn . dsh_stable) = boolean/False and
-       ((s . dsh_stable) = boolean/True)=>
-           (((sn . dsh_events0) :> DshIntEvents) = none and
-              ((sn . dsh_events0) :> DshEnvEvents) =
-                ((s . dsh_events0) :> DshEnvEvents) and
-              (sn . dsh_sc_used0) = none and
-              ((sn . dsh_events1) :> DshIntEvents) =
+    ((sn.dsh_stable) = boolean/False and
+       ((s.dsh_stable) = boolean/True)=>
+           (((sn.dsh_events0) :> DshIntEvents) = none and
+              ((sn.dsh_events0) :> DshEnvEvents) =
+                ((s.dsh_events0) :> DshEnvEvents) and
+              (sn.dsh_sc_used0) = none and
+              ((sn.dsh_events1) :> DshIntEvents) =
                 ((thisPID.P0/next) -> Counter_Bit_Tk1) and
-              ((sn . dsh_events1) :> DshEnvEvents) =
-                ((s . dsh_events1) :> DshEnvEvents) and
-              (sn . dsh_sc_used1) = none)
+              ((sn.dsh_events1) :> DshEnvEvents) =
+                ((s.dsh_events1) :> DshEnvEvents) and
+              (sn.dsh_sc_used1) = none)
          else
-           ((sn . dsh_sc_used0) = (s . dsh_sc_used0) and
-              (sn . dsh_events1) =
-                ((s . dsh_events1) +
+           ((sn.dsh_sc_used0) = (s.dsh_sc_used0) and
+              (sn.dsh_events1) =
+                ((s.dsh_events1) +
                    ((thisPID.P0/next) -> Counter_Bit_Tk1)) and
-              (sn . dsh_sc_used1) =
-                ((s . dsh_sc_used1) +
-                   (p0_PID -> Counter_Bit)))
+              (sn.dsh_sc_used1) =
+                ((s.dsh_sc_used1) + (p0_PID -> Counter_Bit)))
        )
 
 }
 
-pred Counter_Bit_currentBitToBit1_enabledAfterStep [s: one DshSnapshot, sn: one DshSnapshot, p0_PID: one PID, dsh_scp0: DshStates, dsh_genEvs0: DshEvents, dsh_scp1: DshIds -> DshStates, dsh_genEvs1: DshIds -> DshEvents] {
-  some ((p0_PID -> Counter_Bit_Bit2) & (sn . dsh_conf1))
-  ((s . dsh_stable) = boolean/True)=>
-    (!
-       (Counter in dsh_scp0) and
-       !
-       ((p0_PID -> Counter_Bit) in dsh_scp1) and
+pred Counter_Bit_currentBitToBit1_enabledAfterStep [
+	s: one DshSnapshot,
+	sn: one DshSnapshot,
+	p0_PID: one PID,
+	dsh_scp0: DshStates,
+	dsh_genEvs0: DshEvents,
+	dsh_scp1: DshIds -> DshStates,
+	dsh_genEvs1: DshIds -> DshEvents] {
+  some ((p0_PID -> Counter_Bit_Bit2) & (sn.dsh_conf1))
+  ((s.dsh_stable) = boolean/True)=>
+    (!(Counter in dsh_scp0) and
+       !((p0_PID -> Counter_Bit) in dsh_scp1) and
        Counter_Tk0 in
-         (((s . dsh_events0) & DshEnvEvents) + dsh_genEvs0))
+         (((s.dsh_events0) & DshEnvEvents) + dsh_genEvs0))
   else
-    (Counter_Tk0 in ((s . dsh_events0) + dsh_genEvs0))
+    (Counter_Tk0 in ((s.dsh_events0) + dsh_genEvs0))
 
 }
 
-pred Counter_Bit_currentBitToBit1 [s: one DshSnapshot, sn: one DshSnapshot, p0_PID: one PID] {
-  p0_PID . (s . Counter_Bit_currentBitToBit1_pre)
-  p0_PID . (sn . (s . Counter_Bit_currentBitToBit1_post))
+pred Counter_Bit_currentBitToBit1 [
+	s: one DshSnapshot,
+	sn: one DshSnapshot,
+	p0_PID: one PID] {
+  p0_PID.(s.Counter_Bit_currentBitToBit1_pre)
+  p0_PID.(sn.(s.Counter_Bit_currentBitToBit1_post))
 }
 
-pred Counter_Bit_lastBitDone_pre [s: one DshSnapshot, p0_PID: one PID] {
-  some ((p0_PID -> Counter_Bit_Bit2) & (s . dsh_conf1))
+pred Counter_Bit_lastBitDone_pre [
+	s: one DshSnapshot,
+	p0_PID: one PID] {
+  some ((p0_PID -> Counter_Bit_Bit2) & (s.dsh_conf1))
   thisPID in P0/last
-  ! (Counter in (s . dsh_sc_used0))
-  ! ((p0_PID -> Counter_Bit) in (s . dsh_sc_used1))
-  ((s . dsh_stable) = boolean/True)=>
+  !(Counter in (s.dsh_sc_used0))
+  !((p0_PID -> Counter_Bit) in (s.dsh_sc_used1))
+  ((s.dsh_stable) = boolean/True)=>
     ((p0_PID -> Counter_Bit_Tk1) in
-       ((s . dsh_events1) :> DshEnvEvents))
+       ((s.dsh_events1) :> DshEnvEvents))
   else
-    ((p0_PID -> Counter_Bit_Tk1) in (s . dsh_events1))
+    ((p0_PID -> Counter_Bit_Tk1) in (s.dsh_events1))
 
 }
 
 
-pred Counter_Bit_lastBitDone_post [s: one DshSnapshot, sn: one DshSnapshot, p0_PID: one PID] {
-  (sn . dsh_conf0) = (s . dsh_conf0)
-  (sn . dsh_conf1) =
-  ((((s . dsh_conf1) - (p0_PID -> Counter_Bit_Bit1)) -
+pred Counter_Bit_lastBitDone_post [
+	s: one DshSnapshot,
+	sn: one DshSnapshot,
+	p0_PID: one PID] {
+  (sn.dsh_conf0) = (s.dsh_conf0)
+  (sn.dsh_conf1) =
+  ((((s.dsh_conf1) - (p0_PID -> Counter_Bit_Bit1)) -
       (p0_PID -> Counter_Bit_Bit2)) +
      (p0_PID -> Counter_Bit_Bit1))
-  ((none -> none) .
-   ((p0_PID -> Counter_Bit) .
-      (Counter_Done .
-         (none . (p0_PID . (sn . (s . _testIfNextStable)))))))=>
-    ((sn . dsh_stable) = boolean/True and
-       (sn . dsh_sc_used0) = none and
-       (sn . dsh_sc_used1) = none and
-       ((s . dsh_stable) = boolean/True)=>
-           (((sn . dsh_events0) :> DshIntEvents) =
+  ((none -> none).((p0_PID -> Counter_Bit).(Counter_Done.(none.(p0_PID.(sn.(s._testIfNextStable)))))))=>
+    ((sn.dsh_stable) = boolean/True and
+       (sn.dsh_sc_used0) = none and
+       (sn.dsh_sc_used1) = none and
+       ((s.dsh_stable) = boolean/True)=>
+           (((sn.dsh_events0) :> DshIntEvents) =
               Counter_Done and
-              ((sn . dsh_events1) :> DshIntEvents) =
+              ((sn.dsh_events1) :> DshIntEvents) =
                 (none -> none))
          else
-           (((sn . dsh_events0) :> DshIntEvents) =
+           (((sn.dsh_events0) :> DshIntEvents) =
               (Counter_Done +
-                 ((s . dsh_events0) :> DshIntEvents)) and
-              ((sn . dsh_events1) :> DshIntEvents) =
-                ((s . dsh_events1) :> DshIntEvents))
+                 ((s.dsh_events0) :> DshIntEvents)) and
+              ((sn.dsh_events1) :> DshIntEvents) =
+                ((s.dsh_events1) :> DshIntEvents))
        )
   else
-    ((sn . dsh_stable) = boolean/False and
-       ((s . dsh_stable) = boolean/True)=>
-           (((sn . dsh_events0) :> DshIntEvents) =
+    ((sn.dsh_stable) = boolean/False and
+       ((s.dsh_stable) = boolean/True)=>
+           (((sn.dsh_events0) :> DshIntEvents) =
               Counter_Done and
-              ((sn . dsh_events0) :> DshEnvEvents) =
-                ((s . dsh_events0) :> DshEnvEvents) and
-              (sn . dsh_sc_used0) = none and
-              ((sn . dsh_events1) :> DshIntEvents) =
+              ((sn.dsh_events0) :> DshEnvEvents) =
+                ((s.dsh_events0) :> DshEnvEvents) and
+              (sn.dsh_sc_used0) = none and
+              ((sn.dsh_events1) :> DshIntEvents) =
                 (none -> none) and
-              ((sn . dsh_events1) :> DshEnvEvents) =
-                ((s . dsh_events1) :> DshEnvEvents) and
-              (sn . dsh_sc_used1) = none)
+              ((sn.dsh_events1) :> DshEnvEvents) =
+                ((s.dsh_events1) :> DshEnvEvents) and
+              (sn.dsh_sc_used1) = none)
          else
-           ((sn . dsh_events0) =
-              ((s . dsh_events0) + Counter_Done) and
-              (sn . dsh_sc_used0) = (s . dsh_sc_used0) and
-              (sn . dsh_sc_used1) =
-                ((s . dsh_sc_used1) +
-                   (p0_PID -> Counter_Bit)))
+           ((sn.dsh_events0) =
+              ((s.dsh_events0) + Counter_Done) and
+              (sn.dsh_sc_used0) = (s.dsh_sc_used0) and
+              (sn.dsh_sc_used1) =
+                ((s.dsh_sc_used1) + (p0_PID -> Counter_Bit)))
        )
 
 }
 
-pred Counter_Bit_lastBitDone_enabledAfterStep [s: one DshSnapshot, sn: one DshSnapshot, p0_PID: one PID, dsh_scp0: DshStates, dsh_genEvs0: DshEvents, dsh_scp1: DshIds -> DshStates, dsh_genEvs1: DshIds -> DshEvents] {
-  some ((p0_PID -> Counter_Bit_Bit2) & (sn . dsh_conf1))
-  !
-  ((s . dsh_stable) = boolean/True) and
+pred Counter_Bit_lastBitDone_enabledAfterStep [
+	s: one DshSnapshot,
+	sn: one DshSnapshot,
+	p0_PID: one PID,
+	dsh_scp0: DshStates,
+	dsh_genEvs0: DshEvents,
+	dsh_scp1: DshIds -> DshStates,
+	dsh_genEvs1: DshIds -> DshEvents] {
+  some ((p0_PID -> Counter_Bit_Bit2) & (sn.dsh_conf1))
+  !((s.dsh_stable) = boolean/True) and
   (p0_PID -> Counter_Bit_Tk1) in
-    ((s . dsh_events1) + dsh_genEvs1)
+    ((s.dsh_events1) + dsh_genEvs1)
 }
 
-pred Counter_Bit_lastBitDone [s: one DshSnapshot, sn: one DshSnapshot, p0_PID: one PID] {
-  p0_PID . (s . Counter_Bit_lastBitDone_pre)
-  p0_PID . (sn . (s . Counter_Bit_lastBitDone_post))
+pred Counter_Bit_lastBitDone [
+	s: one DshSnapshot,
+	sn: one DshSnapshot,
+	p0_PID: one PID] {
+  p0_PID.(s.Counter_Bit_lastBitDone_pre)
+  p0_PID.(sn.(s.Counter_Bit_lastBitDone_post))
 }
 
-pred Counter_Bit_currentBitToBit2_pre [s: one DshSnapshot, p0_PID: one PID] {
-  some ((p0_PID -> Counter_Bit_Bit1) & (s . dsh_conf1))
-  thisPID in (s . Counter_current)
-  ! (Counter in (s . dsh_sc_used0))
-  ! ((p0_PID -> Counter_Bit) in (s . dsh_sc_used1))
-  ((s . dsh_stable) = boolean/True)=>
-    (Counter_Tk0 in ((s . dsh_events0) :> DshEnvEvents))
+pred Counter_Bit_currentBitToBit2_pre [
+	s: one DshSnapshot,
+	p0_PID: one PID] {
+  some ((p0_PID -> Counter_Bit_Bit1) & (s.dsh_conf1))
+  thisPID in (s.Counter_current)
+  !(Counter in (s.dsh_sc_used0))
+  !((p0_PID -> Counter_Bit) in (s.dsh_sc_used1))
+  ((s.dsh_stable) = boolean/True)=>
+    (Counter_Tk0 in ((s.dsh_events0) :> DshEnvEvents))
   else
-    (Counter_Tk0 in (s . dsh_events0))
+    (Counter_Tk0 in (s.dsh_events0))
 
 }
 
 
-pred Counter_Bit_currentBitToBit2_post [s: one DshSnapshot, sn: one DshSnapshot, p0_PID: one PID] {
-  (sn . dsh_conf0) = (s . dsh_conf0)
-  (sn . dsh_conf1) =
-  ((((s . dsh_conf1) - (p0_PID -> Counter_Bit_Bit1)) -
+pred Counter_Bit_currentBitToBit2_post [
+	s: one DshSnapshot,
+	sn: one DshSnapshot,
+	p0_PID: one PID] {
+  (sn.dsh_conf0) = (s.dsh_conf0)
+  (sn.dsh_conf1) =
+  ((((s.dsh_conf1) - (p0_PID -> Counter_Bit_Bit1)) -
       (p0_PID -> Counter_Bit_Bit2)) +
      (p0_PID -> Counter_Bit_Bit2))
-  ((none -> none) .
-   ((p0_PID -> Counter_Bit) .
-      (none .
-         (none . (p0_PID . (sn . (s . _testIfNextStable)))))))=>
-    ((sn . dsh_stable) = boolean/True and
-       (sn . dsh_sc_used0) = none and
-       (sn . dsh_sc_used1) = none and
-       ((s . dsh_stable) = boolean/True)=>
-           (((sn . dsh_events0) :> DshIntEvents) = none and
-              ((sn . dsh_events1) :> DshIntEvents) =
+  ((none -> none).((p0_PID -> Counter_Bit).(none.(none.(p0_PID.(sn.(s._testIfNextStable)))))))=>
+    ((sn.dsh_stable) = boolean/True and
+       (sn.dsh_sc_used0) = none and
+       (sn.dsh_sc_used1) = none and
+       ((s.dsh_stable) = boolean/True)=>
+           (((sn.dsh_events0) :> DshIntEvents) = none and
+              ((sn.dsh_events1) :> DshIntEvents) =
                 (none -> none))
          else
-           (((sn . dsh_events0) :> DshIntEvents) =
-              ((s . dsh_events0) :> DshIntEvents) and
-              ((sn . dsh_events1) :> DshIntEvents) =
-                ((s . dsh_events1) :> DshIntEvents))
+           (((sn.dsh_events0) :> DshIntEvents) =
+              ((s.dsh_events0) :> DshIntEvents) and
+              ((sn.dsh_events1) :> DshIntEvents) =
+                ((s.dsh_events1) :> DshIntEvents))
        )
   else
-    ((sn . dsh_stable) = boolean/False and
-       ((s . dsh_stable) = boolean/True)=>
-           (((sn . dsh_events0) :> DshIntEvents) = none and
-              ((sn . dsh_events0) :> DshEnvEvents) =
-                ((s . dsh_events0) :> DshEnvEvents) and
-              (sn . dsh_sc_used0) = none and
-              ((sn . dsh_events1) :> DshIntEvents) =
+    ((sn.dsh_stable) = boolean/False and
+       ((s.dsh_stable) = boolean/True)=>
+           (((sn.dsh_events0) :> DshIntEvents) = none and
+              ((sn.dsh_events0) :> DshEnvEvents) =
+                ((s.dsh_events0) :> DshEnvEvents) and
+              (sn.dsh_sc_used0) = none and
+              ((sn.dsh_events1) :> DshIntEvents) =
                 (none -> none) and
-              ((sn . dsh_events1) :> DshEnvEvents) =
-                ((s . dsh_events1) :> DshEnvEvents) and
-              (sn . dsh_sc_used1) = none)
+              ((sn.dsh_events1) :> DshEnvEvents) =
+                ((s.dsh_events1) :> DshEnvEvents) and
+              (sn.dsh_sc_used1) = none)
          else
-           ((sn . dsh_sc_used0) = (s . dsh_sc_used0) and
-              (sn . dsh_sc_used1) =
-                ((s . dsh_sc_used1) +
-                   (p0_PID -> Counter_Bit)))
+           ((sn.dsh_sc_used0) = (s.dsh_sc_used0) and
+              (sn.dsh_sc_used1) =
+                ((s.dsh_sc_used1) + (p0_PID -> Counter_Bit)))
        )
 
 }
 
-pred Counter_Bit_currentBitToBit2_enabledAfterStep [s: one DshSnapshot, sn: one DshSnapshot, p0_PID: one PID, dsh_scp0: DshStates, dsh_genEvs0: DshEvents, dsh_scp1: DshIds -> DshStates, dsh_genEvs1: DshIds -> DshEvents] {
-  some ((p0_PID -> Counter_Bit_Bit1) & (sn . dsh_conf1))
-  ((s . dsh_stable) = boolean/True)=>
-    (!
-       (Counter in dsh_scp0) and
-       !
-       ((p0_PID -> Counter_Bit) in dsh_scp1) and
+pred Counter_Bit_currentBitToBit2_enabledAfterStep [
+	s: one DshSnapshot,
+	sn: one DshSnapshot,
+	p0_PID: one PID,
+	dsh_scp0: DshStates,
+	dsh_genEvs0: DshEvents,
+	dsh_scp1: DshIds -> DshStates,
+	dsh_genEvs1: DshIds -> DshEvents] {
+  some ((p0_PID -> Counter_Bit_Bit1) & (sn.dsh_conf1))
+  ((s.dsh_stable) = boolean/True)=>
+    (!(Counter in dsh_scp0) and
+       !((p0_PID -> Counter_Bit) in dsh_scp1) and
        Counter_Tk0 in
-         (((s . dsh_events0) & DshEnvEvents) + dsh_genEvs0))
+         (((s.dsh_events0) & DshEnvEvents) + dsh_genEvs0))
   else
-    (Counter_Tk0 in ((s . dsh_events0) + dsh_genEvs0))
+    (Counter_Tk0 in ((s.dsh_events0) + dsh_genEvs0))
 
 }
 
-pred Counter_Bit_currentBitToBit2 [s: one DshSnapshot, sn: one DshSnapshot, p0_PID: one PID] {
-  p0_PID . (s . Counter_Bit_currentBitToBit2_pre)
-  p0_PID . (sn . (s . Counter_Bit_currentBitToBit2_post))
+pred Counter_Bit_currentBitToBit2 [
+	s: one DshSnapshot,
+	sn: one DshSnapshot,
+	p0_PID: one PID] {
+  p0_PID.(s.Counter_Bit_currentBitToBit2_pre)
+  p0_PID.(sn.(s.Counter_Bit_currentBitToBit2_post))
 }
 
-pred Counter_Bit_nextBitToBit1_pre [s: one DshSnapshot, p0_PID: one PID] {
-  some ((p0_PID -> Counter_Bit_Bit2) & (s . dsh_conf1))
-  thisPID in ((s . Counter_current).P0/next) and
-  ((s . Counter_current).P0/next) !in P0/last
-  ! (Counter in (s . dsh_sc_used0))
-  ! ((p0_PID -> Counter_Bit) in (s . dsh_sc_used1))
-  ((s . dsh_stable) = boolean/True)=>
+pred Counter_Bit_nextBitToBit1_pre [
+	s: one DshSnapshot,
+	p0_PID: one PID] {
+  some ((p0_PID -> Counter_Bit_Bit2) & (s.dsh_conf1))
+  thisPID in ((s.Counter_current).P0/next) and
+  ((s.Counter_current).P0/next) !in P0/last
+  !(Counter in (s.dsh_sc_used0))
+  !((p0_PID -> Counter_Bit) in (s.dsh_sc_used1))
+  ((s.dsh_stable) = boolean/True)=>
     ((p0_PID -> Counter_Bit_Tk1) in
-       ((s . dsh_events1) :> DshEnvEvents))
+       ((s.dsh_events1) :> DshEnvEvents))
   else
-    ((p0_PID -> Counter_Bit_Tk1) in (s . dsh_events1))
+    ((p0_PID -> Counter_Bit_Tk1) in (s.dsh_events1))
 
 }
 
 
-pred Counter_Bit_nextBitToBit1_post [s: one DshSnapshot, sn: one DshSnapshot, p0_PID: one PID] {
-  (sn . dsh_conf0) = (s . dsh_conf0)
-  (sn . dsh_conf1) =
-  ((((s . dsh_conf1) - (p0_PID -> Counter_Bit_Bit1)) -
+pred Counter_Bit_nextBitToBit1_post [
+	s: one DshSnapshot,
+	sn: one DshSnapshot,
+	p0_PID: one PID] {
+  (sn.dsh_conf0) = (s.dsh_conf0)
+  (sn.dsh_conf1) =
+  ((((s.dsh_conf1) - (p0_PID -> Counter_Bit_Bit1)) -
       (p0_PID -> Counter_Bit_Bit2)) +
      (p0_PID -> Counter_Bit_Bit1))
-  (sn . Counter_current) = ((s . Counter_current).P0/next)
-  ((none -> none) .
-   ((p0_PID -> Counter_Bit) .
-      (none .
-         (none . (p0_PID . (sn . (s . _testIfNextStable)))))))=>
-    ((sn . dsh_stable) = boolean/True and
-       (sn . dsh_sc_used0) = none and
-       (sn . dsh_sc_used1) = none and
-       ((s . dsh_stable) = boolean/True)=>
-           (((sn . dsh_events0) :> DshIntEvents) = none and
-              ((sn . dsh_events1) :> DshIntEvents) =
+  (sn.Counter_current) = ((s.Counter_current).P0/next)
+  ((none -> none).((p0_PID -> Counter_Bit).(none.(none.(p0_PID.(sn.(s._testIfNextStable)))))))=>
+    ((sn.dsh_stable) = boolean/True and
+       (sn.dsh_sc_used0) = none and
+       (sn.dsh_sc_used1) = none and
+       ((s.dsh_stable) = boolean/True)=>
+           (((sn.dsh_events0) :> DshIntEvents) = none and
+              ((sn.dsh_events1) :> DshIntEvents) =
                 (none -> none))
          else
-           (((sn . dsh_events0) :> DshIntEvents) =
-              ((s . dsh_events0) :> DshIntEvents) and
-              ((sn . dsh_events1) :> DshIntEvents) =
-                ((s . dsh_events1) :> DshIntEvents))
+           (((sn.dsh_events0) :> DshIntEvents) =
+              ((s.dsh_events0) :> DshIntEvents) and
+              ((sn.dsh_events1) :> DshIntEvents) =
+                ((s.dsh_events1) :> DshIntEvents))
        )
   else
-    ((sn . dsh_stable) = boolean/False and
-       ((s . dsh_stable) = boolean/True)=>
-           (((sn . dsh_events0) :> DshIntEvents) = none and
-              ((sn . dsh_events0) :> DshEnvEvents) =
-                ((s . dsh_events0) :> DshEnvEvents) and
-              (sn . dsh_sc_used0) = none and
-              ((sn . dsh_events1) :> DshIntEvents) =
+    ((sn.dsh_stable) = boolean/False and
+       ((s.dsh_stable) = boolean/True)=>
+           (((sn.dsh_events0) :> DshIntEvents) = none and
+              ((sn.dsh_events0) :> DshEnvEvents) =
+                ((s.dsh_events0) :> DshEnvEvents) and
+              (sn.dsh_sc_used0) = none and
+              ((sn.dsh_events1) :> DshIntEvents) =
                 (none -> none) and
-              ((sn . dsh_events1) :> DshEnvEvents) =
-                ((s . dsh_events1) :> DshEnvEvents) and
-              (sn . dsh_sc_used1) = none)
+              ((sn.dsh_events1) :> DshEnvEvents) =
+                ((s.dsh_events1) :> DshEnvEvents) and
+              (sn.dsh_sc_used1) = none)
          else
-           ((sn . dsh_sc_used0) = (s . dsh_sc_used0) and
-              (sn . dsh_sc_used1) =
-                ((s . dsh_sc_used1) +
-                   (p0_PID -> Counter_Bit)))
+           ((sn.dsh_sc_used0) = (s.dsh_sc_used0) and
+              (sn.dsh_sc_used1) =
+                ((s.dsh_sc_used1) + (p0_PID -> Counter_Bit)))
        )
 
 }
 
-pred Counter_Bit_nextBitToBit1_enabledAfterStep [s: one DshSnapshot, sn: one DshSnapshot, p0_PID: one PID, dsh_scp0: DshStates, dsh_genEvs0: DshEvents, dsh_scp1: DshIds -> DshStates, dsh_genEvs1: DshIds -> DshEvents] {
-  some ((p0_PID -> Counter_Bit_Bit2) & (sn . dsh_conf1))
-  !
-  ((s . dsh_stable) = boolean/True) and
+pred Counter_Bit_nextBitToBit1_enabledAfterStep [
+	s: one DshSnapshot,
+	sn: one DshSnapshot,
+	p0_PID: one PID,
+	dsh_scp0: DshStates,
+	dsh_genEvs0: DshEvents,
+	dsh_scp1: DshIds -> DshStates,
+	dsh_genEvs1: DshIds -> DshEvents] {
+  some ((p0_PID -> Counter_Bit_Bit2) & (sn.dsh_conf1))
+  !((s.dsh_stable) = boolean/True) and
   (p0_PID -> Counter_Bit_Tk1) in
-    ((s . dsh_events1) + dsh_genEvs1)
+    ((s.dsh_events1) + dsh_genEvs1)
 }
 
-pred Counter_Bit_nextBitToBit1 [s: one DshSnapshot, sn: one DshSnapshot, p0_PID: one PID] {
-  p0_PID . (s . Counter_Bit_nextBitToBit1_pre)
-  p0_PID . (sn . (s . Counter_Bit_nextBitToBit1_post))
+pred Counter_Bit_nextBitToBit1 [
+	s: one DshSnapshot,
+	sn: one DshSnapshot,
+	p0_PID: one PID] {
+  p0_PID.(s.Counter_Bit_nextBitToBit1_pre)
+  p0_PID.(sn.(s.Counter_Bit_nextBitToBit1_post))
 }
 
-pred Counter_Bit_nextBitToBit2_pre [s: one DshSnapshot, p0_PID: one PID] {
-  some ((p0_PID -> Counter_Bit_Bit1) & (s . dsh_conf1))
-  thisPID in ((s . Counter_current).P0/next)
-  ! (Counter in (s . dsh_sc_used0))
-  ! ((p0_PID -> Counter_Bit) in (s . dsh_sc_used1))
-  ((s . dsh_stable) = boolean/True)=>
+pred Counter_Bit_nextBitToBit2_pre [
+	s: one DshSnapshot,
+	p0_PID: one PID] {
+  some ((p0_PID -> Counter_Bit_Bit1) & (s.dsh_conf1))
+  thisPID in ((s.Counter_current).P0/next)
+  !(Counter in (s.dsh_sc_used0))
+  !((p0_PID -> Counter_Bit) in (s.dsh_sc_used1))
+  ((s.dsh_stable) = boolean/True)=>
     ((p0_PID -> Counter_Bit_Tk1) in
-       ((s . dsh_events1) :> DshEnvEvents))
+       ((s.dsh_events1) :> DshEnvEvents))
   else
-    ((p0_PID -> Counter_Bit_Tk1) in (s . dsh_events1))
+    ((p0_PID -> Counter_Bit_Tk1) in (s.dsh_events1))
 
 }
 
 
-pred Counter_Bit_nextBitToBit2_post [s: one DshSnapshot, sn: one DshSnapshot, p0_PID: one PID] {
-  (sn . dsh_conf0) = (s . dsh_conf0)
-  (sn . dsh_conf1) =
-  ((((s . dsh_conf1) - (p0_PID -> Counter_Bit_Bit1)) -
+pred Counter_Bit_nextBitToBit2_post [
+	s: one DshSnapshot,
+	sn: one DshSnapshot,
+	p0_PID: one PID] {
+  (sn.dsh_conf0) = (s.dsh_conf0)
+  (sn.dsh_conf1) =
+  ((((s.dsh_conf1) - (p0_PID -> Counter_Bit_Bit1)) -
       (p0_PID -> Counter_Bit_Bit2)) +
      (p0_PID -> Counter_Bit_Bit2))
-  ((none -> none) .
-   ((p0_PID -> Counter_Bit) .
-      (none .
-         (none . (p0_PID . (sn . (s . _testIfNextStable)))))))=>
-    ((sn . dsh_stable) = boolean/True and
-       (sn . dsh_sc_used0) = none and
-       (sn . dsh_sc_used1) = none and
-       ((s . dsh_stable) = boolean/True)=>
-           (((sn . dsh_events0) :> DshIntEvents) = none and
-              ((sn . dsh_events1) :> DshIntEvents) =
+  ((none -> none).((p0_PID -> Counter_Bit).(none.(none.(p0_PID.(sn.(s._testIfNextStable)))))))=>
+    ((sn.dsh_stable) = boolean/True and
+       (sn.dsh_sc_used0) = none and
+       (sn.dsh_sc_used1) = none and
+       ((s.dsh_stable) = boolean/True)=>
+           (((sn.dsh_events0) :> DshIntEvents) = none and
+              ((sn.dsh_events1) :> DshIntEvents) =
                 (none -> none))
          else
-           (((sn . dsh_events0) :> DshIntEvents) =
-              ((s . dsh_events0) :> DshIntEvents) and
-              ((sn . dsh_events1) :> DshIntEvents) =
-                ((s . dsh_events1) :> DshIntEvents))
+           (((sn.dsh_events0) :> DshIntEvents) =
+              ((s.dsh_events0) :> DshIntEvents) and
+              ((sn.dsh_events1) :> DshIntEvents) =
+                ((s.dsh_events1) :> DshIntEvents))
        )
   else
-    ((sn . dsh_stable) = boolean/False and
-       ((s . dsh_stable) = boolean/True)=>
-           (((sn . dsh_events0) :> DshIntEvents) = none and
-              ((sn . dsh_events0) :> DshEnvEvents) =
-                ((s . dsh_events0) :> DshEnvEvents) and
-              (sn . dsh_sc_used0) = none and
-              ((sn . dsh_events1) :> DshIntEvents) =
+    ((sn.dsh_stable) = boolean/False and
+       ((s.dsh_stable) = boolean/True)=>
+           (((sn.dsh_events0) :> DshIntEvents) = none and
+              ((sn.dsh_events0) :> DshEnvEvents) =
+                ((s.dsh_events0) :> DshEnvEvents) and
+              (sn.dsh_sc_used0) = none and
+              ((sn.dsh_events1) :> DshIntEvents) =
                 (none -> none) and
-              ((sn . dsh_events1) :> DshEnvEvents) =
-                ((s . dsh_events1) :> DshEnvEvents) and
-              (sn . dsh_sc_used1) = none)
+              ((sn.dsh_events1) :> DshEnvEvents) =
+                ((s.dsh_events1) :> DshEnvEvents) and
+              (sn.dsh_sc_used1) = none)
          else
-           ((sn . dsh_sc_used0) = (s . dsh_sc_used0) and
-              (sn . dsh_sc_used1) =
-                ((s . dsh_sc_used1) +
-                   (p0_PID -> Counter_Bit)))
+           ((sn.dsh_sc_used0) = (s.dsh_sc_used0) and
+              (sn.dsh_sc_used1) =
+                ((s.dsh_sc_used1) + (p0_PID -> Counter_Bit)))
        )
 
 }
 
-pred Counter_Bit_nextBitToBit2_enabledAfterStep [s: one DshSnapshot, sn: one DshSnapshot, p0_PID: one PID, dsh_scp0: DshStates, dsh_genEvs0: DshEvents, dsh_scp1: DshIds -> DshStates, dsh_genEvs1: DshIds -> DshEvents] {
-  some ((p0_PID -> Counter_Bit_Bit1) & (sn . dsh_conf1))
-  !
-  ((s . dsh_stable) = boolean/True) and
+pred Counter_Bit_nextBitToBit2_enabledAfterStep [
+	s: one DshSnapshot,
+	sn: one DshSnapshot,
+	p0_PID: one PID,
+	dsh_scp0: DshStates,
+	dsh_genEvs0: DshEvents,
+	dsh_scp1: DshIds -> DshStates,
+	dsh_genEvs1: DshIds -> DshEvents] {
+  some ((p0_PID -> Counter_Bit_Bit1) & (sn.dsh_conf1))
+  !((s.dsh_stable) = boolean/True) and
   (p0_PID -> Counter_Bit_Tk1) in
-    ((s . dsh_events1) + dsh_genEvs1)
+    ((s.dsh_events1) + dsh_genEvs1)
 }
 
-pred Counter_Bit_nextBitToBit2 [s: one DshSnapshot, sn: one DshSnapshot, p0_PID: one PID] {
-  p0_PID . (s . Counter_Bit_nextBitToBit2_pre)
-  p0_PID . (sn . (s . Counter_Bit_nextBitToBit2_post))
+pred Counter_Bit_nextBitToBit2 [
+	s: one DshSnapshot,
+	sn: one DshSnapshot,
+	p0_PID: one PID] {
+  p0_PID.(s.Counter_Bit_nextBitToBit2_pre)
+  p0_PID.(sn.(s.Counter_Bit_nextBitToBit2_post))
 }
 
-pred _testIfNextStable [s: one DshSnapshot, sn: one DshSnapshot, p0_PID: one PID, dsh_scp0: DshStates, dsh_genEvs0: DshEvents, dsh_scp1: DshIds -> DshStates, dsh_genEvs1: DshIds -> DshEvents] {
-  !
-(dsh_genEvs1 .
-   (dsh_scp1 .
-      (dsh_genEvs0 .
-         (dsh_scp0 .
-            (sn .
-               (s .
-                  Counter_Bit_currentBitToBit1_enabledAfterStep))))))
-  !
-(dsh_genEvs1 .
-   (dsh_scp1 .
-      (dsh_genEvs0 .
-         (dsh_scp0 .
-            (sn .
-               (s . Counter_Bit_lastBitDone_enabledAfterStep))))))
-  !
-(dsh_genEvs1 .
-   (dsh_scp1 .
-      (dsh_genEvs0 .
-         (dsh_scp0 .
-            (sn .
-               (s .
-                  Counter_Bit_currentBitToBit2_enabledAfterStep))))))
-  !
-(dsh_genEvs1 .
-   (dsh_scp1 .
-      (dsh_genEvs0 .
-         (dsh_scp0 .
-            (sn .
-               (s .
-                  Counter_Bit_nextBitToBit1_enabledAfterStep))))))
-  !
-(dsh_genEvs1 .
-   (dsh_scp1 .
-      (dsh_genEvs0 .
-         (dsh_scp0 .
-            (sn .
-               (s .
-                  Counter_Bit_nextBitToBit2_enabledAfterStep))))))
+pred _testIfNextStable [
+	s: one DshSnapshot,
+	sn: one DshSnapshot,
+	p0_PID: one PID,
+	dsh_scp0: DshStates,
+	dsh_genEvs0: DshEvents,
+	dsh_scp1: DshIds -> DshStates,
+	dsh_genEvs1: DshIds -> DshEvents] {
+  !(dsh_genEvs1.(dsh_scp1.(dsh_genEvs0.(dsh_scp0.(sn.(s.Counter_Bit_currentBitToBit1_enabledAfterStep))))))
+  !(dsh_genEvs1.(dsh_scp1.(dsh_genEvs0.(dsh_scp0.(sn.(s.Counter_Bit_lastBitDone_enabledAfterStep))))))
+  !(dsh_genEvs1.(dsh_scp1.(dsh_genEvs0.(dsh_scp0.(sn.(s.Counter_Bit_currentBitToBit2_enabledAfterStep))))))
+  !(dsh_genEvs1.(dsh_scp1.(dsh_genEvs0.(dsh_scp0.(sn.(s.Counter_Bit_nextBitToBit1_enabledAfterStep))))))
+  !(dsh_genEvs1.(dsh_scp1.(dsh_genEvs0.(dsh_scp0.(sn.(s.Counter_Bit_nextBitToBit2_enabledAfterStep))))))
 }
 
-pred dsh_small_step [s: one DshSnapshot, sn: one DshSnapshot] {
+pred dsh_small_step [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
   (some p0_PID: one
-  PID | { p0_PID . (sn . (s . Counter_Bit_currentBitToBit1)) or
-            p0_PID . (sn . (s . Counter_Bit_lastBitDone)) or
-            p0_PID .
-              (sn . (s . Counter_Bit_currentBitToBit2)) or
-            p0_PID . (sn . (s . Counter_Bit_nextBitToBit1)) or
-            p0_PID . (sn . (s . Counter_Bit_nextBitToBit2)) })
+  PID | { p0_PID.(sn.(s.Counter_Bit_currentBitToBit1)) or
+            p0_PID.(sn.(s.Counter_Bit_lastBitDone)) or
+            p0_PID.(sn.(s.Counter_Bit_currentBitToBit2)) or
+            p0_PID.(sn.(s.Counter_Bit_nextBitToBit1)) or
+            p0_PID.(sn.(s.Counter_Bit_nextBitToBit2)) })
 }
 
-fact dsh_traces_fact {  DshSnapshot/first . dsh_initial
+fact dsh_traces_fact {  DshSnapshot/first.dsh_initial
   (all s: one
-  (DshSnapshot - DshSnapshot/last) | (s . DshSnapshot/next)
-                                       .
-                                       (s . dsh_small_step))
+  (DshSnapshot - DshSnapshot/last) | (s.DshSnapshot/next).(s.dsh_small_step))
 }
 

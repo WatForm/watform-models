@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-05-27 15:36:52
+   on 2023-05-27 17:38:49
 */
 
 open util/boolean
@@ -87,288 +87,324 @@ sig DshSnapshot {
   dsh_sc_used0: set DshStates,
   dsh_conf0: set DshStates,
   Library_books: set BookID,
-  Library_reservations: (s . Library_books) one->one
-                        (seq s . Library_members),
+  Library_reservations: (s.Library_books) one->one
+                        (seq s.Library_members),
   Library_in_b: lone BookID,
   Library_in_m: lone MemberID,
   Library_members: set MemberID,
-  Library_loans: (s . Library_books) one->one
-                 (s . Library_members)
+  Library_loans: (s.Library_books) one->one
+                 (s.Library_members)
 }
 
-pred dsh_initial [s: one DshSnapshot] {
-  (s . dsh_conf0) = Library and
+pred dsh_initial [
+	s: one DshSnapshot] {
+  (s.dsh_conf0) = Library and
   no
-  (s . Library_members) and
+  (s.Library_members) and
   no
-  (s . Library_books) and
+  (s.Library_books) and
   no
-  (s . Library_loans) and
+  (s.Library_loans) and
   no
-  (s . Library_reservations)
+  (s.Library_reservations)
 }
 
 fact inv {  (all s: one DshSnapshot | (Const.maxNbLoans) = (7))
 }
 
-pred Library_Cancel_pre [s: one DshSnapshot] {
-  some (Library & (s . dsh_conf0))
-  (s . Library_in_m) in (s . Library_members) and
-  (s . Library_in_b) in (s . Library_books) and
+pred Library_Cancel_pre [
+	s: one DshSnapshot] {
+  some (Library & (s.dsh_conf0))
+  (s.Library_in_m) in (s.Library_members) and
+  (s.Library_in_b) in (s.Library_books) and
   one
-  ((Int -> (s . Library_in_m)) &
-     ((s . Library_in_b).(s . Library_reservations)))
-  ! (Library in (s . dsh_sc_used0))
+  ((Int -> (s.Library_in_m)) &
+     ((s.Library_in_b).(s.Library_reservations)))
+  !(Library in (s.dsh_sc_used0))
 }
 
 
-pred Library_Cancel_post [s: one DshSnapshot, sn: one DshSnapshot] {
-  (sn . dsh_conf0) = (((s . dsh_conf0) - Library) + Library)
-  ((s . Library_in_b).(sn . Library_reservations)) =
-  (((s . Library_in_m).(((s . Library_in_b).(s .
-                                               Library_reservations)).idxOf)).(((s
-                                                                                   .
-                                                                                   Library_in_b).(s
-                                                                                                    .
-                                                                                                    Library_reservations)).delete))
+pred Library_Cancel_post [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_conf0) = (((s.dsh_conf0) - Library) + Library)
+  ((s.Library_in_b).(sn.Library_reservations)) =
+  (((s.Library_in_m).(((s.Library_in_b).(s.Library_reservations)).idxOf)).(((s.Library_in_b).(s.Library_reservations)).delete))
 }
 
-pred Library_Cancel [s: one DshSnapshot, sn: one DshSnapshot] {
-  s . Library_Cancel_pre
-  sn . (s . Library_Cancel_post)
+pred Library_Cancel [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  s.Library_Cancel_pre
+  sn.(s.Library_Cancel_post)
 }
 
-pred Library_Join_pre [s: one DshSnapshot] {
-  some (Library & (s . dsh_conf0))
-  ! ((s . Library_in_m) in (s . Library_members))
-  ! (Library in (s . dsh_sc_used0))
+pred Library_Join_pre [
+	s: one DshSnapshot] {
+  some (Library & (s.dsh_conf0))
+  !((s.Library_in_m) in (s.Library_members))
+  !(Library in (s.dsh_sc_used0))
 }
 
 
-pred Library_Join_post [s: one DshSnapshot, sn: one DshSnapshot] {
-  (sn . dsh_conf0) = (((s . dsh_conf0) - Library) + Library)
-  (sn . Library_members) =
-  ((s . Library_members) + (s . Library_in_m))
+pred Library_Join_post [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_conf0) = (((s.dsh_conf0) - Library) + Library)
+  (sn.Library_members) =
+  ((s.Library_members) + (s.Library_in_m))
 }
 
-pred Library_Join [s: one DshSnapshot, sn: one DshSnapshot] {
-  s . Library_Join_pre
-  sn . (s . Library_Join_post)
+pred Library_Join [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  s.Library_Join_pre
+  sn.(s.Library_Join_post)
 }
 
-pred Library_Return_pre [s: one DshSnapshot] {
-  some (Library & (s . dsh_conf0))
-  (s . Library_in_b) in (s . Library_books) and
+pred Library_Return_pre [
+	s: one DshSnapshot] {
+  some (Library & (s.dsh_conf0))
+  (s.Library_in_b) in (s.Library_books) and
   some
-  ((s . Library_in_b).(s . Library_loans))
-  ! (Library in (s . dsh_sc_used0))
+  ((s.Library_in_b).(s.Library_loans))
+  !(Library in (s.dsh_sc_used0))
 }
 
 
-pred Library_Return_post [s: one DshSnapshot, sn: one DshSnapshot] {
-  (sn . dsh_conf0) = (((s . dsh_conf0) - Library) + Library)
-  (sn . Library_loans) =
-  ((s . Library_loans) -
-     ((s . Library_in_b) ->
-        ((s . Library_in_b).(s . Library_loans))))
+pred Library_Return_post [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_conf0) = (((s.dsh_conf0) - Library) + Library)
+  (sn.Library_loans) =
+  ((s.Library_loans) -
+     ((s.Library_in_b) ->
+        ((s.Library_in_b).(s.Library_loans))))
 }
 
-pred Library_Return [s: one DshSnapshot, sn: one DshSnapshot] {
-  s . Library_Return_pre
-  sn . (s . Library_Return_post)
+pred Library_Return [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  s.Library_Return_pre
+  sn.(s.Library_Return_post)
 }
 
-pred Library_Discard_pre [s: one DshSnapshot] {
-  some (Library & (s . dsh_conf0))
-  (s . Library_in_b) in (s . Library_books) and
+pred Library_Discard_pre [
+	s: one DshSnapshot] {
+  some (Library & (s.dsh_conf0))
+  (s.Library_in_b) in (s.Library_books) and
   no
-  ((s . Library_in_b).(s . Library_loans)) and
+  ((s.Library_in_b).(s.Library_loans)) and
   no
-  ((s . Library_in_b).(s . Library_reservations))
-  ! (Library in (s . dsh_sc_used0))
+  ((s.Library_in_b).(s.Library_reservations))
+  !(Library in (s.dsh_sc_used0))
 }
 
 
-pred Library_Discard_post [s: one DshSnapshot, sn: one DshSnapshot] {
-  (sn . dsh_conf0) = (((s . dsh_conf0) - Library) + Library)
-  (sn . Library_books) =
-  ((s . Library_books) - (s . Library_in_b))
+pred Library_Discard_post [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_conf0) = (((s.dsh_conf0) - Library) + Library)
+  (sn.Library_books) = ((s.Library_books) - (s.Library_in_b))
 }
 
-pred Library_Discard [s: one DshSnapshot, sn: one DshSnapshot] {
-  s . Library_Discard_pre
-  sn . (s . Library_Discard_post)
+pred Library_Discard [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  s.Library_Discard_pre
+  sn.(s.Library_Discard_post)
 }
 
-pred Library_Leave_pre [s: one DshSnapshot] {
-  some (Library & (s . dsh_conf0))
-  (s . Library_in_m) in (s . Library_members) and
+pred Library_Leave_pre [
+	s: one DshSnapshot] {
+  some (Library & (s.dsh_conf0))
+  (s.Library_in_m) in (s.Library_members) and
   no
-  ((s . Library_loans).(s . Library_in_m)) and
+  ((s.Library_loans).(s.Library_in_m)) and
   no
-  ((Int -> (s . Library_in_m)) &
-     ((s . Library_in_b).(s . Library_reservations)))
-  ! (Library in (s . dsh_sc_used0))
+  ((Int -> (s.Library_in_m)) &
+     ((s.Library_in_b).(s.Library_reservations)))
+  !(Library in (s.dsh_sc_used0))
 }
 
 
-pred Library_Leave_post [s: one DshSnapshot, sn: one DshSnapshot] {
-  (sn . dsh_conf0) = (((s . dsh_conf0) - Library) + Library)
-  (sn . Library_members) =
-  ((s . Library_members) - (s . Library_in_m))
+pred Library_Leave_post [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_conf0) = (((s.dsh_conf0) - Library) + Library)
+  (sn.Library_members) =
+  ((s.Library_members) - (s.Library_in_m))
 }
 
-pred Library_Leave [s: one DshSnapshot, sn: one DshSnapshot] {
-  s . Library_Leave_pre
-  sn . (s . Library_Leave_post)
+pred Library_Leave [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  s.Library_Leave_pre
+  sn.(s.Library_Leave_post)
 }
 
-pred Library_Renew_pre [s: one DshSnapshot] {
-  some (Library & (s . dsh_conf0))
-  (s . Library_in_m) in (s . Library_members) and
-  (s . Library_in_b) in (s . Library_books) and
-  ((s . Library_in_b) -> (s . Library_in_m)) in
-    (s . Library_loans) and
+pred Library_Renew_pre [
+	s: one DshSnapshot] {
+  some (Library & (s.dsh_conf0))
+  (s.Library_in_m) in (s.Library_members) and
+  (s.Library_in_b) in (s.Library_books) and
+  ((s.Library_in_b) -> (s.Library_in_m)) in
+    (s.Library_loans) and
   no
-  ((s . Library_in_b).(s . Library_reservations))
-  ! (Library in (s . dsh_sc_used0))
+  ((s.Library_in_b).(s.Library_reservations))
+  !(Library in (s.dsh_sc_used0))
 }
 
 
-pred Library_Renew_post [s: one DshSnapshot, sn: one DshSnapshot] {
-  (sn . dsh_conf0) = (((s . dsh_conf0) - Library) + Library)
+pred Library_Renew_post [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_conf0) = (((s.dsh_conf0) - Library) + Library)
 }
 
-pred Library_Renew [s: one DshSnapshot, sn: one DshSnapshot] {
-  s . Library_Renew_pre
-  sn . (s . Library_Renew_post)
+pred Library_Renew [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  s.Library_Renew_pre
+  sn.(s.Library_Renew_post)
 }
 
-pred Library_Take_pre [s: one DshSnapshot] {
-  some (Library & (s . dsh_conf0))
-  (s . Library_in_m) in (s . Library_members) and
-  (s . Library_in_b) in (s . Library_books) and
+pred Library_Take_pre [
+	s: one DshSnapshot] {
+  some (Library & (s.dsh_conf0))
+  (s.Library_in_m) in (s.Library_members) and
+  (s.Library_in_b) in (s.Library_books) and
   no
-  ((s . Library_in_b).(s . Library_loans)) and
-  (# ((s . Library_loans).(s . Library_in_m))) <
+  ((s.Library_in_b).(s.Library_loans)) and
+  (# ((s.Library_loans).(s.Library_in_m))) <
     (Const.maxNbLoans) and
-  (# ((s . Library_in_b).(s . Library_reservations))) > (0) and
-  (((s . Library_in_b).(s . Library_reservations)).first) =
-    (s . Library_in_m)
-  ! (Library in (s . dsh_sc_used0))
+  (# ((s.Library_in_b).(s.Library_reservations))) > (0) and
+  (((s.Library_in_b).(s.Library_reservations)).first) =
+    (s.Library_in_m)
+  !(Library in (s.dsh_sc_used0))
 }
 
 
-pred Library_Take_post [s: one DshSnapshot, sn: one DshSnapshot] {
-  (sn . dsh_conf0) = (((s . dsh_conf0) - Library) + Library)
-  (sn . Library_loans) =
-  ((s . Library_loans) +
-     ((s . Library_in_b) -> (s . Library_in_m))) and
-  ((s . Library_in_b).(sn . Library_reservations)) =
-    (((s . Library_in_m).(((s . Library_in_b).(s .
-                                                 Library_reservations)).idxOf)).(((s
-                                                                                     .
-                                                                                     Library_in_b).(s
-                                                                                                      .
-                                                                                                      Library_reservations)).delete))
+pred Library_Take_post [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_conf0) = (((s.dsh_conf0) - Library) + Library)
+  (sn.Library_loans) =
+  ((s.Library_loans) +
+     ((s.Library_in_b) -> (s.Library_in_m))) and
+  ((s.Library_in_b).(sn.Library_reservations)) =
+    (((s.Library_in_m).(((s.Library_in_b).(s.Library_reservations)).idxOf)).(((s.Library_in_b).(s.Library_reservations)).delete))
 }
 
-pred Library_Take [s: one DshSnapshot, sn: one DshSnapshot] {
-  s . Library_Take_pre
-  sn . (s . Library_Take_post)
+pred Library_Take [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  s.Library_Take_pre
+  sn.(s.Library_Take_post)
 }
 
-pred Library_Acquire_pre [s: one DshSnapshot] {
-  some (Library & (s . dsh_conf0))
-  ! ((s . Library_in_b) in (s . Library_books))
-  ! (Library in (s . dsh_sc_used0))
+pred Library_Acquire_pre [
+	s: one DshSnapshot] {
+  some (Library & (s.dsh_conf0))
+  !((s.Library_in_b) in (s.Library_books))
+  !(Library in (s.dsh_sc_used0))
 }
 
 
-pred Library_Acquire_post [s: one DshSnapshot, sn: one DshSnapshot] {
-  (sn . dsh_conf0) = (((s . dsh_conf0) - Library) + Library)
-  (sn . Library_books) =
-  ((s . Library_books) + (s . Library_in_b))
+pred Library_Acquire_post [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_conf0) = (((s.dsh_conf0) - Library) + Library)
+  (sn.Library_books) = ((s.Library_books) + (s.Library_in_b))
 }
 
-pred Library_Acquire [s: one DshSnapshot, sn: one DshSnapshot] {
-  s . Library_Acquire_pre
-  sn . (s . Library_Acquire_post)
+pred Library_Acquire [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  s.Library_Acquire_pre
+  sn.(s.Library_Acquire_post)
 }
 
-pred Library_Lend_pre [s: one DshSnapshot] {
-  some (Library & (s . dsh_conf0))
-  (s . Library_in_m) in (s . Library_members) and
-  (s . Library_in_b) in (s . Library_books) and
-  (all m: s . Library_members | no
-    (((s . Library_loans).m) & (s . Library_in_b))) and
+pred Library_Lend_pre [
+	s: one DshSnapshot] {
+  some (Library & (s.dsh_conf0))
+  (s.Library_in_m) in (s.Library_members) and
+  (s.Library_in_b) in (s.Library_books) and
+  (all m: s.Library_members | no
+    (((s.Library_loans).m) & (s.Library_in_b))) and
   no
-  ((s . Library_in_b).(s . Library_reservations)) and
-  (# ((s . Library_loans).(s . Library_in_m))) <
+  ((s.Library_in_b).(s.Library_reservations)) and
+  (# ((s.Library_loans).(s.Library_in_m))) <
     (Const.maxNbLoans)
-  ! (Library in (s . dsh_sc_used0))
+  !(Library in (s.dsh_sc_used0))
 }
 
 
-pred Library_Lend_post [s: one DshSnapshot, sn: one DshSnapshot] {
-  (sn . dsh_conf0) = (((s . dsh_conf0) - Library) + Library)
-  (sn . Library_loans) =
-  ((s . Library_loans) +
-     ((s . Library_in_b) -> (s . Library_in_m)))
+pred Library_Lend_post [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_conf0) = (((s.dsh_conf0) - Library) + Library)
+  (sn.Library_loans) =
+  ((s.Library_loans) +
+     ((s.Library_in_b) -> (s.Library_in_m)))
 }
 
-pred Library_Lend [s: one DshSnapshot, sn: one DshSnapshot] {
-  s . Library_Lend_pre
-  sn . (s . Library_Lend_post)
+pred Library_Lend [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  s.Library_Lend_pre
+  sn.(s.Library_Lend_post)
 }
 
-pred Library_Reserve_pre [s: one DshSnapshot] {
-  some (Library & (s . dsh_conf0))
-  (s . Library_in_m) in (s . Library_members) and
-  (s . Library_in_b) in (s . Library_books) and
-  !
-  (((s . Library_in_b) -> (s . Library_in_m)) in
-     (s . Library_loans)) and
+pred Library_Reserve_pre [
+	s: one DshSnapshot] {
+  some (Library & (s.dsh_conf0))
+  (s.Library_in_m) in (s.Library_members) and
+  (s.Library_in_b) in (s.Library_books) and
+  !(((s.Library_in_b) -> (s.Library_in_m)) in
+      (s.Library_loans)) and
   no
-  ((Int -> (s . Library_in_m)) &
-     ((s . Library_in_b).(s . Library_reservations))) and
+  ((Int -> (s.Library_in_m)) &
+     ((s.Library_in_b).(s.Library_reservations))) and
   { some
-      ((s . Library_in_b).(s . Library_loans)) or
-      !
-      (((s . Library_in_b).(s . Library_reservations)).isEmpty) }
-  ! (Library in (s . dsh_sc_used0))
+      ((s.Library_in_b).(s.Library_loans)) or
+      !(((s.Library_in_b).(s.Library_reservations)).isEmpty) }
+  !(Library in (s.dsh_sc_used0))
 }
 
 
-pred Library_Reserve_post [s: one DshSnapshot, sn: one DshSnapshot] {
-  (sn . dsh_conf0) = (((s . dsh_conf0) - Library) + Library)
-  ((s . Library_in_b).(sn . Library_reservations)) =
-  ((s . Library_in_m).(((s . Library_in_b).(s .
-                                              Library_reservations)).add))
+pred Library_Reserve_post [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_conf0) = (((s.dsh_conf0) - Library) + Library)
+  ((s.Library_in_b).(sn.Library_reservations)) =
+  ((s.Library_in_m).(((s.Library_in_b).(s.Library_reservations)).add))
 }
 
-pred Library_Reserve [s: one DshSnapshot, sn: one DshSnapshot] {
-  s . Library_Reserve_pre
-  sn . (s . Library_Reserve_post)
+pred Library_Reserve [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  s.Library_Reserve_pre
+  sn.(s.Library_Reserve_post)
 }
 
-pred dsh_small_step [s: one DshSnapshot, sn: one DshSnapshot] {
-  { sn . (s . Library_Cancel) or
-    sn . (s . Library_Join) or
-    sn . (s . Library_Return) or
-    sn . (s . Library_Discard) or
-    sn . (s . Library_Leave) or
-    sn . (s . Library_Renew) or
-    sn . (s . Library_Take) or
-    sn . (s . Library_Acquire) or
-    sn . (s . Library_Lend) or
-    sn . (s . Library_Reserve) }
+pred dsh_small_step [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  { sn.(s.Library_Cancel) or
+    sn.(s.Library_Join) or
+    sn.(s.Library_Return) or
+    sn.(s.Library_Discard) or
+    sn.(s.Library_Leave) or
+    sn.(s.Library_Renew) or
+    sn.(s.Library_Take) or
+    sn.(s.Library_Acquire) or
+    sn.(s.Library_Lend) or
+    sn.(s.Library_Reserve) }
 }
 
-fact dsh_traces_fact {  DshSnapshot/first . dsh_initial
+fact dsh_traces_fact {  DshSnapshot/first.dsh_initial
   (all s: one
-  (DshSnapshot - DshSnapshot/last) | (s . DshSnapshot/next)
-                                       .
-                                       (s . dsh_small_step))
+  (DshSnapshot - DshSnapshot/last) | (s.DshSnapshot/next).(s.dsh_small_step))
 }
 

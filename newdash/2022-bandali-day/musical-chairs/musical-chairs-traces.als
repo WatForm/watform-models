@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-05-27 15:36:53
+   on 2023-05-27 17:38:49
 */
 
 open util/boolean
@@ -107,113 +107,133 @@ sig DshSnapshot {
   Game_occupiedChairs: Chairs -> Players
 }
 
-pred dsh_initial [s: one DshSnapshot] {
-  (s . dsh_conf0) = Game_Start and
-  (# (s . Game_activePlayers)) > (1) and
-  (# (s . Game_activePlayers)) =
-    ((1).((# (s . Game_activeChairs)).plus)) and
-  (s . Game_activePlayers) = Players and
-  (s . Game_activeChairs) = Chairs and
-  (s . Game_occupiedChairs) = (none -> none)
+pred dsh_initial [
+	s: one DshSnapshot] {
+  (s.dsh_conf0) = Game_Start and
+  (# (s.Game_activePlayers)) > (1) and
+  (# (s.Game_activePlayers)) =
+    ((1).((# (s.Game_activeChairs)).plus)) and
+  (s.Game_activePlayers) = Players and
+  (s.Game_activeChairs) = Chairs and
+  (s.Game_occupiedChairs) = (none -> none)
 }
 
-pred Game_Sitting_EliminateLoser_pre [s: one DshSnapshot] {
-  some (Game_Sitting & (s . dsh_conf0))
-  ! (Game in (s . dsh_sc_used0))
+pred Game_Sitting_EliminateLoser_pre [
+	s: one DshSnapshot] {
+  some (Game_Sitting & (s.dsh_conf0))
+  !(Game in (s.dsh_sc_used0))
 }
 
 
-pred Game_Sitting_EliminateLoser_post [s: one DshSnapshot, sn: one DshSnapshot] {
-  (sn . dsh_conf0) =
-  ((((((s . dsh_conf0) - Game_Start) - Game_Walking) -
+pred Game_Sitting_EliminateLoser_post [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_conf0) =
+  ((((((s.dsh_conf0) - Game_Start) - Game_Walking) -
        Game_Sitting) - Game_End) + Game_Start)
-  (sn . Game_activePlayers) =
-  (Chairs.(s . Game_occupiedChairs)) and
-  (# (sn . Game_activeChairs)) =
-    ((1).((# (s . Game_activeChairs)).minus))
+  (sn.Game_activePlayers) = (Chairs.(s.Game_occupiedChairs)) and
+  (# (sn.Game_activeChairs)) =
+    ((1).((# (s.Game_activeChairs)).minus))
 }
 
-pred Game_Sitting_EliminateLoser [s: one DshSnapshot, sn: one DshSnapshot] {
-  s . Game_Sitting_EliminateLoser_pre
-  sn . (s . Game_Sitting_EliminateLoser_post)
+pred Game_Sitting_EliminateLoser [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  s.Game_Sitting_EliminateLoser_pre
+  sn.(s.Game_Sitting_EliminateLoser_post)
 }
 
-pred Game_Start_DeclareWinner_pre [s: one DshSnapshot] {
-  some (Game_Start & (s . dsh_conf0))
-  one (s . Game_activePlayers)
-  ! (Game in (s . dsh_sc_used0))
+pred Game_Start_DeclareWinner_pre [
+	s: one DshSnapshot] {
+  some (Game_Start & (s.dsh_conf0))
+  one (s.Game_activePlayers)
+  !(Game in (s.dsh_sc_used0))
 }
 
 
-pred Game_Start_DeclareWinner_post [s: one DshSnapshot, sn: one DshSnapshot] {
-  (sn . dsh_conf0) =
-  ((((((s . dsh_conf0) - Game_Start) - Game_Walking) -
+pred Game_Start_DeclareWinner_post [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_conf0) =
+  ((((((s.dsh_conf0) - Game_Start) - Game_Walking) -
        Game_Sitting) - Game_End) + Game_End)
 }
 
-pred Game_Start_DeclareWinner [s: one DshSnapshot, sn: one DshSnapshot] {
-  s . Game_Start_DeclareWinner_pre
-  sn . (s . Game_Start_DeclareWinner_post)
+pred Game_Start_DeclareWinner [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  s.Game_Start_DeclareWinner_pre
+  sn.(s.Game_Start_DeclareWinner_post)
 }
 
-pred Game_Start_Walk_pre [s: one DshSnapshot] {
-  some (Game_Start & (s . dsh_conf0))
-  (# (s . Game_activePlayers)) > (1)
-  ! (Game in (s . dsh_sc_used0))
-  Game_MusicStarts in (s . dsh_events0)
+pred Game_Start_Walk_pre [
+	s: one DshSnapshot] {
+  some (Game_Start & (s.dsh_conf0))
+  (# (s.Game_activePlayers)) > (1)
+  !(Game in (s.dsh_sc_used0))
+  Game_MusicStarts in (s.dsh_events0)
 }
 
 
-pred Game_Start_Walk_post [s: one DshSnapshot, sn: one DshSnapshot] {
-  (sn . dsh_conf0) =
-  ((((((s . dsh_conf0) - Game_Start) - Game_Walking) -
+pred Game_Start_Walk_post [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_conf0) =
+  ((((((s.dsh_conf0) - Game_Start) - Game_Walking) -
        Game_Sitting) - Game_End) + Game_Walking)
-  (sn . Game_occupiedChairs) = (none -> none)
+  (sn.Game_occupiedChairs) = (none -> none)
 }
 
-pred Game_Start_Walk [s: one DshSnapshot, sn: one DshSnapshot] {
-  s . Game_Start_Walk_pre
-  sn . (s . Game_Start_Walk_post)
+pred Game_Start_Walk [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  s.Game_Start_Walk_pre
+  sn.(s.Game_Start_Walk_post)
 }
 
-pred Game_Walking_Sit_pre [s: one DshSnapshot] {
-  some (Game_Walking & (s . dsh_conf0))
-  ! (Game in (s . dsh_sc_used0))
-  Game_MusicStops in (s . dsh_events0)
+pred Game_Walking_Sit_pre [
+	s: one DshSnapshot] {
+  some (Game_Walking & (s.dsh_conf0))
+  !(Game in (s.dsh_sc_used0))
+  Game_MusicStops in (s.dsh_events0)
 }
 
 
-pred Game_Walking_Sit_post [s: one DshSnapshot, sn: one DshSnapshot] {
-  (sn . dsh_conf0) =
-  ((((((s . dsh_conf0) - Game_Start) - Game_Walking) -
+pred Game_Walking_Sit_post [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_conf0) =
+  ((((((s.dsh_conf0) - Game_Start) - Game_Walking) -
        Game_Sitting) - Game_End) + Game_Sitting)
-  (sn . Game_occupiedChairs) in
-  ((s . Game_activeChairs) -> (s . Game_activePlayers)) and
-  (sn . Game_activeChairs) = (s . Game_activeChairs) and
-  (sn . Game_activePlayers) = (s . Game_activePlayers) and
-  (all c: sn . Game_activeChairs | one
-    (c.(sn . Game_occupiedChairs))) and
-  (all p: Chairs.(sn . Game_occupiedChairs) | one
-    ((sn . Game_occupiedChairs).p))
+  (sn.Game_occupiedChairs) in
+  ((s.Game_activeChairs) -> (s.Game_activePlayers)) and
+  (sn.Game_activeChairs) = (s.Game_activeChairs) and
+  (sn.Game_activePlayers) = (s.Game_activePlayers) and
+  (all c: sn.Game_activeChairs | one
+    (c.(sn.Game_occupiedChairs))) and
+  (all p: Chairs.(sn.Game_occupiedChairs) | one
+    ((sn.Game_occupiedChairs).p))
 }
 
-pred Game_Walking_Sit [s: one DshSnapshot, sn: one DshSnapshot] {
-  s . Game_Walking_Sit_pre
-  sn . (s . Game_Walking_Sit_post)
+pred Game_Walking_Sit [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  s.Game_Walking_Sit_pre
+  sn.(s.Game_Walking_Sit_post)
 }
 
-pred dsh_small_step [s: one DshSnapshot, sn: one DshSnapshot] {
-  { sn . (s . Game_Sitting_EliminateLoser) or
-    sn . (s . Game_Start_DeclareWinner) or
-    sn . (s . Game_Start_Walk) or
-    sn . (s . Game_Walking_Sit) }
+pred dsh_small_step [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  { sn.(s.Game_Sitting_EliminateLoser) or
+    sn.(s.Game_Start_DeclareWinner) or
+    sn.(s.Game_Start_Walk) or
+    sn.(s.Game_Walking_Sit) }
 }
 
-fact dsh_traces_fact {  DshSnapshot/first . dsh_initial
+fact dsh_traces_fact {  DshSnapshot/first.dsh_initial
   (all s: one
-  (DshSnapshot - DshSnapshot/last) | (s . DshSnapshot/next)
-                                       .
-                                       (s . dsh_small_step))
+  (DshSnapshot - DshSnapshot/last) | (s.DshSnapshot/next).(s.dsh_small_step))
 }
 
 
