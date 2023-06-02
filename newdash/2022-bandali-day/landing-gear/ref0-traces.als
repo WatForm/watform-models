@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-05-27 17:38:43
+   on 2023-06-01 22:01:19
 */
 
 open util/boolean
@@ -105,9 +105,9 @@ abstract sig LandingGear extends DshStates {}
 sig DshSnapshot {
   dsh_sc_used0: set DshStates,
   dsh_conf0: set DshStates,
-  LandingGear_gears: one GearStatus,
   LandingGear_handle: one HandleStatus,
-  LandingGear_doors: one DoorStatus
+  LandingGear_doors: one DoorStatus,
+  LandingGear_gears: one GearStatus
 }
 
 pred dsh_initial [

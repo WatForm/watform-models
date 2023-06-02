@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-05-27 17:38:54
+   on 2023-06-01 22:01:29
 */
 
 open util/ordering[Level] as nodeLevel
@@ -26,26 +26,25 @@ sig DshSnapshot {
   dsh_conf1: DshIds -> DshStates,
   dsh_stable: one boolean/Bool,
   DistrubedTreeSpanning_N_level: Node -> lone Level,
+  DistrubedTreeSpanning_N_parent: Node -> lone Node,
   DistrubedTreeSpanning_N_message: Node -> (Node -> Level),
-  DistrubedTreeSpanning_root: one Node,
-  DistrubedTreeSpanning_N_parent: Node -> lone Node
+  DistrubedTreeSpanning_root: one Node
 }
 
 pred dsh_initial [
-	s: one DshSnapshot,
-	p0_Node: one Node] {
+	s: one DshSnapshot] {
   (all p0_Node: one
   Node | (s.dsh_conf0) = none and
            (s.dsh_conf1) =
              (Node -> DistrubedTreeSpanning_N_Unassigned) and
            (s.dsh_sc_used1) = (none -> none) and
            no
-           (p0_Node.(s.DistrubedTreeSpanning_N_level)) and
+           p0_Node.(s.DistrubedTreeSpanning_N_level) and
            no
-           (p0_Node.(s.DistrubedTreeSpanning_N_parent)) and
+           p0_Node.(s.DistrubedTreeSpanning_N_parent) and
            no
-           (p0_Node.(s.DistrubedTreeSpanning_N_message)))
-  (s.dsh_stable) = boolean/True
+           p0_Node.(s.DistrubedTreeSpanning_N_message))
+  (s.dsh_stable).boolean/isTrue
 }
 
 pred DistrubedTreeSpanning_N_Assigned_sendMessage_pre [
@@ -54,7 +53,7 @@ pred DistrubedTreeSpanning_N_Assigned_sendMessage_pre [
   some
 ((p0_Node -> DistrubedTreeSpanning_N_Assigned) &
    (s.dsh_conf1))
-  (some n: Node | no (n.(s.DistrubedTreeSpanning_N_level)))
+  (some n: Node | no n.(s.DistrubedTreeSpanning_N_level))
   !(DistrubedTreeSpanning in (s.dsh_sc_used0))
   !((p0_Node -> DistrubedTreeSpanning_N) in (s.dsh_sc_used1))
 }
@@ -69,24 +68,24 @@ pred DistrubedTreeSpanning_N_Assigned_sendMessage_post [
   (((s.dsh_conf1) -
       (p0_Node -> DistrubedTreeSpanning_N_Assigned)) +
      (p0_Node -> DistrubedTreeSpanning_N_Assigned))
-  (some n: Node - thisNode | no
-                             (n.(s.DistrubedTreeSpanning_N_message)) and
-                             (n.(sn.DistrubedTreeSpanning_N_message)) =
-                               (thisNode ->
-                                  (p0_Node.(s.DistrubedTreeSpanning_N_level))) and
-                             (all others: Node - n | (others.(sn.DistrubedTreeSpanning_N_message)) =
-                                                       (others.(s.DistrubedTreeSpanning_N_message))))
+  (some n: Node - p0_Node | no
+                            n.(s.DistrubedTreeSpanning_N_message) and
+                            (n.(sn.DistrubedTreeSpanning_N_message)) =
+                              (p0_Node ->
+                                 p0_Node.(s.DistrubedTreeSpanning_N_level)) and
+                            (all others: Node - n | (others.(sn.DistrubedTreeSpanning_N_message)) =
+                                                      (others.(s.DistrubedTreeSpanning_N_message))))
   ((p0_Node -> DistrubedTreeSpanning_N).(none.(p0_Node.(sn.(s._testIfNextStable)))))=>
-    ((sn.dsh_stable) = boolean/True and
+    ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
-       (sn.dsh_sc_used1) = none and
-       { (s.dsh_stable) = boolean/True or
-           !((s.dsh_stable) = boolean/True) })
+       (sn.dsh_sc_used1) = (none -> none) and
+       { (s.dsh_stable).boolean/isTrue or
+           !((s.dsh_stable).boolean/isTrue) })
   else
-    ((sn.dsh_stable) = boolean/False and
-       ((s.dsh_stable) = boolean/True)=>
+    ((sn.dsh_stable).boolean/isFalse and
+       ((s.dsh_stable).boolean/isTrue)=>
            ((sn.dsh_sc_used0) = none and
-              (sn.dsh_sc_used1) = none)
+              (sn.dsh_sc_used1) = (none -> none))
          else
            ((sn.dsh_sc_used0) = (s.dsh_sc_used0) and
               (sn.dsh_sc_used1) =
@@ -105,10 +104,10 @@ pred DistrubedTreeSpanning_N_Assigned_sendMessage_enabledAfterStep [
   some
 ((p0_Node -> DistrubedTreeSpanning_N_Assigned) &
    (sn.dsh_conf1))
-  { (s.dsh_stable) = boolean/True and
+  { (s.dsh_stable).boolean/isTrue and
     !(DistrubedTreeSpanning in dsh_scp0) and
     !((p0_Node -> DistrubedTreeSpanning_N) in dsh_scp1) or
-    !((s.dsh_stable) = boolean/True) }
+    !((s.dsh_stable).boolean/isTrue) }
 }
 
 pred DistrubedTreeSpanning_N_Assigned_sendMessage [
@@ -125,7 +124,7 @@ pred DistrubedTreeSpanning_N_Unassigned_RootAssign_pre [
   some
 ((p0_Node -> DistrubedTreeSpanning_N_Unassigned) &
    (s.dsh_conf1))
-  thisNode in (s.DistrubedTreeSpanning_root)
+  p0_Node in s.DistrubedTreeSpanning_root
   !(DistrubedTreeSpanning in (s.dsh_sc_used0))
   !((p0_Node -> DistrubedTreeSpanning_N) in (s.dsh_sc_used1))
 }
@@ -143,18 +142,18 @@ pred DistrubedTreeSpanning_N_Unassigned_RootAssign_post [
      (p0_Node -> DistrubedTreeSpanning_N_Assigned))
   (p0_Node.(sn.DistrubedTreeSpanning_N_level)) =
   nodeLevel/first and
-  (p0_Node.(sn.DistrubedTreeSpanning_N_parent)) = thisNode
+  (p0_Node.(sn.DistrubedTreeSpanning_N_parent)) = p0_Node
   ((p0_Node -> DistrubedTreeSpanning_N).(none.(p0_Node.(sn.(s._testIfNextStable)))))=>
-    ((sn.dsh_stable) = boolean/True and
+    ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
-       (sn.dsh_sc_used1) = none and
-       { (s.dsh_stable) = boolean/True or
-           !((s.dsh_stable) = boolean/True) })
+       (sn.dsh_sc_used1) = (none -> none) and
+       { (s.dsh_stable).boolean/isTrue or
+           !((s.dsh_stable).boolean/isTrue) })
   else
-    ((sn.dsh_stable) = boolean/False and
-       ((s.dsh_stable) = boolean/True)=>
+    ((sn.dsh_stable).boolean/isFalse and
+       ((s.dsh_stable).boolean/isTrue)=>
            ((sn.dsh_sc_used0) = none and
-              (sn.dsh_sc_used1) = none)
+              (sn.dsh_sc_used1) = (none -> none))
          else
            ((sn.dsh_sc_used0) = (s.dsh_sc_used0) and
               (sn.dsh_sc_used1) =
@@ -173,10 +172,10 @@ pred DistrubedTreeSpanning_N_Unassigned_RootAssign_enabledAfterStep [
   some
 ((p0_Node -> DistrubedTreeSpanning_N_Unassigned) &
    (sn.dsh_conf1))
-  { (s.dsh_stable) = boolean/True and
+  { (s.dsh_stable).boolean/isTrue and
     !(DistrubedTreeSpanning in dsh_scp0) and
     !((p0_Node -> DistrubedTreeSpanning_N) in dsh_scp1) or
-    !((s.dsh_stable) = boolean/True) }
+    !((s.dsh_stable).boolean/isTrue) }
 }
 
 pred DistrubedTreeSpanning_N_Unassigned_RootAssign [
@@ -193,7 +192,7 @@ pred DistrubedTreeSpanning_N_Unassigned_NodeAssign_pre [
   some
 ((p0_Node -> DistrubedTreeSpanning_N_Unassigned) &
    (s.dsh_conf1))
-  some (p0_Node.(s.DistrubedTreeSpanning_N_message))
+  some p0_Node.(s.DistrubedTreeSpanning_N_message)
   !(DistrubedTreeSpanning in (s.dsh_sc_used0))
   !((p0_Node -> DistrubedTreeSpanning_N) in (s.dsh_sc_used1))
 }
@@ -214,16 +213,16 @@ pred DistrubedTreeSpanning_N_Unassigned_NodeAssign_post [
   (p0_Node.(sn.DistrubedTreeSpanning_N_parent)) =
     ((p0_Node.(s.DistrubedTreeSpanning_N_message)).Level)
   ((p0_Node -> DistrubedTreeSpanning_N).(none.(p0_Node.(sn.(s._testIfNextStable)))))=>
-    ((sn.dsh_stable) = boolean/True and
+    ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
-       (sn.dsh_sc_used1) = none and
-       { (s.dsh_stable) = boolean/True or
-           !((s.dsh_stable) = boolean/True) })
+       (sn.dsh_sc_used1) = (none -> none) and
+       { (s.dsh_stable).boolean/isTrue or
+           !((s.dsh_stable).boolean/isTrue) })
   else
-    ((sn.dsh_stable) = boolean/False and
-       ((s.dsh_stable) = boolean/True)=>
+    ((sn.dsh_stable).boolean/isFalse and
+       ((s.dsh_stable).boolean/isTrue)=>
            ((sn.dsh_sc_used0) = none and
-              (sn.dsh_sc_used1) = none)
+              (sn.dsh_sc_used1) = (none -> none))
          else
            ((sn.dsh_sc_used0) = (s.dsh_sc_used0) and
               (sn.dsh_sc_used1) =
@@ -242,10 +241,10 @@ pred DistrubedTreeSpanning_N_Unassigned_NodeAssign_enabledAfterStep [
   some
 ((p0_Node -> DistrubedTreeSpanning_N_Unassigned) &
    (sn.dsh_conf1))
-  { (s.dsh_stable) = boolean/True and
+  { (s.dsh_stable).boolean/isTrue and
     !(DistrubedTreeSpanning in dsh_scp0) and
     !((p0_Node -> DistrubedTreeSpanning_N) in dsh_scp1) or
-    !((s.dsh_stable) = boolean/True) }
+    !((s.dsh_stable).boolean/isTrue) }
 }
 
 pred DistrubedTreeSpanning_N_Unassigned_NodeAssign [
@@ -262,9 +261,9 @@ pred _testIfNextStable [
 	p0_Node: one Node,
 	dsh_scp0: DshStates,
 	dsh_scp1: DshIds -> DshStates] {
-  !(dsh_scp1.(dsh_scp0.(sn.(s.DistrubedTreeSpanning_N_Assigned_sendMessage_enabledAfterStep))))
-  !(dsh_scp1.(dsh_scp0.(sn.(s.DistrubedTreeSpanning_N_Unassigned_RootAssign_enabledAfterStep))))
-  !(dsh_scp1.(dsh_scp0.(sn.(s.DistrubedTreeSpanning_N_Unassigned_NodeAssign_enabledAfterStep))))
+  !(dsh_scp1.(dsh_scp0.(p0_Node.(sn.(s.DistrubedTreeSpanning_N_Assigned_sendMessage_enabledAfterStep)))))
+  !(dsh_scp1.(dsh_scp0.(p0_Node.(sn.(s.DistrubedTreeSpanning_N_Unassigned_RootAssign_enabledAfterStep)))))
+  !(dsh_scp1.(dsh_scp0.(p0_Node.(sn.(s.DistrubedTreeSpanning_N_Unassigned_NodeAssign_enabledAfterStep)))))
 }
 
 pred dsh_small_step [

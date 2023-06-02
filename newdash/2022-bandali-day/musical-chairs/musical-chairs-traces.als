@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-05-27 17:38:49
+   on 2023-06-01 22:01:25
 */
 
 open util/boolean
@@ -110,9 +110,9 @@ sig DshSnapshot {
 pred dsh_initial [
 	s: one DshSnapshot] {
   (s.dsh_conf0) = Game_Start and
-  (# (s.Game_activePlayers)) > (1) and
-  (# (s.Game_activePlayers)) =
-    ((1).((# (s.Game_activeChairs)).plus)) and
+  (# s.Game_activePlayers) > (1) and
+  (# s.Game_activePlayers) =
+    ((1).((# s.Game_activeChairs).plus)) and
   (s.Game_activePlayers) = Players and
   (s.Game_activeChairs) = Chairs and
   (s.Game_occupiedChairs) = (none -> none)
@@ -132,8 +132,8 @@ pred Game_Sitting_EliminateLoser_post [
   ((((((s.dsh_conf0) - Game_Start) - Game_Walking) -
        Game_Sitting) - Game_End) + Game_Start)
   (sn.Game_activePlayers) = (Chairs.(s.Game_occupiedChairs)) and
-  (# (sn.Game_activeChairs)) =
-    ((1).((# (s.Game_activeChairs)).minus))
+  (# sn.Game_activeChairs) =
+    ((1).((# s.Game_activeChairs).minus))
 }
 
 pred Game_Sitting_EliminateLoser [
@@ -146,7 +146,7 @@ pred Game_Sitting_EliminateLoser [
 pred Game_Start_DeclareWinner_pre [
 	s: one DshSnapshot] {
   some (Game_Start & (s.dsh_conf0))
-  one (s.Game_activePlayers)
+  one s.Game_activePlayers
   !(Game in (s.dsh_sc_used0))
 }
 
@@ -169,7 +169,7 @@ pred Game_Start_DeclareWinner [
 pred Game_Start_Walk_pre [
 	s: one DshSnapshot] {
   some (Game_Start & (s.dsh_conf0))
-  (# (s.Game_activePlayers)) > (1)
+  (# s.Game_activePlayers) > (1)
   !(Game in (s.dsh_sc_used0))
   Game_MusicStarts in (s.dsh_events0)
 }
@@ -205,8 +205,8 @@ pred Game_Walking_Sit_post [
   (sn.dsh_conf0) =
   ((((((s.dsh_conf0) - Game_Start) - Game_Walking) -
        Game_Sitting) - Game_End) + Game_Sitting)
-  (sn.Game_occupiedChairs) in
-  ((s.Game_activeChairs) -> (s.Game_activePlayers)) and
+  sn.Game_occupiedChairs in
+  (s.Game_activeChairs -> s.Game_activePlayers) and
   (sn.Game_activeChairs) = (s.Game_activeChairs) and
   (sn.Game_activePlayers) = (s.Game_activePlayers) and
   (all c: sn.Game_activeChairs | one

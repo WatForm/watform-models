@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-05-27 17:38:44
+   on 2023-06-01 22:01:20
 */
 
 open util/boolean
@@ -140,14 +140,14 @@ abstract sig LandingGear extends DshStates {}
 sig DshSnapshot {
   dsh_sc_used0: set DshStates,
   dsh_conf0: set DshStates,
+  LandingGear_handle: one HandleStatus,
+  LandingGear_doors: one DoorStatus,
+  LandingGear_gears: one GearStatus,
+  LandingGear_general_electro_valve: one Bool,
+  LandingGear_open_doors_electro_valve: one Bool,
   LandingGear_close_doors_electro_valve: one Bool,
   LandingGear_retract_gears_electro_valve: one Bool,
-  LandingGear_gears: one GearStatus,
-  LandingGear_open_doors_electro_valve: one Bool,
-  LandingGear_extend_gears_electro_valve: one Bool,
-  LandingGear_general_electro_valve: one Bool,
-  LandingGear_handle: one HandleStatus,
-  LandingGear_doors: one DoorStatus
+  LandingGear_extend_gears_electro_valve: one Bool
 }
 
 pred dsh_initial [

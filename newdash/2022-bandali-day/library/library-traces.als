@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-05-27 17:38:49
+   on 2023-06-01 22:01:24
 */
 
 open util/boolean
@@ -86,39 +86,38 @@ abstract sig Library extends DshStates {}
 sig DshSnapshot {
   dsh_sc_used0: set DshStates,
   dsh_conf0: set DshStates,
-  Library_books: set BookID,
-  Library_reservations: (s.Library_books) one->one
-                        (seq s.Library_members),
-  Library_in_b: lone BookID,
   Library_in_m: lone MemberID,
+  Library_in_b: lone BookID,
   Library_members: set MemberID,
-  Library_loans: (s.Library_books) one->one
-                 (s.Library_members)
+  Library_books: set BookID,
+  Library_loans: Library_books one->one Library_members,
+  Library_reservations: Library_books one->one
+                        (seq Library_members)
 }
 
 pred dsh_initial [
 	s: one DshSnapshot] {
   (s.dsh_conf0) = Library and
   no
-  (s.Library_members) and
+  s.Library_members and
   no
-  (s.Library_books) and
+  s.Library_books and
   no
-  (s.Library_loans) and
+  s.Library_loans and
   no
-  (s.Library_reservations)
+  s.Library_reservations
 }
 
-fact inv {  (all s: one DshSnapshot | (Const.maxNbLoans) = (7))
+fact inv {  (Const.maxNbLoans) = (7)
 }
 
 pred Library_Cancel_pre [
 	s: one DshSnapshot] {
   some (Library & (s.dsh_conf0))
-  (s.Library_in_m) in (s.Library_members) and
-  (s.Library_in_b) in (s.Library_books) and
+  s.Library_in_m in s.Library_members and
+  s.Library_in_b in s.Library_books and
   one
-  ((Int -> (s.Library_in_m)) &
+  ((Int -> s.Library_in_m) &
      ((s.Library_in_b).(s.Library_reservations)))
   !(Library in (s.dsh_sc_used0))
 }
@@ -142,7 +141,7 @@ pred Library_Cancel [
 pred Library_Join_pre [
 	s: one DshSnapshot] {
   some (Library & (s.dsh_conf0))
-  !((s.Library_in_m) in (s.Library_members))
+  !(s.Library_in_m in s.Library_members)
   !(Library in (s.dsh_sc_used0))
 }
 
@@ -165,7 +164,7 @@ pred Library_Join [
 pred Library_Return_pre [
 	s: one DshSnapshot] {
   some (Library & (s.dsh_conf0))
-  (s.Library_in_b) in (s.Library_books) and
+  s.Library_in_b in s.Library_books and
   some
   ((s.Library_in_b).(s.Library_loans))
   !(Library in (s.dsh_sc_used0))
@@ -178,8 +177,7 @@ pred Library_Return_post [
   (sn.dsh_conf0) = (((s.dsh_conf0) - Library) + Library)
   (sn.Library_loans) =
   ((s.Library_loans) -
-     ((s.Library_in_b) ->
-        ((s.Library_in_b).(s.Library_loans))))
+     (s.Library_in_b -> ((s.Library_in_b).(s.Library_loans))))
 }
 
 pred Library_Return [
@@ -192,7 +190,7 @@ pred Library_Return [
 pred Library_Discard_pre [
 	s: one DshSnapshot] {
   some (Library & (s.dsh_conf0))
-  (s.Library_in_b) in (s.Library_books) and
+  s.Library_in_b in s.Library_books and
   no
   ((s.Library_in_b).(s.Library_loans)) and
   no
@@ -218,11 +216,11 @@ pred Library_Discard [
 pred Library_Leave_pre [
 	s: one DshSnapshot] {
   some (Library & (s.dsh_conf0))
-  (s.Library_in_m) in (s.Library_members) and
+  s.Library_in_m in s.Library_members and
   no
   ((s.Library_loans).(s.Library_in_m)) and
   no
-  ((Int -> (s.Library_in_m)) &
+  ((Int -> s.Library_in_m) &
      ((s.Library_in_b).(s.Library_reservations)))
   !(Library in (s.dsh_sc_used0))
 }
@@ -246,10 +244,9 @@ pred Library_Leave [
 pred Library_Renew_pre [
 	s: one DshSnapshot] {
   some (Library & (s.dsh_conf0))
-  (s.Library_in_m) in (s.Library_members) and
-  (s.Library_in_b) in (s.Library_books) and
-  ((s.Library_in_b) -> (s.Library_in_m)) in
-    (s.Library_loans) and
+  s.Library_in_m in s.Library_members and
+  s.Library_in_b in s.Library_books and
+  (s.Library_in_b -> s.Library_in_m) in s.Library_loans and
   no
   ((s.Library_in_b).(s.Library_reservations))
   !(Library in (s.dsh_sc_used0))
@@ -272,8 +269,8 @@ pred Library_Renew [
 pred Library_Take_pre [
 	s: one DshSnapshot] {
   some (Library & (s.dsh_conf0))
-  (s.Library_in_m) in (s.Library_members) and
-  (s.Library_in_b) in (s.Library_books) and
+  s.Library_in_m in s.Library_members and
+  s.Library_in_b in s.Library_books and
   no
   ((s.Library_in_b).(s.Library_loans)) and
   (# ((s.Library_loans).(s.Library_in_m))) <
@@ -290,8 +287,7 @@ pred Library_Take_post [
 	sn: one DshSnapshot] {
   (sn.dsh_conf0) = (((s.dsh_conf0) - Library) + Library)
   (sn.Library_loans) =
-  ((s.Library_loans) +
-     ((s.Library_in_b) -> (s.Library_in_m))) and
+  ((s.Library_loans) + (s.Library_in_b -> s.Library_in_m)) and
   ((s.Library_in_b).(sn.Library_reservations)) =
     (((s.Library_in_m).(((s.Library_in_b).(s.Library_reservations)).idxOf)).(((s.Library_in_b).(s.Library_reservations)).delete))
 }
@@ -306,7 +302,7 @@ pred Library_Take [
 pred Library_Acquire_pre [
 	s: one DshSnapshot] {
   some (Library & (s.dsh_conf0))
-  !((s.Library_in_b) in (s.Library_books))
+  !(s.Library_in_b in s.Library_books)
   !(Library in (s.dsh_sc_used0))
 }
 
@@ -328,10 +324,10 @@ pred Library_Acquire [
 pred Library_Lend_pre [
 	s: one DshSnapshot] {
   some (Library & (s.dsh_conf0))
-  (s.Library_in_m) in (s.Library_members) and
-  (s.Library_in_b) in (s.Library_books) and
+  s.Library_in_m in s.Library_members and
+  s.Library_in_b in s.Library_books and
   (all m: s.Library_members | no
-    (((s.Library_loans).m) & (s.Library_in_b))) and
+    (((s.Library_loans).m) & s.Library_in_b)) and
   no
   ((s.Library_in_b).(s.Library_reservations)) and
   (# ((s.Library_loans).(s.Library_in_m))) <
@@ -345,8 +341,7 @@ pred Library_Lend_post [
 	sn: one DshSnapshot] {
   (sn.dsh_conf0) = (((s.dsh_conf0) - Library) + Library)
   (sn.Library_loans) =
-  ((s.Library_loans) +
-     ((s.Library_in_b) -> (s.Library_in_m)))
+  ((s.Library_loans) + (s.Library_in_b -> s.Library_in_m))
 }
 
 pred Library_Lend [
@@ -359,12 +354,11 @@ pred Library_Lend [
 pred Library_Reserve_pre [
 	s: one DshSnapshot] {
   some (Library & (s.dsh_conf0))
-  (s.Library_in_m) in (s.Library_members) and
-  (s.Library_in_b) in (s.Library_books) and
-  !(((s.Library_in_b) -> (s.Library_in_m)) in
-      (s.Library_loans)) and
+  s.Library_in_m in s.Library_members and
+  s.Library_in_b in s.Library_books and
+  !((s.Library_in_b -> s.Library_in_m) in s.Library_loans) and
   no
-  ((Int -> (s.Library_in_m)) &
+  ((Int -> s.Library_in_m) &
      ((s.Library_in_b).(s.Library_reservations))) and
   { some
       ((s.Library_in_b).(s.Library_loans)) or

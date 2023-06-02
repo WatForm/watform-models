@@ -1,5 +1,6 @@
 open util/ring[Identifier] as P0
 
+
 state System {
 	elected: set Identifier
 
@@ -12,11 +13,11 @@ state System {
 				when {
 					no elected
 					some token.elems
-					lt[this, token.firstElem]
+					lt[thisProcess, token.firstElem]
 				}
 				do {
-					Process[nextRing[thisIdentifier]]/token.addFirst[token.firstElem] // Pass the token
-					all others: Identifier - nextRing[thisIdentifier] | Process[others]/token' = Process[others]/token
+					addFirst[Process[nextRing[thisProcess]]/token, Process[nextRing[thisProcess]]/token', token.firstElem] // Pass the token
+					all others: Identifier - nextRing[thisProcess] | Process[others]/token' = Process[others]/token
 				}
 			}
 
@@ -24,20 +25,20 @@ state System {
 				when {
 					no elected
 					some token.elems
-					gt[thisIdentifier, token.firstElem]
+					gt[thisProcess, token.firstElem]
 				}
 				do {
-					token.removeFirst // Consume the Token
+					token'.(token.removeFirst) // Consume the Token
 				}
 			}			
 
 			trans ElectLeader {
 				when {
 					no elected
-					token.firstElem = thisIdentifier
+					token.firstElem = thisProcess
 				}
 				do {
-					elected' =  thisIdentifier // Elect Leader
+					elected' =  thisProcess // Elect Leader
 				}
 				goto Elected
 			}
@@ -47,7 +48,7 @@ state System {
 
 		init {
 			one token
-			Process[nextRing[thisIdentifier]]/token.firstElem = thisIdentifier
+			Process[nextRing[thisProcess]]/token.firstElem = thisProcess
 		}
 	}
 

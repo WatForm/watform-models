@@ -35,10 +35,10 @@ state System {
 			trans Fail {
 				when {
 					// We cannot fail if it would leave a member with no successors
-					all n: Node - thisNode | some (members - thisNode) & (N[n]/frst + N[n]/scnd)
+					all n: Node - thisN | some (members - thisN) & (N[n]/frst + N[n]/scnd)
 				}
 				do {
-					members' = members - thisNode
+					members' = members - thisN
 					frst' = {none}
 					scnd' = {none}
 					prdc' = {none}
@@ -63,14 +63,14 @@ state System {
 						frst' = frst 
 						scnd' = N[frst]/frst
 						// The sucessor's predecessor is better
-						(some N[frst]/prdc and between[thisNode, N[frst]/prdc, frst] and (N[frst]/prdc in members)) => {
+						(some N[frst]/prdc and between[thisN, N[frst]/prdc, frst] and (N[frst]/prdc in members)) => {
 							status' = Stabilizing
 							saved' = N[frst]/prdc
-							all n: Node - thisNode | N[n]/status' = N[n]/status
-							all n: Node - thisNode | N[n]/saved' = N[n]/saved
-						} else (thisNode !in N[frst]/prdc) => {
+							all n: Node - thisN | N[n]/status' = N[n]/status
+							all n: Node - thisN | N[n]/saved' = N[n]/saved
+						} else (thisN !in N[frst]/prdc) => {
 							N[frst]/status' = Rectifying
-							N[frst]/saved' = thisNode
+							N[frst]/saved' = thisN
 							all n: Node - frst | N[n]/status' = N[n]/status
 							all n: Node - frst | N[n]/saved' = N[n]/saved
 						} else {
@@ -83,9 +83,9 @@ state System {
 
 			trans StabilizeFromPrdc {
 				when {
-					thisNode in members
+					thisN in members
 					status = Stabilizing
-					between[thisNode, saved, frst]
+					between[thisN, saved, frst]
 				}
 				do {
 					no status'
@@ -94,27 +94,27 @@ state System {
 					saved !in members implies {
 						frst' = frst
 						scnd' = scnd
-						all n: Node - thisNode | N[n]/status' = N[n]/status
-						all n: Node - thisNode | N[n]/saved' = N[n]/saved
+						all n: Node - thisN | N[n]/status' = N[n]/status
+						all n: Node - thisN | N[n]/saved' = N[n]/saved
 					// The Successor's Predecessor is a member
 					} else {
 						frst' = saved
 						scnd' = N[saved]/frst
 						N[saved]/status' = Rectifying
-						N[saved]/saved' = thisNode
-						all n: Node - saved - thisNode | N[n]/status' = N[n]/status
-						all n: Node - saved - thisNode | N[n]/saved' = N[n]/saved
+						N[saved]/saved' = thisN
+						all n: Node - saved - thisN | N[n]/status' = N[n]/status
+						all n: Node - saved - thisN | N[n]/saved' = N[n]/saved
 					}
 				}
 			}
 
 			trans Rectify {
 				when {
-					thisNode in members
+					thisN in members
 					status = Rectifying
 				}
 				do {
-					(between[prdc, saved, thisNode] or prdc !in members or no prdc) => {prdc' = saved}
+					(between[prdc, saved, thisN] or prdc !in members or no prdc) => {prdc' = saved}
 					else {
 						prdc' = prdc
 					}
@@ -123,7 +123,7 @@ state System {
 
 			trans Flush {
 				when {
-					thisNode in members
+					thisN in members
 					prdc !in members
 				}
 				do {
@@ -135,10 +135,10 @@ state System {
 		state Failed {
 			trans Join {
 				when {
-					thisNode !in members
+					thisN !in members
 				}
 				do {
-					members' = members + thisNode
+					members' = members + thisN
 				}
 				goto Live
 			}
@@ -147,9 +147,9 @@ state System {
 		init {
 			no status
 			no saved
-			frst = nextNode[thisNode]
+			frst = nextNode[thisN]
 			scnd = nextNode[frst]
-			prdc = prevNode[thisNode]
+			prdc = prevNode[thisN]
 		}
 	}
 

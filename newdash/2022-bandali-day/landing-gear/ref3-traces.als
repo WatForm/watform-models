@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-05-27 17:38:46
+   on 2023-06-01 22:01:22
 */
 
 open util/boolean
@@ -113,7 +113,8 @@ fun cylinders_gears[g: GearStatus]: CylinderStatus {
     else CYLINDER_RETRACTED // should never be reached
 }
 
-pred close_door[d1, d2: DoorStatus,
+pred close_door[dclosed: Bool, 
+                d1, d2: DoorStatus,
                 gev1, gev2, cdev1, cdev2, odev1, odev2: Bool] {
     d1 = OPEN implies {
         d2 = CLOSING
@@ -122,7 +123,7 @@ pred close_door[d1, d2: DoorStatus,
         and odev2 = odev1
     }
     else d1 = CLOSING implies {
-        doors_closed = True implies {
+        dclosed = True implies {
             d2 = CLOSED
             and gev2 = False
             and cdev2 = False
@@ -137,21 +138,35 @@ pred close_door[d1, d2: DoorStatus,
     }
 }
 
-pred gears_extended[] {
-    all s: LandingSet | LandingGear/f_gears_extended[s]
+pred close_door[dc: LandingSet -> Bool,
+                d1, d2: DoorStatus,
+                gev1, gev2, cdev1, cdev2, odev1, odev2: Bool] {
+    d1 = OPEN implies {
+        d2 = CLOSING
+        and gev2 = gev1
+        and cdev2 = True
+        and odev2 = odev1
+    }
+    else d1 = CLOSING implies {
+        all_landing_set[dc] implies {
+            d2 = CLOSED
+            and gev2 = False
+            and cdev2 = False
+            and odev2 = odev1
+        }
+    }
+    else d1 = OPENING implies {
+        d2 = CLOSING
+        and gev2 = gev1
+        and cdev2 = True
+        and odev2 = False
+    }
 }
 
-pred gears_retracted[] {
-    all s: LandingSet | LandingGear/f_gears_retracted[s]
+pred all_landing_set[attr: LandingSet -> Bool] {
+    all s: LandingSet | boolean/isTrue[s.attr]
 }
 
-pred doors_closed[] {
-    all s: LandingSet | LandingGear/f_doors_closed[s]
-}
-
-pred doors_open[] {
-    all s: LandingSet | LandingGear/f_doors_open[s]
-}
 
 abstract sig DshStates {}
 abstract sig LandingGear extends DshStates {} 
@@ -159,18 +174,18 @@ abstract sig LandingGear extends DshStates {}
 sig DshSnapshot {
   dsh_sc_used0: set DshStates,
   dsh_conf0: set DshStates,
-  LandingGear_close_doors_electro_valve: one Bool,
-  LandingGear_f_doors_open: LandingSet one->one Bool,
-  LandingGear_retract_gears_electro_valve: one Bool,
-  LandingGear_gears: one GearStatus,
-  LandingGear_open_doors_electro_valve: one Bool,
-  LandingGear_extend_gears_electro_valve: one Bool,
-  LandingGear_f_gears_retracted: LandingSet one->one Bool,
-  LandingGear_general_electro_valve: one Bool,
-  LandingGear_f_doors_closed: LandingSet one->one Bool,
-  LandingGear_f_gears_extended: LandingSet one->one Bool,
   LandingGear_handle: one HandleStatus,
-  LandingGear_doors: one DoorStatus
+  LandingGear_doors: one DoorStatus,
+  LandingGear_gears: one GearStatus,
+  LandingGear_general_electro_valve: one Bool,
+  LandingGear_open_doors_electro_valve: one Bool,
+  LandingGear_close_doors_electro_valve: one Bool,
+  LandingGear_retract_gears_electro_valve: one Bool,
+  LandingGear_extend_gears_electro_valve: one Bool,
+  LandingGear_f_gears_extended: LandingSet one->one Bool,
+  LandingGear_f_gears_retracted: LandingSet one->one Bool,
+  LandingGear_f_doors_closed: LandingSet one->one Bool,
+  LandingGear_f_doors_open: LandingSet one->one Bool
 }
 
 pred dsh_initial [
@@ -221,7 +236,7 @@ pred LandingGear_retraction_sequence_post [
                  True
            else
              (((s.LandingGear_doors) = OPENING)=>
-                  (doors_open = True) =>
+                  ((s.LandingGear_f_doors_open).all_landing_set) =>
                     (sn.LandingGear_doors) = OPEN and
                       (sn.LandingGear_open_doors_electro_valve) =
                         False
@@ -234,7 +249,7 @@ pred LandingGear_retraction_sequence_post [
                        else
                          (((s.LandingGear_gears) =
                              RETRACTING)=>
-                              (gears_retracted = True) =>
+                              ((s.LandingGear_f_gears_retracted).all_landing_set) =>
                                 (sn.LandingGear_gears) =
                                   RETRACTED and
                                   (sn.LandingGear_retract_gears_electro_valve) =
@@ -254,7 +269,7 @@ pred LandingGear_retraction_sequence_post [
          )
     
   else
-    ((sn.LandingGear_open_doors_electro_valve).((s.LandingGear_open_doors_electro_valve).((sn.LandingGear_close_doors_electro_valve).((s.LandingGear_close_doors_electro_valve).((sn.LandingGear_general_electro_valve).((s.LandingGear_general_electro_valve).((sn.LandingGear_doors).((s.LandingGear_doors).close_door))))))))
+    ((sn.LandingGear_open_doors_electro_valve).((s.LandingGear_open_doors_electro_valve).((sn.LandingGear_close_doors_electro_valve).((s.LandingGear_close_doors_electro_valve).((sn.LandingGear_general_electro_valve).((s.LandingGear_general_electro_valve).((sn.LandingGear_doors).((s.LandingGear_doors).((s.LandingGear_f_doors_closed).close_door)))))))))
 
 }
 
@@ -285,7 +300,7 @@ pred LandingGear_outgoing_sequence_post [
           (sn.LandingGear_open_doors_electro_valve) = True
       else
         (((s.LandingGear_doors) = OPENING)=>
-             (doors_open = True) =>
+             ((s.LandingGear_f_doors_open).all_landing_set) =>
                (sn.LandingGear_doors) = OPEN and
                  (sn.LandingGear_open_doors_electro_valve) =
                    False
@@ -297,7 +312,7 @@ pred LandingGear_outgoing_sequence_post [
                         True
                   else
                     (((s.LandingGear_gears) = EXTENDING)=>
-                         (gears_extended = True) =>
+                         ((s.LandingGear_f_gears_extended).all_landing_set) =>
                            (sn.LandingGear_gears) = EXTENDED and
                              (sn.LandingGear_extend_gears_electro_valve) =
                                False
@@ -315,7 +330,7 @@ pred LandingGear_outgoing_sequence_post [
          )
     
   else
-    ((sn.LandingGear_open_doors_electro_valve).((s.LandingGear_open_doors_electro_valve).((sn.LandingGear_close_doors_electro_valve).((s.LandingGear_close_doors_electro_valve).((sn.LandingGear_general_electro_valve).((s.LandingGear_general_electro_valve).((sn.LandingGear_doors).((s.LandingGear_doors).close_door))))))))
+    ((sn.LandingGear_open_doors_electro_valve).((s.LandingGear_open_doors_electro_valve).((sn.LandingGear_close_doors_electro_valve).((s.LandingGear_close_doors_electro_valve).((sn.LandingGear_general_electro_valve).((s.LandingGear_general_electro_valve).((sn.LandingGear_doors).((s.LandingGear_doors).((s.LandingGear_f_doors_closed).close_door)))))))))
 
 }
 

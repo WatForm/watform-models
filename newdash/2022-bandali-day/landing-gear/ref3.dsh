@@ -105,7 +105,8 @@ fun cylinders_gears[g: GearStatus]: CylinderStatus {
     else CYLINDER_RETRACTED // should never be reached
 }
 
-pred close_door[d1, d2: DoorStatus,
+pred close_door[dclosed: Bool, 
+                d1, d2: DoorStatus,
                 gev1, gev2, cdev1, cdev2, odev1, odev2: Bool] {
     d1 = OPEN implies {
         d2 = CLOSING
@@ -114,7 +115,7 @@ pred close_door[d1, d2: DoorStatus,
         and odev2 = odev1
     }
     else d1 = CLOSING implies {
-        doors_closed = True implies {
+        dclosed = True implies {
             d2 = CLOSED
             and gev2 = False
             and cdev2 = False
@@ -129,21 +130,35 @@ pred close_door[d1, d2: DoorStatus,
     }
 }
 
-pred gears_extended[] {
-    all s: LandingSet | LandingGear/f_gears_extended[s]
+pred close_door[dc: LandingSet -> Bool,
+                d1, d2: DoorStatus,
+                gev1, gev2, cdev1, cdev2, odev1, odev2: Bool] {
+    d1 = OPEN implies {
+        d2 = CLOSING
+        and gev2 = gev1
+        and cdev2 = True
+        and odev2 = odev1
+    }
+    else d1 = CLOSING implies {
+        all_landing_set[dc] implies {
+            d2 = CLOSED
+            and gev2 = False
+            and cdev2 = False
+            and odev2 = odev1
+        }
+    }
+    else d1 = OPENING implies {
+        d2 = CLOSING
+        and gev2 = gev1
+        and cdev2 = True
+        and odev2 = False
+    }
 }
 
-pred gears_retracted[] {
-    all s: LandingSet | LandingGear/f_gears_retracted[s]
+pred all_landing_set[attr: LandingSet -> Bool] {
+    all s: LandingSet | boolean/isTrue[s.attr]
 }
 
-pred doors_closed[] {
-    all s: LandingSet | LandingGear/f_doors_closed[s]
-}
-
-pred doors_open[] {
-    all s: LandingSet | LandingGear/f_doors_open[s]
-}
 
 state LandingGear {
     env handle: one HandleStatus
@@ -185,7 +200,7 @@ state LandingGear {
                     and open_doors_electro_valve' = True
                 }
                 else doors = OPENING implies {
-                    doors_open = True implies {
+                    all_landing_set[f_doors_open] implies {
                         doors' = OPEN
                         open_doors_electro_valve' = False
                     }
@@ -196,7 +211,7 @@ state LandingGear {
                         and retract_gears_electro_valve' = True
                     }
                     else gears = RETRACTING implies {
-                        gears_retracted = True implies {
+                        all_landing_set[f_gears_retracted]  implies {
                             gears' = RETRACTED
                             and retract_gears_electro_valve' = False
                         }
@@ -208,7 +223,8 @@ state LandingGear {
                     }
                 }
             }
-            else close_door[doors, doors',
+            else close_door[f_doors_closed,
+                            doors, doors',
                             general_electro_valve,
                             general_electro_valve',
                             close_doors_electro_valve,
@@ -228,7 +244,7 @@ state LandingGear {
                     and open_doors_electro_valve' = True
                 }
                 else doors = OPENING implies {
-                    doors_open = True implies {
+                    all_landing_set[f_doors_open] implies {
                         doors' = OPEN
                         and open_doors_electro_valve' = False
                     }
@@ -239,7 +255,7 @@ state LandingGear {
                         and extend_gears_electro_valve' = True
                     }
                     else gears = EXTENDING implies {
-                        gears_extended = True implies {
+                        all_landing_set[LandingGear/f_gears_extended] implies {
                             gears' = EXTENDED
                             and extend_gears_electro_valve' = False
                         }
@@ -251,7 +267,8 @@ state LandingGear {
                     }
                 }
             }
-            else close_door[doors, doors',
+            else close_door[f_doors_closed,
+                            doors, doors',
                             general_electro_valve,
                             general_electro_valve',
                             close_doors_electro_valve,

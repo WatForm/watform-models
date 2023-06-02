@@ -28,12 +28,12 @@ state Carousel {
 				do {
 					one t: transToSend, c: CoordinatorID | all leader: PartLdrID | {
 						txn' = t
-						Coordinator[c]/client' = thisClientID // Inform the coordinator of the client making the request
+						Coordinator[c]/client' = thisClient // Inform the coordinator of the client making the request
 						no Coordinator[c]/currentTxn // It should not be managing another transaction
 						Coordinator[c]/currentTxn' = t // Inform coordinator of transaction
 
 						t.coordinator = c // Store the coordinator information for the respective transaction (to be used by partition leaders)
-						PartitionLeader[leader]/currentTxn.add[t]  // Store the transaction to be processed by a participant leader
+						add[PartitionLeader[leader]/currentTxn, PartitionLeader[leader]/currentTxn', t]  // Store the transaction to be processed by a participant leader
 						transToSend' = transToSend - t
 						all others: CoordinatorID - c | Coordinator[others]/client' = Coordinator[others]/client
 						all others: CoordinatorID - c | Coordinator[others]/currentTxn' = Coordinator[others]/currentTxn
@@ -145,8 +145,8 @@ state Carousel {
 					!( (currentTxn.firstElem).key.Value in (pendingTxn.elems.key).Value) // The new transaction does not conflict with pending transactions
 				}
 				do {
-					pendingTxn.add[currentTxn.firstElem] // Add this transaction to the pending list of transactions
-					currentTxn.removeFirst // Remove the current transaction
+					add[pendingTxn, pendingTxn', currentTxn.firstElem] // Add this transaction to the pending list of transactions
+					removeFirst[currentTxn, currentTxn'] // Remove the current transaction
 				}
 				goto Commit // Start the commit phase
 			}
@@ -165,7 +165,7 @@ state Carousel {
 				}
 				do {
 					no response' // Clear out responses
-					pendingTxn.removeFirst // Remove the Committed transaction from the Pending List
+					removeFirst[pendingTxn, pendingTxn'] // Remove the Committed transaction from the Pending List
 					data' = data ++ (response.Response.key) // Update the data based on the Read-Write values
 				}
 			}
@@ -177,7 +177,7 @@ state Carousel {
 				do {
 					//Inform the coordinator the first pending transaction about the Prepare (Commit) decision
 					Coordinator[(pendingTxn.firstElem).coordinator]/coord_responses' = 
-						Coordinator[(pendingTxn.firstElem).coordinator]/coord_responses + (thisPartLdrID -> Commit) 
+						Coordinator[(pendingTxn.firstElem).coordinator]/coord_responses + (thisPartitionLeader -> Commit) 
 					all others: CoordinatorID - (pendingTxn.firstElem).coordinator | Coordinator[others]/coord_responses' = Coordinator[others]/coord_responses
 				}
 				goto Waiting
@@ -188,8 +188,8 @@ state Carousel {
 		state Abort {
 			trans AbortTransaction {
 				do {
-					currentTxn.removeFirst
-					Coordinator[currentTxn.firstElem.coordinator]/coord_responses' =  Coordinator[currentTxn.firstElem.coordinator]/coord_responses + (thisPartLdrID -> Abort)
+					removeFirst[currentTxn, currentTxn]
+					Coordinator[currentTxn.firstElem.coordinator]/coord_responses' =  Coordinator[currentTxn.firstElem.coordinator]/coord_responses + (thisPartitionLeader -> Abort)
 					no response'
 					all others: CoordinatorID - (pendingTxn.firstElem).coordinator | Coordinator[others]/coord_responses' = Coordinator[others]/coord_responses
 				}

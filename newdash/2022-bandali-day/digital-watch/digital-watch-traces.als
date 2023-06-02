@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-05-27 17:38:41
+   on 2023-06-01 22:01:16
 */
 
 open util/boolean
@@ -128,7 +128,7 @@ pred dsh_initial [
 	s: one DshSnapshot] {
   (s.dsh_conf0) =
   (DigitalWatch_Light_Off + DigitalWatch_Main_Displays_Time)
-  (s.dsh_stable) = boolean/True
+  (s.dsh_stable).boolean/isTrue
 }
 
 pred DigitalWatch_Main_Displays_Date_return_to_time_pre [
@@ -155,17 +155,17 @@ pred DigitalWatch_Main_Displays_Date_return_to_time_post [
       DigitalWatch_Main_Displays_StopWatch) +
      DigitalWatch_Main_Displays_Time)
   (none.(DigitalWatch_Main.(sn.(s._testIfNextStable))))=>
-    ((sn.dsh_stable) = boolean/True and
+    ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
-       ((s.dsh_stable) = boolean/True)=>
+       ((s.dsh_stable).boolean/isTrue)=>
            (((sn.dsh_events0) :> DshIntEvents) = none)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
               ((s.dsh_events0) :> DshIntEvents))
        )
   else
-    ((sn.dsh_stable) = boolean/False and
-       ((s.dsh_stable) = boolean/True)=>
+    ((sn.dsh_stable).boolean/isFalse and
+       ((s.dsh_stable).boolean/isTrue)=>
            (((sn.dsh_events0) :> DshIntEvents) = none and
               (sn.dsh_sc_used0) = none)
          else
@@ -181,7 +181,7 @@ pred DigitalWatch_Main_Displays_Date_return_to_time_enabledAfterStep [
 	dsh_scp0: DshStates,
 	dsh_genEvs0: DshEvents] {
   some (DigitalWatch_Main_Displays_Date & (sn.dsh_conf0))
-  !((s.dsh_stable) = boolean/True) and
+  !((s.dsh_stable).boolean/isTrue) and
   DigitalWatch_Main_Displays_Date_waited_2_min in
     ((s.dsh_events0) + dsh_genEvs0)
 }
@@ -216,17 +216,17 @@ pred DigitalWatch_Main_Displays_Date_show_time_post [
       DigitalWatch_Main_Displays_StopWatch) +
      DigitalWatch_Main_Displays_Time)
   (none.(DigitalWatch_Main.(sn.(s._testIfNextStable))))=>
-    ((sn.dsh_stable) = boolean/True and
+    ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
-       ((s.dsh_stable) = boolean/True)=>
+       ((s.dsh_stable).boolean/isTrue)=>
            (((sn.dsh_events0) :> DshIntEvents) = none)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
               ((s.dsh_events0) :> DshIntEvents))
        )
   else
-    ((sn.dsh_stable) = boolean/False and
-       ((s.dsh_stable) = boolean/True)=>
+    ((sn.dsh_stable).boolean/isFalse and
+       ((s.dsh_stable).boolean/isTrue)=>
            (((sn.dsh_events0) :> DshIntEvents) = none and
               (sn.dsh_sc_used0) = none)
          else
@@ -242,7 +242,7 @@ pred DigitalWatch_Main_Displays_Date_show_time_enabledAfterStep [
 	dsh_scp0: DshStates,
 	dsh_genEvs0: DshEvents] {
   some (DigitalWatch_Main_Displays_Date & (sn.dsh_conf0))
-  !((s.dsh_stable) = boolean/True) and
+  !((s.dsh_stable).boolean/isTrue) and
   DigitalWatch_press_d in ((s.dsh_events0) + dsh_genEvs0)
 }
 
@@ -276,17 +276,17 @@ pred DigitalWatch_Main_Displays_Update_show_time_post [
       DigitalWatch_Main_Displays_StopWatch) +
      DigitalWatch_Main_Displays_Time)
   (none.(DigitalWatch_Main.(sn.(s._testIfNextStable))))=>
-    ((sn.dsh_stable) = boolean/True and
+    ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
-       ((s.dsh_stable) = boolean/True)=>
+       ((s.dsh_stable).boolean/isTrue)=>
            (((sn.dsh_events0) :> DshIntEvents) = none)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
               ((s.dsh_events0) :> DshIntEvents))
        )
   else
-    ((sn.dsh_stable) = boolean/False and
-       ((s.dsh_stable) = boolean/True)=>
+    ((sn.dsh_stable).boolean/isFalse and
+       ((s.dsh_stable).boolean/isTrue)=>
            (((sn.dsh_events0) :> DshIntEvents) = none and
               (sn.dsh_sc_used0) = none)
          else
@@ -302,7 +302,7 @@ pred DigitalWatch_Main_Displays_Update_show_time_enabledAfterStep [
 	dsh_scp0: DshStates,
 	dsh_genEvs0: DshEvents] {
   some (DigitalWatch_Main_Displays_Update & (sn.dsh_conf0))
-  !((s.dsh_stable) = boolean/True) and
+  !((s.dsh_stable).boolean/isTrue) and
   DigitalWatch_press_b in ((s.dsh_events0) + dsh_genEvs0)
 }
 
@@ -336,17 +336,17 @@ pred DigitalWatch_Main_Displays_Alarm2_go2chime_post [
       DigitalWatch_Main_Displays_StopWatch) +
      DigitalWatch_Main_Displays_Chime)
   (none.(DigitalWatch_Main.(sn.(s._testIfNextStable))))=>
-    ((sn.dsh_stable) = boolean/True and
+    ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
-       ((s.dsh_stable) = boolean/True)=>
+       ((s.dsh_stable).boolean/isTrue)=>
            (((sn.dsh_events0) :> DshIntEvents) = none)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
               ((s.dsh_events0) :> DshIntEvents))
        )
   else
-    ((sn.dsh_stable) = boolean/False and
-       ((s.dsh_stable) = boolean/True)=>
+    ((sn.dsh_stable).boolean/isFalse and
+       ((s.dsh_stable).boolean/isTrue)=>
            (((sn.dsh_events0) :> DshIntEvents) = none and
               (sn.dsh_sc_used0) = none)
          else
@@ -362,7 +362,7 @@ pred DigitalWatch_Main_Displays_Alarm2_go2chime_enabledAfterStep [
 	dsh_scp0: DshStates,
 	dsh_genEvs0: DshEvents] {
   some (DigitalWatch_Main_Displays_Alarm2 & (sn.dsh_conf0))
-  !((s.dsh_stable) = boolean/True) and
+  !((s.dsh_stable).boolean/isTrue) and
   DigitalWatch_press_a in ((s.dsh_events0) + dsh_genEvs0)
 }
 
@@ -396,17 +396,17 @@ pred DigitalWatch_Main_Displays_Time_try_update_post [
       DigitalWatch_Main_Displays_StopWatch) +
      DigitalWatch_Main_Displays_Wait)
   (none.(DigitalWatch_Main.(sn.(s._testIfNextStable))))=>
-    ((sn.dsh_stable) = boolean/True and
+    ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
-       ((s.dsh_stable) = boolean/True)=>
+       ((s.dsh_stable).boolean/isTrue)=>
            (((sn.dsh_events0) :> DshIntEvents) = none)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
               ((s.dsh_events0) :> DshIntEvents))
        )
   else
-    ((sn.dsh_stable) = boolean/False and
-       ((s.dsh_stable) = boolean/True)=>
+    ((sn.dsh_stable).boolean/isFalse and
+       ((s.dsh_stable).boolean/isTrue)=>
            (((sn.dsh_events0) :> DshIntEvents) = none and
               (sn.dsh_sc_used0) = none)
          else
@@ -422,7 +422,7 @@ pred DigitalWatch_Main_Displays_Time_try_update_enabledAfterStep [
 	dsh_scp0: DshStates,
 	dsh_genEvs0: DshEvents] {
   some (DigitalWatch_Main_Displays_Time & (sn.dsh_conf0))
-  !((s.dsh_stable) = boolean/True) and
+  !((s.dsh_stable).boolean/isTrue) and
   DigitalWatch_press_c in ((s.dsh_events0) + dsh_genEvs0)
 }
 
@@ -457,17 +457,17 @@ pred DigitalWatch_Main_Displays_Wait_show_update_post [
       DigitalWatch_Main_Displays_StopWatch) +
      DigitalWatch_Main_Displays_Update)
   (none.(DigitalWatch_Main.(sn.(s._testIfNextStable))))=>
-    ((sn.dsh_stable) = boolean/True and
+    ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
-       ((s.dsh_stable) = boolean/True)=>
+       ((s.dsh_stable).boolean/isTrue)=>
            (((sn.dsh_events0) :> DshIntEvents) = none)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
               ((s.dsh_events0) :> DshIntEvents))
        )
   else
-    ((sn.dsh_stable) = boolean/False and
-       ((s.dsh_stable) = boolean/True)=>
+    ((sn.dsh_stable).boolean/isFalse and
+       ((s.dsh_stable).boolean/isTrue)=>
            (((sn.dsh_events0) :> DshIntEvents) = none and
               (sn.dsh_sc_used0) = none)
          else
@@ -483,7 +483,7 @@ pred DigitalWatch_Main_Displays_Wait_show_update_enabledAfterStep [
 	dsh_scp0: DshStates,
 	dsh_genEvs0: DshEvents] {
   some (DigitalWatch_Main_Displays_Wait & (sn.dsh_conf0))
-  !((s.dsh_stable) = boolean/True) and
+  !((s.dsh_stable).boolean/isTrue) and
   DigitalWatch_Main_Displays_Wait_waited_2_sec in
     ((s.dsh_events0) + dsh_genEvs0)
 }
@@ -511,17 +511,17 @@ pred DigitalWatch_Light_Off_light_on_post [
   ((((s.dsh_conf0) - DigitalWatch_Light_Off) -
       DigitalWatch_Light_On) + DigitalWatch_Light_On)
   (none.(DigitalWatch_Light.(sn.(s._testIfNextStable))))=>
-    ((sn.dsh_stable) = boolean/True and
+    ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
-       ((s.dsh_stable) = boolean/True)=>
+       ((s.dsh_stable).boolean/isTrue)=>
            (((sn.dsh_events0) :> DshIntEvents) = none)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
               ((s.dsh_events0) :> DshIntEvents))
        )
   else
-    ((sn.dsh_stable) = boolean/False and
-       ((s.dsh_stable) = boolean/True)=>
+    ((sn.dsh_stable).boolean/isFalse and
+       ((s.dsh_stable).boolean/isTrue)=>
            (((sn.dsh_events0) :> DshIntEvents) = none and
               (sn.dsh_sc_used0) = none)
          else
@@ -537,7 +537,7 @@ pred DigitalWatch_Light_Off_light_on_enabledAfterStep [
 	dsh_scp0: DshStates,
 	dsh_genEvs0: DshEvents] {
   some (DigitalWatch_Light_Off & (sn.dsh_conf0))
-  !((s.dsh_stable) = boolean/True) and
+  !((s.dsh_stable).boolean/isTrue) and
   DigitalWatch_press_b in ((s.dsh_events0) + dsh_genEvs0)
 }
 
@@ -564,17 +564,17 @@ pred DigitalWatch_Light_On_light_off_post [
   ((((s.dsh_conf0) - DigitalWatch_Light_Off) -
       DigitalWatch_Light_On) + DigitalWatch_Light_Off)
   (none.(DigitalWatch_Light.(sn.(s._testIfNextStable))))=>
-    ((sn.dsh_stable) = boolean/True and
+    ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
-       ((s.dsh_stable) = boolean/True)=>
+       ((s.dsh_stable).boolean/isTrue)=>
            (((sn.dsh_events0) :> DshIntEvents) = none)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
               ((s.dsh_events0) :> DshIntEvents))
        )
   else
-    ((sn.dsh_stable) = boolean/False and
-       ((s.dsh_stable) = boolean/True)=>
+    ((sn.dsh_stable).boolean/isFalse and
+       ((s.dsh_stable).boolean/isTrue)=>
            (((sn.dsh_events0) :> DshIntEvents) = none and
               (sn.dsh_sc_used0) = none)
          else
@@ -590,7 +590,7 @@ pred DigitalWatch_Light_On_light_off_enabledAfterStep [
 	dsh_scp0: DshStates,
 	dsh_genEvs0: DshEvents] {
   some (DigitalWatch_Light_On & (sn.dsh_conf0))
-  !((s.dsh_stable) = boolean/True) and
+  !((s.dsh_stable).boolean/isTrue) and
   DigitalWatch_release_b in ((s.dsh_events0) + dsh_genEvs0)
 }
 
@@ -624,17 +624,17 @@ pred DigitalWatch_Main_Displays_Chime_go2Stopwatch_post [
       DigitalWatch_Main_Displays_StopWatch) +
      DigitalWatch_Main_Displays_StopWatch)
   (none.(DigitalWatch_Main.(sn.(s._testIfNextStable))))=>
-    ((sn.dsh_stable) = boolean/True and
+    ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
-       ((s.dsh_stable) = boolean/True)=>
+       ((s.dsh_stable).boolean/isTrue)=>
            (((sn.dsh_events0) :> DshIntEvents) = none)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
               ((s.dsh_events0) :> DshIntEvents))
        )
   else
-    ((sn.dsh_stable) = boolean/False and
-       ((s.dsh_stable) = boolean/True)=>
+    ((sn.dsh_stable).boolean/isFalse and
+       ((s.dsh_stable).boolean/isTrue)=>
            (((sn.dsh_events0) :> DshIntEvents) = none and
               (sn.dsh_sc_used0) = none)
          else
@@ -650,7 +650,7 @@ pred DigitalWatch_Main_Displays_Chime_go2Stopwatch_enabledAfterStep [
 	dsh_scp0: DshStates,
 	dsh_genEvs0: DshEvents] {
   some (DigitalWatch_Main_Displays_Chime & (sn.dsh_conf0))
-  !((s.dsh_stable) = boolean/True) and
+  !((s.dsh_stable).boolean/isTrue) and
   DigitalWatch_press_a in ((s.dsh_events0) + dsh_genEvs0)
 }
 
@@ -684,17 +684,17 @@ pred DigitalWatch_Main_Displays_Time_go2alarm1_post [
       DigitalWatch_Main_Displays_StopWatch) +
      DigitalWatch_Main_Displays_Alarm1)
   (none.(DigitalWatch_Main.(sn.(s._testIfNextStable))))=>
-    ((sn.dsh_stable) = boolean/True and
+    ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
-       ((s.dsh_stable) = boolean/True)=>
+       ((s.dsh_stable).boolean/isTrue)=>
            (((sn.dsh_events0) :> DshIntEvents) = none)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
               ((s.dsh_events0) :> DshIntEvents))
        )
   else
-    ((sn.dsh_stable) = boolean/False and
-       ((s.dsh_stable) = boolean/True)=>
+    ((sn.dsh_stable).boolean/isFalse and
+       ((s.dsh_stable).boolean/isTrue)=>
            (((sn.dsh_events0) :> DshIntEvents) = none and
               (sn.dsh_sc_used0) = none)
          else
@@ -710,7 +710,7 @@ pred DigitalWatch_Main_Displays_Time_go2alarm1_enabledAfterStep [
 	dsh_scp0: DshStates,
 	dsh_genEvs0: DshEvents] {
   some (DigitalWatch_Main_Displays_Time & (sn.dsh_conf0))
-  !((s.dsh_stable) = boolean/True) and
+  !((s.dsh_stable).boolean/isTrue) and
   DigitalWatch_press_a in ((s.dsh_events0) + dsh_genEvs0)
 }
 
@@ -744,17 +744,17 @@ pred DigitalWatch_Main_Displays_Time_show_date_post [
       DigitalWatch_Main_Displays_StopWatch) +
      DigitalWatch_Main_Displays_Date)
   (none.(DigitalWatch_Main.(sn.(s._testIfNextStable))))=>
-    ((sn.dsh_stable) = boolean/True and
+    ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
-       ((s.dsh_stable) = boolean/True)=>
+       ((s.dsh_stable).boolean/isTrue)=>
            (((sn.dsh_events0) :> DshIntEvents) = none)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
               ((s.dsh_events0) :> DshIntEvents))
        )
   else
-    ((sn.dsh_stable) = boolean/False and
-       ((s.dsh_stable) = boolean/True)=>
+    ((sn.dsh_stable).boolean/isFalse and
+       ((s.dsh_stable).boolean/isTrue)=>
            (((sn.dsh_events0) :> DshIntEvents) = none and
               (sn.dsh_sc_used0) = none)
          else
@@ -770,7 +770,7 @@ pred DigitalWatch_Main_Displays_Time_show_date_enabledAfterStep [
 	dsh_scp0: DshStates,
 	dsh_genEvs0: DshEvents] {
   some (DigitalWatch_Main_Displays_Time & (sn.dsh_conf0))
-  !((s.dsh_stable) = boolean/True) and
+  !((s.dsh_stable).boolean/isTrue) and
   DigitalWatch_press_d in ((s.dsh_events0) + dsh_genEvs0)
 }
 
@@ -804,17 +804,17 @@ pred DigitalWatch_Main_Displays_Wait_show_time_post [
       DigitalWatch_Main_Displays_StopWatch) +
      DigitalWatch_Main_Displays_Time)
   (none.(DigitalWatch_Main.(sn.(s._testIfNextStable))))=>
-    ((sn.dsh_stable) = boolean/True and
+    ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
-       ((s.dsh_stable) = boolean/True)=>
+       ((s.dsh_stable).boolean/isTrue)=>
            (((sn.dsh_events0) :> DshIntEvents) = none)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
               ((s.dsh_events0) :> DshIntEvents))
        )
   else
-    ((sn.dsh_stable) = boolean/False and
-       ((s.dsh_stable) = boolean/True)=>
+    ((sn.dsh_stable).boolean/isFalse and
+       ((s.dsh_stable).boolean/isTrue)=>
            (((sn.dsh_events0) :> DshIntEvents) = none and
               (sn.dsh_sc_used0) = none)
          else
@@ -830,7 +830,7 @@ pred DigitalWatch_Main_Displays_Wait_show_time_enabledAfterStep [
 	dsh_scp0: DshStates,
 	dsh_genEvs0: DshEvents] {
   some (DigitalWatch_Main_Displays_Wait & (sn.dsh_conf0))
-  !((s.dsh_stable) = boolean/True) and
+  !((s.dsh_stable).boolean/isTrue) and
   DigitalWatch_release_c in ((s.dsh_events0) + dsh_genEvs0)
 }
 
@@ -864,17 +864,17 @@ pred DigitalWatch_Main_Displays_Alarm1_go2alarm2_post [
       DigitalWatch_Main_Displays_StopWatch) +
      DigitalWatch_Main_Displays_Alarm2)
   (none.(DigitalWatch_Main.(sn.(s._testIfNextStable))))=>
-    ((sn.dsh_stable) = boolean/True and
+    ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
-       ((s.dsh_stable) = boolean/True)=>
+       ((s.dsh_stable).boolean/isTrue)=>
            (((sn.dsh_events0) :> DshIntEvents) = none)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
               ((s.dsh_events0) :> DshIntEvents))
        )
   else
-    ((sn.dsh_stable) = boolean/False and
-       ((s.dsh_stable) = boolean/True)=>
+    ((sn.dsh_stable).boolean/isFalse and
+       ((s.dsh_stable).boolean/isTrue)=>
            (((sn.dsh_events0) :> DshIntEvents) = none and
               (sn.dsh_sc_used0) = none)
          else
@@ -890,7 +890,7 @@ pred DigitalWatch_Main_Displays_Alarm1_go2alarm2_enabledAfterStep [
 	dsh_scp0: DshStates,
 	dsh_genEvs0: DshEvents] {
   some (DigitalWatch_Main_Displays_Alarm1 & (sn.dsh_conf0))
-  !((s.dsh_stable) = boolean/True) and
+  !((s.dsh_stable).boolean/isTrue) and
   DigitalWatch_press_a in ((s.dsh_events0) + dsh_genEvs0)
 }
 
@@ -924,17 +924,17 @@ pred DigitalWatch_Main_Displays_StopWatch_go2Time_post [
       DigitalWatch_Main_Displays_StopWatch) +
      DigitalWatch_Main_Displays_Time)
   (none.(DigitalWatch_Main.(sn.(s._testIfNextStable))))=>
-    ((sn.dsh_stable) = boolean/True and
+    ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
-       ((s.dsh_stable) = boolean/True)=>
+       ((s.dsh_stable).boolean/isTrue)=>
            (((sn.dsh_events0) :> DshIntEvents) = none)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
               ((s.dsh_events0) :> DshIntEvents))
        )
   else
-    ((sn.dsh_stable) = boolean/False and
-       ((s.dsh_stable) = boolean/True)=>
+    ((sn.dsh_stable).boolean/isFalse and
+       ((s.dsh_stable).boolean/isTrue)=>
            (((sn.dsh_events0) :> DshIntEvents) = none and
               (sn.dsh_sc_used0) = none)
          else
@@ -950,7 +950,7 @@ pred DigitalWatch_Main_Displays_StopWatch_go2Time_enabledAfterStep [
 	dsh_scp0: DshStates,
 	dsh_genEvs0: DshEvents] {
   some (DigitalWatch_Main_Displays_StopWatch & (sn.dsh_conf0))
-  !((s.dsh_stable) = boolean/True) and
+  !((s.dsh_stable).boolean/isTrue) and
   DigitalWatch_press_a in ((s.dsh_events0) + dsh_genEvs0)
 }
 

@@ -104,7 +104,8 @@ fun cylinders_gears[g: GearStatus]: CylinderStatus {
     else CYLINDER_RETRACTED // should never be reached
 }
 
-pred close_door[d1, d2: DoorStatus,
+pred close_door[dclosed: Bool, 
+                d1, d2: DoorStatus,
                 gev1, gev2, cdev1, cdev2, odev1, odev2: Bool] {
     d1 = OPEN implies {
         d2 = CLOSING
@@ -113,7 +114,7 @@ pred close_door[d1, d2: DoorStatus,
         and odev2 = odev1
     }
     else d1 = CLOSING implies {
-        LandingGear_doors_closed = True implies {
+        dclosed = True implies {
             d2 = CLOSED
             and gev2 = False
             and cdev2 = False
@@ -191,7 +192,8 @@ state LandingGear {
                     }
                 }
             }
-            else close_door[doors, doors',
+            else close_door[doors_closed,
+                            doors, doors',
                             general_electro_valve,
                             general_electro_valve',
                             close_doors_electro_valve,
@@ -234,7 +236,8 @@ state LandingGear {
                     }
                 }
             }
-            else close_door[doors, doors',
+            else close_door[doors_closed,
+                            doors, doors',
                             general_electro_valve,
                             general_electro_valve',
                             close_doors_electro_valve,

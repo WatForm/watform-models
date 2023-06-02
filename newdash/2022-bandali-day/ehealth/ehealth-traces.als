@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-05-27 17:38:42
+   on 2023-06-01 22:01:18
 */
 
 open util/boolean
@@ -95,57 +95,57 @@ abstract sig EHealthSystem extends DshStates {}
 sig DshSnapshot {
   dsh_sc_used0: set DshStates,
   dsh_conf0: set DshStates,
-  EHealthSystem_interactions: Medication -> Medication,
-  EHealthSystem_prescriptions: Patient -> Medication,
   EHealthSystem_in_p: lone Patient,
-  EHealthSystem_in_m2: lone Medication,
-  EHealthSystem_patients: set Patient,
   EHealthSystem_in_m1: lone Medication,
-  EHealthSystem_medications: set Medication
+  EHealthSystem_in_m2: lone Medication,
+  EHealthSystem_medications: set Medication,
+  EHealthSystem_patients: set Patient,
+  EHealthSystem_prescriptions: Patient -> Medication,
+  EHealthSystem_interactions: Medication -> Medication
 }
 
 pred dsh_initial [
 	s: one DshSnapshot] {
   (s.dsh_conf0) = EHealthSystem and
   no
-  (s.EHealthSystem_medications) and
+  s.EHealthSystem_medications and
   no
-  (s.EHealthSystem_prescriptions) and
+  s.EHealthSystem_prescriptions and
   no
-  (s.EHealthSystem_patients) and
+  s.EHealthSystem_patients and
   no
-  (s.EHealthSystem_interactions)
+  s.EHealthSystem_interactions
 }
 
 fact inv {  (all s: one
   DshSnapshot | (all m1,m2: Medication | ((m1 -> m2) in
-                                            (s.EHealthSystem_interactions)) <=>
+                                            s.EHealthSystem_interactions) <=>
                                            ((m2 -> m1) in
-                                              (s.EHealthSystem_interactions))) and
+                                              s.EHealthSystem_interactions)) and
                   (all m: s.EHealthSystem_medications | !((m ->
                                                              m) in
-                                                            (s.EHealthSystem_interactions))) and
+                                                            s.EHealthSystem_interactions)) and
                   (all m1,m2: s.EHealthSystem_medications,p: s.EHealthSystem_patients | ((m1 ->
                                                                                             m2) in
-                                                                                           (s.EHealthSystem_interactions)) =>
+                                                                                           s.EHealthSystem_interactions) =>
                                                                                           !((p ->
                                                                                                m1) in
-                                                                                              (s.EHealthSystem_prescriptions) and
+                                                                                              s.EHealthSystem_prescriptions and
                                                                                               (p ->
                                                                                                  m2) in
-                                                                                                (s.EHealthSystem_prescriptions))))
+                                                                                                s.EHealthSystem_prescriptions)))
 }
 
 pred EHealthSystem_add_interaction_pre [
 	s: one DshSnapshot] {
   some (EHealthSystem & (s.dsh_conf0))
   (s.EHealthSystem_in_m1) != (s.EHealthSystem_in_m2) and
-  !(((s.EHealthSystem_in_m1) -> (s.EHealthSystem_in_m2)) in
-      (s.EHealthSystem_interactions)) and
-  !(((s.EHealthSystem_in_m2) -> (s.EHealthSystem_in_m1)) in
-      (s.EHealthSystem_interactions)) and
-  (s.EHealthSystem_in_m1) in (s.EHealthSystem_medications) and
-  (s.EHealthSystem_in_m2) in (s.EHealthSystem_medications)
+  !((s.EHealthSystem_in_m1 -> s.EHealthSystem_in_m2) in
+      s.EHealthSystem_interactions) and
+  !((s.EHealthSystem_in_m2 -> s.EHealthSystem_in_m1) in
+      s.EHealthSystem_interactions) and
+  s.EHealthSystem_in_m1 in s.EHealthSystem_medications and
+  s.EHealthSystem_in_m2 in s.EHealthSystem_medications
   !(EHealthSystem in (s.dsh_sc_used0))
 }
 
@@ -157,8 +157,8 @@ pred EHealthSystem_add_interaction_post [
   (((s.dsh_conf0) - EHealthSystem) + EHealthSystem)
   (sn.EHealthSystem_interactions) =
   ((s.EHealthSystem_interactions) +
-     ((s.EHealthSystem_in_m1) -> (s.EHealthSystem_in_m2)) +
-       ((s.EHealthSystem_in_m2) -> (s.EHealthSystem_in_m1)))
+     (s.EHealthSystem_in_m1 -> s.EHealthSystem_in_m2) +
+       (s.EHealthSystem_in_m2 -> s.EHealthSystem_in_m1))
 }
 
 pred EHealthSystem_add_interaction [
@@ -171,7 +171,7 @@ pred EHealthSystem_add_interaction [
 pred EHealthSystem_add_patient_pre [
 	s: one DshSnapshot] {
   some (EHealthSystem & (s.dsh_conf0))
-  !((s.EHealthSystem_in_p) in (s.EHealthSystem_patients))
+  !(s.EHealthSystem_in_p in s.EHealthSystem_patients)
   !(EHealthSystem in (s.dsh_sc_used0))
 }
 
@@ -195,10 +195,10 @@ pred EHealthSystem_add_patient [
 pred EHealthSystem_remove_interaction_pre [
 	s: one DshSnapshot] {
   some (EHealthSystem & (s.dsh_conf0))
-  (s.EHealthSystem_in_m1) in (s.EHealthSystem_medications) and
-  (s.EHealthSystem_in_m2) in (s.EHealthSystem_medications) and
-  ((s.EHealthSystem_in_m1) -> (s.EHealthSystem_in_m2)) in
-    (s.EHealthSystem_interactions)
+  s.EHealthSystem_in_m1 in s.EHealthSystem_medications and
+  s.EHealthSystem_in_m2 in s.EHealthSystem_medications and
+  (s.EHealthSystem_in_m1 -> s.EHealthSystem_in_m2) in
+    s.EHealthSystem_interactions
   !(EHealthSystem in (s.dsh_sc_used0))
 }
 
@@ -210,8 +210,8 @@ pred EHealthSystem_remove_interaction_post [
   (((s.dsh_conf0) - EHealthSystem) + EHealthSystem)
   (sn.EHealthSystem_interactions) =
   ((s.EHealthSystem_interactions) -
-     ((s.EHealthSystem_in_m1) -> (s.EHealthSystem_in_m2)) +
-       ((s.EHealthSystem_in_m2) -> (s.EHealthSystem_in_m1)))
+     (s.EHealthSystem_in_m1 -> s.EHealthSystem_in_m2) +
+       (s.EHealthSystem_in_m2 -> s.EHealthSystem_in_m1))
 }
 
 pred EHealthSystem_remove_interaction [
@@ -224,12 +224,12 @@ pred EHealthSystem_remove_interaction [
 pred EHealthSystem_add_prescription_pre [
 	s: one DshSnapshot] {
   some (EHealthSystem & (s.dsh_conf0))
-  (s.EHealthSystem_in_p) in (s.EHealthSystem_patients) and
-  !(((s.EHealthSystem_in_p) -> (s.EHealthSystem_in_m1)) in
-      (s.EHealthSystem_prescriptions)) and
-  (all x: (s.EHealthSystem_in_p).(s.EHealthSystem_prescriptions) | !(((s.EHealthSystem_in_m1) ->
+  s.EHealthSystem_in_p in s.EHealthSystem_patients and
+  !((s.EHealthSystem_in_p -> s.EHealthSystem_in_m1) in
+      s.EHealthSystem_prescriptions) and
+  (all x: (s.EHealthSystem_in_p).(s.EHealthSystem_prescriptions) | !((s.EHealthSystem_in_m1 ->
                                                                         x) in
-                                                                       (s.EHealthSystem_interactions)))
+                                                                       s.EHealthSystem_interactions))
   !(EHealthSystem in (s.dsh_sc_used0))
 }
 
@@ -241,7 +241,7 @@ pred EHealthSystem_add_prescription_post [
   (((s.dsh_conf0) - EHealthSystem) + EHealthSystem)
   (sn.EHealthSystem_prescriptions) =
   ((s.EHealthSystem_prescriptions) +
-     ((s.EHealthSystem_in_p) -> (s.EHealthSystem_in_m1)))
+     (s.EHealthSystem_in_p -> s.EHealthSystem_in_m1))
 }
 
 pred EHealthSystem_add_prescription [
@@ -254,7 +254,7 @@ pred EHealthSystem_add_prescription [
 pred EHealthSystem_add_medication_pre [
 	s: one DshSnapshot] {
   some (EHealthSystem & (s.dsh_conf0))
-  !((s.EHealthSystem_in_m1) in (s.EHealthSystem_medications))
+  !(s.EHealthSystem_in_m1 in s.EHealthSystem_medications)
   !(EHealthSystem in (s.dsh_sc_used0))
 }
 
@@ -278,10 +278,10 @@ pred EHealthSystem_add_medication [
 pred EHealthSystem_remove_prescription_pre [
 	s: one DshSnapshot] {
   some (EHealthSystem & (s.dsh_conf0))
-  (s.EHealthSystem_in_p) in (s.EHealthSystem_patients) and
-  (s.EHealthSystem_in_m1) in (s.EHealthSystem_medications) and
-  ((s.EHealthSystem_in_p) -> (s.EHealthSystem_in_m1)) in
-    (s.EHealthSystem_prescriptions)
+  s.EHealthSystem_in_p in s.EHealthSystem_patients and
+  s.EHealthSystem_in_m1 in s.EHealthSystem_medications and
+  (s.EHealthSystem_in_p -> s.EHealthSystem_in_m1) in
+    s.EHealthSystem_prescriptions
   !(EHealthSystem in (s.dsh_sc_used0))
 }
 
@@ -293,7 +293,7 @@ pred EHealthSystem_remove_prescription_post [
   (((s.dsh_conf0) - EHealthSystem) + EHealthSystem)
   (sn.EHealthSystem_prescriptions) =
   ((s.EHealthSystem_prescriptions) -
-     ((s.EHealthSystem_in_p) -> (s.EHealthSystem_in_m1)))
+     (s.EHealthSystem_in_p -> s.EHealthSystem_in_m1))
 }
 
 pred EHealthSystem_remove_prescription [

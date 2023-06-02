@@ -1,9 +1,10 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-05-27 17:38:57
+   on 2023-06-01 22:01:32
 */
 
 open util/ring[Identifier] as P0
+
 
 open util/boolean
 open util/traces[DshSnapshot] as DshSnapshot
@@ -24,26 +25,25 @@ sig DshSnapshot {
   dsh_sc_used1: DshIds -> DshStates,
   dsh_conf1: DshIds -> DshStates,
   dsh_stable: one boolean/Bool,
-  System_elected: set Identifier,
   System_Process_succ: Identifier -> one Identifier,
+  System_elected: set Identifier,
   System_Process_token: Identifier -> (bufIdx0 -> Identifier)
 }
 
 pred dsh_initial [
-	s: one DshSnapshot,
-	p0_Identifier: one Identifier] {
+	s: one DshSnapshot] {
   (all p0_Identifier: one
   Identifier | (s.dsh_conf0) = none and
                  (s.dsh_conf1) =
                    (Identifier -> System_Process_Electing) and
                  (s.dsh_sc_used1) = (none -> none) and
                  one
-                 (p0_Identifier.(s.System_Process_token)) and
-                 (((thisIdentifier.nextRing).(s.System_Process_token)).firstElem) =
-                   thisIdentifier and
+                 p0_Identifier.(s.System_Process_token) and
+                 (((p0_Identifier.nextRing).(s.System_Process_token)).firstElem) =
+                   p0_Identifier and
                  no
-                 (s.System_elected))
-  (s.dsh_stable) = boolean/True
+                 s.System_elected)
+  (s.dsh_stable).boolean/isTrue
 }
 
 pred System_Process_Electing_ConsumeToken_pre [
@@ -52,10 +52,10 @@ pred System_Process_Electing_ConsumeToken_pre [
   some
 ((p0_Identifier -> System_Process_Electing) & (s.dsh_conf1))
   no
-  (s.System_elected) and
+  s.System_elected and
   some
   ((p0_Identifier.(s.System_Process_token)).elems) and
-  ((p0_Identifier.(s.System_Process_token)).firstElem).(thisIdentifier.gt)
+  ((p0_Identifier.(s.System_Process_token)).firstElem).(p0_Identifier.gt)
   !(System in (s.dsh_sc_used0))
   !((p0_Identifier -> System_Process) in (s.dsh_sc_used1))
 }
@@ -70,18 +70,18 @@ pred System_Process_Electing_ConsumeToken_post [
   (((s.dsh_conf1) -
       (p0_Identifier -> System_Process_Electing)) +
      (p0_Identifier -> System_Process_Electing))
-  (p0_Identifier.(s.System_Process_token)).removeFirst
+  (p0_Identifier.(sn.System_Process_token)).((p0_Identifier.(s.System_Process_token)).removeFirst)
   ((p0_Identifier -> System_Process).(none.(p0_Identifier.(sn.(s._testIfNextStable)))))=>
-    ((sn.dsh_stable) = boolean/True and
+    ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
-       (sn.dsh_sc_used1) = none and
-       { (s.dsh_stable) = boolean/True or
-           !((s.dsh_stable) = boolean/True) })
+       (sn.dsh_sc_used1) = (none -> none) and
+       { (s.dsh_stable).boolean/isTrue or
+           !((s.dsh_stable).boolean/isTrue) })
   else
-    ((sn.dsh_stable) = boolean/False and
-       ((s.dsh_stable) = boolean/True)=>
+    ((sn.dsh_stable).boolean/isFalse and
+       ((s.dsh_stable).boolean/isTrue)=>
            ((sn.dsh_sc_used0) = none and
-              (sn.dsh_sc_used1) = none)
+              (sn.dsh_sc_used1) = (none -> none))
          else
            ((sn.dsh_sc_used0) = (s.dsh_sc_used0) and
               (sn.dsh_sc_used1) =
@@ -99,10 +99,10 @@ pred System_Process_Electing_ConsumeToken_enabledAfterStep [
 	dsh_scp1: DshIds -> DshStates] {
   some
 ((p0_Identifier -> System_Process_Electing) & (sn.dsh_conf1))
-  { (s.dsh_stable) = boolean/True and
+  { (s.dsh_stable).boolean/isTrue and
     !(System in dsh_scp0) and
     !((p0_Identifier -> System_Process) in dsh_scp1) or
-    !((s.dsh_stable) = boolean/True) }
+    !((s.dsh_stable).boolean/isTrue) }
 }
 
 pred System_Process_Electing_ConsumeToken [
@@ -119,10 +119,10 @@ pred System_Process_Electing_PassToken_pre [
   some
 ((p0_Identifier -> System_Process_Electing) & (s.dsh_conf1))
   no
-  (s.System_elected) and
+  s.System_elected and
   some
   ((p0_Identifier.(s.System_Process_token)).elems) and
-  ((p0_Identifier.(s.System_Process_token)).firstElem).(this.lt)
+  ((p0_Identifier.(s.System_Process_token)).firstElem).(p0_Identifier.lt)
   !(System in (s.dsh_sc_used0))
   !((p0_Identifier -> System_Process) in (s.dsh_sc_used1))
 }
@@ -137,20 +137,20 @@ pred System_Process_Electing_PassToken_post [
   (((s.dsh_conf1) -
       (p0_Identifier -> System_Process_Electing)) +
      (p0_Identifier -> System_Process_Electing))
-  ((p0_Identifier.(s.System_Process_token)).firstElem).(((thisIdentifier.nextRing).(s.System_Process_token)).addFirst) and
-  (all others: Identifier - (thisIdentifier.nextRing) | (others.(sn.System_Process_token)) =
-                                                          (others.(s.System_Process_token)))
+  ((p0_Identifier.(s.System_Process_token)).firstElem).(((p0_Identifier.nextRing).(sn.System_Process_token)).(((p0_Identifier.nextRing).(s.System_Process_token)).addFirst)) and
+  (all others: Identifier - (p0_Identifier.nextRing) | (others.(sn.System_Process_token)) =
+                                                         (others.(s.System_Process_token)))
   ((p0_Identifier -> System_Process).(none.(p0_Identifier.(sn.(s._testIfNextStable)))))=>
-    ((sn.dsh_stable) = boolean/True and
+    ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
-       (sn.dsh_sc_used1) = none and
-       { (s.dsh_stable) = boolean/True or
-           !((s.dsh_stable) = boolean/True) })
+       (sn.dsh_sc_used1) = (none -> none) and
+       { (s.dsh_stable).boolean/isTrue or
+           !((s.dsh_stable).boolean/isTrue) })
   else
-    ((sn.dsh_stable) = boolean/False and
-       ((s.dsh_stable) = boolean/True)=>
+    ((sn.dsh_stable).boolean/isFalse and
+       ((s.dsh_stable).boolean/isTrue)=>
            ((sn.dsh_sc_used0) = none and
-              (sn.dsh_sc_used1) = none)
+              (sn.dsh_sc_used1) = (none -> none))
          else
            ((sn.dsh_sc_used0) = (s.dsh_sc_used0) and
               (sn.dsh_sc_used1) =
@@ -168,10 +168,10 @@ pred System_Process_Electing_PassToken_enabledAfterStep [
 	dsh_scp1: DshIds -> DshStates] {
   some
 ((p0_Identifier -> System_Process_Electing) & (sn.dsh_conf1))
-  { (s.dsh_stable) = boolean/True and
+  { (s.dsh_stable).boolean/isTrue and
     !(System in dsh_scp0) and
     !((p0_Identifier -> System_Process) in dsh_scp1) or
-    !((s.dsh_stable) = boolean/True) }
+    !((s.dsh_stable).boolean/isTrue) }
 }
 
 pred System_Process_Electing_PassToken [
@@ -188,9 +188,9 @@ pred System_Process_Electing_ElectLeader_pre [
   some
 ((p0_Identifier -> System_Process_Electing) & (s.dsh_conf1))
   no
-  (s.System_elected) and
+  s.System_elected and
   ((p0_Identifier.(s.System_Process_token)).firstElem) =
-    thisIdentifier
+    p0_Identifier
   !(System in (s.dsh_sc_used0))
   !((p0_Identifier -> System_Process) in (s.dsh_sc_used1))
 }
@@ -206,18 +206,18 @@ pred System_Process_Electing_ElectLeader_post [
        (p0_Identifier -> System_Process_Electing)) -
       (p0_Identifier -> System_Process_Elected)) +
      (p0_Identifier -> System_Process_Elected))
-  (sn.System_elected) = thisIdentifier
+  (sn.System_elected) = p0_Identifier
   ((p0_Identifier -> System_Process).(none.(p0_Identifier.(sn.(s._testIfNextStable)))))=>
-    ((sn.dsh_stable) = boolean/True and
+    ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
-       (sn.dsh_sc_used1) = none and
-       { (s.dsh_stable) = boolean/True or
-           !((s.dsh_stable) = boolean/True) })
+       (sn.dsh_sc_used1) = (none -> none) and
+       { (s.dsh_stable).boolean/isTrue or
+           !((s.dsh_stable).boolean/isTrue) })
   else
-    ((sn.dsh_stable) = boolean/False and
-       ((s.dsh_stable) = boolean/True)=>
+    ((sn.dsh_stable).boolean/isFalse and
+       ((s.dsh_stable).boolean/isTrue)=>
            ((sn.dsh_sc_used0) = none and
-              (sn.dsh_sc_used1) = none)
+              (sn.dsh_sc_used1) = (none -> none))
          else
            ((sn.dsh_sc_used0) = (s.dsh_sc_used0) and
               (sn.dsh_sc_used1) =
@@ -235,10 +235,10 @@ pred System_Process_Electing_ElectLeader_enabledAfterStep [
 	dsh_scp1: DshIds -> DshStates] {
   some
 ((p0_Identifier -> System_Process_Electing) & (sn.dsh_conf1))
-  { (s.dsh_stable) = boolean/True and
+  { (s.dsh_stable).boolean/isTrue and
     !(System in dsh_scp0) and
     !((p0_Identifier -> System_Process) in dsh_scp1) or
-    !((s.dsh_stable) = boolean/True) }
+    !((s.dsh_stable).boolean/isTrue) }
 }
 
 pred System_Process_Electing_ElectLeader [
@@ -255,9 +255,9 @@ pred _testIfNextStable [
 	p0_Identifier: one Identifier,
 	dsh_scp0: DshStates,
 	dsh_scp1: DshIds -> DshStates] {
-  !(dsh_scp1.(dsh_scp0.(sn.(s.System_Process_Electing_ConsumeToken_enabledAfterStep))))
-  !(dsh_scp1.(dsh_scp0.(sn.(s.System_Process_Electing_PassToken_enabledAfterStep))))
-  !(dsh_scp1.(dsh_scp0.(sn.(s.System_Process_Electing_ElectLeader_enabledAfterStep))))
+  !(dsh_scp1.(dsh_scp0.(p0_Identifier.(sn.(s.System_Process_Electing_ConsumeToken_enabledAfterStep)))))
+  !(dsh_scp1.(dsh_scp0.(p0_Identifier.(sn.(s.System_Process_Electing_PassToken_enabledAfterStep)))))
+  !(dsh_scp1.(dsh_scp0.(p0_Identifier.(sn.(s.System_Process_Electing_ElectLeader_enabledAfterStep)))))
 }
 
 pred dsh_small_step [

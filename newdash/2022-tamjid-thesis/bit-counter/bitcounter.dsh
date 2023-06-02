@@ -13,7 +13,7 @@ state Counter {
 
 		trans currentBitToBit2{
 			from Bit1
-			when thisPID in current
+			when thisBit in current
 			on Tk0
 			goto Bit2
 		}
@@ -21,14 +21,14 @@ state Counter {
 		trans currentBitToBit1 {
 			from Bit2
 			on Tk0
-			when thisPID in current
+			when thisBit in current
 			goto Bit1
-			send Bit[P0/next[thisPID]]/Tk1
+			send Bit[P0/next[thisBit]]/Tk1
 		}
 
 		trans nextBitToBit2 {
  			from Bit1
-			when thisPID in P0/next[current]
+			when thisBit in P0/next[current]
 			on Tk1
 			goto Bit2
 		}
@@ -36,7 +36,7 @@ state Counter {
 		trans nextBitToBit1 {
 			from Bit2
 			when {
-				 thisPID in P0/next[current]
+				 thisBit in P0/next[current]
 				 P0/next[current] !in P0/last
 			}
 			on Tk1
@@ -46,7 +46,7 @@ state Counter {
 
 		trans lastBitDone {
 			from Bit2
-			when thisPID in P0/last
+			when thisBit in P0/last
 			on Tk1
 			goto Bit1
 			send Done

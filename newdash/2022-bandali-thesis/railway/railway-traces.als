@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-05-27 17:38:50
+   on 2023-06-01 22:01:26
 */
 
 open util/boolean
@@ -95,17 +95,10 @@ abstract sig Railway extends DshStates {}
 sig DshSnapshot {
   dsh_sc_used0: set DshStates,
   dsh_conf0: set DshStates,
-  Railway_RA: one
-((((((((0) + (1)) + (2)) + (3)) + (4)) + (5)) + (6)) + (7)) +
-  (8),
   Railway_P0: one
 ((((((0) + (1)) + (2)) + (3)) + (4)) + (5)) + (6),
-  Railway_RB: one
-((((((((0) + (1)) + (2)) + (3)) + (4)) + (5)) + (6)) + (7)) +
-  (8),
   Railway_P1: one
 ((((((0) + (1)) + (2)) + (3)) + (4)) + (5)) + (6),
-  Railway_ct: one Train,
   Railway_P2: one
 ((((((0) + (1)) + (2)) + (3)) + (4)) + (5)) + (6),
   Railway_P3: one
@@ -117,7 +110,14 @@ sig DshSnapshot {
   Railway_P6: one
 ((((((0) + (1)) + (2)) + (3)) + (4)) + (5)) + (6),
   Railway_P7: one
-((((((0) + (1)) + (2)) + (3)) + (4)) + (5)) + (6)
+((((((0) + (1)) + (2)) + (3)) + (4)) + (5)) + (6),
+  Railway_RA: one
+((((((((0) + (1)) + (2)) + (3)) + (4)) + (5)) + (6)) + (7)) +
+  (8),
+  Railway_RB: one
+((((((((0) + (1)) + (2)) + (3)) + (4)) + (5)) + (6)) + (7)) +
+  (8),
+  Railway_ct: one Train
 }
 
 pred dsh_initial [
@@ -135,182 +135,125 @@ pred dsh_initial [
   (s.Railway_RB) = (1)
 }
 
-fact inv {  (all s: one
-  DshSnapshot | (Const.T0) =
-                  ((((((Int[0] -> s1) + (Int[1] -> s9)) +
-                        (Int[2] -> s10)) + (Int[3] -> s13)) +
-                      (Int[4] -> s15)) + (Int[5] -> s20)) +
-                    (Int[6] -> s23) and
-                  (Const.T1) =
-                    ((((((Int[0] -> s3) + (Int[1] -> s9)) +
-                          (Int[2] -> s10)) + (Int[3] -> s13)) +
-                        (Int[4] -> s15)) + (Int[5] -> s20)) +
-                      (Int[6] -> s24) and
-                  (Const.T2) =
-                    ((((((Int[0] -> s5) + (Int[1] -> s27)) +
-                          (Int[2] -> s11)) + (Int[3] -> s13)) +
-                        (Int[4] -> s16)) + (Int[5] -> s20)) +
-                      (Int[6] -> s25) and
-                  (Const.T3) =
-                    ((((((Int[0] -> s7) + (Int[1] -> s27)) +
-                          (Int[2] -> s11)) + (Int[3] -> s13)) +
-                        (Int[4] -> s16)) + (Int[5] -> s20)) +
-                      (Int[6] -> s26) and
-                  (Const.T4) =
-                    ((((((Int[0] -> s23) + (Int[1] -> s22)) +
-                          (Int[2] -> s17)) + (Int[3] -> s18)) +
-                        (Int[4] -> s11)) + (Int[5] -> s9)) +
-                      (Int[6] -> s2) and
-                  (Const.T5) =
-                    ((((((Int[0] -> s24) + (Int[1] -> s22)) +
-                          (Int[2] -> s17)) + (Int[3] -> s18)) +
-                        (Int[4] -> s11)) + (Int[5] -> s9)) +
-                      (Int[6] -> s4) and
-                  (Const.T6) =
-                    ((((((Int[0] -> s25) + (Int[1] -> s22)) +
-                          (Int[2] -> s17)) + (Int[3] -> s18)) +
-                        (Int[4] -> s12)) + (Int[5] -> s27)) +
-                      (Int[6] -> s6) and
-                  (Const.T7) =
-                    ((((((Int[0] -> s26) + (Int[1] -> s22)) +
-                          (Int[2] -> s17)) + (Int[3] -> s18)) +
-                        (Int[4] -> s12)) + (Int[5] -> s27)) +
-                      (Int[6] -> s8) and
-                  (Const.A0) =
-                    ((((((Int[0] -> Int[0]) +
-                           (Int[1] -> Int[0])) +
-                          (Int[2] -> Int[0])) +
-                         (Int[3] -> Int[1])) +
-                        (Int[4] -> Int[0])) +
-                       (Int[5] -> Int[-1])) +
-                      (Int[6] -> Int[0]) and
-                  (Const.A1) =
-                    ((((((Int[0] -> Int[0]) +
-                           (Int[1] -> Int[0])) +
-                          (Int[2] -> Int[0])) +
-                         (Int[3] -> Int[1])) +
-                        (Int[4] -> Int[0])) +
-                       (Int[5] -> Int[-1])) +
-                      (Int[6] -> Int[0]) and
-                  (Const.A2) =
-                    ((((((Int[0] -> Int[0]) +
-                           (Int[1] -> Int[0])) +
-                          (Int[2] -> Int[1])) +
-                         (Int[3] -> Int[-1])) +
-                        (Int[4] -> Int[0])) +
-                       (Int[5] -> Int[1])) +
-                      (Int[6] -> Int[0]) and
-                  (Const.A3) =
-                    ((((((Int[0] -> Int[0]) +
-                           (Int[1] -> Int[0])) +
-                          (Int[2] -> Int[1])) +
-                         (Int[3] -> Int[-1])) +
-                        (Int[4] -> Int[0])) +
-                       (Int[5] -> Int[0])) +
-                      (Int[6] -> Int[0]) and
-                  (Const.A4) =
-                    ((((((Int[0] -> Int[0]) +
-                           (Int[1] -> Int[1])) +
-                          (Int[2] -> Int[0])) +
-                         (Int[3] -> Int[0])) +
-                        (Int[4] -> Int[-1])) +
-                       (Int[5] -> Int[0])) +
-                      (Int[6] -> Int[0]) and
-                  (Const.A5) =
-                    ((((((Int[0] -> Int[0]) +
-                           (Int[1] -> Int[1])) +
-                          (Int[2] -> Int[0])) +
-                         (Int[3] -> Int[0])) +
-                        (Int[4] -> Int[-1])) +
-                       (Int[5] -> Int[0])) +
-                      (Int[6] -> Int[0]) and
-                  (Const.A6) =
-                    ((((((Int[0] -> Int[0]) +
-                           (Int[1] -> Int[0])) +
-                          (Int[2] -> Int[0])) +
-                         (Int[3] -> Int[-1])) +
-                        (Int[4] -> Int[0])) +
-                       (Int[5] -> Int[0])) +
-                      (Int[6] -> Int[0]) and
-                  (Const.A7) =
-                    ((((((Int[0] -> Int[0]) +
-                           (Int[1] -> Int[1])) +
-                          (Int[2] -> Int[0])) +
-                         (Int[3] -> Int[-1])) +
-                        (Int[4] -> Int[0])) +
-                       (Int[5] -> Int[0])) +
-                      (Int[6] -> Int[0]) and
-                  (Const.B0) =
-                    ((((((Int[0] -> Int[0]) +
-                           (Int[1] -> Int[0])) +
-                          (Int[2] -> Int[0])) +
-                         (Int[3] -> Int[1])) +
-                        (Int[4] -> Int[0])) +
-                       (Int[5] -> Int[-1])) +
-                      (Int[6] -> Int[0]) and
-                  (Const.B1) =
-                    ((((((Int[0] -> Int[0]) +
-                           (Int[1] -> Int[0])) +
-                          (Int[2] -> Int[0])) +
-                         (Int[3] -> Int[1])) +
-                        (Int[4] -> Int[0])) +
-                       (Int[5] -> Int[-1])) +
-                      (Int[6] -> Int[0]) and
-                  (Const.B2) =
-                    ((((((Int[0] -> Int[0]) +
-                           (Int[1] -> Int[0])) +
-                          (Int[2] -> Int[1])) +
-                         (Int[3] -> Int[-1])) +
-                        (Int[4] -> Int[0])) +
-                       (Int[5] -> Int[0])) +
-                      (Int[6] -> Int[0]) and
-                  (Const.B3) =
-                    ((((((Int[0] -> Int[0]) +
-                           (Int[1] -> Int[0])) +
-                          (Int[2] -> Int[1])) +
-                         (Int[3] -> Int[-1])) +
-                        (Int[4] -> Int[0])) +
-                       (Int[5] -> Int[1])) +
-                      (Int[6] -> Int[0]) and
-                  (Const.B4) =
-                    ((((((Int[0] -> Int[0]) +
-                           (Int[1] -> Int[1])) +
-                          (Int[2] -> Int[0])) +
-                         (Int[3] -> Int[0])) +
-                        (Int[4] -> Int[-1])) +
-                       (Int[5] -> Int[0])) +
-                      (Int[6] -> Int[0]) and
-                  (Const.B5) =
-                    ((((((Int[0] -> Int[0]) +
-                           (Int[1] -> Int[1])) +
-                          (Int[2] -> Int[0])) +
-                         (Int[3] -> Int[0])) +
-                        (Int[4] -> Int[-1])) +
-                       (Int[5] -> Int[0])) +
-                      (Int[6] -> Int[0]) and
-                  (Const.B6) =
-                    ((((((Int[0] -> Int[0]) +
-                           (Int[1] -> Int[1])) +
-                          (Int[2] -> Int[0])) +
-                         (Int[3] -> Int[-1])) +
-                        (Int[4] -> Int[0])) +
-                       (Int[5] -> Int[0])) +
-                      (Int[6] -> Int[0]) and
-                  (Const.B7) =
-                    ((((((Int[0] -> Int[0]) +
-                           (Int[1] -> Int[0])) +
-                          (Int[2] -> Int[0])) +
-                         (Int[3] -> Int[-1])) +
-                        (Int[4] -> Int[0])) +
-                       (Int[5] -> Int[0])) +
-                      (Int[6] -> Int[0]))
+fact inv {  (Const.T0) =
+  ((((((Int[0] -> s1) + (Int[1] -> s9)) + (Int[2] -> s10)) +
+       (Int[3] -> s13)) + (Int[4] -> s15)) + (Int[5] -> s20)) +
+    (Int[6] -> s23) and
+  (Const.T1) =
+    ((((((Int[0] -> s3) + (Int[1] -> s9)) + (Int[2] -> s10)) +
+         (Int[3] -> s13)) + (Int[4] -> s15)) +
+       (Int[5] -> s20)) + (Int[6] -> s24) and
+  (Const.T2) =
+    ((((((Int[0] -> s5) + (Int[1] -> s27)) + (Int[2] -> s11)) +
+         (Int[3] -> s13)) + (Int[4] -> s16)) +
+       (Int[5] -> s20)) + (Int[6] -> s25) and
+  (Const.T3) =
+    ((((((Int[0] -> s7) + (Int[1] -> s27)) + (Int[2] -> s11)) +
+         (Int[3] -> s13)) + (Int[4] -> s16)) +
+       (Int[5] -> s20)) + (Int[6] -> s26) and
+  (Const.T4) =
+    ((((((Int[0] -> s23) + (Int[1] -> s22)) +
+          (Int[2] -> s17)) + (Int[3] -> s18)) +
+        (Int[4] -> s11)) + (Int[5] -> s9)) + (Int[6] -> s2) and
+  (Const.T5) =
+    ((((((Int[0] -> s24) + (Int[1] -> s22)) +
+          (Int[2] -> s17)) + (Int[3] -> s18)) +
+        (Int[4] -> s11)) + (Int[5] -> s9)) + (Int[6] -> s4) and
+  (Const.T6) =
+    ((((((Int[0] -> s25) + (Int[1] -> s22)) +
+          (Int[2] -> s17)) + (Int[3] -> s18)) +
+        (Int[4] -> s12)) + (Int[5] -> s27)) + (Int[6] -> s6) and
+  (Const.T7) =
+    ((((((Int[0] -> s26) + (Int[1] -> s22)) +
+          (Int[2] -> s17)) + (Int[3] -> s18)) +
+        (Int[4] -> s12)) + (Int[5] -> s27)) + (Int[6] -> s8) and
+  (Const.A0) =
+    ((((((Int[0] -> Int[0]) + (Int[1] -> Int[0])) +
+          (Int[2] -> Int[0])) + (Int[3] -> Int[1])) +
+        (Int[4] -> Int[0])) + (Int[5] -> Int[-1])) +
+      (Int[6] -> Int[0]) and
+  (Const.A1) =
+    ((((((Int[0] -> Int[0]) + (Int[1] -> Int[0])) +
+          (Int[2] -> Int[0])) + (Int[3] -> Int[1])) +
+        (Int[4] -> Int[0])) + (Int[5] -> Int[-1])) +
+      (Int[6] -> Int[0]) and
+  (Const.A2) =
+    ((((((Int[0] -> Int[0]) + (Int[1] -> Int[0])) +
+          (Int[2] -> Int[1])) + (Int[3] -> Int[-1])) +
+        (Int[4] -> Int[0])) + (Int[5] -> Int[1])) +
+      (Int[6] -> Int[0]) and
+  (Const.A3) =
+    ((((((Int[0] -> Int[0]) + (Int[1] -> Int[0])) +
+          (Int[2] -> Int[1])) + (Int[3] -> Int[-1])) +
+        (Int[4] -> Int[0])) + (Int[5] -> Int[0])) +
+      (Int[6] -> Int[0]) and
+  (Const.A4) =
+    ((((((Int[0] -> Int[0]) + (Int[1] -> Int[1])) +
+          (Int[2] -> Int[0])) + (Int[3] -> Int[0])) +
+        (Int[4] -> Int[-1])) + (Int[5] -> Int[0])) +
+      (Int[6] -> Int[0]) and
+  (Const.A5) =
+    ((((((Int[0] -> Int[0]) + (Int[1] -> Int[1])) +
+          (Int[2] -> Int[0])) + (Int[3] -> Int[0])) +
+        (Int[4] -> Int[-1])) + (Int[5] -> Int[0])) +
+      (Int[6] -> Int[0]) and
+  (Const.A6) =
+    ((((((Int[0] -> Int[0]) + (Int[1] -> Int[0])) +
+          (Int[2] -> Int[0])) + (Int[3] -> Int[-1])) +
+        (Int[4] -> Int[0])) + (Int[5] -> Int[0])) +
+      (Int[6] -> Int[0]) and
+  (Const.A7) =
+    ((((((Int[0] -> Int[0]) + (Int[1] -> Int[1])) +
+          (Int[2] -> Int[0])) + (Int[3] -> Int[-1])) +
+        (Int[4] -> Int[0])) + (Int[5] -> Int[0])) +
+      (Int[6] -> Int[0]) and
+  (Const.B0) =
+    ((((((Int[0] -> Int[0]) + (Int[1] -> Int[0])) +
+          (Int[2] -> Int[0])) + (Int[3] -> Int[1])) +
+        (Int[4] -> Int[0])) + (Int[5] -> Int[-1])) +
+      (Int[6] -> Int[0]) and
+  (Const.B1) =
+    ((((((Int[0] -> Int[0]) + (Int[1] -> Int[0])) +
+          (Int[2] -> Int[0])) + (Int[3] -> Int[1])) +
+        (Int[4] -> Int[0])) + (Int[5] -> Int[-1])) +
+      (Int[6] -> Int[0]) and
+  (Const.B2) =
+    ((((((Int[0] -> Int[0]) + (Int[1] -> Int[0])) +
+          (Int[2] -> Int[1])) + (Int[3] -> Int[-1])) +
+        (Int[4] -> Int[0])) + (Int[5] -> Int[0])) +
+      (Int[6] -> Int[0]) and
+  (Const.B3) =
+    ((((((Int[0] -> Int[0]) + (Int[1] -> Int[0])) +
+          (Int[2] -> Int[1])) + (Int[3] -> Int[-1])) +
+        (Int[4] -> Int[0])) + (Int[5] -> Int[1])) +
+      (Int[6] -> Int[0]) and
+  (Const.B4) =
+    ((((((Int[0] -> Int[0]) + (Int[1] -> Int[1])) +
+          (Int[2] -> Int[0])) + (Int[3] -> Int[0])) +
+        (Int[4] -> Int[-1])) + (Int[5] -> Int[0])) +
+      (Int[6] -> Int[0]) and
+  (Const.B5) =
+    ((((((Int[0] -> Int[0]) + (Int[1] -> Int[1])) +
+          (Int[2] -> Int[0])) + (Int[3] -> Int[0])) +
+        (Int[4] -> Int[-1])) + (Int[5] -> Int[0])) +
+      (Int[6] -> Int[0]) and
+  (Const.B6) =
+    ((((((Int[0] -> Int[0]) + (Int[1] -> Int[1])) +
+          (Int[2] -> Int[0])) + (Int[3] -> Int[-1])) +
+        (Int[4] -> Int[0])) + (Int[5] -> Int[0])) +
+      (Int[6] -> Int[0]) and
+  (Const.B7) =
+    ((((((Int[0] -> Int[0]) + (Int[1] -> Int[0])) +
+          (Int[2] -> Int[0])) + (Int[3] -> Int[-1])) +
+        (Int[4] -> Int[0])) + (Int[5] -> Int[0])) +
+      (Int[6] -> Int[0])
 }
 
 pred Railway_move_train3_pre [
 	s: one DshSnapshot] {
   some (Railway & (s.dsh_conf0))
   (s.Railway_ct) = t3 and
-  (s.Railway_P3) < (6) and
+  s.Railway_P3 < (6) and
   (((1).((s.Railway_P3).plus)).(Const.T3)) !=
     ((s.Railway_P0).(Const.T0)) and
   (((1).((s.Railway_P3).plus)).(Const.T3)) !=
@@ -353,7 +296,7 @@ pred Railway_move_train2_pre [
 	s: one DshSnapshot] {
   some (Railway & (s.dsh_conf0))
   (s.Railway_ct) = t2 and
-  (s.Railway_P2) < (6) and
+  s.Railway_P2 < (6) and
   (((1).((s.Railway_P2).plus)).(Const.T2)) !=
     ((s.Railway_P0).(Const.T0)) and
   (((1).((s.Railway_P2).plus)).(Const.T2)) !=
@@ -396,7 +339,7 @@ pred Railway_move_train1_pre [
 	s: one DshSnapshot] {
   some (Railway & (s.dsh_conf0))
   (s.Railway_ct) = t1 and
-  (s.Railway_P1) < (6) and
+  s.Railway_P1 < (6) and
   (((1).((s.Railway_P1).plus)).(Const.T1)) !=
     ((s.Railway_P0).(Const.T0)) and
   (((1).((s.Railway_P1).plus)).(Const.T1)) !=
@@ -439,7 +382,7 @@ pred Railway_move_train0_pre [
 	s: one DshSnapshot] {
   some (Railway & (s.dsh_conf0))
   (s.Railway_ct) = t0 and
-  (s.Railway_P0) < (6) and
+  s.Railway_P0 < (6) and
   (((1).((s.Railway_P0).plus)).(Const.T0)) !=
     ((s.Railway_P1).(Const.T1)) and
   (((1).((s.Railway_P0).plus)).(Const.T0)) !=
@@ -482,7 +425,7 @@ pred Railway_move_train7_pre [
 	s: one DshSnapshot] {
   some (Railway & (s.dsh_conf0))
   (s.Railway_ct) = t7 and
-  (s.Railway_P7) < (6) and
+  s.Railway_P7 < (6) and
   (((1).((s.Railway_P7).plus)).(Const.T7)) !=
     ((s.Railway_P0).(Const.T0)) and
   (((1).((s.Railway_P7).plus)).(Const.T7)) !=
@@ -525,7 +468,7 @@ pred Railway_move_train6_pre [
 	s: one DshSnapshot] {
   some (Railway & (s.dsh_conf0))
   (s.Railway_ct) = t6 and
-  (s.Railway_P6) < (6) and
+  s.Railway_P6 < (6) and
   (((1).((s.Railway_P6).plus)).(Const.T6)) !=
     ((s.Railway_P0).(Const.T0)) and
   (((1).((s.Railway_P6).plus)).(Const.T6)) !=
@@ -568,7 +511,7 @@ pred Railway_move_train5_pre [
 	s: one DshSnapshot] {
   some (Railway & (s.dsh_conf0))
   (s.Railway_ct) = t5 and
-  (s.Railway_P5) < (6) and
+  s.Railway_P5 < (6) and
   (((1).((s.Railway_P5).plus)).(Const.T5)) !=
     ((s.Railway_P0).(Const.T0)) and
   (((1).((s.Railway_P5).plus)).(Const.T5)) !=
@@ -611,7 +554,7 @@ pred Railway_move_train4_pre [
 	s: one DshSnapshot] {
   some (Railway & (s.dsh_conf0))
   (s.Railway_ct) = t4 and
-  (s.Railway_P4) < (6) and
+  s.Railway_P4 < (6) and
   (((1).((s.Railway_P4).plus)).(Const.T4)) !=
     ((s.Railway_P0).(Const.T0)) and
   (((1).((s.Railway_P4).plus)).(Const.T4)) !=
