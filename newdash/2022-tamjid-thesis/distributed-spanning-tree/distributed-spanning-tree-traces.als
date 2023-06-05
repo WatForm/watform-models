@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-05 14:19:50
+   on 2023-06-05 17:42:42
 */
 
 open util/ordering[Level] as nodeLevel

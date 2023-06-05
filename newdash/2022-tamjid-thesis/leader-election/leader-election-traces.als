@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-05 14:19:53
+   on 2023-06-05 17:42:45
 */
 
 open util/ring[Identifier] as P0

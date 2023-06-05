@@ -22,7 +22,7 @@ fun prevNode [n: Node] : lone Node  {
 }
 
 state System {
-	members: Node
+	members: set Node
 
 	conc N [Node] {
 		frst: lone Node

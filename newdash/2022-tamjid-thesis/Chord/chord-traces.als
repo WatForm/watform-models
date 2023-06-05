@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-05 14:19:49
+   on 2023-06-05 17:42:41
 */
 
 open util/ordering[Node] as node
@@ -49,7 +49,7 @@ sig DshSnapshot {
   System_N_prdc: Node -> lone Node,
   System_N_status: Node -> Status,
   System_N_saved: Node -> lone Node,
-  System_members: Node
+  System_members: set Node
 }
 
 pred dsh_initial [
