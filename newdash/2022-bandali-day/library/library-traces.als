@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-05 13:28:11
+   on 2023-06-05 14:19:45
 */
 
 open util/boolean

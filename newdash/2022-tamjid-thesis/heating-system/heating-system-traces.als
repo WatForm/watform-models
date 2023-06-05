@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-05 13:28:19
+   on 2023-06-05 14:19:52
 */
 
 open util/ordering[Temp] as temp

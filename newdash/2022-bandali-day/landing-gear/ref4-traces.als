@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-05 13:28:10
+   on 2023-06-05 14:19:44
 */
 
 open util/boolean
@@ -175,10 +175,10 @@ sig DshSnapshot {
   LandingGear_close_doors_electro_valve: one Bool,
   LandingGear_retract_gears_electro_valve: one Bool,
   LandingGear_extend_gears_electro_valve: one Bool,
-  LandingGear_f_gears_extended: LandingSet one->one Bool,
-  LandingGear_f_gears_retracted: LandingSet one->one Bool,
-  LandingGear_f_doors_closed: LandingSet one->one Bool,
-  LandingGear_f_doors_open: LandingSet one->one Bool,
+  LandingGear_f_gears_extended: LandingSet ->one Bool,
+  LandingGear_f_gears_retracted: LandingSet ->one Bool,
+  LandingGear_f_doors_closed: LandingSet ->one Bool,
+  LandingGear_f_doors_open: LandingSet ->one Bool,
   LandingGear_timeout: one Bool,
   LandingGear_anomaly: one Bool
 }

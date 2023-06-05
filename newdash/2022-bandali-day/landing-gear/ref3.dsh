@@ -171,19 +171,22 @@ state LandingGear {
     retract_gears_electro_valve: one Bool
     extend_gears_electro_valve: one Bool
 
+
+    // NAD: These can't be one->one
+    // NAD: they are function ->one
     // === sensors ===
     // gears_extended is true if the corresponding gear is locked in
     // the extended position and false in other cases
-    env f_gears_extended: LandingSet one -> one Bool
+    env f_gears_extended: LandingSet -> one Bool
     // gears_retracted is true if the corresponding gear is locked in
     // the retracted position and false in other cases
-    env f_gears_retracted: LandingSet one -> one Bool
+    env f_gears_retracted: LandingSet -> one Bool
     // doors_closed is true if and only if the corresponding door is
     // locked closed
-    env f_doors_closed: LandingSet one -> one Bool
+    env f_doors_closed: LandingSet -> one Bool
     // doors_open is true if and only if the corresponding door is
     // locked open
-    env f_doors_open: LandingSet one -> one Bool
+    env f_doors_open: LandingSet -> one Bool
 
     trans retraction_sequence {
         when handle = UP
