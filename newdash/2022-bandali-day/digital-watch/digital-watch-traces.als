@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-01 22:01:16
+   on 2023-06-05 13:28:04
 */
 
 open util/boolean
@@ -106,15 +106,15 @@ one sig DigitalWatch_Main_Alarms_Beep extends DigitalWatch_Main {}
 
 abstract sig DshEvents {}
 abstract sig DshIntEvents extends DshEvents {} 
-one sig DigitalWatch_press_d extends DshIntEvents {} 
-one sig DigitalWatch_Main_Displays_Wait_waited_2_sec extends DshIntEvents {} 
-one sig DigitalWatch_release_b extends DshIntEvents {} 
-one sig DigitalWatch_press_a extends DshIntEvents {} 
-one sig DigitalWatch_release_c extends DshIntEvents {} 
-one sig DigitalWatch_press_b extends DshIntEvents {} 
-one sig DigitalWatch_release_a extends DshIntEvents {} 
-one sig DigitalWatch_press_c extends DshIntEvents {} 
 one sig DigitalWatch_Main_Displays_Date_waited_2_min extends DshIntEvents {} 
+one sig DigitalWatch_Main_Displays_Wait_waited_2_sec extends DshIntEvents {} 
+one sig DigitalWatch_press_a extends DshIntEvents {} 
+one sig DigitalWatch_release_a extends DshIntEvents {} 
+one sig DigitalWatch_press_b extends DshIntEvents {} 
+one sig DigitalWatch_release_b extends DshIntEvents {} 
+one sig DigitalWatch_press_c extends DshIntEvents {} 
+one sig DigitalWatch_release_c extends DshIntEvents {} 
+one sig DigitalWatch_press_d extends DshIntEvents {} 
 one sig DigitalWatch_release_d extends DshIntEvents {} 
 
 sig DshSnapshot {

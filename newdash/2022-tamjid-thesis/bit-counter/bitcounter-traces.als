@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-01 22:01:27
+   on 2023-06-05 13:28:14
 */
 
 open util/ordering[PID] as P0
@@ -18,8 +18,8 @@ sig PID extends DshIds {}
 
 abstract sig DshEvents {}
 abstract sig DshIntEvents extends DshEvents {} 
-one sig Counter_Done extends DshIntEvents {} 
 one sig Counter_Bit_Tk1 extends DshIntEvents {} 
+one sig Counter_Done extends DshIntEvents {} 
 abstract sig DshEnvEvents extends DshEvents {} 
 one sig Counter_Tk0 extends DshEnvEvents {} 
 

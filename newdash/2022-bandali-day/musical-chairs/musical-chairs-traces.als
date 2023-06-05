@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-01 22:01:25
+   on 2023-06-05 13:28:12
 */
 
 open util/boolean
@@ -95,8 +95,8 @@ one sig Game_End extends Game {}
 
 abstract sig DshEvents {}
 abstract sig DshIntEvents extends DshEvents {} 
-one sig Game_MusicStops extends DshIntEvents {} 
 one sig Game_MusicStarts extends DshIntEvents {} 
+one sig Game_MusicStops extends DshIntEvents {} 
 
 sig DshSnapshot {
   dsh_sc_used0: set DshStates,

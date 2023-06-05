@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-01 22:01:27
+   on 2023-06-05 13:28:15
 */
 
 open util/boolean
@@ -95,10 +95,10 @@ pred dsh_initial [
                 p1_CoordinatorID.(s.Carousel_Coordinator_info) and
                 no
                 p1_CoordinatorID.(s.Carousel_Coordinator_currentTxn) and
-                (all disj p,q: PartLdrID | (p.(p2_PartLdrID.(s.Carousel_PartitionLeader_data))) =
-                                             (q.(p2_PartLdrID.(s.Carousel_PartitionLeader_data)))) and
-                (all disj p,q: PartLdrID | (p.(p2_PartLdrID.(s.Carousel_PartitionLeader_pendingTxn))) =
-                                             (q.(p2_PartLdrID.(s.Carousel_PartitionLeader_pendingTxn)))) and
+                (all disj p,q: PartLdrID | (p.(s.Carousel_PartitionLeader_data)) =
+                                             (q.(s.Carousel_PartitionLeader_data))) and
+                (all disj p,q: PartLdrID | (p.(s.Carousel_PartitionLeader_pendingTxn)) =
+                                             (q.(s.Carousel_PartitionLeader_pendingTxn))) and
                 no
                 p2_PartLdrID.(s.Carousel_PartitionLeader_response) and
                 one

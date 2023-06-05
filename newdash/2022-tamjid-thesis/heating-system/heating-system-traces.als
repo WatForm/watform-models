@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-01 22:01:31
+   on 2023-06-05 13:28:19
 */
 
 open util/ordering[Temp] as temp
@@ -39,19 +39,19 @@ sig Identifier extends DshIds {}
 
 abstract sig DshEvents {}
 abstract sig DshIntEvents extends DshEvents {} 
-one sig HeatingSystem_furnaceReset extends DshIntEvents {} 
-one sig HeatingSystem_furnaceNotRunning extends DshIntEvents {} 
+one sig HeatingSystem_activate extends DshIntEvents {} 
 one sig HeatingSystem_deactivate extends DshIntEvents {} 
 one sig HeatingSystem_furnaceRunning extends DshIntEvents {} 
-one sig HeatingSystem_activate extends DshIntEvents {} 
+one sig HeatingSystem_furnaceNotRunning extends DshIntEvents {} 
+one sig HeatingSystem_furnaceReset extends DshIntEvents {} 
 abstract sig DshEnvEvents extends DshEvents {} 
 one sig HeatingSystem_Functioning_Room_waitedForWarmth extends DshEnvEvents {} 
 one sig HeatingSystem_Functioning_Room_waitedForCool extends DshEnvEvents {} 
+one sig HeatingSystem_Reset extends DshEnvEvents {} 
 one sig HeatingSystem_TurnOn extends DshEnvEvents {} 
 one sig HeatingSystem_furnaceFault extends DshEnvEvents {} 
-one sig HeatingSystem_heatSwitchOn extends DshEnvEvents {} 
-one sig HeatingSystem_Reset extends DshEnvEvents {} 
 one sig HeatingSystem_userReset extends DshEnvEvents {} 
+one sig HeatingSystem_heatSwitchOn extends DshEnvEvents {} 
 
 sig DshSnapshot {
   dsh_sc_used0: set DshStates,

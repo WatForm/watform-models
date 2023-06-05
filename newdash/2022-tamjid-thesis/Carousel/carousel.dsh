@@ -198,12 +198,14 @@ state Carousel {
 		}
 
 		init {
-			all disj p, q: PartLdrID | p.data = q.data
-			all disj p, q: PartLdrID | p.pendingTxn = q.pendingTxn
 			no response
 			one pendingTxn
 			no currentTxn
 		}
+	}
+	init {
+		all disj p, q: PartLdrID | PartitionLeader[p]/data = PartitionLeader[q]/data
+		all disj p, q: PartLdrID | PartitionLeader[p]/pendingTxn = PartitionLeader[q]/pendingTxn
 	}
 }
 
