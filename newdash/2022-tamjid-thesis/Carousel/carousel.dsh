@@ -16,7 +16,8 @@ fact {
 state Carousel {
 	conc Client [ClientID] {
 		response: lone Response //Commit or Abort Decision from the Co-ordinator
-		data: Key -> one Value
+		// NAD: changed one to lone here
+		data: Key -> lone Value
 		txn: lone Transaction
 		transToSend: set Transaction
 
@@ -82,8 +83,10 @@ state Carousel {
 	conc Coordinator [CoordinatorID] {
 		currentTxn: lone Transaction
 		client: lone ClientID
-		info: Key -> one Value
-		coord_responses: PartLdrID -> one Response
+		// NAD: changed one to lone here
+		info: Key -> lone Value
+		// NAD: changed one to lone here
+		coord_responses: PartLdrID -> lone Response
 
 		//action Reset [no info' and no currentTxn' and no client' and no coord_responses'] {}
 		
@@ -135,8 +138,10 @@ state Carousel {
 	conc PartitionLeader [PartLdrID] {
 		currentTxn: buf[Transaction] // Requests that not been prepared. They can either be committed or aborted
 		pendingTxn: buf[Transaction] // Requests that have been committed
-		response: Transaction -> one Response // Response from a Coordinator regarding a Commit or Abort decision
-		data: Key -> one Value
+		// NAD: changed one to lone here
+		response: Transaction -> lone Response // Response from a Coordinator regarding a Commit or Abort decision
+		// NAD: changed one to lone here
+		data: Key -> lone Value
 	
 		default state Waiting {
 			trans PrepareCommit { // Commit a transaction if the keys it modifies do not have a conflict with pending requests

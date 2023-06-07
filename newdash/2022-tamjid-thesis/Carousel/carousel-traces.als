@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-05 17:42:40
+   on 2023-06-06 21:05:20
 */
 
 open util/boolean
@@ -50,22 +50,22 @@ sig DshSnapshot {
   dsh_conf1: DshIds -> DshStates,
   dsh_stable: one boolean/Bool,
   Carousel_Client_response: ClientID -> lone Response,
-  Carousel_Client_data: ClientID -> (Key ->one Value),
+  Carousel_Client_data: ClientID -> (Key ->lone Value),
   Carousel_Client_txn: ClientID -> lone Transaction,
   Carousel_Client_transToSend: ClientID -> set Transaction,
   Carousel_Coordinator_currentTxn: CoordinatorID -> lone
                                    Transaction,
   Carousel_Coordinator_client: CoordinatorID -> lone ClientID,
   Carousel_Coordinator_info: CoordinatorID ->
-                             (Key ->one Value),
+                             (Key ->lone Value),
   Carousel_Coordinator_coord_responses: CoordinatorID ->
-                                        (PartLdrID ->one
+                                        (PartLdrID ->lone
                                            Response),
   Carousel_PartitionLeader_response: PartLdrID ->
-                                     (Transaction ->one
+                                     (Transaction ->lone
                                         Response),
   Carousel_PartitionLeader_data: PartLdrID ->
-                                 (Key ->one Value),
+                                 (Key ->lone Value),
   Carousel_PartitionLeader_currentTxn: PartLdrID ->
                                        (bufIdx0 ->
                                           Transaction),
