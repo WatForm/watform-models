@@ -1,9 +1,0 @@
-// remember to have TCMC option set 
-
-assert ctl_allBitsInBit0 {
-        ctl_mc[af[{ s: Snapshot | Counter_Done in s.events0 and 
-		(all p: PID | Counter_Bit_Bit1 in p.(s.conf1)) }]]
-}
-
-check ctl_allBitsInBit0 for 12 Snapshot, exactly 3 PID, 1 PathNode
-check ctl_allBitsInBit0 for 20 Snapshot, exactly 4 PID, 1 PathNode
