@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-08 20:27:49
+   on 2023-06-08 21:12:24
 */
 
 open util/ordering[Level] as nodeLevel
@@ -68,13 +68,13 @@ pred DistrubedTreeSpanning_N_Assigned_sendMessage_post [
   (((s.dsh_conf1) -
       (p0_Node -> DistrubedTreeSpanning_N_Assigned)) +
      (p0_Node -> DistrubedTreeSpanning_N_Assigned))
-  (some n: Node - p0_Node | no
-                            n.(s.DistrubedTreeSpanning_N_message) and
-                            (n.(sn.DistrubedTreeSpanning_N_message)) =
-                              (p0_Node ->
-                                 p0_Node.(s.DistrubedTreeSpanning_N_level)) and
-                            (all others: Node - n | (others.(sn.DistrubedTreeSpanning_N_message)) =
-                                                      (others.(s.DistrubedTreeSpanning_N_message))))
+  (one n: Node - p0_Node | no
+                           n.(s.DistrubedTreeSpanning_N_message) and
+                           (n.(sn.DistrubedTreeSpanning_N_message)) =
+                             (p0_Node ->
+                                p0_Node.(s.DistrubedTreeSpanning_N_level)) and
+                           (all others: Node - n | (others.(sn.DistrubedTreeSpanning_N_message)) =
+                                                     (others.(s.DistrubedTreeSpanning_N_message))))
   ((p0_Node -> DistrubedTreeSpanning_N).(none.(p0_Node.(sn.(s._testIfNextStable)))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and

@@ -10,6 +10,16 @@ state DistrubedTreeSpanning {
 	        parent: lone Node
 		message: Node -> Level
 
+		pred sendMessage {
+			one n: Node - thisN | {
+				// The sister Node has not received a message
+				no N[n]/message
+				// Send the sister Node a message with "this" Node's identifier and Level
+				N[n]/message' = thisN -> level
+				all others: Node - n | N[others]/message' = N[others]/message
+			}
+		}
+
 	        default state Unassigned {
 			trans RootAssign {
 				when {
@@ -39,15 +49,7 @@ state DistrubedTreeSpanning {
 				when {
 					some n: Node | no N[n]/level
 				}
-				do {
-					some n: Node - thisN | {
-						// The sister Node has not received a message
-						no N[n]/message
-						// Send the sister Node a message with "this" Node's identifier and Level
-						N[n]/message' = thisN -> level
-						all others: Node - n | N[others]/message' = N[others]/message
-					}
-				}
+				do { sendMessage }
 			}
 		}
 

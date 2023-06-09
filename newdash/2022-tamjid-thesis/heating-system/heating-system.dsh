@@ -51,8 +51,8 @@ state HeatingSystem {
 	
 		conc Controller {
 			controllerOn: one Bool
-			//condition heatRequested [some r: Identifier | Functioning/Room[r]/requestHeat = True] {}
-			//condition noHeatRequested [no r: Identifier |  Functioning/Room[r]/requestHeat = True] {}
+			pred heatRequested {some r: Identifier | Functioning/Room[r]/requestHeat = True}
+			pred noHeatRequested {no r: Identifier |  Functioning/Room[r]/requestHeat = True}
 
 			default state Off {
 				trans T8 {
@@ -66,14 +66,14 @@ state HeatingSystem {
 			state On {
 				default state Idle {
 					trans T9 {
-						when { some r: Identifier | Functioning/Room[r]/requestHeat = True }
+						when heatRequested 
 						send activate
 						goto Heater_Active
 					}
 				}
 				state Heater_Active {
 					trans T10 {
-						when { no r: Identifier |  Functioning/Room[r]/requestHeat = True }
+						when noHeatRequested 
 						send deactivate
 						goto Idle
 					}
@@ -98,21 +98,29 @@ state HeatingSystem {
 	
 			env event waitedForWarmth {}
 			env event waitedForCool {}
-	
+
+			pred tooCold { lt[actualTemp, desiredTemp] }
+			pred tooHot { gt[actualTemp, desiredTemp] }
+			pred vOpen { valvePos = OPEN }
+			pred vClosed { valvePos = CLOSED }
+			pred controllerOn { Functioning/Controller/controllerOn = True }
+			pred rH { requestHeat' = True }
+			pred cancelrH { requestHeat' = False } 
+
 			default state No_Heat_Request {
 				default state Idle_No_Heat {
 					trans T12 {
-						when lt[actualTemp, desiredTemp]
+						when tooCold
 						goto Wait_For_Heat
 					}
 					trans coolRoom {
-						when !lt[actualTemp, desiredTemp]
+						when !tooCold
 						do actualTemp' = temp/prev[actualTemp]
 					}
 				}
 				state Wait_For_Heat {
 					trans T13 {
-						when !(lt[actualTemp, desiredTemp])
+						when !tooCold
 						goto Idle_No_Heat
 					}
 					trans T14 {
@@ -121,8 +129,8 @@ state HeatingSystem {
 						do valvePos' = OPEN
 					}
 					trans T15 {
-						when valvePos = OPEN and Functioning/Controller/controllerOn = True
-						do requestHeat' = True
+						when vOpen and controllerOn
+						do rH
 						goto Heat_Requested
 					}
 				}
@@ -131,19 +139,19 @@ state HeatingSystem {
 			state Heat_Requested {
 				default state Idle_Heating {
 					trans T15 {
-						when gt[actualTemp, desiredTemp]
+						when tooHot
 						do valvePos' = CLOSED
 						goto Wait_For_Cool
 					}
 					trans heatRoom {
-						when !(gt[actualTemp, desiredTemp])
+						when !tooHot
 						do actualTemp' = temp/next[actualTemp]
 					}
 				}
 	
 				state Wait_For_Cool {
 					trans T16 {
-						when !(gt[actualTemp, desiredTemp])
+						when !tooHot
 						goto Idle_Heating
 					}
 					trans T17 {
@@ -152,9 +160,9 @@ state HeatingSystem {
 					}
 					trans T18 {
 						on waitedForCool
-						when valvePos = CLOSED
+						when vClosed
 						do {
-							requestHeat' = False
+							cancelrH
 							actualTemp' = desiredTemp
 						}
 						goto No_Heat_Request

@@ -11,7 +11,7 @@
 exe = "java -cp /Users/nday/UW/github/org.alloytools.alloy/org.alloytools.alloy.dist/target/org.alloytools.alloy.dist.jar ca.uwaterloo.watform.dash4whole.Dash"
 options = "-t -m traces"
 #ext = "-tcmc.dsh"
-ext = ".als"
+ext = ".dsh"
 
 # set path to tests to run
 # usually either whole archive or one year
@@ -98,7 +98,8 @@ for filename in listoffiles:
         break
             
 print("** Files executed: " + str(cnt))
-print("** SAT result: " + str(sat))
+if ext == ".als":
+    print("** SAT result: " + str(sat))
 if errlist != [] :
     print("** Failures: "+ str(len(errlist)))
     for i in errlist:

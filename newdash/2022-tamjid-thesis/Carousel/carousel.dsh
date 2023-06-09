@@ -88,7 +88,7 @@ state Carousel {
 		// NAD: changed one to lone here
 		coord_responses: PartLdrID -> lone Response
 
-		//action Reset [no info' and no currentTxn' and no client' and no coord_responses'] {}
+		pred Reset {no info' and no currentTxn' and no client' and no coord_responses'}
 		
 		default state Replicate {
 			trans Replicating { 	// Replicate Transaction information after receiving it from a client
@@ -111,7 +111,7 @@ state Carousel {
 					Client[client]/response' = Commit
 					all others: ClientID - client | Client[others]/response' = Client[others]/response
 					all leader: PartLdrID | PartitionLeader[leader]/response' = currentTxn -> Commit 
-                    no info' and no currentTxn' and no client' and no coord_responses'
+                    Reset
 				}
 			}
 
@@ -121,7 +121,7 @@ state Carousel {
 				do {
 					Client[client]/response' = Abort
 					all others: ClientID - client | Client[others]/response' = Client[others]/response
-					no info' and no currentTxn' and no client' and no coord_responses'
+					Reset
 				}
 			}
 		}

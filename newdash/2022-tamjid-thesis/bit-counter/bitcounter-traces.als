@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-08 20:27:47
+   on 2023-06-08 21:12:22
 */
 
 open util/ordering[PID] as P0
