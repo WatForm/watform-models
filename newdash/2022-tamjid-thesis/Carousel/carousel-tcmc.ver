@@ -1,9 +1,0 @@
-
-assert cannotBothCommitAndAbort {
-    ctl_mc[ag[{s0: one Snapshot | one disj p0, p1: PartLdrID | (Carousel_PartitionLeader_Waiting_FinalizeCommit in (p0.(s0.(Snapshot <: taken1))) => (Carousel_PartitionLeader_Abort !in p1.(s0.(Snapshot <: conf1))))}]]
-}
-
-// remember to have tcmc option set
-
-check cannotBothCommitAndAbort for 23 Snapshot, exactly 3 Key, exactly 2 Value, exactly 4 Transaction, exactly 2 ClientID, exactly 2 CoordinatorID, exactly 2 PartLdrID, 3 currentTxn, 3 pendingTxn, 1 PathNode
-check cannotBothCommitAndAbort for 30 Snapshot, exactly 3 Key, exactly 2 Value, exactly 4 Transaction, exactly 2 ClientID, exactly 2 CoordinatorID, exactly 3 PartLdrID, 3 currentTxn, 3 pendingTxn, 1 PathNode
