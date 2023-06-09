@@ -1,0 +1,7 @@
+assert infiniteLiveness {
+    // a floor called is always eventually reached as current
+    // AG ( floorCalled = > AF ( floorCurrent ) )
+    all f : Floor | ctl_mc[ag[imp_ctl[Elevator_called.f , af[Elevator_current.f]]]]
+}
+check infiniteLiveness for exactly 6 Floor , 8 Snapshot, 0 EventLabel
+    expect 0

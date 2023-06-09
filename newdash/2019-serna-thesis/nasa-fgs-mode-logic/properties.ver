@@ -1,0 +1,398 @@
+
+/****************************** GLOSSARY **************************************/
+/**
+
+PFD: Primary Flight Display
+FGS: Flight Guidance System
+
+
+*/
+
+/*************************** PROPERTIES ***************************************/
+// A good first initial significant scope is 8 snapshots
+
+/******************************* SAFETY ***************************************/
+
+--------------------------------------------------------------------------------
+-- At least one lateral mode shall always be active
+-- when the FD is displayed or the AP is engaged.
+--------------------------------------------------------------------------------
+assert ctl_At_Least_One_Lateral_Mode_Active{
+    ag (
+        (FlightModes/FD_On = True or FlightModes/Is_AP_Engaged = True) =>
+        FlightModes/ROLL_Active = True or
+        FlightModes/HDG_Active = True or
+        FlightModes/NAV_Active = True or
+        FlightModes/LAPPR_Active = True or
+        FlightModes/LGA_Active = True
+    )
+}
+check ctl_At_Least_One_Lateral_Mode_Active for 9 Snapshot, exactly 2 EventLabel
+
+{escape}
+assert At_Least_One_Lateral_Mode_Active {
+    all s: Snapshot | s.stable = True and (s.FlightModes_FD_On = True or s.FlightModes_Is_AP_Engaged = True) =>
+        (
+            s.FlightModes_ROLL_Active = True or
+            s.FlightModes_HDG_Active = True or
+            s.FlightModes_NAV_Active = True or
+            s.FlightModes_LAPPR_Active = True or
+            s.FlightModes_LGA_Active = True
+        )
+}
+check At_Least_One_Lateral_Mode_Active for 9 Snapshot, exactly 2 EventLabel
+{/escape}
+
+--------------------------------------------------------------------------------
+-- At most one lateral mode shall be active
+-- when the FD is displayed or the AP is engaged.
+
+-- Notes:; The property fails because there is no way to prevent that two lateral
+-- modes become active during the same step.
+-- This behaviour was prevented in the original model by having the event
+-- prioritization module
+--------------------------------------------------------------------------------
+assert ctl_at_Most_One_Lateral_Mode_Active {
+    ag ((FlightModes/ROLL_Active = True =>
+            !(FlightModes/HDG_Active = True or FlightModes/NAV_Active = True or
+             FlightModes/LAPPR_Active = True or FlightModes/LGA_Active = True)) and
+        (FlightModes/HDG_Active = True =>
+            !(FlightModes/ROLL_Active = True or FlightModes/NAV_Active = True or
+             FlightModes/LAPPR_Active = True or FlightModes/LGA_Active = True)) and
+        (FlightModes/NAV_Active = True =>
+            !(FlightModes/ROLL_Active = True or FlightModes/HDG_Active = True or
+             FlightModes/LAPPR_Active = True or FlightModes/LGA_Active = True)) and
+        (FlightModes/LAPPR_Active = True =>
+            !(FlightModes/ROLL_Active = True or FlightModes/HDG_Active = True or
+             FlightModes/NAV_Active = True or FlightModes/LGA_Active = True)) and
+        (FlightModes/LGA_Active = True =>
+            !(FlightModes/ROLL_Active = True or FlightModes/HDG_Active = True or
+             FlightModes/NAV_Active = True or FlightModes/LAPPR_Active = True))
+    )
+}
+check ctl_at_Most_One_Lateral_Mode_Active for 9 Snapshot, exactly 2 EventLabel
+
+{escape}
+assert At_Most_One_Lateral_Mode_Active {
+    all s: Snapshot | s.stable = True =>
+        ((s.FlightModes_ROLL_Active = True =>
+            !(s.FlightModes_HDG_Active = True or s.FlightModes_NAV_Active = True or
+             s.FlightModes_LAPPR_Active = True or s.FlightModes_LGA_Active = True)) and
+        (s.FlightModes_HDG_Active = True =>
+            !(s.FlightModes_ROLL_Active = True or s.FlightModes_NAV_Active = True or
+             s.FlightModes_LAPPR_Active = True or s.FlightModes_LGA_Active = True)) and
+        (s.FlightModes_NAV_Active = True =>
+            !(s.FlightModes_ROLL_Active = True or s.FlightModes_HDG_Active = True or
+             s.FlightModes_LAPPR_Active = True or s.FlightModes_LGA_Active = True)) and
+        (s.FlightModes_LAPPR_Active = True =>
+            !(s.FlightModes_ROLL_Active = True or s.FlightModes_HDG_Active = True or
+             s.FlightModes_NAV_Active = True or s.FlightModes_LGA_Active = True)) and
+        (s.FlightModes_LGA_Active = True =>
+            !(s.FlightModes_ROLL_Active = True or s.FlightModes_HDG_Active = True or
+             s.FlightModes_NAV_Active = True or s.FlightModes_LAPPR_Active = True))
+    )
+}
+check At_Most_One_Lateral_Mode_Active for 9 Snapshot, exactly 2 EventLabel
+{/escape}
+
+ -------------------------------------------------------------------------------
+-- Exactly one lateral mode shall be active
+-- when the FD is displayed or the AP is engaged.
+
+-- Notes: This property is the combination of the previous two.
+-- On the original specification is not statetd.
+-- The property fails because there is no way to prevent that two lateral modes
+-- become active during the same step.
+-- This behaviour was prevented in the original model by having the event
+-- prioritization module
+--------------------------------------------------------------------------------
+assert ctl_exactly_One_Lateral_Mode_Active {
+    ag one {
+        FlightModes/LATERAL/ROLL/SELECTED/ACTIVE +
+        FlightModes/LATERAL/HDG/SELECTED/ACTIVE +
+        FlightModes/LATERAL/NAV/SELECTED/ACTIVE +
+        FlightModes/LATERAL/LAPPR/SELECTED/ACTIVE +
+        FlightModes/LATERAL/LGA/SELECTED/ACTIVE
+    } & conf
+}
+check ctl_exactly_One_Lateral_Mode_Active for 9 Snapshot, exactly 2 EventLabel
+
+{escape}
+assert exactly_One_Lateral_Mode_Active {
+    all s: Snapshot |  s.stable = True => one {
+        FlightModes_LATERAL_ROLL_SELECTED_ACTIVE +
+        FlightModes_LATERAL_HDG_SELECTED_ACTIVE +
+        FlightModes_LATERAL_NAV_SELECTED_ACTIVE +
+        FlightModes_LATERAL_LAPPR_SELECTED_ACTIVE +
+        FlightModes_LATERAL_LGA_SELECTED_ACTIVE
+    } & s.conf
+}
+check exactly_One_Lateral_Mode_Active for 9 Snapshot, exactly 2 EventLabel
+{/escape}
+
+--------------------------------------------------------------------------------
+-- At least one vertical mode shall always be active
+-- when the FD is displayed or the AP is engaged.
+--------------------------------------------------------------------------------
+assert ctl_At_Least_One_Vertical_Mode_Active {
+    ag (
+        FlightModes/PITCH_Active = True or FlightModes/VS_Active = True or
+        FlightModes/FLC_Active = True or FlightModes/ALT_Active = True or
+        FlightModes/ALTSEL_Active = True or FlightModes/VAPPR_Active = True or
+        FlightModes/VGA_Active = True
+    )
+}
+check ctl_At_Least_One_Vertical_Mode_Active for 9 Snapshot, exactly 2 EventLabel
+
+{escape}
+assert At_Least_One_Vertical_Mode_Active {
+    all s: Snapshot | s.stable = True =>
+        (s.FlightModes_PITCH_Active = True or s.FlightModes_VS_Active = True or
+        s.FlightModes_FLC_Active = True or s.FlightModes_ALT_Active = True or
+        s.FlightModes_ALTSEL_Active = True or s.FlightModes_VAPPR_Active = True or
+        s.FlightModes_VGA_Active = True)
+}
+check At_Least_One_Vertical_Mode_Active for 9 Snapshot, exactly 2 EventLabel
+{/escape}
+
+--------------------------------------------------------------------------------
+-- At most one vertical mode shall be active
+-- when the FD is displayed or the AP is engaged.
+-- The property fails because there is no way to prevent that two vertical modes
+-- become active during the same step.
+-- This behaviour was prevented in the original model by having the event
+-- prioritization module
+--------------------------------------------------------------------------------
+assert ctl_At_Most_One_Vertical_Mode_Active {
+    ag (
+        (FlightModes/PITCH_Active = True =>
+            !(FlightModes/VS_Active = True or FlightModes/FLC_Active = True or
+             FlightModes/ALT_Active = True or FlightModes/ALTSEL_Active = True or
+             FlightModes/VAPPR_Active = True or FlightModes/VGA_Active = True)
+        ) and
+        (FlightModes/VS_Active = True =>
+            !( FlightModes/PITCH_Active = True or FlightModes/FLC_Active = True or
+                FlightModes/ALT_Active = True or FlightModes/ALTSEL_Active = True or
+                FlightModes/VAPPR_Active = True or FlightModes/VGA_Active = True)
+        ) and
+        (FlightModes/FLC_Active = True =>
+            !(FlightModes/PITCH_Active = True or FlightModes/VS_Active = True or
+            FlightModes/ALT_Active = True or FlightModes/ALTSEL_Active = True or
+            FlightModes/VAPPR_Active = True or FlightModes/VGA_Active = True)
+        ) and
+        (FlightModes/ALT_Active = True =>
+            !(FlightModes/PITCH_Active = True or FlightModes/VS_Active = True or
+            FlightModes/FLC_Active = True or FlightModes/ALTSEL_Active = True or
+            FlightModes/VAPPR_Active = True or FlightModes/VGA_Active = True)
+        ) and
+        (FlightModes/ALTSEL_Active = True =>
+            !(FlightModes/PITCH_Active = True or FlightModes/VS_Active = True or
+            FlightModes/FLC_Active = True or FlightModes/ALT_Active = True or
+            FlightModes/VAPPR_Active = True or FlightModes/VGA_Active = True)
+        ) and (
+        FlightModes/VAPPR_Active = True =>
+            !(FlightModes/PITCH_Active = True or FlightModes/VS_Active = True or
+            FlightModes/FLC_Active = True or FlightModes/ALT_Active = True or
+            FlightModes/ALTSEL_Active = True or FlightModes/VGA_Active = True)
+        ) and (
+            FlightModes/VGA_Active = True =>
+            !(FlightModes/PITCH_Active = True or FlightModes/VS_Active = True or
+            FlightModes/FLC_Active = True or FlightModes/ALT_Active = True or
+            FlightModes/ALTSEL_Active = True or FlightModes/VAPPR_Active = True)
+        )
+    )
+}
+check ctl_At_Most_One_Vertical_Mode_Active for 9 Snapshot, exactly 2 EventLabel
+
+{escape}
+assert At_Most_One_Vertical_Mode_Active {
+    all s: Snapshot | s.stable = True =>
+        ((s.FlightModes_PITCH_Active = True =>
+            !(s.FlightModes_VS_Active = True or s.FlightModes_FLC_Active = True or
+             s.FlightModes_ALT_Active = True or s.FlightModes_ALTSEL_Active = True or
+             s.FlightModes_VAPPR_Active = True or s.FlightModes_VGA_Active = True)
+        ) and
+        (s.FlightModes_VS_Active = True =>
+            !( s.FlightModes_PITCH_Active = True or s.FlightModes_FLC_Active = True or
+                s.FlightModes_ALT_Active = True or s.FlightModes_ALTSEL_Active = True or
+                s.FlightModes_VAPPR_Active = True or s.FlightModes_VGA_Active = True)
+        ) and
+        (s.FlightModes_FLC_Active = True =>
+            !(s.FlightModes_PITCH_Active = True or s.FlightModes_VS_Active = True or
+            s.FlightModes_ALT_Active = True or s.FlightModes_ALTSEL_Active = True or
+            s.FlightModes_VAPPR_Active = True or s.FlightModes_VGA_Active = True)
+        ) and
+        (s.FlightModes_ALT_Active = True =>
+            !(s.FlightModes_PITCH_Active = True or s.FlightModes_VS_Active = True or
+            s.FlightModes_FLC_Active = True or s.FlightModes_ALTSEL_Active = True or
+            s.FlightModes_VAPPR_Active = True or s.FlightModes_VGA_Active = True)
+        ) and
+        (s.FlightModes_ALTSEL_Active = True =>
+            !(s.FlightModes_PITCH_Active = True or s.FlightModes_VS_Active = True or
+            s.FlightModes_FLC_Active = True or s.FlightModes_ALT_Active = True or
+            s.FlightModes_VAPPR_Active = True or s.FlightModes_VGA_Active = True)
+        ) and (
+        s.FlightModes_VAPPR_Active = True =>
+            !(s.FlightModes_PITCH_Active = True or s.FlightModes_VS_Active = True or
+            s.FlightModes_FLC_Active = True or s.FlightModes_ALT_Active = True or
+            s.FlightModes_ALTSEL_Active = True or s.FlightModes_VGA_Active = True)
+        ) and (
+            s.FlightModes_VGA_Active = True =>
+            !(s.FlightModes_PITCH_Active = True or s.FlightModes_VS_Active = True or
+            s.FlightModes_FLC_Active = True or s.FlightModes_ALT_Active = True or
+            s.FlightModes_ALTSEL_Active = True or s.FlightModes_VAPPR_Active = True)
+        ))
+}
+check At_Most_One_Vertical_Mode_Active for 9 Snapshot, exactly 2 EventLabel
+{/escape}
+
+--------------------------------------------------------------------------------
+-- If the mode annunciations are on, ALTSEL mode shall be selected if
+-- none of ALT, VAPPR, or VGA mode are active.
+--
+-- Notes: The property fails. On the original model the behaviour was prevented
+-- by changing the order of execution of the sub-statemachines.
+--------------------------------------------------------------------------------
+assert ctl_ALTSEL_Selected_If_Not_ALT_VAPPR_VGA_Active {
+    ag (FlightModes/Modes_On = True =>
+        !(
+            FlightModes/ALT_Active = True or
+            FlightModes/VAPPR_Active = True or
+            FlightModes/VGA_Active = True)
+        =>
+        FlightModes/ALTSEL_Selected = True
+    )
+}
+check ctl_ALTSEL_Selected_If_Not_ALT_VAPPR_VGA_Active for 9 Snapshot, exactly 2 EventLabel
+
+{escape}
+assert ALTSEL_Selected_If_Not_ALT_VAPPR_VGA_Active {
+    all s: Snapshot | s.stable = True and s.FlightModes_Modes_On = True =>
+        !(
+            s.FlightModes_ALT_Active = True or
+            s.FlightModes_VAPPR_Active = True or
+            s.FlightModes_VGA_Active = True)
+        =>
+        s.FlightModes_ALTSEL_Selected = True
+}
+check ALTSEL_Selected_If_Not_ALT_VAPPR_VGA_Active for 9 Snapshot, exactly 2 EventLabel
+{/escape}
+
+{escape}
+--------------------------------------------------------------------------------
+-- FLC, ALT, ALTSEL, or PITCH mode shall be active
+-- while an overspeed condition exists.
+--------------------------------------------------------------------------------
+{/escape}
+assert  ctl_Overspeed_Implies_FLC_ALT_ALTSEL_PITCH {
+    ag (
+        FlightModes/Overspeed = True =>
+        (
+            FlightModes/FLC_Active = True or
+            FlightModes/ALT_Active = True or
+            FlightModes/ALTSEL_Active = True or
+            FlightModes/PITCH_Active = True
+        )
+    )
+}
+check ctl_Overspeed_Implies_FLC_ALT_ALTSEL_PITCH for 9 Snapshot, exactly 2 EventLabel
+
+{escape}
+assert  Overspeed_Implies_FLC_ALT_ALTSEL_PITCH {
+    all s: Snapshot | s.stable = True => (
+        s.FlightModes_Overspeed = True =>
+        (
+            s.FlightModes_FLC_Active = True or
+            s.FlightModes_ALT_Active = True or
+            s.FlightModes_ALTSEL_Active = True or
+            s.FlightModes_PITCH_Active = True
+        )
+    )
+}
+check Overspeed_Implies_FLC_ALT_ALTSEL_PITCH for 9 Snapshot, exactly 2 EventLabel
+{/escape}
+
+
+/************************ FUNCTIONAL PROPERTIES *******************************/
+
+/************************* MODE ANNUNCIATIONS *********************************/
+
+
+
+// Escaping this property because there is abug in the translation of nested CTL
+// expressions
+{escape}
+
+{/escape}
+
+assert ctl_AP_Engaged_Implies_Modes_On {
+    ag (FlightModes/Is_AP_Engaged = True => (ax FlightModes/Modes_On = True))
+}
+check ctl_AP_Engaged_Implies_Modes_On for 9 Snapshot, exactly 2 EventLabel
+
+{escape}
+--------------------------------------------------------------------------------
+-- The mode annunciations shall be on if the offside FD is on.
+--
+-- Notes: We use the contrapositive because it is easier to reason about outputs
+-- on stable snapshots
+--------------------------------------------------------------------------------
+assert Offside_FD_On_Implies_Modes_On {
+    all s: Snapshot | s.stable = True =>
+        s.FlightModes_Modes_On = False =>
+        all _s: nextStep.s | _s.FlightModes_Is_Offside_FD_On = False
+}
+check Offside_FD_On_Implies_Modes_On for 9 Snapshot, exactly 2 EventLabel
+
+--------------------------------------------------------------------------------
+-- The mode annunciations shall be on if the onside FD is on.
+--
+-- Notes: We use the contrapositive because it is easier to reason about outputs
+-- on stable snapshots
+--------------------------------------------------------------------------------
+assert Onside_FD_On_Implies_Modes_On {
+    all s: Snapshot | s.stable = True =>
+        s.FlightModes_Modes_On = False =>
+        all _s: nextStep.s | _s.FlightModes_FD_On = False
+}
+check Onside_FD_On_Implies_Modes_On for 9 Snapshot, exactly 2 EventLabel
+
+{/escape}
+
+--==============================================================================
+-- FLIGHT DIRECTOR
+--==============================================================================
+{escape}
+--------------------------------------------------------------------------------
+-- The onside FD shall be off at system start up
+--------------------------------------------------------------------------------
+assert FD_Off_At_Startup {
+    all s: Snapshot | init[s] => s.FlightModes_FD_On = False
+}
+check FD_Off_At_Startup for 10 Snapshot, exactly 2 EventLabel
+
+
+
+
+pred rising[s: Snapshot, rel: Snapshot -> one Bool] {
+    nextStep.s.rel = False and s.rel = True
+}
+--------------------------------------------------------------------------------
+-- The onside FD shall be on when an overspeed condition exists.
+--
+-- Notes: We use the contrapositive because it is easier to reason about outputs
+-- on stable snapshots.
+-- Property fails because we have not implemented the event processing module
+--------------------------------------------------------------------------------
+assert Overspeed_Implies_FD_On {
+    all s: Snapshot | s.stable = True =>
+        s.FlightModes_FD_On = False =>
+        all _s: nextStep.s | _s.FlightModes_Overspeed = False
+}
+check Overspeed_Implies_FD_On for 9 Snapshot, exactly 2 EventLabel
+
+
+
+
+
+{/escape}

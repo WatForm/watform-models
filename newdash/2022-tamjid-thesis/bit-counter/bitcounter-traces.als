@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-06 21:10:27
+   on 2023-06-08 20:27:47
 */
 
 open util/ordering[PID] as P0
@@ -92,8 +92,6 @@ pred Counter_Bit_currentBitToBit1_post [
               (sn.dsh_sc_used0) = none and
               ((sn.dsh_events1) :> DshIntEvents) =
                 (p0_PID -> Counter_Bit_Tk1) and
-              ((sn.dsh_events1) :> DshEnvEvents) =
-                ((s.dsh_events1) :> DshEnvEvents) and
               (sn.dsh_sc_used1) = (none -> none))
          else
            ((sn.dsh_sc_used0) = (s.dsh_sc_used0) and
@@ -180,8 +178,6 @@ pred Counter_Bit_lastBitDone_post [
               (sn.dsh_sc_used0) = none and
               ((sn.dsh_events1) :> DshIntEvents) =
                 (none -> none) and
-              ((sn.dsh_events1) :> DshEnvEvents) =
-                ((s.dsh_events1) :> DshEnvEvents) and
               (sn.dsh_sc_used1) = (none -> none))
          else
            ((sn.dsh_events0) =
@@ -262,8 +258,6 @@ pred Counter_Bit_currentBitToBit2_post [
               (sn.dsh_sc_used0) = none and
               ((sn.dsh_events1) :> DshIntEvents) =
                 (none -> none) and
-              ((sn.dsh_events1) :> DshEnvEvents) =
-                ((s.dsh_events1) :> DshEnvEvents) and
               (sn.dsh_sc_used1) = (none -> none))
          else
            ((sn.dsh_sc_used0) = (s.dsh_sc_used0) and
@@ -346,8 +340,6 @@ pred Counter_Bit_nextBitToBit1_post [
               (sn.dsh_sc_used0) = none and
               ((sn.dsh_events1) :> DshIntEvents) =
                 (none -> none) and
-              ((sn.dsh_events1) :> DshEnvEvents) =
-                ((s.dsh_events1) :> DshEnvEvents) and
               (sn.dsh_sc_used1) = (none -> none))
          else
            ((sn.dsh_sc_used0) = (s.dsh_sc_used0) and
@@ -423,8 +415,6 @@ pred Counter_Bit_nextBitToBit2_post [
               (sn.dsh_sc_used0) = none and
               ((sn.dsh_events1) :> DshIntEvents) =
                 (none -> none) and
-              ((sn.dsh_events1) :> DshEnvEvents) =
-                ((s.dsh_events1) :> DshEnvEvents) and
               (sn.dsh_sc_used1) = (none -> none))
          else
            ((sn.dsh_sc_used0) = (s.dsh_sc_used0) and

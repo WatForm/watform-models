@@ -1,0 +1,7 @@
+
+// Property fails is the single input assumption is not used
+
+assert ctl_no_both_lights_green {
+    ag !({TrafficLight/EastWest/Green + TrafficLight/NorthSouth/Green} in conf)
+}
+check ctl_no_both_lights_green for 7 Snapshot, exactly 2 EventLabel expect 0

@@ -1,0 +1,6 @@
+
+// Property fails is the single input assumption is not used
+assert no_both_lights_green {
+    no s: Snapshot | s.stable = True and {TrafficLight_EastWest_Green + TrafficLight_NorthSouth_Green} in s.conf
+}
+check no_both_lights_green for 7 Snapshot, exactly 2 EventLabel expect 0

@@ -1,0 +1,12 @@
+--------------------------------------------------------------------------------
+-- The mode annunciations shall be on if the AP is engaged.
+--
+-- Notes: We use the contrapositive because it is easier to reason about outputs
+-- on stable snapshots
+--------------------------------------------------------------------------------
+assert AP_Engaged_Implies_Modes_On {
+    all s: Snapshot | s.stable = True =>
+        s.FlightModes_Modes_On = False =>
+        all _s: nextStep.s | _s.FlightModes_Is_AP_Engaged = False
+}
+check AP_Engaged_Implies_Modes_On for 9 Snapshot, exactly 2 EventLabel

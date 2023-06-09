@@ -1,0 +1,10 @@
+
+// The final status of bits when done counting
+
+assert ctl_final_bitStatus {
+    ag (
+        Counter/Bit2/Done in events =>
+        {Counter/Bit1/Bit11 + Counter/Bit2/Bit21} in conf
+    )
+}
+check ctl_final_bitStatus for 7 Snapshot, exactly 2 EventLabel expect 0

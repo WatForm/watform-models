@@ -1,0 +1,6 @@
+/** Always one floor is current */
+assert safety {
+    ag (one Elevator/current)
+}
+check safety for exactly 6 Floor , 8 Snapshot, 0 EventLabel
+    expect 0

@@ -11,7 +11,7 @@
 exe = "java -cp /Users/nday/UW/github/org.alloytools.alloy/org.alloytools.alloy.dist/target/org.alloytools.alloy.dist.jar ca.uwaterloo.watform.dash4whole.Dash"
 options = "-t -m traces"
 #ext = "-tcmc.dsh"
-ext = ".dsh"
+ext = ".als"
 
 # set path to tests to run
 # usually either whole archive or one year
@@ -37,6 +37,7 @@ from subprocess import Popen, PIPE, TimeoutExpired
 print ("\n++ Running files ...")
 cnt = 0
 errlist = []
+sat = 0
 
 myinputpath = locn
 print("Checking files within: "+myinputpath)
@@ -91,10 +92,13 @@ for filename in listoffiles:
         print("Return code: " + str(rc))  
         if msg != "":
             print("Msg: "+ msg)
+    if "Result: SAT" in output:
+        sat = sat + 1
     if errlist != 0 and stop_on_first_fail:
         break
             
 print("** Files executed: " + str(cnt))
+print("** SAT result: " + str(sat))
 if errlist != [] :
     print("** Failures: "+ str(len(errlist)))
     for i in errlist:

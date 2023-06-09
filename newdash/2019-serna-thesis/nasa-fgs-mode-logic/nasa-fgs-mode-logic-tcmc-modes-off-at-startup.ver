@@ -1,0 +1,10 @@
+--------------------------------------------------------------------------------
+-- The mode annunciations shall be off at system start up.
+--------------------------------------------------------------------------------
+{escape}
+assert ctl_Modes_Off_At_Startup {
+    ctl_mc[ag[
+        { s: Snapshot | init[s] => s.FlightModes_Modes_On = False }
+    ]]
+}
+check ctl_Modes_Off_At_Startup for 9 Snapshot, exactly 2 EventLabel

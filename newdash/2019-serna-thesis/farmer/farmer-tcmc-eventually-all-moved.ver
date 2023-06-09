@@ -1,0 +1,6 @@
+/** the farmer moves everything to the far side of the river. */
+
+pred ctl_solve {
+    ef Puzzle/far = Object
+}
+run ctl_solve for 8 Snapshot, 0 EventLabel expect 1

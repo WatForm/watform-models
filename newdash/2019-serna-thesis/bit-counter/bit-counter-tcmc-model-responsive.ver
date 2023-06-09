@@ -1,0 +1,23 @@
+
+// The bitcounter has a significant scope of 10 Snapshots
+// Uncomment when not using the path-based instances option
+// run significance for 7 Snapshot, exactly 2 EventLabel expect 1
+
+// Model is responsive
+assert ctl_model_responsive {
+    ctl_mc[
+        ag[
+            imp_ctl[
+                {s: Snapshot| Counter_Tk0 in s.events},
+                af[{s: Snapshot |
+                    s.stable = True and
+                    (Counter_Bit1_T1 in s.taken or
+                    Counter_Bit1_T2 in s.taken or
+                    Counter_Bit2_T3 in s.taken or
+                    Counter_Bit2_T4 in s.taken)
+                }]
+            ]
+        ]
+    ]
+}
+check ctl_model_responsive for 7 Snapshot, exactly 2 EventLabel expect 0

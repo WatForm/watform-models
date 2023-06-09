@@ -1,0 +1,17 @@
+--------------------------------------------------------------------------------
+-- ROLL mode shall be active iff no other lateral mode is active.
+--
+-- Notes: we ca check this property on the same snapshot because all variables
+-- involved are controlled outputs and they do not change on stable snapshots
+--------------------------------------------------------------------------------
+assert Default_Lateral_Mode_Is_ROLL {
+    all s: Snapshot | s.stable = True =>
+        (s.FlightModes_ROLL_Active = True iff
+        !(
+            s.FlightModes_HDG_Active = True or
+            s.FlightModes_NAV_Active = True or
+            s.FlightModes_LAPPR_Active = True or
+            s.FlightModes_LGA_Active = True
+        ))
+}
+check Default_Lateral_Mode_Is_ROLL for 9 Snapshot, exactly 2 EventLabel

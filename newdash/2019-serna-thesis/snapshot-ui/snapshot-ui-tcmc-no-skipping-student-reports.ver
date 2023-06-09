@@ -1,0 +1,7 @@
+/**
+ *  Always get to see the answers only if coming from students report
+ */
+assert noSkippingStudentsReport {
+    ag ((ex SnapshotUI/Snapshot/Answers in conf) => SnapshotUI/Snapshot/Reports/Students in conf)
+}
+check noSkippingStudentsReport for 10 expect 0

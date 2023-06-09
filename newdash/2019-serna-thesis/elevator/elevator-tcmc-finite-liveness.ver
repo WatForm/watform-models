@@ -1,0 +1,6 @@
+/** Eventually reaches a manitenance state */
+assert finiteLiveness {
+    af (Elevator/maintenance = 0)
+}
+check finiteLiveness for exactly 6 Floor , 8 Snapshot, 0 EventLabel
+    expect 0

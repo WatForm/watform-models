@@ -1,0 +1,5 @@
+assert safety {
+    ag !(RDT/Sender/ReadyResend in conf and RDT/Receiver/ReadyReceiveNext in conf)
+}
+check safety for 10 Snapshot, 4 EventLabel
+    expect 1

@@ -1,0 +1,6 @@
+/** No Object can be in two places at once */
+
+assert ctl_no_quantum_objects {
+    ag (no x: Object | x in Puzzle/near and x in Puzzle/far)
+}
+check ctl_no_quantum_objects for 8 Snapshot, 0 EventLabel expect 0

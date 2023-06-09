@@ -1,0 +1,6 @@
+
+
+assert check_Modes_Off_At_Startup {
+    all s: Snapshot | init[s] => s.FlightModes_Modes_On = False
+}
+check check_Modes_Off_At_Startup for 9 Snapshot, exactly 2 EventLabel

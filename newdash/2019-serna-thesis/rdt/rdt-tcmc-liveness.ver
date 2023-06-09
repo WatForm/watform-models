@@ -1,0 +1,6 @@
+
+assert liveness {
+    ag (RDT/Receiver/ReceiveError in conf => af(RDT/Receiver/ReceiveSuccess in conf))
+}
+check liveness for 10 Snapshot, 4 EventLabel
+    expect 1

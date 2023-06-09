@@ -1,0 +1,209 @@
+/*******************************************************************************
+ * Title: JavaThread.dsh
+ * Authors: Jose Serna - jserna@uwaterloo.ca
+ * Created: 2019-06-10
+ * Last modified: 
+ * 2023-06-07 Nancy Day updates for new dash and no syntactic sugar
+ *
+ * Notes: Dash model of the thread states and lifecycle for the Thread class in 
+ *   Java 6.
+ *   The model uses transition comprehension and templates
+ *   Source: https://www.uml-diagrams.org/examples/java-6-thread-state-machine-diagram-example.html
+ *
+ ******************************************************************************/
+
+ state ThreadStates {
+    // Thread events
+    event ThreadStart{}
+    event ThreadYield {}
+    event ThreadTerminated {}
+    event ThreadJoin {}
+    event ThreadJoinTimeout {}
+    event ThreadSleepTime {}
+    event ThreadSleepTimeElapsed {}
+
+    // Object events
+    event ObjectWaitTimeOut {}
+    event ObjectWait {}
+    event ObjectNotifyAll {}
+    event ObjectNotify {}
+
+    // Lock Support events
+    event LockSupportParkUntil {}
+    event LockSupportParkNanos {}
+    event LockSupportPark {}
+
+    // Scheduler events
+    event SchedulerSelected{}
+    event SchedulerSuspended{}
+
+    // Lock events
+    event WaitForLockToEnterSynchro {}
+    event WaitForLockToReEnterSynchro {}
+    event MonitorLockAcquired {}
+
+    default state New {
+        trans t1 {
+            on ThreadStart
+            goto Runnable
+        }
+    }
+
+    state Runnable {
+        default state Ready{}
+        state Running {}
+
+        trans t2 {
+            from Ready
+            on SchedulerSelected
+            goto Running
+        }
+
+        trans t3 {
+            from Running
+            on ThreadYield
+            goto Ready
+        }
+
+        trans t4 {
+            from Running
+            on SchedulerSuspended
+            goto Ready
+        }
+    }
+
+    state Terminated {}
+    state TimedWaiting {}
+    state Waiting {}
+    state Blocked {}
+
+
+    trans t5 {
+        from Runnable
+        on ThreadTerminated
+        goto Terminated
+    }
+
+    trans t6 {
+        from TimedWaiting
+        on ThreadTerminated
+        goto Terminated
+    }
+
+    trans t7 {
+        from Waiting
+        on ThreadTerminated
+        goto Terminated
+    }
+
+    trans t8 {
+        from Blocked
+        on ThreadTerminated
+        goto Terminated
+    }
+
+    trans t9 {
+        from Runnable
+        on ThreadSleepTime
+        goto TimedWaiting
+    }
+
+    trans t10 {
+        from Runnable
+        on ObjectWaitTimeOut
+        goto TimedWaiting
+    }
+
+    trans t11 {
+        from Runnable
+        on ThreadJoinTimeout
+        goto TimedWaiting
+    }
+
+    trans t12 {
+        from Runnable
+        on LockSupportParkNanos
+        goto TimedWaiting
+
+    }
+
+    trans t13 {
+        from Runnable
+        on LockSupportParkUntil
+        goto TimedWaiting
+
+    }
+
+    trans t14 {
+        from Runnable
+        on ObjectWait
+        goto Waiting
+
+    }
+
+    trans t15 {
+        from Runnable
+        on ThreadJoin
+        goto Waiting
+
+    }
+
+    trans t16 {
+        from Runnable
+        on LockSupportPark
+        goto Waiting
+
+    }
+
+    trans t17 {
+        from Runnable
+        on WaitForLockToEnterSynchro
+        goto Blocked
+    }
+
+    trans t18 {
+        from Runnable
+        on WaitForLockToReEnterSynchro
+        goto Blocked
+    }
+
+    trans t19 {
+        from TimedWaiting
+        on ObjectNotify
+        goto Blocked
+
+    }
+
+    trans t20 {
+        from Waiting
+        on ObjectNotify
+        goto Blocked
+
+    }
+
+    trans t21 {
+        from TimedWaiting
+        on ObjectNotifyAll
+        goto Blocked
+
+    }
+
+    trans t22 {
+        from Waiting
+        on ObjectNotifyAll
+        goto Blocked
+
+    }
+
+    trans t23 {
+        from Blocked
+        on MonitorLockAcquired
+        goto Runnable
+    }
+
+    trans t24 {
+        from TimedWaiting
+        on ThreadSleepTimeElapsed
+        goto Runnable
+    }
+ }

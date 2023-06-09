@@ -1,0 +1,4 @@
+assert ctl_mutex {
+    ag !({Mutex/Process1/Critical + Mutex/Process2/Critical} in conf)
+}
+check ctl_mutex for 9 Snapshot, exactly 0 EventLabel expect 0

@@ -1,0 +1,6 @@
+
+assert mutex {
+    no s: Snapshot | s.stable = True and
+        {Mutex_Process1_Critical + Mutex_Process2_Critical} in s.conf
+}
+check mutex for 9 Snapshot, exactly 0 EventLabel expect 0

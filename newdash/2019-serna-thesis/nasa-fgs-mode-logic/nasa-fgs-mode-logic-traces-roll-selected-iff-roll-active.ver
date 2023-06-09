@@ -1,0 +1,8 @@
+--------------------------------------------------------------------------------
+-- ROLL mode shall be active if and only if ROLL mode is selected.
+--------------------------------------------------------------------------------
+assert ROLL_Selected_Iff_ROLL_Active {
+    all s: Snapshot | s.stable = True =>
+        (s.FlightModes_ROLL_Active = True iff s.FlightModes_ROLL_Selected = True)
+}
+check ROLL_Selected_Iff_ROLL_Active for 9 Snapshot, exactly 2 EventLabel

@@ -1,0 +1,5 @@
+assert no_quantum_objects {
+    all s: Snapshot | no x: Object |
+        x in s.Puzzle_near and x in s.Puzzle_far
+}
+check no_quantum_objects for 8 Snapshot, 0 EventLabel expect 0

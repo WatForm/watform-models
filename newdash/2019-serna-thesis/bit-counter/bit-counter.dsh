@@ -1,0 +1,61 @@
+/*******************************************************************************
+ * Title: bit-counter.dsh
+ * Authors: Jose Serna
+ * Created: 14-04-2018
+ * Last modified: 07-06-2023 Nancy Day
+ *
+ * Notes: Two bit counter model taken from Shahram's PhD thesis
+ *
+ *        Shahram Esmaeilsabzali. Perscriptive Semantics for Big-Step Modelling Languages.
+ *        PhD thesis, University of Waterloo, David R. Cheriton School of Computer Science, 2011
+ *        https://cs.uwaterloo.ca/~nday/pdf/theses/2011-esmaeilsabzali-phd-thesis.pdf
+ *
+ ******************************************************************************/
+
+state Counter {
+    env event Tk0 {}
+
+    conc Bit1 {
+        event Tk1 {}
+
+        default state Bit11 {}
+        state Bit12 {}
+
+        trans T1 {
+            from Bit1/Bit11
+            on Tk0
+            goto Bit12
+        }
+
+        trans T2 {
+            from Bit12
+            on Tk0
+            goto Bit11
+            send Tk1
+        }
+    }
+    
+    conc Bit2 {
+        event Done {}
+
+        default state Bit21 {}
+        state Bit22 {}
+        
+        trans T3 {
+            from Bit21
+            on Bit1/Tk1
+            goto Bit22
+        }
+
+        trans T4 {
+            from Bit22
+            on Bit1/Tk1
+            goto Bit21
+            send Done
+        }
+    }
+}
+
+
+
+

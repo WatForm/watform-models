@@ -1,0 +1,4 @@
+pred solve {
+    some s: Snapshot | s.Puzzle_far = Object
+}
+run solve for 8 Snapshot, 0 EventLabel expect 1

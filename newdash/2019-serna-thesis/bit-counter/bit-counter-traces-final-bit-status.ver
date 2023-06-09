@@ -1,0 +1,6 @@
+
+assert final_bitStatus {
+    all s: Snapshot| s.stable = True and Counter_Bit2_Done in s.events =>
+        {Counter_Bit1_Bit11 + Counter_Bit2_Bit21} in s.conf
+}
+check final_bitStatus for 7 Snapshot, exactly 2 EventLabel expect 0

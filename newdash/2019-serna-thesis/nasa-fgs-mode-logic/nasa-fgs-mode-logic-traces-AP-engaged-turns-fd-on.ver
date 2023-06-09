@@ -1,0 +1,12 @@
+--------------------------------------------------------------------------------
+-- The onside FD shall turn on when the AP is engaged.
+--------------------------------------------------------------------------------
+assert  AP_Engaged_Turns_FD_On {
+    // This property is weaker than it is required, we're proving that the rising
+    // Is_AP_Engaged will eventually turn the Modes On.
+    // This is because of how our nextStep relation is built and we don't have an
+    // easy way to refer to the next stable snapshot
+    all s: Snapshot | s.stable = True =>
+        rising[s, FlightModes_Is_AP_Engaged] => some s': s.*nextStep | s'.stable = True and s'.FlightModes_FD_On = True
+}
+check AP_Engaged_Turns_FD_On for 9 Snapshot, exactly 2 EventLabel

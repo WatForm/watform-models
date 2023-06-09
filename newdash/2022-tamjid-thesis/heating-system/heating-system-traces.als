@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-06 21:10:31
+   on 2023-06-08 20:27:51
 */
 
 open util/ordering[Temp] as temp
@@ -126,15 +126,11 @@ pred HeatingSystem_Functioning_Controller_Off_T8_post [
        (sn.dsh_sc_used1) = (none -> none) and
        ((s.dsh_stable).boolean/isTrue)=>
            (((sn.dsh_events0) :> DshIntEvents) =
-              HeatingSystem_furnaceReset and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none))
+              HeatingSystem_furnaceReset)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
               (HeatingSystem_furnaceReset +
-                 ((s.dsh_events0) :> DshIntEvents)) and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                ((s.dsh_events1) :> DshIntEvents))
+                 ((s.dsh_events0) :> DshIntEvents)))
        )
   else
     ((sn.dsh_stable).boolean/isFalse and
@@ -144,8 +140,6 @@ pred HeatingSystem_Functioning_Controller_Off_T8_post [
               ((sn.dsh_events0) :> DshEnvEvents) =
                 ((s.dsh_events0) :> DshEnvEvents) and
               (sn.dsh_sc_used0) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none) and
               ((sn.dsh_events1) :> DshEnvEvents) =
                 ((s.dsh_events1) :> DshEnvEvents) and
               (sn.dsh_sc_used1) = (none -> none))
@@ -214,15 +208,11 @@ pred HeatingSystem_Functioning_Controller_On_Heater_Active_T10_post [
        (sn.dsh_sc_used1) = (none -> none) and
        ((s.dsh_stable).boolean/isTrue)=>
            (((sn.dsh_events0) :> DshIntEvents) =
-              HeatingSystem_deactivate and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none))
+              HeatingSystem_deactivate)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
               (HeatingSystem_deactivate +
-                 ((s.dsh_events0) :> DshIntEvents)) and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                ((s.dsh_events1) :> DshIntEvents))
+                 ((s.dsh_events0) :> DshIntEvents)))
        )
   else
     ((sn.dsh_stable).boolean/isFalse and
@@ -232,8 +222,6 @@ pred HeatingSystem_Functioning_Controller_On_Heater_Active_T10_post [
               ((sn.dsh_events0) :> DshEnvEvents) =
                 ((s.dsh_events0) :> DshEnvEvents) and
               (sn.dsh_sc_used0) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none) and
               ((sn.dsh_events1) :> DshEnvEvents) =
                 ((s.dsh_events1) :> DshEnvEvents) and
               (sn.dsh_sc_used1) = (none -> none))
@@ -315,14 +303,10 @@ pred HeatingSystem_Functioning_Controller_On_Heater_Active_T11_post [
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
        ((s.dsh_stable).boolean/isTrue)=>
-           (((sn.dsh_events0) :> DshIntEvents) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none))
+           (((sn.dsh_events0) :> DshIntEvents) = none)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
-              ((s.dsh_events0) :> DshIntEvents) and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                ((s.dsh_events1) :> DshIntEvents))
+              ((s.dsh_events0) :> DshIntEvents))
        )
   else
     ((sn.dsh_stable).boolean/isFalse and
@@ -331,8 +315,6 @@ pred HeatingSystem_Functioning_Controller_On_Heater_Active_T11_post [
               ((sn.dsh_events0) :> DshEnvEvents) =
                 ((s.dsh_events0) :> DshEnvEvents) and
               (sn.dsh_sc_used0) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none) and
               ((sn.dsh_events1) :> DshEnvEvents) =
                 ((s.dsh_events1) :> DshEnvEvents) and
               (sn.dsh_sc_used1) = (none -> none))
@@ -398,14 +380,10 @@ pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running_T4_post [
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
        ((s.dsh_stable).boolean/isTrue)=>
-           (((sn.dsh_events0) :> DshIntEvents) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none))
+           (((sn.dsh_events0) :> DshIntEvents) = none)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
-              ((s.dsh_events0) :> DshIntEvents) and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                ((s.dsh_events1) :> DshIntEvents))
+              ((s.dsh_events0) :> DshIntEvents))
        )
   else
     ((sn.dsh_stable).boolean/isFalse and
@@ -414,8 +392,6 @@ pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running_T4_post [
               ((sn.dsh_events0) :> DshEnvEvents) =
                 ((s.dsh_events0) :> DshEnvEvents) and
               (sn.dsh_sc_used0) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none) and
               ((sn.dsh_events1) :> DshEnvEvents) =
                 ((s.dsh_events1) :> DshEnvEvents) and
               (sn.dsh_sc_used1) = (none -> none))
@@ -492,14 +468,10 @@ pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running_T5_post [
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
        ((s.dsh_stable).boolean/isTrue)=>
-           (((sn.dsh_events0) :> DshIntEvents) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none))
+           (((sn.dsh_events0) :> DshIntEvents) = none)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
-              ((s.dsh_events0) :> DshIntEvents) and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                ((s.dsh_events1) :> DshIntEvents))
+              ((s.dsh_events0) :> DshIntEvents))
        )
   else
     ((sn.dsh_stable).boolean/isFalse and
@@ -508,8 +480,6 @@ pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running_T5_post [
               ((sn.dsh_events0) :> DshEnvEvents) =
                 ((s.dsh_events0) :> DshEnvEvents) and
               (sn.dsh_sc_used0) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none) and
               ((sn.dsh_events1) :> DshEnvEvents) =
                 ((s.dsh_events1) :> DshEnvEvents) and
               (sn.dsh_sc_used1) = (none -> none))
@@ -574,15 +544,11 @@ pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Activating_T3_post
        (sn.dsh_sc_used1) = (none -> none) and
        ((s.dsh_stable).boolean/isTrue)=>
            (((sn.dsh_events0) :> DshIntEvents) =
-              HeatingSystem_furnaceRunning and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none))
+              HeatingSystem_furnaceRunning)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
               (HeatingSystem_furnaceRunning +
-                 ((s.dsh_events0) :> DshIntEvents)) and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                ((s.dsh_events1) :> DshIntEvents))
+                 ((s.dsh_events0) :> DshIntEvents)))
        )
   else
     ((sn.dsh_stable).boolean/isFalse and
@@ -592,8 +558,6 @@ pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Activating_T3_post
               ((sn.dsh_events0) :> DshEnvEvents) =
                 ((s.dsh_events0) :> DshEnvEvents) and
               (sn.dsh_sc_used0) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none) and
               ((sn.dsh_events1) :> DshEnvEvents) =
                 ((s.dsh_events1) :> DshEnvEvents) and
               (sn.dsh_sc_used1) = (none -> none))
@@ -665,14 +629,10 @@ pred HeatingSystem_Functioning_Room_No_Heat_Request_Idle_No_Heat_coolRoom_post [
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
        ((s.dsh_stable).boolean/isTrue)=>
-           (((sn.dsh_events0) :> DshIntEvents) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none))
+           (((sn.dsh_events0) :> DshIntEvents) = none)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
-              ((s.dsh_events0) :> DshIntEvents) and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                ((s.dsh_events1) :> DshIntEvents))
+              ((s.dsh_events0) :> DshIntEvents))
        )
   else
     ((sn.dsh_stable).boolean/isFalse and
@@ -681,8 +641,6 @@ pred HeatingSystem_Functioning_Room_No_Heat_Request_Idle_No_Heat_coolRoom_post [
               ((sn.dsh_events0) :> DshEnvEvents) =
                 ((s.dsh_events0) :> DshEnvEvents) and
               (sn.dsh_sc_used0) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none) and
               ((sn.dsh_events1) :> DshEnvEvents) =
                 ((s.dsh_events1) :> DshEnvEvents) and
               (sn.dsh_sc_used1) = (none -> none))
@@ -756,14 +714,10 @@ pred HeatingSystem_Functioning_Room_No_Heat_Request_Idle_No_Heat_T12_post [
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
        ((s.dsh_stable).boolean/isTrue)=>
-           (((sn.dsh_events0) :> DshIntEvents) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none))
+           (((sn.dsh_events0) :> DshIntEvents) = none)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
-              ((s.dsh_events0) :> DshIntEvents) and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                ((s.dsh_events1) :> DshIntEvents))
+              ((s.dsh_events0) :> DshIntEvents))
        )
   else
     ((sn.dsh_stable).boolean/isFalse and
@@ -772,8 +726,6 @@ pred HeatingSystem_Functioning_Room_No_Heat_Request_Idle_No_Heat_T12_post [
               ((sn.dsh_events0) :> DshEnvEvents) =
                 ((s.dsh_events0) :> DshEnvEvents) and
               (sn.dsh_sc_used0) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none) and
               ((sn.dsh_events1) :> DshEnvEvents) =
                 ((s.dsh_events1) :> DshEnvEvents) and
               (sn.dsh_sc_used1) = (none -> none))
@@ -855,14 +807,10 @@ pred HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T17_post [
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
        ((s.dsh_stable).boolean/isTrue)=>
-           (((sn.dsh_events0) :> DshIntEvents) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none))
+           (((sn.dsh_events0) :> DshIntEvents) = none)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
-              ((s.dsh_events0) :> DshIntEvents) and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                ((s.dsh_events1) :> DshIntEvents))
+              ((s.dsh_events0) :> DshIntEvents))
        )
   else
     ((sn.dsh_stable).boolean/isFalse and
@@ -871,8 +819,6 @@ pred HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T17_post [
               ((sn.dsh_events0) :> DshEnvEvents) =
                 ((s.dsh_events0) :> DshEnvEvents) and
               (sn.dsh_sc_used0) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none) and
               ((sn.dsh_events1) :> DshEnvEvents) =
                 ((s.dsh_events1) :> DshEnvEvents) and
               (sn.dsh_sc_used1) = (none -> none))
@@ -947,14 +893,10 @@ pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Off_T1_post [
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
        ((s.dsh_stable).boolean/isTrue)=>
-           (((sn.dsh_events0) :> DshIntEvents) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none))
+           (((sn.dsh_events0) :> DshIntEvents) = none)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
-              ((s.dsh_events0) :> DshIntEvents) and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                ((s.dsh_events1) :> DshIntEvents))
+              ((s.dsh_events0) :> DshIntEvents))
        )
   else
     ((sn.dsh_stable).boolean/isFalse and
@@ -963,8 +905,6 @@ pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Off_T1_post [
               ((sn.dsh_events0) :> DshEnvEvents) =
                 ((s.dsh_events0) :> DshEnvEvents) and
               (sn.dsh_sc_used0) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none) and
               ((sn.dsh_events1) :> DshEnvEvents) =
                 ((s.dsh_events1) :> DshEnvEvents) and
               (sn.dsh_sc_used1) = (none -> none))
@@ -1031,14 +971,10 @@ pred HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T16_post [
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
        ((s.dsh_stable).boolean/isTrue)=>
-           (((sn.dsh_events0) :> DshIntEvents) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none))
+           (((sn.dsh_events0) :> DshIntEvents) = none)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
-              ((s.dsh_events0) :> DshIntEvents) and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                ((s.dsh_events1) :> DshIntEvents))
+              ((s.dsh_events0) :> DshIntEvents))
        )
   else
     ((sn.dsh_stable).boolean/isFalse and
@@ -1047,8 +983,6 @@ pred HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T16_post [
               ((sn.dsh_events0) :> DshEnvEvents) =
                 ((s.dsh_events0) :> DshEnvEvents) and
               (sn.dsh_sc_used0) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none) and
               ((sn.dsh_events1) :> DshEnvEvents) =
                 ((s.dsh_events1) :> DshEnvEvents) and
               (sn.dsh_sc_used1) = (none -> none))
@@ -1133,14 +1067,10 @@ pred HeatingSystem_ERROR_T19_post [
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
        ((s.dsh_stable).boolean/isTrue)=>
-           (((sn.dsh_events0) :> DshIntEvents) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none))
+           (((sn.dsh_events0) :> DshIntEvents) = none)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
-              ((s.dsh_events0) :> DshIntEvents) and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                ((s.dsh_events1) :> DshIntEvents))
+              ((s.dsh_events0) :> DshIntEvents))
        )
   else
     ((sn.dsh_stable).boolean/isFalse and
@@ -1149,8 +1079,6 @@ pred HeatingSystem_ERROR_T19_post [
               ((sn.dsh_events0) :> DshEnvEvents) =
                 ((s.dsh_events0) :> DshEnvEvents) and
               (sn.dsh_sc_used0) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none) and
               ((sn.dsh_events1) :> DshEnvEvents) =
                 ((s.dsh_events1) :> DshEnvEvents) and
               (sn.dsh_sc_used1) = (none -> none))
@@ -1238,14 +1166,10 @@ pred HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T18_post [
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
        ((s.dsh_stable).boolean/isTrue)=>
-           (((sn.dsh_events0) :> DshIntEvents) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none))
+           (((sn.dsh_events0) :> DshIntEvents) = none)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
-              ((s.dsh_events0) :> DshIntEvents) and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                ((s.dsh_events1) :> DshIntEvents))
+              ((s.dsh_events0) :> DshIntEvents))
        )
   else
     ((sn.dsh_stable).boolean/isFalse and
@@ -1254,8 +1178,6 @@ pred HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T18_post [
               ((sn.dsh_events0) :> DshEnvEvents) =
                 ((s.dsh_events0) :> DshEnvEvents) and
               (sn.dsh_sc_used0) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none) and
               ((sn.dsh_events1) :> DshEnvEvents) =
                 ((s.dsh_events1) :> DshEnvEvents) and
               (sn.dsh_sc_used1) = (none -> none))
@@ -1346,14 +1268,10 @@ pred HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T14_post [
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
        ((s.dsh_stable).boolean/isTrue)=>
-           (((sn.dsh_events0) :> DshIntEvents) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none))
+           (((sn.dsh_events0) :> DshIntEvents) = none)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
-              ((s.dsh_events0) :> DshIntEvents) and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                ((s.dsh_events1) :> DshIntEvents))
+              ((s.dsh_events0) :> DshIntEvents))
        )
   else
     ((sn.dsh_stable).boolean/isFalse and
@@ -1362,8 +1280,6 @@ pred HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T14_post [
               ((sn.dsh_events0) :> DshEnvEvents) =
                 ((s.dsh_events0) :> DshEnvEvents) and
               (sn.dsh_sc_used0) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none) and
               ((sn.dsh_events1) :> DshEnvEvents) =
                 ((s.dsh_events1) :> DshEnvEvents) and
               (sn.dsh_sc_used1) = (none -> none))
@@ -1453,14 +1369,10 @@ pred HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T15_post [
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
        ((s.dsh_stable).boolean/isTrue)=>
-           (((sn.dsh_events0) :> DshIntEvents) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none))
+           (((sn.dsh_events0) :> DshIntEvents) = none)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
-              ((s.dsh_events0) :> DshIntEvents) and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                ((s.dsh_events1) :> DshIntEvents))
+              ((s.dsh_events0) :> DshIntEvents))
        )
   else
     ((sn.dsh_stable).boolean/isFalse and
@@ -1469,8 +1381,6 @@ pred HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T15_post [
               ((sn.dsh_events0) :> DshEnvEvents) =
                 ((s.dsh_events0) :> DshEnvEvents) and
               (sn.dsh_sc_used0) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none) and
               ((sn.dsh_events1) :> DshEnvEvents) =
                 ((s.dsh_events1) :> DshEnvEvents) and
               (sn.dsh_sc_used1) = (none -> none))
@@ -1538,14 +1448,10 @@ pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Activating_T2_post
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
        ((s.dsh_stable).boolean/isTrue)=>
-           (((sn.dsh_events0) :> DshIntEvents) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none))
+           (((sn.dsh_events0) :> DshIntEvents) = none)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
-              ((s.dsh_events0) :> DshIntEvents) and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                ((s.dsh_events1) :> DshIntEvents))
+              ((s.dsh_events0) :> DshIntEvents))
        )
   else
     ((sn.dsh_stable).boolean/isFalse and
@@ -1554,8 +1460,6 @@ pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Activating_T2_post
               ((sn.dsh_events0) :> DshEnvEvents) =
                 ((s.dsh_events0) :> DshEnvEvents) and
               (sn.dsh_sc_used0) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none) and
               ((sn.dsh_events1) :> DshEnvEvents) =
                 ((s.dsh_events1) :> DshEnvEvents) and
               (sn.dsh_sc_used1) = (none -> none))
@@ -1625,14 +1529,10 @@ pred HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_T15_post [
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
        ((s.dsh_stable).boolean/isTrue)=>
-           (((sn.dsh_events0) :> DshIntEvents) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none))
+           (((sn.dsh_events0) :> DshIntEvents) = none)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
-              ((s.dsh_events0) :> DshIntEvents) and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                ((s.dsh_events1) :> DshIntEvents))
+              ((s.dsh_events0) :> DshIntEvents))
        )
   else
     ((sn.dsh_stable).boolean/isFalse and
@@ -1641,8 +1541,6 @@ pred HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_T15_post [
               ((sn.dsh_events0) :> DshEnvEvents) =
                 ((s.dsh_events0) :> DshEnvEvents) and
               (sn.dsh_sc_used0) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none) and
               ((sn.dsh_events1) :> DshEnvEvents) =
                 ((s.dsh_events1) :> DshEnvEvents) and
               (sn.dsh_sc_used1) = (none -> none))
@@ -1716,14 +1614,10 @@ pred HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T13_post [
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
        ((s.dsh_stable).boolean/isTrue)=>
-           (((sn.dsh_events0) :> DshIntEvents) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none))
+           (((sn.dsh_events0) :> DshIntEvents) = none)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
-              ((s.dsh_events0) :> DshIntEvents) and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                ((s.dsh_events1) :> DshIntEvents))
+              ((s.dsh_events0) :> DshIntEvents))
        )
   else
     ((sn.dsh_stable).boolean/isFalse and
@@ -1732,8 +1626,6 @@ pred HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T13_post [
               ((sn.dsh_events0) :> DshEnvEvents) =
                 ((s.dsh_events0) :> DshEnvEvents) and
               (sn.dsh_sc_used0) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none) and
               ((sn.dsh_events1) :> DshEnvEvents) =
                 ((s.dsh_events1) :> DshEnvEvents) and
               (sn.dsh_sc_used1) = (none -> none))
@@ -1801,15 +1693,11 @@ pred HeatingSystem_Functioning_Controller_On_Idle_T9_post [
        (sn.dsh_sc_used1) = (none -> none) and
        ((s.dsh_stable).boolean/isTrue)=>
            (((sn.dsh_events0) :> DshIntEvents) =
-              HeatingSystem_activate and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none))
+              HeatingSystem_activate)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
               (HeatingSystem_activate +
-                 ((s.dsh_events0) :> DshIntEvents)) and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                ((s.dsh_events1) :> DshIntEvents))
+                 ((s.dsh_events0) :> DshIntEvents)))
        )
   else
     ((sn.dsh_stable).boolean/isFalse and
@@ -1819,8 +1707,6 @@ pred HeatingSystem_Functioning_Controller_On_Idle_T9_post [
               ((sn.dsh_events0) :> DshEnvEvents) =
                 ((s.dsh_events0) :> DshEnvEvents) and
               (sn.dsh_sc_used0) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none) and
               ((sn.dsh_events1) :> DshEnvEvents) =
                 ((s.dsh_events1) :> DshEnvEvents) and
               (sn.dsh_sc_used1) = (none -> none))
@@ -1891,14 +1777,10 @@ pred HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_heatRoom_post [
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
        ((s.dsh_stable).boolean/isTrue)=>
-           (((sn.dsh_events0) :> DshIntEvents) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none))
+           (((sn.dsh_events0) :> DshIntEvents) = none)
          else
            (((sn.dsh_events0) :> DshIntEvents) =
-              ((s.dsh_events0) :> DshIntEvents) and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                ((s.dsh_events1) :> DshIntEvents))
+              ((s.dsh_events0) :> DshIntEvents))
        )
   else
     ((sn.dsh_stable).boolean/isFalse and
@@ -1907,8 +1789,6 @@ pred HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_heatRoom_post [
               ((sn.dsh_events0) :> DshEnvEvents) =
                 ((s.dsh_events0) :> DshEnvEvents) and
               (sn.dsh_sc_used0) = none and
-              ((sn.dsh_events1) :> DshIntEvents) =
-                (none -> none) and
               ((sn.dsh_events1) :> DshEnvEvents) =
                 ((s.dsh_events1) :> DshEnvEvents) and
               (sn.dsh_sc_used1) = (none -> none))

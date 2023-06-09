@@ -1,0 +1,88 @@
+/*******************************************************************************
+ * Title: TrafficLight.dsh
+ * Authors: Jose Serna
+ * Created: 27-04-2018
+ * Last modified: 
+ * 2023-06-07 Nancy Day small changes for new Dash
+ *
+ * Notes: Traffic light system model taken from Shahram's PhD thesis.
+ *  The single input assumption is required for the model to have the expected
+ *  behaviour
+ *  
+ *  Shahram Esmaeilsabzali. Perscriptive Semantics for Big-Step Modelling Languages.
+ *  PhD thesis, University of Waterloo, David R. Cheriton School of Computer Science, 2011
+ *  https://cs.uwaterloo.ca/~nday/pdf/theses/2011-esmaeilsabzali-phd-thesis.pdf
+ *
+ ******************************************************************************/
+
+state TrafficLight {
+    env event Change {}
+    env event End {}
+
+    conc  NorthSouth {
+        default state Green {
+            trans T1 {
+                on End
+                goto Yellow
+            }
+        }
+        
+        state Yellow {
+            trans T2 {
+                on Change
+                goto Red
+            }
+        }
+
+        state Red {
+            trans T3 {
+                on Change
+                goto Green
+            }
+        }
+    }
+
+    conc  EastWest {
+        state Green {
+            trans T5 {
+                on End
+                goto Yellow
+            }
+        }
+
+        state Yellow {
+            trans T6 {
+                on Change
+                goto Red
+            }
+        }
+
+        default state Red {
+            trans T4 {
+                on Change
+                goto Green
+            }
+        }
+    }
+}
+
+
+
+// Environmental assumptions
+
+fact {
+    // Environment generates End First
+    all s: DshSnapshot | {
+        dsh_initial[s] => s.dsh_events0 = TrafficLight_End
+    }
+    // Events alternate after each stable snapshot
+    all s: DshSnapshot, sn: DshSnapshot | dsh_small_step[s,sn] => {
+        s.dsh_stable = True and sn.dsh_stable = True => sn.dsh_events0 != s.dsh_events0
+        s.dsh_stable = False and sn.dsh_stable = True => sn.dsh_events0 != s.dsh_events0
+        s.dsh_stable = True and sn.dsh_stable = False => sn.dsh_events0 = s.dsh_events0
+        s.dsh_stable = False and sn.dsh_stable = False => sn.dsh_events0 = s.dsh_events0
+    }
+}
+
+
+
