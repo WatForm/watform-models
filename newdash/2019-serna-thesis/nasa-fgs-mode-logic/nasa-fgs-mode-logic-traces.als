@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-08 21:12:06
+   on 2023-06-11 19:17:39
 */
 
 open util/boolean
@@ -214,6 +214,7 @@ pred FlightModes_LATERAL_LAPPR_Capture_pre [
   !(FlightModes in (s.dsh_sc_used0))
   !(FlightModes_LATERAL in (s.dsh_sc_used0))
   !(FlightModes_LATERAL_LAPPR in (s.dsh_sc_used0))
+  !(s.FlightModes_LATERAL_LAPPR_Clear_pre)
 }
 
 
@@ -331,6 +332,7 @@ pred FlightModes_VERTICAL_ALT_NewVerticalModeActivated_pre [
   !(FlightModes_VERTICAL_ALT in (s.dsh_sc_used0))
   FlightModes_VERTICAL_New_Vertical_Mode_Activated in
   (s.dsh_events0)
+  !(s.FlightModes_VERTICAL_ALT_Clear_pre)
 }
 
 
@@ -545,6 +547,7 @@ pred FlightModes_LATERAL_NAV_NewLateralModeActivated_pre [
   !(FlightModes_LATERAL_NAV in (s.dsh_sc_used0))
   FlightModes_LATERAL_New_Lateral_Mode_Activated in
   (s.dsh_events0)
+  !(s.FlightModes_LATERAL_NAV_Clear_pre)
 }
 
 
@@ -759,6 +762,7 @@ pred FlightModes_VERTICAL_VAPPR_NewVerticalModeActivated_pre [
   !(FlightModes_VERTICAL_VAPPR in (s.dsh_sc_used0))
   FlightModes_VERTICAL_New_Vertical_Mode_Activated in
   (s.dsh_events0)
+  !(s.FlightModes_VERTICAL_VAPPR_Clear_pre)
 }
 
 
@@ -973,6 +977,7 @@ pred FlightModes_LATERAL_HDG_NewLateralModeActivated_pre [
   !(FlightModes_LATERAL_HDG in (s.dsh_sc_used0))
   FlightModes_LATERAL_New_Lateral_Mode_Activated in
   (s.dsh_events0)
+  !(s.FlightModes_LATERAL_HDG_Clear_pre)
 }
 
 
@@ -1748,6 +1753,7 @@ pred FlightModes_VERTICAL_VAPPR_Capture_pre [
   !(FlightModes in (s.dsh_sc_used0))
   !(FlightModes_VERTICAL in (s.dsh_sc_used0))
   !(FlightModes_VERTICAL_VAPPR in (s.dsh_sc_used0))
+  !(s.FlightModes_VERTICAL_VAPPR_Clear_pre)
 }
 
 
@@ -2749,6 +2755,7 @@ pred FlightModes_VERTICAL_ALTSEL_Capture_pre [
   !(FlightModes in (s.dsh_sc_used0))
   !(FlightModes_VERTICAL in (s.dsh_sc_used0))
   !(FlightModes_VERTICAL_ALTSEL in (s.dsh_sc_used0))
+  !(s.FlightModes_VERTICAL_ALTSEL_Clear_pre)
 }
 
 
@@ -2979,6 +2986,7 @@ pred FlightModes_LATERAL_LGA_NewLateralModeActivated_pre [
   !(FlightModes_LATERAL_LGA in (s.dsh_sc_used0))
   FlightModes_LATERAL_New_Lateral_Mode_Activated in
   (s.dsh_events0)
+  !(s.FlightModes_LATERAL_LGA_Clear_pre)
 }
 
 
@@ -3427,6 +3435,7 @@ pred FlightModes_LATERAL_NAV_Capture_pre [
   !(FlightModes in (s.dsh_sc_used0))
   !(FlightModes_LATERAL in (s.dsh_sc_used0))
   !(FlightModes_LATERAL_NAV in (s.dsh_sc_used0))
+  !(s.FlightModes_LATERAL_NAV_Clear_pre)
 }
 
 
@@ -3658,6 +3667,7 @@ pred FlightModes_VERTICAL_VGA_NewVerticalModeActivated_pre [
   !(FlightModes_VERTICAL_VGA in (s.dsh_sc_used0))
   FlightModes_VERTICAL_New_Vertical_Mode_Activated in
   (s.dsh_events0)
+  !(s.FlightModes_VERTICAL_VGA_Clear_pre)
 }
 
 
@@ -4099,6 +4109,7 @@ pred FlightModes_LATERAL_LAPPR_NewLateralModeActivated_pre [
   !(FlightModes_LATERAL_LAPPR in (s.dsh_sc_used0))
   FlightModes_LATERAL_New_Lateral_Mode_Activated in
   (s.dsh_events0)
+  !(s.FlightModes_LATERAL_LAPPR_Clear_pre)
 }
 
 
@@ -4423,6 +4434,8 @@ pred FlightModes_VERTICAL_ALTSEL_Track_pre [
   !(FlightModes in (s.dsh_sc_used0))
   !(FlightModes_VERTICAL in (s.dsh_sc_used0))
   !(FlightModes_VERTICAL_ALTSEL in (s.dsh_sc_used0))
+  !(s.FlightModes_VERTICAL_ALTSEL_Clear_pre)
+  !(s.FlightModes_VERTICAL_ALTSEL_NewVerticalModeActivated_pre)
 }
 
 
@@ -4535,6 +4548,7 @@ pred FlightModes_VERTICAL_ALTSEL_NewVerticalModeActivated_pre [
   !(FlightModes_VERTICAL_ALTSEL in (s.dsh_sc_used0))
   FlightModes_VERTICAL_New_Vertical_Mode_Activated in
   (s.dsh_events0)
+  !(s.FlightModes_VERTICAL_ALTSEL_Clear_pre)
 }
 
 
@@ -4754,6 +4768,7 @@ pred FlightModes_VERTICAL_FLC_NewVerticalModeActivated_pre [
   !(FlightModes_VERTICAL_FLC in (s.dsh_sc_used0))
   FlightModes_VERTICAL_New_Vertical_Mode_Activated in
   (s.dsh_events0)
+  !(s.FlightModes_VERTICAL_FLC_Clear_pre)
 }
 
 
@@ -4861,6 +4876,7 @@ pred FlightModes_VERTICAL_VS_NewVerticalModeActivated_pre [
   !(FlightModes_VERTICAL_VS in (s.dsh_sc_used0))
   FlightModes_VERTICAL_New_Vertical_Mode_Activated in
   (s.dsh_events0)
+  !(s.FlightModes_VERTICAL_VS_Clear_pre)
 }
 
 

@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-08 21:12:10
+   on 2023-06-11 19:17:42
 */
 
 open util/boolean
@@ -53,6 +53,7 @@ pred SnapshotUI_Snapshot_Reports_SeeStandards_pre [
   some (SnapshotUI_Snapshot_Reports & (s.dsh_conf0))
   !(SnapshotUI in (s.dsh_sc_used0))
   SnapshotUI_standards in (s.dsh_events0)
+  !(s.SnapshotUI_Snapshot_Logout_pre)
 }
 
 
@@ -105,6 +106,7 @@ pred SnapshotUI_Snapshot_Reports_SeeSummary_pre [
   some (SnapshotUI_Snapshot_Reports & (s.dsh_conf0))
   !(SnapshotUI in (s.dsh_sc_used0))
   SnapshotUI_summary in (s.dsh_events0)
+  !(s.SnapshotUI_Snapshot_Logout_pre)
 }
 
 
@@ -156,6 +158,10 @@ pred SnapshotUI_Snapshot_Reports_Students_SeeAnswers_pre [
   some (SnapshotUI_Snapshot_Reports_Students & (s.dsh_conf0))
   !(SnapshotUI in (s.dsh_sc_used0))
   SnapshotUI_answer in (s.dsh_events0)
+  !(s.SnapshotUI_Snapshot_Reports_SeeStandards_pre)
+  !(s.SnapshotUI_Snapshot_Reports_SeeSummary_pre)
+  !(s.SnapshotUI_Snapshot_Logout_pre)
+  !(s.SnapshotUI_Snapshot_Reports_SeeStudents_pre)
 }
 
 
@@ -182,6 +188,7 @@ pred SnapshotUI_Snapshot_Answers_SeeStudents_pre [
   some (SnapshotUI_Snapshot_Answers & (s.dsh_conf0))
   !(SnapshotUI in (s.dsh_sc_used0))
   SnapshotUI_close in (s.dsh_events0)
+  !(s.SnapshotUI_Snapshot_Logout_pre)
 }
 
 
@@ -208,6 +215,7 @@ pred SnapshotUI_Snapshot_Reports_SeeStudents_pre [
   some (SnapshotUI_Snapshot_Reports & (s.dsh_conf0))
   !(SnapshotUI in (s.dsh_sc_used0))
   SnapshotUI_students in (s.dsh_events0)
+  !(s.SnapshotUI_Snapshot_Logout_pre)
 }
 
 

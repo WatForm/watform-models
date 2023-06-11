@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-08 21:12:04
+   on 2023-06-11 19:17:37
 */
 
 open util/boolean
@@ -636,6 +636,17 @@ pred ThreadStates_Runnable_t3_pre [
   some (ThreadStates_Runnable_Running & (s.dsh_conf0))
   !(ThreadStates in (s.dsh_sc_used0))
   ThreadStates_ThreadYield in (s.dsh_events0)
+  !(s.ThreadStates_t16_pre)
+  !(s.ThreadStates_t17_pre)
+  !(s.ThreadStates_t14_pre)
+  !(s.ThreadStates_t9_pre)
+  !(s.ThreadStates_t15_pre)
+  !(s.ThreadStates_t12_pre)
+  !(s.ThreadStates_t13_pre)
+  !(s.ThreadStates_t10_pre)
+  !(s.ThreadStates_t11_pre)
+  !(s.ThreadStates_t18_pre)
+  !(s.ThreadStates_t5_pre)
 }
 
 
@@ -660,6 +671,17 @@ pred ThreadStates_Runnable_t4_pre [
   some (ThreadStates_Runnable_Running & (s.dsh_conf0))
   !(ThreadStates in (s.dsh_sc_used0))
   ThreadStates_SchedulerSuspended in (s.dsh_events0)
+  !(s.ThreadStates_t16_pre)
+  !(s.ThreadStates_t17_pre)
+  !(s.ThreadStates_t14_pre)
+  !(s.ThreadStates_t9_pre)
+  !(s.ThreadStates_t15_pre)
+  !(s.ThreadStates_t12_pre)
+  !(s.ThreadStates_t13_pre)
+  !(s.ThreadStates_t10_pre)
+  !(s.ThreadStates_t11_pre)
+  !(s.ThreadStates_t18_pre)
+  !(s.ThreadStates_t5_pre)
 }
 
 
@@ -684,6 +706,17 @@ pred ThreadStates_Runnable_t2_pre [
   some (ThreadStates_Runnable_Ready & (s.dsh_conf0))
   !(ThreadStates in (s.dsh_sc_used0))
   ThreadStates_SchedulerSelected in (s.dsh_events0)
+  !(s.ThreadStates_t16_pre)
+  !(s.ThreadStates_t17_pre)
+  !(s.ThreadStates_t14_pre)
+  !(s.ThreadStates_t9_pre)
+  !(s.ThreadStates_t15_pre)
+  !(s.ThreadStates_t12_pre)
+  !(s.ThreadStates_t13_pre)
+  !(s.ThreadStates_t10_pre)
+  !(s.ThreadStates_t11_pre)
+  !(s.ThreadStates_t18_pre)
+  !(s.ThreadStates_t5_pre)
 }
 
 
