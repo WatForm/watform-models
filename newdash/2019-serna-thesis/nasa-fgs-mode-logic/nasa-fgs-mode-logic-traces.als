@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-13 15:57:22
+   on 2023-06-13 16:48:53
 */
 
 open util/boolean
@@ -6573,6 +6573,51 @@ pred _nextIsStable [
   !(dsh_genEvs0.(dsh_scp0.(sn.(s.FlightModes_VERTICAL_VS_NewVerticalModeActivated_enabledAfterStep))))
 }
 
+pred dsh_stutter [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_stable) = (s.dsh_stable)
+  (sn.dsh_conf0) = (s.dsh_conf0)
+  (sn.dsh_sc_used0) = (s.dsh_sc_used0)
+  (sn.dsh_events0) = (s.dsh_events0)
+  (sn.FlightModes_FD_On) = (s.FlightModes_FD_On)
+  (sn.FlightModes_Modes_On) = (s.FlightModes_Modes_On)
+  (sn.FlightModes_HDG_Selected) = (s.FlightModes_HDG_Selected)
+  (sn.FlightModes_HDG_Active) = (s.FlightModes_HDG_Active)
+  (sn.FlightModes_NAV_Selected) = (s.FlightModes_NAV_Selected)
+  (sn.FlightModes_NAV_Active) = (s.FlightModes_NAV_Active)
+  (sn.FlightModes_VS_Active) = (s.FlightModes_VS_Active)
+  (sn.FlightModes_LAPPR_Selected) =
+  (s.FlightModes_LAPPR_Selected)
+  (sn.FlightModes_LAPPR_Active) = (s.FlightModes_LAPPR_Active)
+  (sn.FlightModes_LGA_Selected) = (s.FlightModes_LGA_Selected)
+  (sn.FlightModes_LGA_Active) = (s.FlightModes_LGA_Active)
+  (sn.FlightModes_ROLL_Active) = (s.FlightModes_ROLL_Active)
+  (sn.FlightModes_ROLL_Selected) =
+  (s.FlightModes_ROLL_Selected)
+  (sn.FlightModes_VS_Selected) = (s.FlightModes_VS_Selected)
+  (sn.FlightModes_FLC_Selected) = (s.FlightModes_FLC_Selected)
+  (sn.FlightModes_FLC_Active) = (s.FlightModes_FLC_Active)
+  (sn.FlightModes_ALT_Active) = (s.FlightModes_ALT_Active)
+  (sn.FlightModes_ALTSEL_Active) =
+  (s.FlightModes_ALTSEL_Active)
+  (sn.FlightModes_ALT_Selected) = (s.FlightModes_ALT_Selected)
+  (sn.FlightModes_ALTSEL_Track) = (s.FlightModes_ALTSEL_Track)
+  (sn.FlightModes_ALTSEL_Selected) =
+  (s.FlightModes_ALTSEL_Selected)
+  (sn.FlightModes_PITCH_Selected) =
+  (s.FlightModes_PITCH_Selected)
+  (sn.FlightModes_VAPPR_Selected) =
+  (s.FlightModes_VAPPR_Selected)
+  (sn.FlightModes_VAPPR_Active) = (s.FlightModes_VAPPR_Active)
+  (sn.FlightModes_VGA_Selected) = (s.FlightModes_VGA_Selected)
+  (sn.FlightModes_VGA_Active) = (s.FlightModes_VGA_Active)
+  (sn.FlightModes_PITCH_Active) = (s.FlightModes_PITCH_Active)
+  (sn.FlightModes_Independent_Mode) =
+  (s.FlightModes_Independent_Mode)
+  (sn.FlightModes_Active_Side) = (s.FlightModes_Active_Side)
+}
+
 pred dsh_small_step [
 	s: one DshSnapshot,
 	sn: one DshSnapshot] {
@@ -6662,7 +6707,7 @@ pred dsh_small_step [
           s.FlightModes_VERTICAL_VS_Clear_pre or
           s.FlightModes_VERTICAL_FLC_NewVerticalModeActivated_pre or
           s.FlightModes_VERTICAL_VS_NewVerticalModeActivated_pre }) and
-      s = sn }
+      sn.(s.dsh_stutter) }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

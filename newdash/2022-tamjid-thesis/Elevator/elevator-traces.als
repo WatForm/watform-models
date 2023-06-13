@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-13 15:57:40
+   on 2023-06-13 16:49:11
 */
 
 open util/ordering[Floor]
@@ -1030,6 +1030,22 @@ pred _nextIsStable [
   !(dsh_scp1.(dsh_scp0.(p0_PID.(sn.(s.System_Elevator_MovingUp_ElevatorInCalled_enabledAfterStep)))))
 }
 
+pred dsh_stutter [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_stable) = (s.dsh_stable)
+  (sn.dsh_conf0) = (s.dsh_conf0)
+  (sn.dsh_sc_used0) = (s.dsh_sc_used0)
+  (sn.dsh_conf1) = (s.dsh_conf1)
+  (sn.dsh_sc_used1) = (s.dsh_sc_used1)
+  (sn.System_Controller_callToSend) =
+  (s.System_Controller_callToSend)
+  (sn.System_Elevator_direction) =
+  (s.System_Elevator_direction)
+  (sn.System_Elevator_called) = (s.System_Elevator_called)
+  (sn.System_Elevator_current) = (s.System_Elevator_current)
+}
+
 pred dsh_small_step [
 	s: one DshSnapshot,
 	sn: one DshSnapshot] {
@@ -1059,7 +1075,7 @@ pred dsh_small_step [
                    p0_PID.(s.System_Elevator_MovingDown_ChangeDirToUp_pre) or
                    s.System_Controller_SendingUpRequest_pre or
                    p0_PID.(s.System_Elevator_MovingUp_ElevatorInCalled_pre) })) and
-      s = sn }
+      sn.(s.dsh_stutter) }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

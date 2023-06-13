@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-13 15:57:29
+   on 2023-06-13 16:49:01
 */
 
 open util/boolean
@@ -299,6 +299,25 @@ pred LandingGear_outgoing_sequence [
   sn.(s.LandingGear_outgoing_sequence_post)
 }
 
+pred dsh_stutter [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_conf0) = (s.dsh_conf0)
+  (sn.dsh_sc_used0) = (s.dsh_sc_used0)
+  (sn.LandingGear_doors) = (s.LandingGear_doors)
+  (sn.LandingGear_gears) = (s.LandingGear_gears)
+  (sn.LandingGear_general_electro_valve) =
+  (s.LandingGear_general_electro_valve)
+  (sn.LandingGear_open_doors_electro_valve) =
+  (s.LandingGear_open_doors_electro_valve)
+  (sn.LandingGear_close_doors_electro_valve) =
+  (s.LandingGear_close_doors_electro_valve)
+  (sn.LandingGear_retract_gears_electro_valve) =
+  (s.LandingGear_retract_gears_electro_valve)
+  (sn.LandingGear_extend_gears_electro_valve) =
+  (s.LandingGear_extend_gears_electro_valve)
+}
+
 pred dsh_small_step [
 	s: one DshSnapshot,
 	sn: one DshSnapshot] {
@@ -306,7 +325,7 @@ pred dsh_small_step [
     sn.(s.LandingGear_outgoing_sequence) or
     !({ s.LandingGear_retraction_sequence_pre or
           s.LandingGear_outgoing_sequence_pre }) and
-      s = sn }
+      sn.(s.dsh_stutter) }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-13 15:57:26
+   on 2023-06-13 16:48:57
 */
 
 open util/boolean
@@ -441,6 +441,15 @@ pred _nextIsStable [
   !(dsh_genEvs0.(dsh_scp0.(sn.(s.TrafficLight_EastWest_Yellow_T6_enabledAfterStep))))
 }
 
+pred dsh_stutter [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_stable) = (s.dsh_stable)
+  (sn.dsh_conf0) = (s.dsh_conf0)
+  (sn.dsh_sc_used0) = (s.dsh_sc_used0)
+  (sn.dsh_events0) = (s.dsh_events0)
+}
+
 pred dsh_small_step [
 	s: one DshSnapshot,
 	sn: one DshSnapshot] {
@@ -456,7 +465,7 @@ pred dsh_small_step [
           s.TrafficLight_NorthSouth_Red_T3_pre or
           s.TrafficLight_EastWest_Red_T4_pre or
           s.TrafficLight_EastWest_Yellow_T6_pre }) and
-      s = sn }
+      sn.(s.dsh_stutter) }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

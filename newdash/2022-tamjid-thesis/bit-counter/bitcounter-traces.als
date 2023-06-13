@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-13 15:57:36
+   on 2023-06-13 16:49:07
 */
 
 open util/ordering[PID] as P0
@@ -465,6 +465,19 @@ pred _nextIsStable [
   !(dsh_genEvs1.(dsh_scp1.(dsh_genEvs0.(dsh_scp0.(p0_PID.(sn.(s.Counter_Bit_nextBitToBit2_enabledAfterStep)))))))
 }
 
+pred dsh_stutter [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_stable) = (s.dsh_stable)
+  (sn.dsh_conf0) = (s.dsh_conf0)
+  (sn.dsh_sc_used0) = (s.dsh_sc_used0)
+  (sn.dsh_events0) = (s.dsh_events0)
+  (sn.dsh_conf1) = (s.dsh_conf1)
+  (sn.dsh_sc_used1) = (s.dsh_sc_used1)
+  (sn.dsh_events1) = (s.dsh_events1)
+  (sn.Counter_current) = (s.Counter_current)
+}
+
 pred dsh_small_step [
 	s: one DshSnapshot,
 	sn: one DshSnapshot] {
@@ -480,7 +493,7 @@ pred dsh_small_step [
                    p0_PID.(s.Counter_Bit_currentBitToBit2_pre) or
                    p0_PID.(s.Counter_Bit_nextBitToBit1_pre) or
                    p0_PID.(s.Counter_Bit_nextBitToBit2_pre) })) and
-      s = sn }
+      sn.(s.dsh_stutter) }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

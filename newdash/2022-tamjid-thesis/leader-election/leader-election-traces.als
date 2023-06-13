@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-13 15:57:42
+   on 2023-06-13 16:49:13
 */
 
 open util/ring[Identifier] as P0
@@ -273,6 +273,19 @@ pred _nextIsStable [
   !(dsh_scp1.(dsh_scp0.(p0_Identifier.(sn.(s.System_Process_Electing_ElectLeader_enabledAfterStep)))))
 }
 
+pred dsh_stutter [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_stable) = (s.dsh_stable)
+  (sn.dsh_conf0) = (s.dsh_conf0)
+  (sn.dsh_sc_used0) = (s.dsh_sc_used0)
+  (sn.dsh_conf1) = (s.dsh_conf1)
+  (sn.dsh_sc_used1) = (s.dsh_sc_used1)
+  (sn.System_Process_succ) = (s.System_Process_succ)
+  (sn.System_elected) = (s.System_elected)
+  (sn.System_Process_token) = (s.System_Process_token)
+}
+
 pred dsh_small_step [
 	s: one DshSnapshot,
 	sn: one DshSnapshot] {
@@ -284,7 +297,7 @@ pred dsh_small_step [
          Identifier | { p0_Identifier.(s.System_Process_Electing_ConsumeToken_pre) or
                           p0_Identifier.(s.System_Process_Electing_PassToken_pre) or
                           p0_Identifier.(s.System_Process_Electing_ElectLeader_pre) })) and
-      s = sn }
+      sn.(s.dsh_stutter) }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

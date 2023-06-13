@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-13 15:57:39
+   on 2023-06-13 16:49:10
 */
 
 open util/ordering[Level] as nodeLevel
@@ -292,6 +292,24 @@ pred _nextIsStable [
   !(dsh_scp1.(dsh_scp0.(p0_Node.(sn.(s.DistributedTreeSpanning_N_Unassigned_NodeAssign_enabledAfterStep)))))
 }
 
+pred dsh_stutter [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_stable) = (s.dsh_stable)
+  (sn.dsh_conf0) = (s.dsh_conf0)
+  (sn.dsh_sc_used0) = (s.dsh_sc_used0)
+  (sn.dsh_conf1) = (s.dsh_conf1)
+  (sn.dsh_sc_used1) = (s.dsh_sc_used1)
+  (sn.DistributedTreeSpanning_N_level) =
+  (s.DistributedTreeSpanning_N_level)
+  (sn.DistributedTreeSpanning_N_parent) =
+  (s.DistributedTreeSpanning_N_parent)
+  (sn.DistributedTreeSpanning_N_message) =
+  (s.DistributedTreeSpanning_N_message)
+  (sn.DistributedTreeSpanning_root) =
+  (s.DistributedTreeSpanning_root)
+}
+
 pred dsh_small_step [
 	s: one DshSnapshot,
 	sn: one DshSnapshot] {
@@ -303,7 +321,7 @@ pred dsh_small_step [
          Node | { p0_Node.(s.DistributedTreeSpanning_N_Assigned_sendMessage_pre) or
                     p0_Node.(s.DistributedTreeSpanning_N_Unassigned_RootAssign_pre) or
                     p0_Node.(s.DistributedTreeSpanning_N_Unassigned_NodeAssign_pre) })) and
-      s = sn }
+      sn.(s.dsh_stutter) }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

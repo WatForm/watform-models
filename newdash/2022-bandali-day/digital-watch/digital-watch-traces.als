@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-13 15:57:27
+   on 2023-06-13 16:48:58
 */
 
 open util/boolean
@@ -982,6 +982,15 @@ pred _nextIsStable [
   !(dsh_genEvs0.(dsh_scp0.(sn.(s.DigitalWatch_Main_Displays_StopWatch_go2Time_enabledAfterStep))))
 }
 
+pred dsh_stutter [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_stable) = (s.dsh_stable)
+  (sn.dsh_conf0) = (s.dsh_conf0)
+  (sn.dsh_sc_used0) = (s.dsh_sc_used0)
+  (sn.dsh_events0) = (s.dsh_events0)
+}
+
 pred dsh_small_step [
 	s: one DshSnapshot,
 	sn: one DshSnapshot] {
@@ -1013,7 +1022,7 @@ pred dsh_small_step [
           s.DigitalWatch_Main_Displays_Wait_show_time_pre or
           s.DigitalWatch_Main_Displays_Alarm1_go2alarm2_pre or
           s.DigitalWatch_Main_Displays_StopWatch_go2Time_pre }) and
-      s = sn }
+      sn.(s.dsh_stutter) }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

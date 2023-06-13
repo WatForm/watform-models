@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-13 15:57:35
+   on 2023-06-13 16:49:06
 */
 
 open util/boolean
@@ -687,6 +687,23 @@ pred Railway_choose_train [
   sn.(s.Railway_choose_train_post)
 }
 
+pred dsh_stutter [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_conf0) = (s.dsh_conf0)
+  (sn.dsh_sc_used0) = (s.dsh_sc_used0)
+  (sn.Railway_P0) = (s.Railway_P0)
+  (sn.Railway_P1) = (s.Railway_P1)
+  (sn.Railway_P2) = (s.Railway_P2)
+  (sn.Railway_P3) = (s.Railway_P3)
+  (sn.Railway_P4) = (s.Railway_P4)
+  (sn.Railway_P5) = (s.Railway_P5)
+  (sn.Railway_P6) = (s.Railway_P6)
+  (sn.Railway_P7) = (s.Railway_P7)
+  (sn.Railway_RA) = (s.Railway_RA)
+  (sn.Railway_RB) = (s.Railway_RB)
+}
+
 pred dsh_small_step [
 	s: one DshSnapshot,
 	sn: one DshSnapshot] {
@@ -708,7 +725,7 @@ pred dsh_small_step [
           s.Railway_move_train5_pre or
           s.Railway_move_train4_pre or
           s.Railway_choose_train_pre }) and
-      s = sn }
+      sn.(s.dsh_stutter) }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

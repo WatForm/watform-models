@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-13 15:57:33
+   on 2023-06-13 16:49:05
 */
 
 open util/boolean
@@ -412,6 +412,17 @@ pred Library_Reserve [
   sn.(s.Library_Reserve_post)
 }
 
+pred dsh_stutter [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_conf0) = (s.dsh_conf0)
+  (sn.dsh_sc_used0) = (s.dsh_sc_used0)
+  (sn.Library_members) = (s.Library_members)
+  (sn.Library_books) = (s.Library_books)
+  (sn.Library_loans) = (s.Library_loans)
+  (sn.Library_reservations) = (s.Library_reservations)
+}
+
 pred dsh_small_step [
 	s: one DshSnapshot,
 	sn: one DshSnapshot] {
@@ -435,7 +446,7 @@ pred dsh_small_step [
           s.Library_Acquire_pre or
           s.Library_Lend_pre or
           s.Library_Reserve_pre }) and
-      s = sn }
+      sn.(s.dsh_stutter) }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

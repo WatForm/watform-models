@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-13 15:57:19
+   on 2023-06-13 16:48:50
 */
 
 open util/boolean
@@ -262,6 +262,17 @@ pred Elevator_MoveDown [
   sn.(s.Elevator_MoveDown_post)
 }
 
+pred dsh_stutter [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_conf0) = (s.dsh_conf0)
+  (sn.dsh_sc_used0) = (s.dsh_sc_used0)
+  (sn.Elevator_direction) = (s.Elevator_direction)
+  (sn.Elevator_called) = (s.Elevator_called)
+  (sn.Elevator_maintenance) = (s.Elevator_maintenance)
+  (sn.Elevator_current) = (s.Elevator_current)
+}
+
 pred dsh_small_step [
 	s: one DshSnapshot,
 	sn: one DshSnapshot] {
@@ -279,7 +290,7 @@ pred dsh_small_step [
           s.Elevator_MoveUp_pre or
           s.Elevator_ChangeDirToUp_pre or
           s.Elevator_MoveDown_pre }) and
-      s = sn }
+      sn.(s.dsh_stutter) }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

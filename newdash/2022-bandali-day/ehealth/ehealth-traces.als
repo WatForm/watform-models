@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-13 15:57:28
+   on 2023-06-13 16:48:59
 */
 
 open util/boolean
@@ -334,6 +334,20 @@ pred EHealthSystem_remove_prescription [
   sn.(s.EHealthSystem_remove_prescription_post)
 }
 
+pred dsh_stutter [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_conf0) = (s.dsh_conf0)
+  (sn.dsh_sc_used0) = (s.dsh_sc_used0)
+  (sn.EHealthSystem_medications) =
+  (s.EHealthSystem_medications)
+  (sn.EHealthSystem_patients) = (s.EHealthSystem_patients)
+  (sn.EHealthSystem_prescriptions) =
+  (s.EHealthSystem_prescriptions)
+  (sn.EHealthSystem_interactions) =
+  (s.EHealthSystem_interactions)
+}
+
 pred dsh_small_step [
 	s: one DshSnapshot,
 	sn: one DshSnapshot] {
@@ -349,7 +363,7 @@ pred dsh_small_step [
           s.EHealthSystem_add_prescription_pre or
           s.EHealthSystem_add_medication_pre or
           s.EHealthSystem_remove_prescription_pre }) and
-      s = sn }
+      sn.(s.dsh_stutter) }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-13 15:57:25
+   on 2023-06-13 16:48:57
 */
 
 open util/boolean
@@ -236,6 +236,14 @@ pred SnapshotUI_Snapshot_Reports_SeeStudents [
   sn.(s.SnapshotUI_Snapshot_Reports_SeeStudents_post)
 }
 
+pred dsh_stutter [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_conf0) = (s.dsh_conf0)
+  (sn.dsh_sc_used0) = (s.dsh_sc_used0)
+  (sn.dsh_events0) = (s.dsh_events0)
+}
+
 pred dsh_small_step [
 	s: one DshSnapshot,
 	sn: one DshSnapshot] {
@@ -253,7 +261,7 @@ pred dsh_small_step [
           s.SnapshotUI_Snapshot_Reports_Students_SeeAnswers_pre or
           s.SnapshotUI_Snapshot_Answers_SeeStudents_pre or
           s.SnapshotUI_Snapshot_Reports_SeeStudents_pre }) and
-      s = sn }
+      sn.(s.dsh_stutter) }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

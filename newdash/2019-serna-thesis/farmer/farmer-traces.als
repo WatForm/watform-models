@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-13 15:57:19
+   on 2023-06-13 16:48:51
 */
 
 open util/boolean
@@ -107,13 +107,22 @@ pred Puzzle_far2near [
   sn.(s.Puzzle_far2near_post)
 }
 
+pred dsh_stutter [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_conf0) = (s.dsh_conf0)
+  (sn.dsh_sc_used0) = (s.dsh_sc_used0)
+  (sn.Puzzle_near) = (s.Puzzle_near)
+  (sn.Puzzle_far) = (s.Puzzle_far)
+}
+
 pred dsh_small_step [
 	s: one DshSnapshot,
 	sn: one DshSnapshot] {
   { sn.(s.Puzzle_near2far) or
     sn.(s.Puzzle_far2near) or
     !({ s.Puzzle_near2far_pre or s.Puzzle_far2near_pre }) and
-      s = sn }
+      sn.(s.dsh_stutter) }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

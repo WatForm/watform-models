@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-13 15:57:38
+   on 2023-06-13 16:49:09
 */
 
 open util/ordering[Node] as node
@@ -603,6 +603,22 @@ pred _nextIsStable [
   !(dsh_scp1.(dsh_scp0.(p0_Node.(sn.(s.System_N_Failed_Join_enabledAfterStep)))))
 }
 
+pred dsh_stutter [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_stable) = (s.dsh_stable)
+  (sn.dsh_conf0) = (s.dsh_conf0)
+  (sn.dsh_sc_used0) = (s.dsh_sc_used0)
+  (sn.dsh_conf1) = (s.dsh_conf1)
+  (sn.dsh_sc_used1) = (s.dsh_sc_used1)
+  (sn.System_N_frst) = (s.System_N_frst)
+  (sn.System_N_scnd) = (s.System_N_scnd)
+  (sn.System_N_prdc) = (s.System_N_prdc)
+  (sn.System_N_status) = (s.System_N_status)
+  (sn.System_N_saved) = (s.System_N_saved)
+  (sn.System_members) = (s.System_members)
+}
+
 pred dsh_small_step [
 	s: one DshSnapshot,
 	sn: one DshSnapshot] {
@@ -620,7 +636,7 @@ pred dsh_small_step [
                     p0_Node.(s.System_N_Live_StabilizeFromSucc_pre) or
                     p0_Node.(s.System_N_Live_Rectify_pre) or
                     p0_Node.(s.System_N_Failed_Join_pre) })) and
-      s = sn }
+      sn.(s.dsh_stutter) }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

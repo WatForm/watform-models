@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-13 15:57:21
+   on 2023-06-13 16:48:52
 */
 
 open util/boolean
@@ -463,6 +463,15 @@ pred _nextIsStable [
   !(dsh_scp0.(sn.(s.Mutex_Process2_give_up_enabledAfterStep)))
 }
 
+pred dsh_stutter [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_stable) = (s.dsh_stable)
+  (sn.dsh_conf0) = (s.dsh_conf0)
+  (sn.dsh_sc_used0) = (s.dsh_sc_used0)
+  (sn.Mutex_semaphore_free) = (s.Mutex_semaphore_free)
+}
+
 pred dsh_small_step [
 	s: one DshSnapshot,
 	sn: one DshSnapshot] {
@@ -482,7 +491,7 @@ pred dsh_small_step [
           s.Mutex_Process1_wait_pre or
           s.Mutex_Process1_exit_critical_section_pre or
           s.Mutex_Process2_give_up_pre }) and
-      s = sn }
+      sn.(s.dsh_stutter) }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

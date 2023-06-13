@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-13 15:57:37
+   on 2023-06-13 16:49:08
 */
 
 open util/boolean
@@ -1259,6 +1259,37 @@ pred _nextIsStable [
   !(dsh_scp1.(dsh_scp0.(p2_PartLdrID.(sn.(s.Carousel_PartitionLeader_Commit_CommitTransaction_enabledAfterStep)))))
 }
 
+pred dsh_stutter [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_stable) = (s.dsh_stable)
+  (sn.dsh_conf0) = (s.dsh_conf0)
+  (sn.dsh_sc_used0) = (s.dsh_sc_used0)
+  (sn.dsh_conf1) = (s.dsh_conf1)
+  (sn.dsh_sc_used1) = (s.dsh_sc_used1)
+  (sn.Carousel_Client_response) = (s.Carousel_Client_response)
+  (sn.Carousel_Client_data) = (s.Carousel_Client_data)
+  (sn.Carousel_Client_txn) = (s.Carousel_Client_txn)
+  (sn.Carousel_Client_transToSend) =
+  (s.Carousel_Client_transToSend)
+  (sn.Carousel_Coordinator_currentTxn) =
+  (s.Carousel_Coordinator_currentTxn)
+  (sn.Carousel_Coordinator_client) =
+  (s.Carousel_Coordinator_client)
+  (sn.Carousel_Coordinator_info) =
+  (s.Carousel_Coordinator_info)
+  (sn.Carousel_Coordinator_coord_responses) =
+  (s.Carousel_Coordinator_coord_responses)
+  (sn.Carousel_PartitionLeader_response) =
+  (s.Carousel_PartitionLeader_response)
+  (sn.Carousel_PartitionLeader_data) =
+  (s.Carousel_PartitionLeader_data)
+  (sn.Carousel_PartitionLeader_currentTxn) =
+  (s.Carousel_PartitionLeader_currentTxn)
+  (sn.Carousel_PartitionLeader_pendingTxn) =
+  (s.Carousel_PartitionLeader_pendingTxn)
+}
+
 pred dsh_small_step [
 	s: one DshSnapshot,
 	sn: one DshSnapshot] {
@@ -1290,7 +1321,7 @@ pred dsh_small_step [
                          p2_PartLdrID.(s.Carousel_PartitionLeader_Waiting_PrepareAbort_pre) or
                          p1_CoordinatorID.(s.Carousel_Coordinator_Replicate_Replicating_pre) or
                          p2_PartLdrID.(s.Carousel_PartitionLeader_Commit_CommitTransaction_pre) })) and
-      s = sn }
+      sn.(s.dsh_stutter) }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

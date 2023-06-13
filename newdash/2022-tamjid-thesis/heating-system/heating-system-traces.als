@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-13 15:57:41
+   on 2023-06-13 16:49:12
 */
 
 open util/ordering[Temp] as temp
@@ -2127,6 +2127,28 @@ pred _nextIsStable [
   !(dsh_genEvs1.(dsh_scp1.(dsh_genEvs0.(dsh_scp0.(p0_Identifier.(sn.(s.HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_heatRoom_enabledAfterStep)))))))
 }
 
+pred dsh_stutter [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_stable) = (s.dsh_stable)
+  (sn.dsh_conf0) = (s.dsh_conf0)
+  (sn.dsh_sc_used0) = (s.dsh_sc_used0)
+  (sn.dsh_events0) = (s.dsh_events0)
+  (sn.dsh_conf1) = (s.dsh_conf1)
+  (sn.dsh_sc_used1) = (s.dsh_sc_used1)
+  (sn.dsh_events1) = (s.dsh_events1)
+  (sn.HeatingSystem_Functioning_Controller_controllerOn) =
+  (s.HeatingSystem_Functioning_Controller_controllerOn)
+  (sn.HeatingSystem_Functioning_Room_actualTemp) =
+  (s.HeatingSystem_Functioning_Room_actualTemp)
+  (sn.HeatingSystem_Functioning_Room_desiredTemp) =
+  (s.HeatingSystem_Functioning_Room_desiredTemp)
+  (sn.HeatingSystem_Functioning_Room_valvePos) =
+  (s.HeatingSystem_Functioning_Room_valvePos)
+  (sn.HeatingSystem_Functioning_Room_requestHeat) =
+  (s.HeatingSystem_Functioning_Room_requestHeat)
+}
+
 pred dsh_small_step [
 	s: one DshSnapshot,
 	sn: one DshSnapshot] {
@@ -2172,7 +2194,7 @@ pred dsh_small_step [
                           p0_Identifier.(s.HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T13_pre) or
                           s.HeatingSystem_Functioning_Controller_On_Idle_T9_pre or
                           p0_Identifier.(s.HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_heatRoom_pre) })) and
-      s = sn }
+      sn.(s.dsh_stutter) }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

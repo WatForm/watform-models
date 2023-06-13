@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-13 15:57:34
+   on 2023-06-13 16:49:05
 */
 
 open util/boolean
@@ -228,6 +228,17 @@ pred Game_Walking_Sit [
   sn.(s.Game_Walking_Sit_post)
 }
 
+pred dsh_stutter [
+	s: one DshSnapshot,
+	sn: one DshSnapshot] {
+  (sn.dsh_conf0) = (s.dsh_conf0)
+  (sn.dsh_sc_used0) = (s.dsh_sc_used0)
+  (sn.dsh_events0) = (s.dsh_events0)
+  (sn.Game_activePlayers) = (s.Game_activePlayers)
+  (sn.Game_activeChairs) = (s.Game_activeChairs)
+  (sn.Game_occupiedChairs) = (s.Game_occupiedChairs)
+}
+
 pred dsh_small_step [
 	s: one DshSnapshot,
 	sn: one DshSnapshot] {
@@ -239,7 +250,7 @@ pred dsh_small_step [
           s.Game_Start_DeclareWinner_pre or
           s.Game_Start_Walk_pre or
           s.Game_Walking_Sit_pre }) and
-      s = sn }
+      sn.(s.dsh_stutter) }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial
