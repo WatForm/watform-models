@@ -1,0 +1,7 @@
+/shelf/
+/workspace.xml
+# Ignore IDE files
+/.idea/**
+# Ignore vombined models. Can be generated with `combine_modesl.py`
+/newdash/combined-models/
+**/combined-modesl/**

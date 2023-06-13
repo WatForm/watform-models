@@ -47,6 +47,9 @@ if os.path.exists(myinputpath):
     listoffiles = []
     # r=root, d=directories, f = files
     for r, d, f in os.walk(myinputpath):
+        if 'combined-files' in d:  # skip the combined-files (added later for Owen and Aditya's work)
+            d.remove('combined-files')
+
         for file in f:
             if ext == "" or file.endswith(ext):
                 listoffiles.append(os.path.join(r, file))
