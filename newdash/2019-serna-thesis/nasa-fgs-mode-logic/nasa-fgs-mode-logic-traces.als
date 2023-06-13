@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-13 16:48:53
+   on 2023-06-13 17:09:29
 */
 
 open util/boolean
@@ -6579,7 +6579,7 @@ pred dsh_stutter [
   (sn.dsh_stable) = (s.dsh_stable)
   (sn.dsh_conf0) = (s.dsh_conf0)
   (sn.dsh_sc_used0) = (s.dsh_sc_used0)
-  (sn.dsh_events0) = (s.dsh_events0)
+  ((sn.dsh_events0) :> DshIntEvents) = none
   (sn.FlightModes_FD_On) = (s.FlightModes_FD_On)
   (sn.FlightModes_Modes_On) = (s.FlightModes_Modes_On)
   (sn.FlightModes_HDG_Selected) = (s.FlightModes_HDG_Selected)

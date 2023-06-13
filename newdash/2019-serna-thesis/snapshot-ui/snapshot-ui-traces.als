@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-13 16:48:57
+   on 2023-06-13 17:09:32
 */
 
 open util/boolean
@@ -241,7 +241,7 @@ pred dsh_stutter [
 	sn: one DshSnapshot] {
   (sn.dsh_conf0) = (s.dsh_conf0)
   (sn.dsh_sc_used0) = (s.dsh_sc_used0)
-  (sn.dsh_events0) = (s.dsh_events0)
+  ((sn.dsh_events0) :> DshIntEvents) = none
 }
 
 pred dsh_small_step [

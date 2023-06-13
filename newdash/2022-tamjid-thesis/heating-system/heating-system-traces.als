@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-13 16:49:12
+   on 2023-06-13 17:09:48
 */
 
 open util/ordering[Temp] as temp
@@ -2133,10 +2133,9 @@ pred dsh_stutter [
   (sn.dsh_stable) = (s.dsh_stable)
   (sn.dsh_conf0) = (s.dsh_conf0)
   (sn.dsh_sc_used0) = (s.dsh_sc_used0)
-  (sn.dsh_events0) = (s.dsh_events0)
+  ((sn.dsh_events0) :> DshIntEvents) = none
   (sn.dsh_conf1) = (s.dsh_conf1)
   (sn.dsh_sc_used1) = (s.dsh_sc_used1)
-  (sn.dsh_events1) = (s.dsh_events1)
   (sn.HeatingSystem_Functioning_Controller_controllerOn) =
   (s.HeatingSystem_Functioning_Controller_controllerOn)
   (sn.HeatingSystem_Functioning_Room_actualTemp) =

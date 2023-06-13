@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-13 16:49:05
+   on 2023-06-13 17:09:41
 */
 
 open util/boolean
@@ -233,7 +233,7 @@ pred dsh_stutter [
 	sn: one DshSnapshot] {
   (sn.dsh_conf0) = (s.dsh_conf0)
   (sn.dsh_sc_used0) = (s.dsh_sc_used0)
-  (sn.dsh_events0) = (s.dsh_events0)
+  ((sn.dsh_events0) :> DshIntEvents) = none
   (sn.Game_activePlayers) = (s.Game_activePlayers)
   (sn.Game_activeChairs) = (s.Game_activeChairs)
   (sn.Game_occupiedChairs) = (s.Game_occupiedChairs)

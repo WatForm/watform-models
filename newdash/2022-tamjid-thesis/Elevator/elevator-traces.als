@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-13 16:49:11
+   on 2023-06-13 17:09:47
 */
 
 open util/ordering[Floor]
