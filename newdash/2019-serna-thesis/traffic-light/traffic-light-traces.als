@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-11 19:17:43
+   on 2023-06-13 15:57:26
 */
 
 open util/boolean
@@ -74,7 +74,7 @@ pred TrafficLight_EastWest_Green_T5_post [
        TrafficLight_EastWest_Yellow) -
       TrafficLight_EastWest_Red) +
      TrafficLight_EastWest_Yellow)
-  (none.(TrafficLight_EastWest.(sn.(s._testIfNextStable))))=>
+  (none.(TrafficLight_EastWest.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        { (s.dsh_stable).boolean/isTrue or
@@ -137,7 +137,7 @@ pred TrafficLight_NorthSouth_Yellow_T2_post [
        TrafficLight_NorthSouth_Yellow) -
       TrafficLight_NorthSouth_Red) +
      TrafficLight_NorthSouth_Red)
-  (none.(TrafficLight_NorthSouth.(sn.(s._testIfNextStable))))=>
+  (none.(TrafficLight_NorthSouth.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        { (s.dsh_stable).boolean/isTrue or
@@ -199,7 +199,7 @@ pred TrafficLight_NorthSouth_Green_T1_post [
        TrafficLight_NorthSouth_Yellow) -
       TrafficLight_NorthSouth_Red) +
      TrafficLight_NorthSouth_Yellow)
-  (none.(TrafficLight_NorthSouth.(sn.(s._testIfNextStable))))=>
+  (none.(TrafficLight_NorthSouth.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        { (s.dsh_stable).boolean/isTrue or
@@ -262,7 +262,7 @@ pred TrafficLight_NorthSouth_Red_T3_post [
        TrafficLight_NorthSouth_Yellow) -
       TrafficLight_NorthSouth_Red) +
      TrafficLight_NorthSouth_Green)
-  (none.(TrafficLight_NorthSouth.(sn.(s._testIfNextStable))))=>
+  (none.(TrafficLight_NorthSouth.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        { (s.dsh_stable).boolean/isTrue or
@@ -325,7 +325,7 @@ pred TrafficLight_EastWest_Red_T4_post [
        TrafficLight_EastWest_Yellow) -
       TrafficLight_EastWest_Red) +
      TrafficLight_EastWest_Green)
-  (none.(TrafficLight_EastWest.(sn.(s._testIfNextStable))))=>
+  (none.(TrafficLight_EastWest.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        { (s.dsh_stable).boolean/isTrue or
@@ -387,7 +387,7 @@ pred TrafficLight_EastWest_Yellow_T6_post [
   (((((s.dsh_conf0) - TrafficLight_EastWest_Green) -
        TrafficLight_EastWest_Yellow) -
       TrafficLight_EastWest_Red) + TrafficLight_EastWest_Red)
-  (none.(TrafficLight_EastWest.(sn.(s._testIfNextStable))))=>
+  (none.(TrafficLight_EastWest.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        { (s.dsh_stable).boolean/isTrue or
@@ -428,7 +428,7 @@ pred TrafficLight_EastWest_Yellow_T6 [
   sn.(s.TrafficLight_EastWest_Yellow_T6_post)
 }
 
-pred _testIfNextStable [
+pred _nextIsStable [
 	s: one DshSnapshot,
 	sn: one DshSnapshot,
 	dsh_scp0: DshStates,
@@ -449,7 +449,14 @@ pred dsh_small_step [
     sn.(s.TrafficLight_NorthSouth_Green_T1) or
     sn.(s.TrafficLight_NorthSouth_Red_T3) or
     sn.(s.TrafficLight_EastWest_Red_T4) or
-    sn.(s.TrafficLight_EastWest_Yellow_T6) }
+    sn.(s.TrafficLight_EastWest_Yellow_T6) or
+    !({ s.TrafficLight_EastWest_Green_T5_pre or
+          s.TrafficLight_NorthSouth_Yellow_T2_pre or
+          s.TrafficLight_NorthSouth_Green_T1_pre or
+          s.TrafficLight_NorthSouth_Red_T3_pre or
+          s.TrafficLight_EastWest_Red_T4_pre or
+          s.TrafficLight_EastWest_Yellow_T6_pre }) and
+      s = sn }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-11 19:17:49
+   on 2023-06-13 15:57:31
 */
 
 open util/boolean
@@ -345,7 +345,10 @@ pred dsh_small_step [
 	s: one DshSnapshot,
 	sn: one DshSnapshot] {
   { sn.(s.LandingGear_retraction_sequence) or
-    sn.(s.LandingGear_outgoing_sequence) }
+    sn.(s.LandingGear_outgoing_sequence) or
+    !({ s.LandingGear_retraction_sequence_pre or
+          s.LandingGear_outgoing_sequence_pre }) and
+      s = sn }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

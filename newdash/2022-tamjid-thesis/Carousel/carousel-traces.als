@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-11 19:17:54
+   on 2023-06-13 15:57:37
 */
 
 open util/boolean
@@ -145,7 +145,34 @@ pred Carousel_Client_Waiting_FinalizeCommit_post [
   (p0_ClientID.(sn.Carousel_Client_txn)) = none and
   no
   p0_ClientID.(sn.Carousel_Client_response)
-  ((p0_ClientID -> Carousel_Client).(none.(none.(none.(p0_ClientID.(sn.(s._testIfNextStable)))))))=>
+  (all ClientID_aa: ClientID - p0_ClientID | (ClientID_aa.(s.Carousel_Client_data)) =
+                                             (ClientID_aa.(sn.Carousel_Client_data)))
+  (all ClientID_aa: ClientID - p0_ClientID | (ClientID_aa.(s.Carousel_Client_txn)) =
+                                             (ClientID_aa.(sn.Carousel_Client_txn)))
+  (all ClientID_aa: ClientID - p0_ClientID | (ClientID_aa.(s.Carousel_Client_response)) =
+                                             (ClientID_aa.(sn.Carousel_Client_response)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_transToSend)) =
+               (ClientID_aa.(sn.Carousel_Client_transToSend)))
+  (all CoordinatorID_aa: one
+  CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_coord_responses)) =
+                    (CoordinatorID_aa.(sn.Carousel_Coordinator_coord_responses)))
+  (all CoordinatorID_aa: one
+  CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_client)) =
+                    (CoordinatorID_aa.(sn.Carousel_Coordinator_client)))
+  (all CoordinatorID_aa: one
+  CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_info)) =
+                    (CoordinatorID_aa.(sn.Carousel_Coordinator_info)))
+  (all PartLdrID_aa: one
+  PartLdrID | (PartLdrID_aa.(s.Carousel_PartitionLeader_data)) =
+                (PartLdrID_aa.(sn.Carousel_PartitionLeader_data)))
+  (all CoordinatorID_aa: one
+  CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_currentTxn)) =
+                    (CoordinatorID_aa.(sn.Carousel_Coordinator_currentTxn)))
+  (all PartLdrID_aa: one
+  PartLdrID | (PartLdrID_aa.(s.Carousel_PartitionLeader_response)) =
+                (PartLdrID_aa.(sn.Carousel_PartitionLeader_response)))
+  ((p0_ClientID -> Carousel_Client).(none.(none.(none.(p0_ClientID.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -219,7 +246,33 @@ pred Carousel_PartitionLeader_Abort_AbortTransaction_post [
   (all others: CoordinatorID -
                  (((p2_PartLdrID.(s.Carousel_PartitionLeader_pendingTxn)).firstElem).coordinator) | (others.(sn.Carousel_Coordinator_coord_responses)) =
                                                                                                       (others.(s.Carousel_Coordinator_coord_responses)))
-  ((p2_PartLdrID -> Carousel_PartitionLeader).(none.(p2_PartLdrID.(none.(none.(sn.(s._testIfNextStable)))))))=>
+  (all PartLdrID_aa: PartLdrID - p2_PartLdrID | (PartLdrID_aa.(s.Carousel_PartitionLeader_response)) =
+                                                (PartLdrID_aa.(sn.Carousel_PartitionLeader_response)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_transToSend)) =
+               (ClientID_aa.(sn.Carousel_Client_transToSend)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_data)) =
+               (ClientID_aa.(sn.Carousel_Client_data)))
+  (all CoordinatorID_aa: one
+  CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_client)) =
+                    (CoordinatorID_aa.(sn.Carousel_Coordinator_client)))
+  (all CoordinatorID_aa: one
+  CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_info)) =
+                    (CoordinatorID_aa.(sn.Carousel_Coordinator_info)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_txn)) =
+               (ClientID_aa.(sn.Carousel_Client_txn)))
+  (all PartLdrID_aa: one
+  PartLdrID | (PartLdrID_aa.(s.Carousel_PartitionLeader_data)) =
+                (PartLdrID_aa.(sn.Carousel_PartitionLeader_data)))
+  (all CoordinatorID_aa: one
+  CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_currentTxn)) =
+                    (CoordinatorID_aa.(sn.Carousel_Coordinator_currentTxn)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_response)) =
+               (ClientID_aa.(sn.Carousel_Client_response)))
+  ((p2_PartLdrID -> Carousel_PartitionLeader).(none.(p2_PartLdrID.(none.(none.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -304,7 +357,29 @@ pred Carousel_Client_Reading_ReadAndPrepare_post [
                                                                                                   (all others: CoordinatorID -
                                                                                                                  c | (others.(sn.Carousel_Coordinator_currentTxn)) =
                                                                                                                        (others.(s.Carousel_Coordinator_currentTxn)))))
-  ((p0_ClientID -> Carousel_Client).(none.(none.(none.(p0_ClientID.(sn.(s._testIfNextStable)))))))=>
+  (all ClientID_aa: ClientID - p0_ClientID | (ClientID_aa.(s.Carousel_Client_transToSend)) =
+                                             (ClientID_aa.(sn.Carousel_Client_transToSend)))
+  (all ClientID_aa: ClientID - p0_ClientID | (ClientID_aa.(s.Carousel_Client_txn)) =
+                                             (ClientID_aa.(sn.Carousel_Client_txn)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_data)) =
+               (ClientID_aa.(sn.Carousel_Client_data)))
+  (all CoordinatorID_aa: one
+  CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_coord_responses)) =
+                    (CoordinatorID_aa.(sn.Carousel_Coordinator_coord_responses)))
+  (all CoordinatorID_aa: one
+  CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_info)) =
+                    (CoordinatorID_aa.(sn.Carousel_Coordinator_info)))
+  (all PartLdrID_aa: one
+  PartLdrID | (PartLdrID_aa.(s.Carousel_PartitionLeader_data)) =
+                (PartLdrID_aa.(sn.Carousel_PartitionLeader_data)))
+  (all PartLdrID_aa: one
+  PartLdrID | (PartLdrID_aa.(s.Carousel_PartitionLeader_response)) =
+                (PartLdrID_aa.(sn.Carousel_PartitionLeader_response)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_response)) =
+               (ClientID_aa.(sn.Carousel_Client_response)))
+  ((p0_ClientID -> Carousel_Client).(none.(none.(none.(p0_ClientID.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -386,7 +461,30 @@ pred Carousel_Coordinator_WaitForResponse_StartAbort_post [
   p1_CoordinatorID.(sn.Carousel_Coordinator_client) and
   no
   p1_CoordinatorID.(sn.Carousel_Coordinator_coord_responses)
-  ((p1_CoordinatorID -> Carousel_Coordinator).(none.(none.(p1_CoordinatorID.(none.(sn.(s._testIfNextStable)))))))=>
+  (all CoordinatorID_aa: CoordinatorID - p1_CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_coord_responses)) =
+                                                            (CoordinatorID_aa.(sn.Carousel_Coordinator_coord_responses)))
+  (all CoordinatorID_aa: CoordinatorID - p1_CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_client)) =
+                                                            (CoordinatorID_aa.(sn.Carousel_Coordinator_client)))
+  (all CoordinatorID_aa: CoordinatorID - p1_CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_info)) =
+                                                            (CoordinatorID_aa.(sn.Carousel_Coordinator_info)))
+  (all CoordinatorID_aa: CoordinatorID - p1_CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_currentTxn)) =
+                                                            (CoordinatorID_aa.(sn.Carousel_Coordinator_currentTxn)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_transToSend)) =
+               (ClientID_aa.(sn.Carousel_Client_transToSend)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_data)) =
+               (ClientID_aa.(sn.Carousel_Client_data)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_txn)) =
+               (ClientID_aa.(sn.Carousel_Client_txn)))
+  (all PartLdrID_aa: one
+  PartLdrID | (PartLdrID_aa.(s.Carousel_PartitionLeader_data)) =
+                (PartLdrID_aa.(sn.Carousel_PartitionLeader_data)))
+  (all PartLdrID_aa: one
+  PartLdrID | (PartLdrID_aa.(s.Carousel_PartitionLeader_response)) =
+                (PartLdrID_aa.(sn.Carousel_PartitionLeader_response)))
+  ((p1_CoordinatorID -> Carousel_Coordinator).(none.(none.(p1_CoordinatorID.(none.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -460,7 +558,41 @@ pred Carousel_PartitionLeader_Waiting_PrepareCommit_post [
      (p2_PartLdrID -> Carousel_PartitionLeader_Commit))
   ((p2_PartLdrID.(s.Carousel_PartitionLeader_currentTxn)).firstElem).((p2_PartLdrID.(sn.Carousel_PartitionLeader_pendingTxn)).((p2_PartLdrID.(s.Carousel_PartitionLeader_pendingTxn)).add)) and
   (p2_PartLdrID.(sn.Carousel_PartitionLeader_currentTxn)).((p2_PartLdrID.(s.Carousel_PartitionLeader_currentTxn)).removeFirst)
-  ((p2_PartLdrID -> Carousel_PartitionLeader).(none.(p2_PartLdrID.(none.(none.(sn.(s._testIfNextStable)))))))=>
+  (all PartLdrID_aa: PartLdrID - p2_PartLdrID | (PartLdrID_aa.(s.Carousel_PartitionLeader_pendingTxn)) =
+                                                (PartLdrID_aa.(sn.Carousel_PartitionLeader_pendingTxn)))
+  (all PartLdrID_aa: PartLdrID - p2_PartLdrID | (PartLdrID_aa.(s.Carousel_PartitionLeader_currentTxn)) =
+                                                (PartLdrID_aa.(sn.Carousel_PartitionLeader_currentTxn)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_transToSend)) =
+               (ClientID_aa.(sn.Carousel_Client_transToSend)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_data)) =
+               (ClientID_aa.(sn.Carousel_Client_data)))
+  (all CoordinatorID_aa: one
+  CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_coord_responses)) =
+                    (CoordinatorID_aa.(sn.Carousel_Coordinator_coord_responses)))
+  (all CoordinatorID_aa: one
+  CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_client)) =
+                    (CoordinatorID_aa.(sn.Carousel_Coordinator_client)))
+  (all CoordinatorID_aa: one
+  CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_info)) =
+                    (CoordinatorID_aa.(sn.Carousel_Coordinator_info)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_txn)) =
+               (ClientID_aa.(sn.Carousel_Client_txn)))
+  (all PartLdrID_aa: one
+  PartLdrID | (PartLdrID_aa.(s.Carousel_PartitionLeader_data)) =
+                (PartLdrID_aa.(sn.Carousel_PartitionLeader_data)))
+  (all CoordinatorID_aa: one
+  CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_currentTxn)) =
+                    (CoordinatorID_aa.(sn.Carousel_Coordinator_currentTxn)))
+  (all PartLdrID_aa: one
+  PartLdrID | (PartLdrID_aa.(s.Carousel_PartitionLeader_response)) =
+                (PartLdrID_aa.(sn.Carousel_PartitionLeader_response)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_response)) =
+               (ClientID_aa.(sn.Carousel_Client_response)))
+  ((p2_PartLdrID -> Carousel_PartitionLeader).(none.(p2_PartLdrID.(none.(none.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -547,7 +679,27 @@ pred Carousel_Coordinator_WaitForResponse_StartCommit_post [
   p1_CoordinatorID.(sn.Carousel_Coordinator_client) and
   no
   p1_CoordinatorID.(sn.Carousel_Coordinator_coord_responses)
-  ((p1_CoordinatorID -> Carousel_Coordinator).(none.(none.(p1_CoordinatorID.(none.(sn.(s._testIfNextStable)))))))=>
+  (all CoordinatorID_aa: CoordinatorID - p1_CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_coord_responses)) =
+                                                            (CoordinatorID_aa.(sn.Carousel_Coordinator_coord_responses)))
+  (all CoordinatorID_aa: CoordinatorID - p1_CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_client)) =
+                                                            (CoordinatorID_aa.(sn.Carousel_Coordinator_client)))
+  (all CoordinatorID_aa: CoordinatorID - p1_CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_info)) =
+                                                            (CoordinatorID_aa.(sn.Carousel_Coordinator_info)))
+  (all CoordinatorID_aa: CoordinatorID - p1_CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_currentTxn)) =
+                                                            (CoordinatorID_aa.(sn.Carousel_Coordinator_currentTxn)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_transToSend)) =
+               (ClientID_aa.(sn.Carousel_Client_transToSend)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_data)) =
+               (ClientID_aa.(sn.Carousel_Client_data)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_txn)) =
+               (ClientID_aa.(sn.Carousel_Client_txn)))
+  (all PartLdrID_aa: one
+  PartLdrID | (PartLdrID_aa.(s.Carousel_PartitionLeader_data)) =
+                (PartLdrID_aa.(sn.Carousel_PartitionLeader_data)))
+  ((p1_CoordinatorID -> Carousel_Coordinator).(none.(none.(p1_CoordinatorID.(none.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -616,7 +768,35 @@ pred Carousel_Client_Waiting_FinalizeAbort_post [
   (p0_ClientID.(sn.Carousel_Client_txn)) = none and
   no
   p0_ClientID.(sn.Carousel_Client_response)
-  ((p0_ClientID -> Carousel_Client).(none.(none.(none.(p0_ClientID.(sn.(s._testIfNextStable)))))))=>
+  (all ClientID_aa: ClientID - p0_ClientID | (ClientID_aa.(s.Carousel_Client_txn)) =
+                                             (ClientID_aa.(sn.Carousel_Client_txn)))
+  (all ClientID_aa: ClientID - p0_ClientID | (ClientID_aa.(s.Carousel_Client_response)) =
+                                             (ClientID_aa.(sn.Carousel_Client_response)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_transToSend)) =
+               (ClientID_aa.(sn.Carousel_Client_transToSend)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_data)) =
+               (ClientID_aa.(sn.Carousel_Client_data)))
+  (all CoordinatorID_aa: one
+  CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_coord_responses)) =
+                    (CoordinatorID_aa.(sn.Carousel_Coordinator_coord_responses)))
+  (all CoordinatorID_aa: one
+  CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_client)) =
+                    (CoordinatorID_aa.(sn.Carousel_Coordinator_client)))
+  (all CoordinatorID_aa: one
+  CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_info)) =
+                    (CoordinatorID_aa.(sn.Carousel_Coordinator_info)))
+  (all PartLdrID_aa: one
+  PartLdrID | (PartLdrID_aa.(s.Carousel_PartitionLeader_data)) =
+                (PartLdrID_aa.(sn.Carousel_PartitionLeader_data)))
+  (all CoordinatorID_aa: one
+  CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_currentTxn)) =
+                    (CoordinatorID_aa.(sn.Carousel_Coordinator_currentTxn)))
+  (all PartLdrID_aa: one
+  PartLdrID | (PartLdrID_aa.(s.Carousel_PartitionLeader_response)) =
+                (PartLdrID_aa.(sn.Carousel_PartitionLeader_response)))
+  ((p0_ClientID -> Carousel_Client).(none.(none.(none.(p0_ClientID.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -687,7 +867,37 @@ pred Carousel_PartitionLeader_Waiting_FinalizeCommit_post [
   (p2_PartLdrID.(sn.Carousel_PartitionLeader_data)) =
     (p2_PartLdrID.(s.Carousel_PartitionLeader_data) ++
        (((p2_PartLdrID.(s.Carousel_PartitionLeader_response)).Response).key))
-  ((p2_PartLdrID -> Carousel_PartitionLeader).(none.(p2_PartLdrID.(none.(none.(sn.(s._testIfNextStable)))))))=>
+  (all PartLdrID_aa: PartLdrID - p2_PartLdrID | (PartLdrID_aa.(s.Carousel_PartitionLeader_pendingTxn)) =
+                                                (PartLdrID_aa.(sn.Carousel_PartitionLeader_pendingTxn)))
+  (all PartLdrID_aa: PartLdrID - p2_PartLdrID | (PartLdrID_aa.(s.Carousel_PartitionLeader_data)) =
+                                                (PartLdrID_aa.(sn.Carousel_PartitionLeader_data)))
+  (all PartLdrID_aa: PartLdrID - p2_PartLdrID | (PartLdrID_aa.(s.Carousel_PartitionLeader_response)) =
+                                                (PartLdrID_aa.(sn.Carousel_PartitionLeader_response)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_transToSend)) =
+               (ClientID_aa.(sn.Carousel_Client_transToSend)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_data)) =
+               (ClientID_aa.(sn.Carousel_Client_data)))
+  (all CoordinatorID_aa: one
+  CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_coord_responses)) =
+                    (CoordinatorID_aa.(sn.Carousel_Coordinator_coord_responses)))
+  (all CoordinatorID_aa: one
+  CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_client)) =
+                    (CoordinatorID_aa.(sn.Carousel_Coordinator_client)))
+  (all CoordinatorID_aa: one
+  CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_info)) =
+                    (CoordinatorID_aa.(sn.Carousel_Coordinator_info)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_txn)) =
+               (ClientID_aa.(sn.Carousel_Client_txn)))
+  (all CoordinatorID_aa: one
+  CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_currentTxn)) =
+                    (CoordinatorID_aa.(sn.Carousel_Coordinator_currentTxn)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_response)) =
+               (ClientID_aa.(sn.Carousel_Client_response)))
+  ((p2_PartLdrID -> Carousel_PartitionLeader).(none.(p2_PartLdrID.(none.(none.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -757,7 +967,37 @@ pred Carousel_PartitionLeader_Waiting_PrepareAbort_post [
        (p2_PartLdrID -> Carousel_PartitionLeader_Commit)) -
       (p2_PartLdrID -> Carousel_PartitionLeader_Abort)) +
      (p2_PartLdrID -> Carousel_PartitionLeader_Abort))
-  ((p2_PartLdrID -> Carousel_PartitionLeader).(none.(p2_PartLdrID.(none.(none.(sn.(s._testIfNextStable)))))))=>
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_transToSend)) =
+               (ClientID_aa.(sn.Carousel_Client_transToSend)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_data)) =
+               (ClientID_aa.(sn.Carousel_Client_data)))
+  (all CoordinatorID_aa: one
+  CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_coord_responses)) =
+                    (CoordinatorID_aa.(sn.Carousel_Coordinator_coord_responses)))
+  (all CoordinatorID_aa: one
+  CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_client)) =
+                    (CoordinatorID_aa.(sn.Carousel_Coordinator_client)))
+  (all CoordinatorID_aa: one
+  CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_info)) =
+                    (CoordinatorID_aa.(sn.Carousel_Coordinator_info)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_txn)) =
+               (ClientID_aa.(sn.Carousel_Client_txn)))
+  (all PartLdrID_aa: one
+  PartLdrID | (PartLdrID_aa.(s.Carousel_PartitionLeader_data)) =
+                (PartLdrID_aa.(sn.Carousel_PartitionLeader_data)))
+  (all CoordinatorID_aa: one
+  CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_currentTxn)) =
+                    (CoordinatorID_aa.(sn.Carousel_Coordinator_currentTxn)))
+  (all PartLdrID_aa: one
+  PartLdrID | (PartLdrID_aa.(s.Carousel_PartitionLeader_response)) =
+                (PartLdrID_aa.(sn.Carousel_PartitionLeader_response)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_response)) =
+               (ClientID_aa.(sn.Carousel_Client_response)))
+  ((p2_PartLdrID -> Carousel_PartitionLeader).(none.(p2_PartLdrID.(none.(none.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -827,7 +1067,36 @@ pred Carousel_Coordinator_Replicate_Replicating_post [
         Carousel_Coordinator_WaitForResponse))
   (p1_CoordinatorID.(sn.Carousel_Coordinator_info)) =
   ((p1_CoordinatorID.(s.Carousel_Coordinator_currentTxn)).key)
-  ((p1_CoordinatorID -> Carousel_Coordinator).(none.(none.(p1_CoordinatorID.(none.(sn.(s._testIfNextStable)))))))=>
+  (all CoordinatorID_aa: CoordinatorID - p1_CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_info)) =
+                                                            (CoordinatorID_aa.(sn.Carousel_Coordinator_info)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_transToSend)) =
+               (ClientID_aa.(sn.Carousel_Client_transToSend)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_data)) =
+               (ClientID_aa.(sn.Carousel_Client_data)))
+  (all CoordinatorID_aa: one
+  CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_coord_responses)) =
+                    (CoordinatorID_aa.(sn.Carousel_Coordinator_coord_responses)))
+  (all CoordinatorID_aa: one
+  CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_client)) =
+                    (CoordinatorID_aa.(sn.Carousel_Coordinator_client)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_txn)) =
+               (ClientID_aa.(sn.Carousel_Client_txn)))
+  (all PartLdrID_aa: one
+  PartLdrID | (PartLdrID_aa.(s.Carousel_PartitionLeader_data)) =
+                (PartLdrID_aa.(sn.Carousel_PartitionLeader_data)))
+  (all CoordinatorID_aa: one
+  CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_currentTxn)) =
+                    (CoordinatorID_aa.(sn.Carousel_Coordinator_currentTxn)))
+  (all PartLdrID_aa: one
+  PartLdrID | (PartLdrID_aa.(s.Carousel_PartitionLeader_response)) =
+                (PartLdrID_aa.(sn.Carousel_PartitionLeader_response)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_response)) =
+               (ClientID_aa.(sn.Carousel_Client_response)))
+  ((p1_CoordinatorID -> Carousel_Coordinator).(none.(none.(p1_CoordinatorID.(none.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -899,7 +1168,34 @@ pred Carousel_PartitionLeader_Commit_CommitTransaction_post [
   (all others: CoordinatorID -
                  (((p2_PartLdrID.(s.Carousel_PartitionLeader_pendingTxn)).firstElem).coordinator) | (others.(sn.Carousel_Coordinator_coord_responses)) =
                                                                                                       (others.(s.Carousel_Coordinator_coord_responses)))
-  ((p2_PartLdrID -> Carousel_PartitionLeader).(none.(p2_PartLdrID.(none.(none.(sn.(s._testIfNextStable)))))))=>
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_transToSend)) =
+               (ClientID_aa.(sn.Carousel_Client_transToSend)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_data)) =
+               (ClientID_aa.(sn.Carousel_Client_data)))
+  (all CoordinatorID_aa: one
+  CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_client)) =
+                    (CoordinatorID_aa.(sn.Carousel_Coordinator_client)))
+  (all CoordinatorID_aa: one
+  CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_info)) =
+                    (CoordinatorID_aa.(sn.Carousel_Coordinator_info)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_txn)) =
+               (ClientID_aa.(sn.Carousel_Client_txn)))
+  (all PartLdrID_aa: one
+  PartLdrID | (PartLdrID_aa.(s.Carousel_PartitionLeader_data)) =
+                (PartLdrID_aa.(sn.Carousel_PartitionLeader_data)))
+  (all CoordinatorID_aa: one
+  CoordinatorID | (CoordinatorID_aa.(s.Carousel_Coordinator_currentTxn)) =
+                    (CoordinatorID_aa.(sn.Carousel_Coordinator_currentTxn)))
+  (all PartLdrID_aa: one
+  PartLdrID | (PartLdrID_aa.(s.Carousel_PartitionLeader_response)) =
+                (PartLdrID_aa.(sn.Carousel_PartitionLeader_response)))
+  (all ClientID_aa: one
+  ClientID | (ClientID_aa.(s.Carousel_Client_response)) =
+               (ClientID_aa.(sn.Carousel_Client_response)))
+  ((p2_PartLdrID -> Carousel_PartitionLeader).(none.(p2_PartLdrID.(none.(none.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -942,7 +1238,7 @@ pred Carousel_PartitionLeader_Commit_CommitTransaction [
   p2_PartLdrID.(sn.(s.Carousel_PartitionLeader_Commit_CommitTransaction_post))
 }
 
-pred _testIfNextStable [
+pred _nextIsStable [
 	s: one DshSnapshot,
 	sn: one DshSnapshot,
 	p0_ClientID: one ClientID,
@@ -966,20 +1262,35 @@ pred _testIfNextStable [
 pred dsh_small_step [
 	s: one DshSnapshot,
 	sn: one DshSnapshot] {
-  (some p0_ClientID: one
-  ClientID,p1_CoordinatorID: one
-  CoordinatorID,p2_PartLdrID: one
-  PartLdrID | { p0_ClientID.(sn.(s.Carousel_Client_Waiting_FinalizeCommit)) or
-                  p2_PartLdrID.(sn.(s.Carousel_PartitionLeader_Abort_AbortTransaction)) or
-                  p0_ClientID.(sn.(s.Carousel_Client_Reading_ReadAndPrepare)) or
-                  p1_CoordinatorID.(sn.(s.Carousel_Coordinator_WaitForResponse_StartAbort)) or
-                  p2_PartLdrID.(sn.(s.Carousel_PartitionLeader_Waiting_PrepareCommit)) or
-                  p1_CoordinatorID.(sn.(s.Carousel_Coordinator_WaitForResponse_StartCommit)) or
-                  p0_ClientID.(sn.(s.Carousel_Client_Waiting_FinalizeAbort)) or
-                  p2_PartLdrID.(sn.(s.Carousel_PartitionLeader_Waiting_FinalizeCommit)) or
-                  p2_PartLdrID.(sn.(s.Carousel_PartitionLeader_Waiting_PrepareAbort)) or
-                  p1_CoordinatorID.(sn.(s.Carousel_Coordinator_Replicate_Replicating)) or
-                  p2_PartLdrID.(sn.(s.Carousel_PartitionLeader_Commit_CommitTransaction)) })
+  { (some p0_ClientID: one
+      ClientID,p1_CoordinatorID: one
+      CoordinatorID,p2_PartLdrID: one
+      PartLdrID | { p0_ClientID.(sn.(s.Carousel_Client_Waiting_FinalizeCommit)) or
+                      p2_PartLdrID.(sn.(s.Carousel_PartitionLeader_Abort_AbortTransaction)) or
+                      p0_ClientID.(sn.(s.Carousel_Client_Reading_ReadAndPrepare)) or
+                      p1_CoordinatorID.(sn.(s.Carousel_Coordinator_WaitForResponse_StartAbort)) or
+                      p2_PartLdrID.(sn.(s.Carousel_PartitionLeader_Waiting_PrepareCommit)) or
+                      p1_CoordinatorID.(sn.(s.Carousel_Coordinator_WaitForResponse_StartCommit)) or
+                      p0_ClientID.(sn.(s.Carousel_Client_Waiting_FinalizeAbort)) or
+                      p2_PartLdrID.(sn.(s.Carousel_PartitionLeader_Waiting_FinalizeCommit)) or
+                      p2_PartLdrID.(sn.(s.Carousel_PartitionLeader_Waiting_PrepareAbort)) or
+                      p1_CoordinatorID.(sn.(s.Carousel_Coordinator_Replicate_Replicating)) or
+                      p2_PartLdrID.(sn.(s.Carousel_PartitionLeader_Commit_CommitTransaction)) }) or
+    !((some p0_ClientID: one
+         ClientID,p1_CoordinatorID: one
+         CoordinatorID,p2_PartLdrID: one
+         PartLdrID | { p0_ClientID.(s.Carousel_Client_Waiting_FinalizeCommit_pre) or
+                         p2_PartLdrID.(s.Carousel_PartitionLeader_Abort_AbortTransaction_pre) or
+                         p0_ClientID.(s.Carousel_Client_Reading_ReadAndPrepare_pre) or
+                         p1_CoordinatorID.(s.Carousel_Coordinator_WaitForResponse_StartAbort_pre) or
+                         p2_PartLdrID.(s.Carousel_PartitionLeader_Waiting_PrepareCommit_pre) or
+                         p1_CoordinatorID.(s.Carousel_Coordinator_WaitForResponse_StartCommit_pre) or
+                         p0_ClientID.(s.Carousel_Client_Waiting_FinalizeAbort_pre) or
+                         p2_PartLdrID.(s.Carousel_PartitionLeader_Waiting_FinalizeCommit_pre) or
+                         p2_PartLdrID.(s.Carousel_PartitionLeader_Waiting_PrepareAbort_pre) or
+                         p1_CoordinatorID.(s.Carousel_Coordinator_Replicate_Replicating_pre) or
+                         p2_PartLdrID.(s.Carousel_PartitionLeader_Commit_CommitTransaction_pre) })) and
+      s = sn }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

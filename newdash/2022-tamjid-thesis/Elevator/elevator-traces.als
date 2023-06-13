@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-11 19:17:57
+   on 2023-06-13 15:57:40
 */
 
 open util/ordering[Floor]
@@ -103,7 +103,13 @@ pred System_Controller_SendingDownRequest_post [
                                                                                   e0 | (others.(sn.System_Elevator_called)) =
                                                                                          (others.(s.System_Elevator_called))))
 
-  ((none -> none).(System_Controller.(none.(sn.(s._testIfNextStable)))))=>
+  (all PID_aa: one
+  PID | (PID_aa.(s.System_Elevator_direction)) =
+          (PID_aa.(sn.System_Elevator_direction)))
+  (all PID_aa: one
+  PID | (PID_aa.(s.System_Elevator_current)) =
+          (PID_aa.(sn.System_Elevator_current)))
+  ((none -> none).(System_Controller.(none.(sn.(s._nextIsStable)))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -171,7 +177,17 @@ pred System_Elevator_MovingUp_ChangeDirToDown_post [
       (p0_PID -> System_Elevator_Idle)) +
      (p0_PID -> System_Elevator_MovingDown))
   (p0_PID.(sn.System_Elevator_direction)) = Down
-  ((p0_PID -> System_Elevator).(none.(p0_PID.(sn.(s._testIfNextStable)))))=>
+  (all PID_aa: PID - p0_PID | (PID_aa.(s.System_Elevator_direction)) =
+                              (PID_aa.(sn.System_Elevator_direction)))
+  (s.System_Controller_callToSend) =
+  (sn.System_Controller_callToSend)
+  (all PID_aa: one
+  PID | (PID_aa.(s.System_Elevator_called)) =
+          (PID_aa.(sn.System_Elevator_called)))
+  (all PID_aa: one
+  PID | (PID_aa.(s.System_Elevator_current)) =
+          (PID_aa.(sn.System_Elevator_current)))
+  ((p0_PID -> System_Elevator).(none.(p0_PID.(sn.(s._nextIsStable)))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -232,7 +248,18 @@ pred System_Elevator_Idle_Move_post [
        (p0_PID -> System_Elevator_MovingDown)) -
       (p0_PID -> System_Elevator_Idle)) +
      (p0_PID -> System_Elevator_MovingUp))
-  ((p0_PID -> System_Elevator).(none.(p0_PID.(sn.(s._testIfNextStable)))))=>
+  (s.System_Controller_callToSend) =
+  (sn.System_Controller_callToSend)
+  (all PID_aa: one
+  PID | (PID_aa.(s.System_Elevator_direction)) =
+          (PID_aa.(sn.System_Elevator_direction)))
+  (all PID_aa: one
+  PID | (PID_aa.(s.System_Elevator_called)) =
+          (PID_aa.(sn.System_Elevator_called)))
+  (all PID_aa: one
+  PID | (PID_aa.(s.System_Elevator_current)) =
+          (PID_aa.(sn.System_Elevator_current)))
+  ((p0_PID -> System_Elevator).(none.(p0_PID.(sn.(s._nextIsStable)))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -294,7 +321,18 @@ pred System_Elevator_MovingDown_Idle_post [
        (p0_PID -> System_Elevator_MovingDown)) -
       (p0_PID -> System_Elevator_Idle)) +
      (p0_PID -> System_Elevator_Idle))
-  ((p0_PID -> System_Elevator).(none.(p0_PID.(sn.(s._testIfNextStable)))))=>
+  (s.System_Controller_callToSend) =
+  (sn.System_Controller_callToSend)
+  (all PID_aa: one
+  PID | (PID_aa.(s.System_Elevator_direction)) =
+          (PID_aa.(sn.System_Elevator_direction)))
+  (all PID_aa: one
+  PID | (PID_aa.(s.System_Elevator_called)) =
+          (PID_aa.(sn.System_Elevator_called)))
+  (all PID_aa: one
+  PID | (PID_aa.(s.System_Elevator_current)) =
+          (PID_aa.(sn.System_Elevator_current)))
+  ((p0_PID -> System_Elevator).(none.(p0_PID.(sn.(s._nextIsStable)))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -368,7 +406,16 @@ pred System_Elevator_MovingDown_MoveDown_post [
   (p0_PID.(sn.System_Elevator_called)) =
     ((p0_PID.(s.System_Elevator_called)) -
        (p0_PID.(sn.System_Elevator_current)))
-  ((p0_PID -> System_Elevator).(none.(p0_PID.(sn.(s._testIfNextStable)))))=>
+  (all PID_aa: PID - p0_PID | (PID_aa.(s.System_Elevator_called)) =
+                              (PID_aa.(sn.System_Elevator_called)))
+  (all PID_aa: PID - p0_PID | (PID_aa.(s.System_Elevator_current)) =
+                              (PID_aa.(sn.System_Elevator_current)))
+  (s.System_Controller_callToSend) =
+  (sn.System_Controller_callToSend)
+  (all PID_aa: one
+  PID | (PID_aa.(s.System_Elevator_direction)) =
+          (PID_aa.(sn.System_Elevator_direction)))
+  ((p0_PID -> System_Elevator).(none.(p0_PID.(sn.(s._nextIsStable)))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -431,7 +478,17 @@ pred System_Elevator_Idle_DefaultToGround_post [
   (((s.dsh_conf1) - (p0_PID -> System_Elevator_Idle)) +
      (p0_PID -> System_Elevator_Idle))
   (p0_PID.(sn.System_Elevator_current)) = (Floor.min)
-  ((p0_PID -> System_Elevator).(none.(p0_PID.(sn.(s._testIfNextStable)))))=>
+  (all PID_aa: PID - p0_PID | (PID_aa.(s.System_Elevator_current)) =
+                              (PID_aa.(sn.System_Elevator_current)))
+  (s.System_Controller_callToSend) =
+  (sn.System_Controller_callToSend)
+  (all PID_aa: one
+  PID | (PID_aa.(s.System_Elevator_direction)) =
+          (PID_aa.(sn.System_Elevator_direction)))
+  (all PID_aa: one
+  PID | (PID_aa.(s.System_Elevator_called)) =
+          (PID_aa.(sn.System_Elevator_called)))
+  ((p0_PID -> System_Elevator).(none.(p0_PID.(sn.(s._nextIsStable)))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -503,7 +560,16 @@ pred System_Elevator_MovingUp_MoveUp_post [
   (p0_PID.(sn.System_Elevator_called)) =
     ((p0_PID.(s.System_Elevator_called)) -
        (p0_PID.(sn.System_Elevator_current)))
-  ((p0_PID -> System_Elevator).(none.(p0_PID.(sn.(s._testIfNextStable)))))=>
+  (all PID_aa: PID - p0_PID | (PID_aa.(s.System_Elevator_called)) =
+                              (PID_aa.(sn.System_Elevator_called)))
+  (all PID_aa: PID - p0_PID | (PID_aa.(s.System_Elevator_current)) =
+                              (PID_aa.(sn.System_Elevator_current)))
+  (s.System_Controller_callToSend) =
+  (sn.System_Controller_callToSend)
+  (all PID_aa: one
+  PID | (PID_aa.(s.System_Elevator_direction)) =
+          (PID_aa.(sn.System_Elevator_direction)))
+  ((p0_PID -> System_Elevator).(none.(p0_PID.(sn.(s._nextIsStable)))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -565,7 +631,18 @@ pred System_Elevator_MovingUp_Idle_post [
       (p0_PID -> System_Elevator_Idle)) +
      (p0_PID -> System_Elevator_Idle))
   (p0_PID.(s.System_Elevator_current)) = (Floor.min)
-  ((p0_PID -> System_Elevator).(none.(p0_PID.(sn.(s._testIfNextStable)))))=>
+  (s.System_Controller_callToSend) =
+  (sn.System_Controller_callToSend)
+  (all PID_aa: one
+  PID | (PID_aa.(s.System_Elevator_direction)) =
+          (PID_aa.(sn.System_Elevator_direction)))
+  (all PID_aa: one
+  PID | (PID_aa.(s.System_Elevator_called)) =
+          (PID_aa.(sn.System_Elevator_called)))
+  (all PID_aa: one
+  PID | (PID_aa.(s.System_Elevator_current)) =
+          (PID_aa.(sn.System_Elevator_current)))
+  ((p0_PID -> System_Elevator).(none.(p0_PID.(sn.(s._nextIsStable)))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -631,7 +708,17 @@ pred System_Elevator_MovingDown_ElevatorInCalled_post [
   (p0_PID.(sn.System_Elevator_called)) =
   ((p0_PID.(s.System_Elevator_called)) -
      (p0_PID.(s.System_Elevator_current)))
-  ((p0_PID -> System_Elevator).(none.(p0_PID.(sn.(s._testIfNextStable)))))=>
+  (all PID_aa: PID - p0_PID | (PID_aa.(s.System_Elevator_called)) =
+                              (PID_aa.(sn.System_Elevator_called)))
+  (s.System_Controller_callToSend) =
+  (sn.System_Controller_callToSend)
+  (all PID_aa: one
+  PID | (PID_aa.(s.System_Elevator_direction)) =
+          (PID_aa.(sn.System_Elevator_direction)))
+  (all PID_aa: one
+  PID | (PID_aa.(s.System_Elevator_current)) =
+          (PID_aa.(sn.System_Elevator_current)))
+  ((p0_PID -> System_Elevator).(none.(p0_PID.(sn.(s._nextIsStable)))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -704,7 +791,17 @@ pred System_Elevator_MovingDown_ChangeDirToUp_post [
       (p0_PID -> System_Elevator_Idle)) +
      (p0_PID -> System_Elevator_MovingUp))
   (p0_PID.(sn.System_Elevator_direction)) = Up
-  ((p0_PID -> System_Elevator).(none.(p0_PID.(sn.(s._testIfNextStable)))))=>
+  (all PID_aa: PID - p0_PID | (PID_aa.(s.System_Elevator_direction)) =
+                              (PID_aa.(sn.System_Elevator_direction)))
+  (s.System_Controller_callToSend) =
+  (sn.System_Controller_callToSend)
+  (all PID_aa: one
+  PID | (PID_aa.(s.System_Elevator_called)) =
+          (PID_aa.(sn.System_Elevator_called)))
+  (all PID_aa: one
+  PID | (PID_aa.(s.System_Elevator_current)) =
+          (PID_aa.(sn.System_Elevator_current)))
+  ((p0_PID -> System_Elevator).(none.(p0_PID.(sn.(s._nextIsStable)))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -794,7 +891,13 @@ pred System_Controller_SendingUpRequest_post [
                                                                                   e0 | (others.(sn.System_Elevator_called)) =
                                                                                          (others.(s.System_Elevator_called))))
 
-  ((none -> none).(System_Controller.(none.(sn.(s._testIfNextStable)))))=>
+  (all PID_aa: one
+  PID | (PID_aa.(s.System_Elevator_direction)) =
+          (PID_aa.(sn.System_Elevator_direction)))
+  (all PID_aa: one
+  PID | (PID_aa.(s.System_Elevator_current)) =
+          (PID_aa.(sn.System_Elevator_current)))
+  ((none -> none).(System_Controller.(none.(sn.(s._nextIsStable)))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -856,7 +959,17 @@ pred System_Elevator_MovingUp_ElevatorInCalled_post [
   (p0_PID.(sn.System_Elevator_called)) =
   ((p0_PID.(s.System_Elevator_called)) -
      (p0_PID.(s.System_Elevator_current)))
-  ((p0_PID -> System_Elevator).(none.(p0_PID.(sn.(s._testIfNextStable)))))=>
+  (all PID_aa: PID - p0_PID | (PID_aa.(s.System_Elevator_called)) =
+                              (PID_aa.(sn.System_Elevator_called)))
+  (s.System_Controller_callToSend) =
+  (sn.System_Controller_callToSend)
+  (all PID_aa: one
+  PID | (PID_aa.(s.System_Elevator_direction)) =
+          (PID_aa.(sn.System_Elevator_direction)))
+  (all PID_aa: one
+  PID | (PID_aa.(s.System_Elevator_current)) =
+          (PID_aa.(sn.System_Elevator_current)))
+  ((p0_PID -> System_Elevator).(none.(p0_PID.(sn.(s._nextIsStable)))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -897,7 +1010,7 @@ pred System_Elevator_MovingUp_ElevatorInCalled [
   p0_PID.(sn.(s.System_Elevator_MovingUp_ElevatorInCalled_post))
 }
 
-pred _testIfNextStable [
+pred _nextIsStable [
 	s: one DshSnapshot,
 	sn: one DshSnapshot,
 	p0_PID: one PID,
@@ -920,19 +1033,33 @@ pred _testIfNextStable [
 pred dsh_small_step [
 	s: one DshSnapshot,
 	sn: one DshSnapshot] {
-  (some p0_PID: one
-  PID | { sn.(s.System_Controller_SendingDownRequest) or
-            p0_PID.(sn.(s.System_Elevator_MovingUp_ChangeDirToDown)) or
-            p0_PID.(sn.(s.System_Elevator_Idle_Move)) or
-            p0_PID.(sn.(s.System_Elevator_MovingDown_Idle)) or
-            p0_PID.(sn.(s.System_Elevator_MovingDown_MoveDown)) or
-            p0_PID.(sn.(s.System_Elevator_Idle_DefaultToGround)) or
-            p0_PID.(sn.(s.System_Elevator_MovingUp_MoveUp)) or
-            p0_PID.(sn.(s.System_Elevator_MovingUp_Idle)) or
-            p0_PID.(sn.(s.System_Elevator_MovingDown_ElevatorInCalled)) or
-            p0_PID.(sn.(s.System_Elevator_MovingDown_ChangeDirToUp)) or
-            sn.(s.System_Controller_SendingUpRequest) or
-            p0_PID.(sn.(s.System_Elevator_MovingUp_ElevatorInCalled)) })
+  { (some p0_PID: one
+      PID | { sn.(s.System_Controller_SendingDownRequest) or
+                p0_PID.(sn.(s.System_Elevator_MovingUp_ChangeDirToDown)) or
+                p0_PID.(sn.(s.System_Elevator_Idle_Move)) or
+                p0_PID.(sn.(s.System_Elevator_MovingDown_Idle)) or
+                p0_PID.(sn.(s.System_Elevator_MovingDown_MoveDown)) or
+                p0_PID.(sn.(s.System_Elevator_Idle_DefaultToGround)) or
+                p0_PID.(sn.(s.System_Elevator_MovingUp_MoveUp)) or
+                p0_PID.(sn.(s.System_Elevator_MovingUp_Idle)) or
+                p0_PID.(sn.(s.System_Elevator_MovingDown_ElevatorInCalled)) or
+                p0_PID.(sn.(s.System_Elevator_MovingDown_ChangeDirToUp)) or
+                sn.(s.System_Controller_SendingUpRequest) or
+                p0_PID.(sn.(s.System_Elevator_MovingUp_ElevatorInCalled)) }) or
+    !((some p0_PID: one
+         PID | { s.System_Controller_SendingDownRequest_pre or
+                   p0_PID.(s.System_Elevator_MovingUp_ChangeDirToDown_pre) or
+                   p0_PID.(s.System_Elevator_Idle_Move_pre) or
+                   p0_PID.(s.System_Elevator_MovingDown_Idle_pre) or
+                   p0_PID.(s.System_Elevator_MovingDown_MoveDown_pre) or
+                   p0_PID.(s.System_Elevator_Idle_DefaultToGround_pre) or
+                   p0_PID.(s.System_Elevator_MovingUp_MoveUp_pre) or
+                   p0_PID.(s.System_Elevator_MovingUp_Idle_pre) or
+                   p0_PID.(s.System_Elevator_MovingDown_ElevatorInCalled_pre) or
+                   p0_PID.(s.System_Elevator_MovingDown_ChangeDirToUp_pre) or
+                   s.System_Controller_SendingUpRequest_pre or
+                   p0_PID.(s.System_Elevator_MovingUp_ElevatorInCalled_pre) })) and
+      s = sn }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

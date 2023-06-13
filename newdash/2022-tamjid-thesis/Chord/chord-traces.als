@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-11 19:17:55
+   on 2023-06-13 15:57:38
 */
 
 open util/ordering[Node] as node
@@ -119,7 +119,15 @@ pred System_N_Live_StabilizeFromPrdc_post [
                   p0_Node | (n.(sn.System_N_saved)) =
                               (n.(s.System_N_saved)))
   
-  ((p0_Node -> System_N).(none.(p0_Node.(sn.(s._testIfNextStable)))))=>
+  (all Node_aa: Node - p0_Node | (Node_aa.(s.System_N_frst)) =
+                                 (Node_aa.(sn.System_N_frst)))
+  (all Node_aa: Node - p0_Node | (Node_aa.(s.System_N_scnd)) =
+                                 (Node_aa.(sn.System_N_scnd)))
+  (all Node_aa: one
+  Node | (Node_aa.(s.System_N_prdc)) =
+           (Node_aa.(sn.System_N_prdc)))
+  (s.System_members) = (sn.System_members)
+  ((p0_Node -> System_N).(none.(p0_Node.(sn.(s._nextIsStable)))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -179,7 +187,22 @@ pred System_N_Live_Flush_post [
   (((s.dsh_conf1) - (p0_Node -> System_N_Live)) +
      (p0_Node -> System_N_Live))
   (p0_Node.(sn.System_N_prdc)) = none
-  ((p0_Node -> System_N).(none.(p0_Node.(sn.(s._testIfNextStable)))))=>
+  (all Node_aa: Node - p0_Node | (Node_aa.(s.System_N_prdc)) =
+                                 (Node_aa.(sn.System_N_prdc)))
+  (all Node_aa: one
+  Node | (Node_aa.(s.System_N_status)) =
+           (Node_aa.(sn.System_N_status)))
+  (all Node_aa: one
+  Node | (Node_aa.(s.System_N_saved)) =
+           (Node_aa.(sn.System_N_saved)))
+  (all Node_aa: one
+  Node | (Node_aa.(s.System_N_frst)) =
+           (Node_aa.(sn.System_N_frst)))
+  (all Node_aa: one
+  Node | (Node_aa.(s.System_N_scnd)) =
+           (Node_aa.(sn.System_N_scnd)))
+  (s.System_members) = (sn.System_members)
+  ((p0_Node -> System_N).(none.(p0_Node.(sn.(s._nextIsStable)))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -245,7 +268,18 @@ pred System_N_Live_Fail_post [
   (p0_Node.(sn.System_N_scnd)) = none and
   (p0_Node.(sn.System_N_prdc)) = none and
   (p0_Node.(sn.System_N_status)) = none
-  ((p0_Node -> System_N).(none.(p0_Node.(sn.(s._testIfNextStable)))))=>
+  (all Node_aa: Node - p0_Node | (Node_aa.(s.System_N_status)) =
+                                 (Node_aa.(sn.System_N_status)))
+  (all Node_aa: Node - p0_Node | (Node_aa.(s.System_N_frst)) =
+                                 (Node_aa.(sn.System_N_frst)))
+  (all Node_aa: Node - p0_Node | (Node_aa.(s.System_N_scnd)) =
+                                 (Node_aa.(sn.System_N_scnd)))
+  (all Node_aa: Node - p0_Node | (Node_aa.(s.System_N_prdc)) =
+                                 (Node_aa.(sn.System_N_prdc)))
+  (all Node_aa: one
+  Node | (Node_aa.(s.System_N_saved)) =
+           (Node_aa.(sn.System_N_saved)))
+  ((p0_Node -> System_N).(none.(p0_Node.(sn.(s._nextIsStable)))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -348,7 +382,15 @@ pred System_N_Live_StabilizeFromSucc_post [
            )
       
 
-  ((p0_Node -> System_N).(none.(p0_Node.(sn.(s._testIfNextStable)))))=>
+  (all Node_aa: Node - p0_Node | (Node_aa.(s.System_N_frst)) =
+                                 (Node_aa.(sn.System_N_frst)))
+  (all Node_aa: Node - p0_Node | (Node_aa.(s.System_N_scnd)) =
+                                 (Node_aa.(sn.System_N_scnd)))
+  (all Node_aa: one
+  Node | (Node_aa.(s.System_N_prdc)) =
+           (Node_aa.(sn.System_N_prdc)))
+  (s.System_members) = (sn.System_members)
+  ((p0_Node -> System_N).(none.(p0_Node.(sn.(s._nextIsStable)))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -417,7 +459,22 @@ pred System_N_Live_Rectify_post [
     (p0_Node.(sn.System_N_prdc)) =
       (p0_Node.(s.System_N_prdc))
 
-  ((p0_Node -> System_N).(none.(p0_Node.(sn.(s._testIfNextStable)))))=>
+  (all Node_aa: Node - p0_Node | (Node_aa.(s.System_N_prdc)) =
+                                 (Node_aa.(sn.System_N_prdc)))
+  (all Node_aa: one
+  Node | (Node_aa.(s.System_N_status)) =
+           (Node_aa.(sn.System_N_status)))
+  (all Node_aa: one
+  Node | (Node_aa.(s.System_N_saved)) =
+           (Node_aa.(sn.System_N_saved)))
+  (all Node_aa: one
+  Node | (Node_aa.(s.System_N_frst)) =
+           (Node_aa.(sn.System_N_frst)))
+  (all Node_aa: one
+  Node | (Node_aa.(s.System_N_scnd)) =
+           (Node_aa.(sn.System_N_scnd)))
+  (s.System_members) = (sn.System_members)
+  ((p0_Node -> System_N).(none.(p0_Node.(sn.(s._nextIsStable)))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -477,7 +534,22 @@ pred System_N_Failed_Join_post [
       (p0_Node -> System_N_Failed)) +
      (p0_Node -> System_N_Live))
   (sn.System_members) = ((s.System_members) + p0_Node)
-  ((p0_Node -> System_N).(none.(p0_Node.(sn.(s._testIfNextStable)))))=>
+  (all Node_aa: one
+  Node | (Node_aa.(s.System_N_status)) =
+           (Node_aa.(sn.System_N_status)))
+  (all Node_aa: one
+  Node | (Node_aa.(s.System_N_saved)) =
+           (Node_aa.(sn.System_N_saved)))
+  (all Node_aa: one
+  Node | (Node_aa.(s.System_N_frst)) =
+           (Node_aa.(sn.System_N_frst)))
+  (all Node_aa: one
+  Node | (Node_aa.(s.System_N_scnd)) =
+           (Node_aa.(sn.System_N_scnd)))
+  (all Node_aa: one
+  Node | (Node_aa.(s.System_N_prdc)) =
+           (Node_aa.(sn.System_N_prdc)))
+  ((p0_Node -> System_N).(none.(p0_Node.(sn.(s._nextIsStable)))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -517,7 +589,7 @@ pred System_N_Failed_Join [
   p0_Node.(sn.(s.System_N_Failed_Join_post))
 }
 
-pred _testIfNextStable [
+pred _nextIsStable [
 	s: one DshSnapshot,
 	sn: one DshSnapshot,
 	p0_Node: one Node,
@@ -534,13 +606,21 @@ pred _testIfNextStable [
 pred dsh_small_step [
 	s: one DshSnapshot,
 	sn: one DshSnapshot] {
-  (some p0_Node: one
-  Node | { p0_Node.(sn.(s.System_N_Live_StabilizeFromPrdc)) or
-             p0_Node.(sn.(s.System_N_Live_Flush)) or
-             p0_Node.(sn.(s.System_N_Live_Fail)) or
-             p0_Node.(sn.(s.System_N_Live_StabilizeFromSucc)) or
-             p0_Node.(sn.(s.System_N_Live_Rectify)) or
-             p0_Node.(sn.(s.System_N_Failed_Join)) })
+  { (some p0_Node: one
+      Node | { p0_Node.(sn.(s.System_N_Live_StabilizeFromPrdc)) or
+                 p0_Node.(sn.(s.System_N_Live_Flush)) or
+                 p0_Node.(sn.(s.System_N_Live_Fail)) or
+                 p0_Node.(sn.(s.System_N_Live_StabilizeFromSucc)) or
+                 p0_Node.(sn.(s.System_N_Live_Rectify)) or
+                 p0_Node.(sn.(s.System_N_Failed_Join)) }) or
+    !((some p0_Node: one
+         Node | { p0_Node.(s.System_N_Live_StabilizeFromPrdc_pre) or
+                    p0_Node.(s.System_N_Live_Flush_pre) or
+                    p0_Node.(s.System_N_Live_Fail_pre) or
+                    p0_Node.(s.System_N_Live_StabilizeFromSucc_pre) or
+                    p0_Node.(s.System_N_Live_Rectify_pre) or
+                    p0_Node.(s.System_N_Failed_Join_pre) })) and
+      s = sn }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

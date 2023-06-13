@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-11 19:17:42
+   on 2023-06-13 15:57:25
 */
 
 open util/boolean
@@ -245,7 +245,15 @@ pred dsh_small_step [
     sn.(s.SnapshotUI_Snapshot_Logout) or
     sn.(s.SnapshotUI_Snapshot_Reports_Students_SeeAnswers) or
     sn.(s.SnapshotUI_Snapshot_Answers_SeeStudents) or
-    sn.(s.SnapshotUI_Snapshot_Reports_SeeStudents) }
+    sn.(s.SnapshotUI_Snapshot_Reports_SeeStudents) or
+    !({ s.SnapshotUI_Snapshot_Reports_SeeStandards_pre or
+          s.SnapshotUI_LoginPage_Login_pre or
+          s.SnapshotUI_Snapshot_Reports_SeeSummary_pre or
+          s.SnapshotUI_Snapshot_Logout_pre or
+          s.SnapshotUI_Snapshot_Reports_Students_SeeAnswers_pre or
+          s.SnapshotUI_Snapshot_Answers_SeeStudents_pre or
+          s.SnapshotUI_Snapshot_Reports_SeeStudents_pre }) and
+      s = sn }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

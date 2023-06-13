@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-11 19:17:58
+   on 2023-06-13 15:57:41
 */
 
 open util/ordering[Temp] as temp
@@ -120,7 +120,19 @@ pred HeatingSystem_Functioning_Controller_Off_T8_post [
   (sn.dsh_conf1) = (s.dsh_conf1)
   (sn.HeatingSystem_Functioning_Controller_controllerOn) =
   True
-  ((none -> none).((none -> none).(HeatingSystem_furnaceReset.(HeatingSystem_Functioning_Controller.(none.(sn.(s._testIfNextStable)))))))=>
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_requestHeat)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_requestHeat)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_actualTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_actualTemp)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_desiredTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_desiredTemp)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_valvePos)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_valvePos)))
+  ((none -> none).((none -> none).(HeatingSystem_furnaceReset.(HeatingSystem_Functioning_Controller.(none.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -202,7 +214,21 @@ pred HeatingSystem_Functioning_Controller_On_Heater_Active_T10_post [
       HeatingSystem_Functioning_Controller_On_Heater_Active) +
      HeatingSystem_Functioning_Controller_On_Idle)
   (sn.dsh_conf1) = (s.dsh_conf1)
-  ((none -> none).((none -> none).(HeatingSystem_deactivate.(HeatingSystem_Functioning_Controller.(none.(sn.(s._testIfNextStable)))))))=>
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_requestHeat)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_requestHeat)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_actualTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_actualTemp)))
+  (s.HeatingSystem_Functioning_Controller_controllerOn) =
+  (sn.HeatingSystem_Functioning_Controller_controllerOn)
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_desiredTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_desiredTemp)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_valvePos)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_valvePos)))
+  ((none -> none).((none -> none).(HeatingSystem_deactivate.(HeatingSystem_Functioning_Controller.(none.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -298,7 +324,19 @@ pred HeatingSystem_Functioning_Controller_On_Heater_Active_T11_post [
         HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool))
   (sn.HeatingSystem_Functioning_Controller_controllerOn) =
   False
-  ((none -> none).((none -> none).(none.(HeatingSystem.(none.(sn.(s._testIfNextStable)))))))=>
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_requestHeat)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_requestHeat)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_actualTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_actualTemp)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_desiredTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_desiredTemp)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_valvePos)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_valvePos)))
+  ((none -> none).((none -> none).(none.(HeatingSystem.(none.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -375,7 +413,21 @@ pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running_T4_post [
       HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running) +
      HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Off)
   (sn.dsh_conf1) = (s.dsh_conf1)
-  ((none -> none).((none -> none).(none.(HeatingSystem_Functioning_Furnace.(none.(sn.(s._testIfNextStable)))))))=>
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_requestHeat)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_requestHeat)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_actualTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_actualTemp)))
+  (s.HeatingSystem_Functioning_Controller_controllerOn) =
+  (sn.HeatingSystem_Functioning_Controller_controllerOn)
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_desiredTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_desiredTemp)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_valvePos)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_valvePos)))
+  ((none -> none).((none -> none).(none.(HeatingSystem_Functioning_Furnace.(none.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -463,7 +515,21 @@ pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running_T5_post [
          HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating)) -
      (Identifier ->
         HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool))
-  ((none -> none).((none -> none).(none.(HeatingSystem.(none.(sn.(s._testIfNextStable)))))))=>
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_requestHeat)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_requestHeat)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_actualTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_actualTemp)))
+  (s.HeatingSystem_Functioning_Controller_controllerOn) =
+  (sn.HeatingSystem_Functioning_Controller_controllerOn)
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_desiredTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_desiredTemp)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_valvePos)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_valvePos)))
+  ((none -> none).((none -> none).(none.(HeatingSystem.(none.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -538,7 +604,21 @@ pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Activating_T3_post
       HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running) +
      HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running)
   (sn.dsh_conf1) = (s.dsh_conf1)
-  ((none -> none).((none -> none).(HeatingSystem_furnaceRunning.(HeatingSystem_Functioning_Furnace.(none.(sn.(s._testIfNextStable)))))))=>
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_requestHeat)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_requestHeat)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_actualTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_actualTemp)))
+  (s.HeatingSystem_Functioning_Controller_controllerOn) =
+  (sn.HeatingSystem_Functioning_Controller_controllerOn)
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_desiredTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_desiredTemp)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_valvePos)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_valvePos)))
+  ((none -> none).((none -> none).(HeatingSystem_furnaceRunning.(HeatingSystem_Functioning_Furnace.(none.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -623,8 +703,21 @@ pred HeatingSystem_Functioning_Room_No_Heat_Request_Idle_No_Heat_coolRoom_post [
         HeatingSystem_Functioning_Room_No_Heat_Request_Idle_No_Heat))
   (p0_Identifier.(sn.HeatingSystem_Functioning_Room_actualTemp)) =
   ((p0_Identifier.(s.HeatingSystem_Functioning_Room_actualTemp)).temp/prev)
+  (all Identifier_aa: Identifier - p0_Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_actualTemp)) =
+                                                   (Identifier_aa.(sn.HeatingSystem_Functioning_Room_actualTemp)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_requestHeat)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_requestHeat)))
+  (s.HeatingSystem_Functioning_Controller_controllerOn) =
+  (sn.HeatingSystem_Functioning_Controller_controllerOn)
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_desiredTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_desiredTemp)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_valvePos)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_valvePos)))
   ((none -> none).((p0_Identifier ->
-                    HeatingSystem_Functioning_Room).(none.(none.(p0_Identifier.(sn.(s._testIfNextStable)))))))=>
+                    HeatingSystem_Functioning_Room).(none.(none.(p0_Identifier.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -708,8 +801,22 @@ pred HeatingSystem_Functioning_Room_No_Heat_Request_Idle_No_Heat_T12_post [
          HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat)) +
      (p0_Identifier ->
         HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_requestHeat)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_requestHeat)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_actualTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_actualTemp)))
+  (s.HeatingSystem_Functioning_Controller_controllerOn) =
+  (sn.HeatingSystem_Functioning_Controller_controllerOn)
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_desiredTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_desiredTemp)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_valvePos)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_valvePos)))
   ((none -> none).((p0_Identifier ->
-                    HeatingSystem_Functioning_Room).(none.(none.(p0_Identifier.(sn.(s._testIfNextStable)))))))=>
+                    HeatingSystem_Functioning_Room).(none.(none.(p0_Identifier.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -801,8 +908,21 @@ pred HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T17_post [
         HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool))
   (p0_Identifier.(sn.HeatingSystem_Functioning_Room_valvePos)) =
   CLOSED
+  (all Identifier_aa: Identifier - p0_Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_valvePos)) =
+                                                   (Identifier_aa.(sn.HeatingSystem_Functioning_Room_valvePos)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_requestHeat)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_requestHeat)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_actualTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_actualTemp)))
+  (s.HeatingSystem_Functioning_Controller_controllerOn) =
+  (sn.HeatingSystem_Functioning_Controller_controllerOn)
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_desiredTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_desiredTemp)))
   ((none -> none).((p0_Identifier ->
-                    HeatingSystem_Functioning_Room).(none.(none.(p0_Identifier.(sn.(s._testIfNextStable)))))))=>
+                    HeatingSystem_Functioning_Room).(none.(none.(p0_Identifier.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -888,7 +1008,21 @@ pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Off_T1_post [
       HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running) +
      HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Activating)
   (sn.dsh_conf1) = (s.dsh_conf1)
-  ((none -> none).((none -> none).(none.(HeatingSystem_Functioning_Furnace.(none.(sn.(s._testIfNextStable)))))))=>
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_requestHeat)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_requestHeat)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_actualTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_actualTemp)))
+  (s.HeatingSystem_Functioning_Controller_controllerOn) =
+  (sn.HeatingSystem_Functioning_Controller_controllerOn)
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_desiredTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_desiredTemp)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_valvePos)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_valvePos)))
+  ((none -> none).((none -> none).(none.(HeatingSystem_Functioning_Furnace.(none.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -965,8 +1099,22 @@ pred HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T16_post [
          HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool)) +
      (p0_Identifier ->
         HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_requestHeat)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_requestHeat)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_actualTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_actualTemp)))
+  (s.HeatingSystem_Functioning_Controller_controllerOn) =
+  (sn.HeatingSystem_Functioning_Controller_controllerOn)
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_desiredTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_desiredTemp)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_valvePos)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_valvePos)))
   ((none -> none).((p0_Identifier ->
-                    HeatingSystem_Functioning_Room).(none.(none.(p0_Identifier.(sn.(s._testIfNextStable)))))))=>
+                    HeatingSystem_Functioning_Room).(none.(none.(p0_Identifier.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -1062,7 +1210,21 @@ pred HeatingSystem_ERROR_T19_post [
          HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool)) +
      (Identifier ->
         HeatingSystem_Functioning_Room_No_Heat_Request_Idle_No_Heat))
-  ((none -> none).((none -> none).(none.(HeatingSystem.(none.(sn.(s._testIfNextStable)))))))=>
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_requestHeat)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_requestHeat)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_actualTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_actualTemp)))
+  (s.HeatingSystem_Functioning_Controller_controllerOn) =
+  (sn.HeatingSystem_Functioning_Controller_controllerOn)
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_desiredTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_desiredTemp)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_valvePos)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_valvePos)))
+  ((none -> none).((none -> none).(none.(HeatingSystem.(none.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -1160,8 +1322,20 @@ pred HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T18_post [
   False and
   (p0_Identifier.(sn.HeatingSystem_Functioning_Room_actualTemp)) =
     (p0_Identifier.(s.HeatingSystem_Functioning_Room_desiredTemp))
+  (all Identifier_aa: Identifier - p0_Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_requestHeat)) =
+                                                   (Identifier_aa.(sn.HeatingSystem_Functioning_Room_requestHeat)))
+  (all Identifier_aa: Identifier - p0_Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_actualTemp)) =
+                                                   (Identifier_aa.(sn.HeatingSystem_Functioning_Room_actualTemp)))
+  (s.HeatingSystem_Functioning_Controller_controllerOn) =
+  (sn.HeatingSystem_Functioning_Controller_controllerOn)
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_desiredTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_desiredTemp)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_valvePos)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_valvePos)))
   ((none -> none).((p0_Identifier ->
-                    HeatingSystem_Functioning_Room).(none.(none.(p0_Identifier.(sn.(s._testIfNextStable)))))))=>
+                    HeatingSystem_Functioning_Room).(none.(none.(p0_Identifier.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -1262,8 +1436,21 @@ pred HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T14_post [
         HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat))
   (p0_Identifier.(sn.HeatingSystem_Functioning_Room_valvePos)) =
   OPEN
+  (all Identifier_aa: Identifier - p0_Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_valvePos)) =
+                                                   (Identifier_aa.(sn.HeatingSystem_Functioning_Room_valvePos)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_requestHeat)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_requestHeat)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_actualTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_actualTemp)))
+  (s.HeatingSystem_Functioning_Controller_controllerOn) =
+  (sn.HeatingSystem_Functioning_Controller_controllerOn)
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_desiredTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_desiredTemp)))
   ((none -> none).((p0_Identifier ->
-                    HeatingSystem_Functioning_Room).(none.(none.(p0_Identifier.(sn.(s._testIfNextStable)))))))=>
+                    HeatingSystem_Functioning_Room).(none.(none.(p0_Identifier.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -1363,8 +1550,21 @@ pred HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T15_post [
         HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating))
   (p0_Identifier.(sn.HeatingSystem_Functioning_Room_requestHeat)) =
   True
+  (all Identifier_aa: Identifier - p0_Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_requestHeat)) =
+                                                   (Identifier_aa.(sn.HeatingSystem_Functioning_Room_requestHeat)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_actualTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_actualTemp)))
+  (s.HeatingSystem_Functioning_Controller_controllerOn) =
+  (sn.HeatingSystem_Functioning_Controller_controllerOn)
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_desiredTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_desiredTemp)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_valvePos)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_valvePos)))
   ((none -> none).((p0_Identifier ->
-                    HeatingSystem_Functioning_Room).(none.(none.(p0_Identifier.(sn.(s._testIfNextStable)))))))=>
+                    HeatingSystem_Functioning_Room).(none.(none.(p0_Identifier.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -1443,7 +1643,21 @@ pred HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Activating_T2_post
       HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running) +
      HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Off)
   (sn.dsh_conf1) = (s.dsh_conf1)
-  ((none -> none).((none -> none).(none.(HeatingSystem_Functioning_Furnace.(none.(sn.(s._testIfNextStable)))))))=>
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_requestHeat)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_requestHeat)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_actualTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_actualTemp)))
+  (s.HeatingSystem_Functioning_Controller_controllerOn) =
+  (sn.HeatingSystem_Functioning_Controller_controllerOn)
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_desiredTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_desiredTemp)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_valvePos)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_valvePos)))
+  ((none -> none).((none -> none).(none.(HeatingSystem_Functioning_Furnace.(none.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -1523,8 +1737,21 @@ pred HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_T15_post [
         HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool))
   (p0_Identifier.(sn.HeatingSystem_Functioning_Room_valvePos)) =
   CLOSED
+  (all Identifier_aa: Identifier - p0_Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_valvePos)) =
+                                                   (Identifier_aa.(sn.HeatingSystem_Functioning_Room_valvePos)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_requestHeat)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_requestHeat)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_actualTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_actualTemp)))
+  (s.HeatingSystem_Functioning_Controller_controllerOn) =
+  (sn.HeatingSystem_Functioning_Controller_controllerOn)
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_desiredTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_desiredTemp)))
   ((none -> none).((p0_Identifier ->
-                    HeatingSystem_Functioning_Room).(none.(none.(p0_Identifier.(sn.(s._testIfNextStable)))))))=>
+                    HeatingSystem_Functioning_Room).(none.(none.(p0_Identifier.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -1608,8 +1835,22 @@ pred HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T13_post [
          HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat)) +
      (p0_Identifier ->
         HeatingSystem_Functioning_Room_No_Heat_Request_Idle_No_Heat))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_requestHeat)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_requestHeat)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_actualTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_actualTemp)))
+  (s.HeatingSystem_Functioning_Controller_controllerOn) =
+  (sn.HeatingSystem_Functioning_Controller_controllerOn)
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_desiredTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_desiredTemp)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_valvePos)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_valvePos)))
   ((none -> none).((p0_Identifier ->
-                    HeatingSystem_Functioning_Room).(none.(none.(p0_Identifier.(sn.(s._testIfNextStable)))))))=>
+                    HeatingSystem_Functioning_Room).(none.(none.(p0_Identifier.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -1687,7 +1928,21 @@ pred HeatingSystem_Functioning_Controller_On_Idle_T9_post [
       HeatingSystem_Functioning_Controller_On_Heater_Active) +
      HeatingSystem_Functioning_Controller_On_Heater_Active)
   (sn.dsh_conf1) = (s.dsh_conf1)
-  ((none -> none).((none -> none).(HeatingSystem_activate.(HeatingSystem_Functioning_Controller.(none.(sn.(s._testIfNextStable)))))))=>
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_requestHeat)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_requestHeat)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_actualTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_actualTemp)))
+  (s.HeatingSystem_Functioning_Controller_controllerOn) =
+  (sn.HeatingSystem_Functioning_Controller_controllerOn)
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_desiredTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_desiredTemp)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_valvePos)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_valvePos)))
+  ((none -> none).((none -> none).(HeatingSystem_activate.(HeatingSystem_Functioning_Controller.(none.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -1771,8 +2026,21 @@ pred HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_heatRoom_post [
         HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating))
   (p0_Identifier.(sn.HeatingSystem_Functioning_Room_actualTemp)) =
   ((p0_Identifier.(s.HeatingSystem_Functioning_Room_actualTemp)).temp/next)
+  (all Identifier_aa: Identifier - p0_Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_actualTemp)) =
+                                                   (Identifier_aa.(sn.HeatingSystem_Functioning_Room_actualTemp)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_requestHeat)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_requestHeat)))
+  (s.HeatingSystem_Functioning_Controller_controllerOn) =
+  (sn.HeatingSystem_Functioning_Controller_controllerOn)
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_desiredTemp)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_desiredTemp)))
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.HeatingSystem_Functioning_Room_valvePos)) =
+                 (Identifier_aa.(sn.HeatingSystem_Functioning_Room_valvePos)))
   ((none -> none).((p0_Identifier ->
-                    HeatingSystem_Functioning_Room).(none.(none.(p0_Identifier.(sn.(s._testIfNextStable)))))))=>
+                    HeatingSystem_Functioning_Room).(none.(none.(p0_Identifier.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -1829,7 +2097,7 @@ pred HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_heatRoom [
   p0_Identifier.(sn.(s.HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_heatRoom_post))
 }
 
-pred _testIfNextStable [
+pred _nextIsStable [
 	s: one DshSnapshot,
 	sn: one DshSnapshot,
 	p0_Identifier: one Identifier,
@@ -1862,27 +2130,49 @@ pred _testIfNextStable [
 pred dsh_small_step [
 	s: one DshSnapshot,
 	sn: one DshSnapshot] {
-  (some p0_Identifier: one
-  Identifier | { sn.(s.HeatingSystem_Functioning_Controller_Off_T8) or
-                   sn.(s.HeatingSystem_Functioning_Controller_On_Heater_Active_T10) or
-                   sn.(s.HeatingSystem_Functioning_Controller_On_Heater_Active_T11) or
-                   sn.(s.HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running_T4) or
-                   sn.(s.HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running_T5) or
-                   sn.(s.HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Activating_T3) or
-                   p0_Identifier.(sn.(s.HeatingSystem_Functioning_Room_No_Heat_Request_Idle_No_Heat_coolRoom)) or
-                   p0_Identifier.(sn.(s.HeatingSystem_Functioning_Room_No_Heat_Request_Idle_No_Heat_T12)) or
-                   p0_Identifier.(sn.(s.HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T17)) or
-                   sn.(s.HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Off_T1) or
-                   p0_Identifier.(sn.(s.HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T16)) or
-                   sn.(s.HeatingSystem_ERROR_T19) or
-                   p0_Identifier.(sn.(s.HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T18)) or
-                   p0_Identifier.(sn.(s.HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T14)) or
-                   p0_Identifier.(sn.(s.HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T15)) or
-                   sn.(s.HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Activating_T2) or
-                   p0_Identifier.(sn.(s.HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_T15)) or
-                   p0_Identifier.(sn.(s.HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T13)) or
-                   sn.(s.HeatingSystem_Functioning_Controller_On_Idle_T9) or
-                   p0_Identifier.(sn.(s.HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_heatRoom)) })
+  { (some p0_Identifier: one
+      Identifier | { sn.(s.HeatingSystem_Functioning_Controller_Off_T8) or
+                       sn.(s.HeatingSystem_Functioning_Controller_On_Heater_Active_T10) or
+                       sn.(s.HeatingSystem_Functioning_Controller_On_Heater_Active_T11) or
+                       sn.(s.HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running_T4) or
+                       sn.(s.HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running_T5) or
+                       sn.(s.HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Activating_T3) or
+                       p0_Identifier.(sn.(s.HeatingSystem_Functioning_Room_No_Heat_Request_Idle_No_Heat_coolRoom)) or
+                       p0_Identifier.(sn.(s.HeatingSystem_Functioning_Room_No_Heat_Request_Idle_No_Heat_T12)) or
+                       p0_Identifier.(sn.(s.HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T17)) or
+                       sn.(s.HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Off_T1) or
+                       p0_Identifier.(sn.(s.HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T16)) or
+                       sn.(s.HeatingSystem_ERROR_T19) or
+                       p0_Identifier.(sn.(s.HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T18)) or
+                       p0_Identifier.(sn.(s.HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T14)) or
+                       p0_Identifier.(sn.(s.HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T15)) or
+                       sn.(s.HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Activating_T2) or
+                       p0_Identifier.(sn.(s.HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_T15)) or
+                       p0_Identifier.(sn.(s.HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T13)) or
+                       sn.(s.HeatingSystem_Functioning_Controller_On_Idle_T9) or
+                       p0_Identifier.(sn.(s.HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_heatRoom)) }) or
+    !((some p0_Identifier: one
+         Identifier | { s.HeatingSystem_Functioning_Controller_Off_T8_pre or
+                          s.HeatingSystem_Functioning_Controller_On_Heater_Active_T10_pre or
+                          s.HeatingSystem_Functioning_Controller_On_Heater_Active_T11_pre or
+                          s.HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running_T4_pre or
+                          s.HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Running_T5_pre or
+                          s.HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Activating_T3_pre or
+                          p0_Identifier.(s.HeatingSystem_Functioning_Room_No_Heat_Request_Idle_No_Heat_coolRoom_pre) or
+                          p0_Identifier.(s.HeatingSystem_Functioning_Room_No_Heat_Request_Idle_No_Heat_T12_pre) or
+                          p0_Identifier.(s.HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T17_pre) or
+                          s.HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Off_T1_pre or
+                          p0_Identifier.(s.HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T16_pre) or
+                          s.HeatingSystem_ERROR_T19_pre or
+                          p0_Identifier.(s.HeatingSystem_Functioning_Room_Heat_Requested_Wait_For_Cool_T18_pre) or
+                          p0_Identifier.(s.HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T14_pre) or
+                          p0_Identifier.(s.HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T15_pre) or
+                          s.HeatingSystem_Functioning_Furnace_Furnace_Normal_Furnace_Activating_T2_pre or
+                          p0_Identifier.(s.HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_T15_pre) or
+                          p0_Identifier.(s.HeatingSystem_Functioning_Room_No_Heat_Request_Wait_For_Heat_T13_pre) or
+                          s.HeatingSystem_Functioning_Controller_On_Idle_T9_pre or
+                          p0_Identifier.(s.HeatingSystem_Functioning_Room_Heat_Requested_Idle_Heating_heatRoom_pre) })) and
+      s = sn }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

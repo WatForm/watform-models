@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-11 19:17:53
+   on 2023-06-13 15:57:36
 */
 
 open util/ordering[PID] as P0
@@ -68,7 +68,8 @@ pred Counter_Bit_currentBitToBit1_post [
   ((((s.dsh_conf1) - (p0_PID -> Counter_Bit_Bit1)) -
       (p0_PID -> Counter_Bit_Bit2)) +
      (p0_PID -> Counter_Bit_Bit1))
-  ((p0_PID -> Counter_Bit_Tk1).((p0_PID -> Counter_Bit).(none.(none.(p0_PID.(sn.(s._testIfNextStable)))))))=>
+  (s.Counter_current) = (sn.Counter_current)
+  ((p0_PID -> Counter_Bit_Tk1).((p0_PID -> Counter_Bit).(none.(none.(p0_PID.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -152,7 +153,8 @@ pred Counter_Bit_lastBitDone_post [
   ((((s.dsh_conf1) - (p0_PID -> Counter_Bit_Bit1)) -
       (p0_PID -> Counter_Bit_Bit2)) +
      (p0_PID -> Counter_Bit_Bit1))
-  ((none -> none).((p0_PID -> Counter_Bit).(Counter_Done.(none.(p0_PID.(sn.(s._testIfNextStable)))))))=>
+  (s.Counter_current) = (sn.Counter_current)
+  ((none -> none).((p0_PID -> Counter_Bit).(Counter_Done.(none.(p0_PID.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -235,7 +237,8 @@ pred Counter_Bit_currentBitToBit2_post [
   ((((s.dsh_conf1) - (p0_PID -> Counter_Bit_Bit1)) -
       (p0_PID -> Counter_Bit_Bit2)) +
      (p0_PID -> Counter_Bit_Bit2))
-  ((none -> none).((p0_PID -> Counter_Bit).(none.(none.(p0_PID.(sn.(s._testIfNextStable)))))))=>
+  (s.Counter_current) = (sn.Counter_current)
+  ((none -> none).((p0_PID -> Counter_Bit).(none.(none.(p0_PID.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -317,7 +320,7 @@ pred Counter_Bit_nextBitToBit1_post [
       (p0_PID -> Counter_Bit_Bit2)) +
      (p0_PID -> Counter_Bit_Bit1))
   (sn.Counter_current) = ((s.Counter_current).P0/next)
-  ((none -> none).((p0_PID -> Counter_Bit).(none.(none.(p0_PID.(sn.(s._testIfNextStable)))))))=>
+  ((none -> none).((p0_PID -> Counter_Bit).(none.(none.(p0_PID.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -392,7 +395,8 @@ pred Counter_Bit_nextBitToBit2_post [
   ((((s.dsh_conf1) - (p0_PID -> Counter_Bit_Bit1)) -
       (p0_PID -> Counter_Bit_Bit2)) +
      (p0_PID -> Counter_Bit_Bit2))
-  ((none -> none).((p0_PID -> Counter_Bit).(none.(none.(p0_PID.(sn.(s._testIfNextStable)))))))=>
+  (s.Counter_current) = (sn.Counter_current)
+  ((none -> none).((p0_PID -> Counter_Bit).(none.(none.(p0_PID.(sn.(s._nextIsStable)))))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -446,7 +450,7 @@ pred Counter_Bit_nextBitToBit2 [
   p0_PID.(sn.(s.Counter_Bit_nextBitToBit2_post))
 }
 
-pred _testIfNextStable [
+pred _nextIsStable [
 	s: one DshSnapshot,
 	sn: one DshSnapshot,
 	p0_PID: one PID,
@@ -464,12 +468,19 @@ pred _testIfNextStable [
 pred dsh_small_step [
 	s: one DshSnapshot,
 	sn: one DshSnapshot] {
-  (some p0_PID: one
-  PID | { p0_PID.(sn.(s.Counter_Bit_currentBitToBit1)) or
-            p0_PID.(sn.(s.Counter_Bit_lastBitDone)) or
-            p0_PID.(sn.(s.Counter_Bit_currentBitToBit2)) or
-            p0_PID.(sn.(s.Counter_Bit_nextBitToBit1)) or
-            p0_PID.(sn.(s.Counter_Bit_nextBitToBit2)) })
+  { (some p0_PID: one
+      PID | { p0_PID.(sn.(s.Counter_Bit_currentBitToBit1)) or
+                p0_PID.(sn.(s.Counter_Bit_lastBitDone)) or
+                p0_PID.(sn.(s.Counter_Bit_currentBitToBit2)) or
+                p0_PID.(sn.(s.Counter_Bit_nextBitToBit1)) or
+                p0_PID.(sn.(s.Counter_Bit_nextBitToBit2)) }) or
+    !((some p0_PID: one
+         PID | { p0_PID.(s.Counter_Bit_currentBitToBit1_pre) or
+                   p0_PID.(s.Counter_Bit_lastBitDone_pre) or
+                   p0_PID.(s.Counter_Bit_currentBitToBit2_pre) or
+                   p0_PID.(s.Counter_Bit_nextBitToBit1_pre) or
+                   p0_PID.(s.Counter_Bit_nextBitToBit2_pre) })) and
+      s = sn }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

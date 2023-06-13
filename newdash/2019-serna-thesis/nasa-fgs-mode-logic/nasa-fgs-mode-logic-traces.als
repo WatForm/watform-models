@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-11 19:17:39
+   on 2023-06-13 15:57:22
 */
 
 open util/boolean
@@ -226,7 +226,43 @@ pred FlightModes_LATERAL_LAPPR_Capture_post [
        FlightModes_LATERAL_LAPPR_SELECTED_ARMED) -
       FlightModes_LATERAL_LAPPR_SELECTED_ACTIVE) +
      FlightModes_LATERAL_LAPPR_SELECTED_ACTIVE)
-  (FlightModes_LATERAL_New_Lateral_Mode_Activated.(FlightModes_LATERAL_LAPPR.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (FlightModes_LATERAL_New_Lateral_Mode_Activated.(FlightModes_LATERAL_LAPPR.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -343,7 +379,43 @@ pred FlightModes_VERTICAL_ALT_NewVerticalModeActivated_post [
   ((((s.dsh_conf0) - FlightModes_VERTICAL_ALT_CLEARED) -
       FlightModes_VERTICAL_ALT_SELECTED_ACTIVE) +
      FlightModes_VERTICAL_ALT_CLEARED)
-  (none.(FlightModes_VERTICAL_ALT.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_VERTICAL_ALT.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -449,7 +521,43 @@ pred FlightModes_LATERAL_NAV_Select_post [
        FlightModes_LATERAL_NAV_SELECTED_ARMED) -
       FlightModes_LATERAL_NAV_SELECTED_ACTIVE) +
      FlightModes_LATERAL_NAV_SELECTED_ARMED)
-  (none.(FlightModes_LATERAL_NAV.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_LATERAL_NAV.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -559,7 +667,43 @@ pred FlightModes_LATERAL_NAV_NewLateralModeActivated_post [
        FlightModes_LATERAL_NAV_SELECTED_ARMED) -
       FlightModes_LATERAL_NAV_SELECTED_ACTIVE) +
      FlightModes_LATERAL_NAV_CLEARED)
-  (none.(FlightModes_LATERAL_NAV.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_LATERAL_NAV.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -665,7 +809,43 @@ pred FlightModes_ANNUNCIATIONS_TurnAnnunciationsOn_post [
   ((((s.dsh_conf0) - FlightModes_ANNUNCIATIONS_OFF) -
       FlightModes_ANNUNCIATIONS_ON) +
      FlightModes_ANNUNCIATIONS_ON)
-  (none.(FlightModes_ANNUNCIATIONS.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_ANNUNCIATIONS.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -774,7 +954,43 @@ pred FlightModes_VERTICAL_VAPPR_NewVerticalModeActivated_post [
        FlightModes_VERTICAL_VAPPR_SELECTED_ARMED) -
       FlightModes_VERTICAL_VAPPR_SELECTED_ACTIVE) +
      FlightModes_VERTICAL_VAPPR_CLEARED)
-  (none.(FlightModes_VERTICAL_VAPPR.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_VERTICAL_VAPPR.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -880,7 +1096,43 @@ pred FlightModes_ANNUNCIATIONS_TurnAnnunciationsOff_post [
   ((((s.dsh_conf0) - FlightModes_ANNUNCIATIONS_OFF) -
       FlightModes_ANNUNCIATIONS_ON) +
      FlightModes_ANNUNCIATIONS_OFF)
-  (none.(FlightModes_ANNUNCIATIONS.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_ANNUNCIATIONS.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -988,7 +1240,43 @@ pred FlightModes_LATERAL_HDG_NewLateralModeActivated_post [
   ((((s.dsh_conf0) - FlightModes_LATERAL_HDG_CLEARED) -
       FlightModes_LATERAL_HDG_SELECTED_ACTIVE) +
      FlightModes_LATERAL_HDG_CLEARED)
-  (none.(FlightModes_LATERAL_HDG.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_LATERAL_HDG.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -1094,7 +1382,43 @@ pred FlightModes_LATERAL_LGA_Select_post [
   ((((s.dsh_conf0) - FlightModes_LATERAL_LGA_CLEARED) -
       FlightModes_LATERAL_LGA_SELECTED_ACTIVE) +
      FlightModes_LATERAL_LGA_SELECTED_ACTIVE)
-  (FlightModes_LATERAL_New_Lateral_Mode_Activated.(FlightModes_LATERAL_LGA.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (FlightModes_LATERAL_New_Lateral_Mode_Activated.(FlightModes_LATERAL_LGA.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -1211,7 +1535,43 @@ pred FlightModes_VERTICAL_FLC_Clear_post [
   ((((s.dsh_conf0) - FlightModes_VERTICAL_FLC_CLEARED) -
       FlightModes_VERTICAL_FLC_SELECTED_ACTIVE) +
      FlightModes_VERTICAL_FLC_CLEARED)
-  (none.(FlightModes_VERTICAL_FLC.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_VERTICAL_FLC.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -1321,7 +1681,43 @@ pred FlightModes_LATERAL_LGA_Clear_post [
   ((((s.dsh_conf0) - FlightModes_LATERAL_LGA_CLEARED) -
       FlightModes_LATERAL_LGA_SELECTED_ACTIVE) +
      FlightModes_LATERAL_LGA_CLEARED)
-  (none.(FlightModes_LATERAL_LGA.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_LATERAL_LGA.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -1432,7 +1828,43 @@ pred FlightModes_LATERAL_NAV_Clear_post [
        FlightModes_LATERAL_NAV_SELECTED_ARMED) -
       FlightModes_LATERAL_NAV_SELECTED_ACTIVE) +
      FlightModes_LATERAL_NAV_CLEARED)
-  (none.(FlightModes_LATERAL_NAV.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_LATERAL_NAV.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -1543,7 +1975,43 @@ pred FlightModes_VERTICAL_PITCH_Select_post [
   ((((s.dsh_conf0) - FlightModes_VERTICAL_PITCH_CLEARED) -
       FlightModes_VERTICAL_PITCH_SELECTED_ACTIVE) +
      FlightModes_VERTICAL_PITCH_SELECTED_ACTIVE)
-  (none.(FlightModes_VERTICAL_PITCH.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_VERTICAL_PITCH.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -1653,7 +2121,43 @@ pred FlightModes_VERTICAL_ALTSEL_Select_post [
        FlightModes_VERTICAL_ALTSEL_SELECTED_ACTIVE_CAPTURE) -
       FlightModes_VERTICAL_ALTSEL_SELECTED_ACTIVE_TRACK) +
      FlightModes_VERTICAL_ALTSEL_SELECTED_ARMED)
-  (none.(FlightModes_VERTICAL_ALTSEL.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_VERTICAL_ALTSEL.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -1765,7 +2269,43 @@ pred FlightModes_VERTICAL_VAPPR_Capture_post [
        FlightModes_VERTICAL_VAPPR_SELECTED_ARMED) -
       FlightModes_VERTICAL_VAPPR_SELECTED_ACTIVE) +
      FlightModes_VERTICAL_VAPPR_SELECTED_ACTIVE)
-  (FlightModes_VERTICAL_New_Vertical_Mode_Activated.(FlightModes_VERTICAL_VAPPR.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (FlightModes_VERTICAL_New_Vertical_Mode_Activated.(FlightModes_VERTICAL_VAPPR.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -1880,7 +2420,43 @@ pred FlightModes_VERTICAL_VAPPR_Select_post [
        FlightModes_VERTICAL_VAPPR_SELECTED_ARMED) -
       FlightModes_VERTICAL_VAPPR_SELECTED_ACTIVE) +
      FlightModes_VERTICAL_VAPPR_SELECTED_ARMED)
-  (none.(FlightModes_VERTICAL_VAPPR.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_VERTICAL_VAPPR.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -1989,7 +2565,43 @@ pred FlightModes_VERTICAL_ALT_Clear_post [
   ((((s.dsh_conf0) - FlightModes_VERTICAL_ALT_CLEARED) -
       FlightModes_VERTICAL_ALT_SELECTED_ACTIVE) +
      FlightModes_VERTICAL_ALT_CLEARED)
-  (none.(FlightModes_VERTICAL_ALT.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_VERTICAL_ALT.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -2100,7 +2712,43 @@ pred FlightModes_VERTICAL_ALTSEL_Clear_post [
        FlightModes_VERTICAL_ALTSEL_SELECTED_ACTIVE_CAPTURE) -
       FlightModes_VERTICAL_ALTSEL_SELECTED_ACTIVE_TRACK) +
      FlightModes_VERTICAL_ALTSEL_CLEARED)
-  (none.(FlightModes_VERTICAL_ALTSEL.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_VERTICAL_ALTSEL.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -2211,7 +2859,43 @@ pred FlightModes_VERTICAL_VGA_Clear_post [
   ((((s.dsh_conf0) - FlightModes_VERTICAL_VGA_CLEARED) -
       FlightModes_VERTICAL_VGA_SELECTED_ACTIVE) +
      FlightModes_VERTICAL_VGA_CLEARED)
-  (none.(FlightModes_VERTICAL_VGA.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_VERTICAL_VGA.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -2316,7 +3000,43 @@ pred FlightModes_FD_TurnFDOff_post [
   (sn.dsh_conf0) =
   ((((s.dsh_conf0) - FlightModes_FD_OFF) - FlightModes_FD_ON) +
      FlightModes_FD_OFF)
-  (none.(FlightModes_FD.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_FD.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -2425,7 +3145,43 @@ pred FlightModes_LATERAL_ROLL_Clear_post [
   ((((s.dsh_conf0) - FlightModes_LATERAL_ROLL_CLEARED) -
       FlightModes_LATERAL_ROLL_SELECTED_ACTIVE) +
      FlightModes_LATERAL_ROLL_CLEARED)
-  (none.(FlightModes_LATERAL_ROLL.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_LATERAL_ROLL.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -2548,7 +3304,43 @@ pred FlightModes_FD_TurnFDOn_post [
   (sn.dsh_conf0) =
   ((((s.dsh_conf0) - FlightModes_FD_OFF) - FlightModes_FD_ON) +
      FlightModes_FD_ON)
-  (none.(FlightModes_FD.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_FD.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -2658,7 +3450,43 @@ pred FlightModes_LATERAL_LAPPR_Clear_post [
        FlightModes_LATERAL_LAPPR_SELECTED_ARMED) -
       FlightModes_LATERAL_LAPPR_SELECTED_ACTIVE) +
      FlightModes_LATERAL_LAPPR_CLEARED)
-  (none.(FlightModes_LATERAL_LAPPR.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_LATERAL_LAPPR.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -2768,7 +3596,43 @@ pred FlightModes_VERTICAL_ALTSEL_Capture_post [
        FlightModes_VERTICAL_ALTSEL_SELECTED_ACTIVE_CAPTURE) -
       FlightModes_VERTICAL_ALTSEL_SELECTED_ACTIVE_TRACK) +
      FlightModes_VERTICAL_ALTSEL_SELECTED_ACTIVE_CAPTURE)
-  (FlightModes_VERTICAL_New_Vertical_Mode_Activated.(FlightModes_VERTICAL_ALTSEL.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (FlightModes_VERTICAL_New_Vertical_Mode_Activated.(FlightModes_VERTICAL_ALTSEL.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -2888,7 +3752,43 @@ pred FlightModes_VERTICAL_VAPPR_Clear_post [
        FlightModes_VERTICAL_VAPPR_SELECTED_ARMED) -
       FlightModes_VERTICAL_VAPPR_SELECTED_ACTIVE) +
      FlightModes_VERTICAL_VAPPR_CLEARED)
-  (none.(FlightModes_VERTICAL_VAPPR.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_VERTICAL_VAPPR.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -2997,7 +3897,43 @@ pred FlightModes_LATERAL_LGA_NewLateralModeActivated_post [
   ((((s.dsh_conf0) - FlightModes_LATERAL_LGA_CLEARED) -
       FlightModes_LATERAL_LGA_SELECTED_ACTIVE) +
      FlightModes_LATERAL_LGA_CLEARED)
-  (none.(FlightModes_LATERAL_LGA.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_LATERAL_LGA.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -3102,7 +4038,43 @@ pred FlightModes_LATERAL_HDG_Select_post [
   ((((s.dsh_conf0) - FlightModes_LATERAL_HDG_CLEARED) -
       FlightModes_LATERAL_HDG_SELECTED_ACTIVE) +
      FlightModes_LATERAL_HDG_SELECTED_ACTIVE)
-  (FlightModes_LATERAL_New_Lateral_Mode_Activated.(FlightModes_LATERAL_HDG.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (FlightModes_LATERAL_New_Lateral_Mode_Activated.(FlightModes_LATERAL_HDG.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -3216,7 +4188,43 @@ pred FlightModes_VERTICAL_VS_Select_post [
   ((((s.dsh_conf0) - FlightModes_VERTICAL_VS_CLEARED) -
       FlightModes_VERTICAL_VS_SELECTED_ACTIVE) +
      FlightModes_VERTICAL_VS_SELECTED_ACTIVE)
-  (FlightModes_VERTICAL_New_Vertical_Mode_Activated.(FlightModes_VERTICAL_VS.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (FlightModes_VERTICAL_New_Vertical_Mode_Activated.(FlightModes_VERTICAL_VS.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -3332,7 +4340,43 @@ pred FlightModes_VERTICAL_FLC_Select_post [
   ((((s.dsh_conf0) - FlightModes_VERTICAL_FLC_CLEARED) -
       FlightModes_VERTICAL_FLC_SELECTED_ACTIVE) +
      FlightModes_VERTICAL_FLC_SELECTED_ACTIVE)
-  (FlightModes_VERTICAL_New_Vertical_Mode_Activated.(FlightModes_VERTICAL_FLC.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (FlightModes_VERTICAL_New_Vertical_Mode_Activated.(FlightModes_VERTICAL_FLC.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -3446,7 +4490,43 @@ pred FlightModes_LATERAL_NAV_Capture_post [
   ((((s.dsh_conf0) - FlightModes_LATERAL_NAV_SELECTED_ARMED) -
       FlightModes_LATERAL_NAV_SELECTED_ACTIVE) +
      FlightModes_LATERAL_NAV_SELECTED_ACTIVE)
-  (FlightModes_LATERAL_New_Lateral_Mode_Activated.(FlightModes_LATERAL_NAV.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (FlightModes_LATERAL_New_Lateral_Mode_Activated.(FlightModes_LATERAL_NAV.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -3563,7 +4643,43 @@ pred FlightModes_VERTICAL_ALT_Select_post [
   ((((s.dsh_conf0) - FlightModes_VERTICAL_ALT_CLEARED) -
       FlightModes_VERTICAL_ALT_SELECTED_ACTIVE) +
      FlightModes_VERTICAL_ALT_SELECTED_ACTIVE)
-  (FlightModes_VERTICAL_New_Vertical_Mode_Activated.(FlightModes_VERTICAL_ALT.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (FlightModes_VERTICAL_New_Vertical_Mode_Activated.(FlightModes_VERTICAL_ALT.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -3678,7 +4794,43 @@ pred FlightModes_VERTICAL_VGA_NewVerticalModeActivated_post [
   ((((s.dsh_conf0) - FlightModes_VERTICAL_VGA_CLEARED) -
       FlightModes_VERTICAL_VGA_SELECTED_ACTIVE) +
      FlightModes_VERTICAL_VGA_CLEARED)
-  (none.(FlightModes_VERTICAL_VGA.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_VERTICAL_VGA.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -3785,7 +4937,43 @@ pred FlightModes_LATERAL_HDG_Clear_post [
   ((((s.dsh_conf0) - FlightModes_LATERAL_HDG_CLEARED) -
       FlightModes_LATERAL_HDG_SELECTED_ACTIVE) +
      FlightModes_LATERAL_HDG_CLEARED)
-  (none.(FlightModes_LATERAL_HDG.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_LATERAL_HDG.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -3897,7 +5085,43 @@ pred FlightModes_VERTICAL_PITCH_Clear_post [
   ((((s.dsh_conf0) - FlightModes_VERTICAL_PITCH_CLEARED) -
       FlightModes_VERTICAL_PITCH_SELECTED_ACTIVE) +
      FlightModes_VERTICAL_PITCH_CLEARED)
-  (none.(FlightModes_VERTICAL_PITCH.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_VERTICAL_PITCH.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -4005,7 +5229,43 @@ pred FlightModes_VERTICAL_VGA_Select_post [
   ((((s.dsh_conf0) - FlightModes_VERTICAL_VGA_CLEARED) -
       FlightModes_VERTICAL_VGA_SELECTED_ACTIVE) +
      FlightModes_VERTICAL_VGA_SELECTED_ACTIVE)
-  (FlightModes_VERTICAL_New_Vertical_Mode_Activated.(FlightModes_VERTICAL_VGA.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (FlightModes_VERTICAL_New_Vertical_Mode_Activated.(FlightModes_VERTICAL_VGA.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -4121,7 +5381,43 @@ pred FlightModes_LATERAL_LAPPR_NewLateralModeActivated_post [
        FlightModes_LATERAL_LAPPR_SELECTED_ARMED) -
       FlightModes_LATERAL_LAPPR_SELECTED_ACTIVE) +
      FlightModes_LATERAL_LAPPR_CLEARED)
-  (none.(FlightModes_LATERAL_LAPPR.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_LATERAL_LAPPR.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -4227,7 +5523,43 @@ pred FlightModes_LATERAL_LAPPR_Select_post [
        FlightModes_LATERAL_LAPPR_SELECTED_ARMED) -
       FlightModes_LATERAL_LAPPR_SELECTED_ACTIVE) +
      FlightModes_LATERAL_LAPPR_SELECTED_ARMED)
-  (none.(FlightModes_LATERAL_LAPPR.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_LATERAL_LAPPR.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -4336,7 +5668,43 @@ pred FlightModes_LATERAL_ROLL_Select_post [
   ((((s.dsh_conf0) - FlightModes_LATERAL_ROLL_CLEARED) -
       FlightModes_LATERAL_ROLL_SELECTED_ACTIVE) +
      FlightModes_LATERAL_ROLL_SELECTED_ACTIVE)
-  (none.(FlightModes_LATERAL_ROLL.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_LATERAL_ROLL.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -4447,7 +5815,43 @@ pred FlightModes_VERTICAL_ALTSEL_Track_post [
        FlightModes_VERTICAL_ALTSEL_SELECTED_ACTIVE_CAPTURE) -
       FlightModes_VERTICAL_ALTSEL_SELECTED_ACTIVE_TRACK) +
      FlightModes_VERTICAL_ALTSEL_SELECTED_ACTIVE_TRACK)
-  (none.(FlightModes_VERTICAL_ALTSEL.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_VERTICAL_ALTSEL.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -4561,7 +5965,43 @@ pred FlightModes_VERTICAL_ALTSEL_NewVerticalModeActivated_post [
        FlightModes_VERTICAL_ALTSEL_SELECTED_ACTIVE_CAPTURE) -
       FlightModes_VERTICAL_ALTSEL_SELECTED_ACTIVE_TRACK) +
      FlightModes_VERTICAL_ALTSEL_CLEARED)
-  (none.(FlightModes_VERTICAL_ALTSEL.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_VERTICAL_ALTSEL.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -4670,7 +6110,43 @@ pred FlightModes_VERTICAL_VS_Clear_post [
   ((((s.dsh_conf0) - FlightModes_VERTICAL_VS_CLEARED) -
       FlightModes_VERTICAL_VS_SELECTED_ACTIVE) +
      FlightModes_VERTICAL_VS_CLEARED)
-  (none.(FlightModes_VERTICAL_VS.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_VERTICAL_VS.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -4779,7 +6255,43 @@ pred FlightModes_VERTICAL_FLC_NewVerticalModeActivated_post [
   ((((s.dsh_conf0) - FlightModes_VERTICAL_FLC_CLEARED) -
       FlightModes_VERTICAL_FLC_SELECTED_ACTIVE) +
      FlightModes_VERTICAL_FLC_CLEARED)
-  (none.(FlightModes_VERTICAL_FLC.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_VERTICAL_FLC.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -4887,7 +6399,43 @@ pred FlightModes_VERTICAL_VS_NewVerticalModeActivated_post [
   ((((s.dsh_conf0) - FlightModes_VERTICAL_VS_CLEARED) -
       FlightModes_VERTICAL_VS_SELECTED_ACTIVE) +
      FlightModes_VERTICAL_VS_CLEARED)
-  (none.(FlightModes_VERTICAL_VS.(sn.(s._testIfNextStable))))=>
+  (s.FlightModes_ROLL_Selected) =
+  (sn.FlightModes_ROLL_Selected)
+  (s.FlightModes_FLC_Selected) = (sn.FlightModes_FLC_Selected)
+  (s.FlightModes_ALT_Active) = (sn.FlightModes_ALT_Active)
+  (s.FlightModes_PITCH_Selected) =
+  (sn.FlightModes_PITCH_Selected)
+  (s.FlightModes_HDG_Selected) = (sn.FlightModes_HDG_Selected)
+  (s.FlightModes_LGA_Active) = (sn.FlightModes_LGA_Active)
+  (s.FlightModes_Modes_On) = (sn.FlightModes_Modes_On)
+  (s.FlightModes_ALTSEL_Track) = (sn.FlightModes_ALTSEL_Track)
+  (s.FlightModes_VAPPR_Selected) =
+  (sn.FlightModes_VAPPR_Selected)
+  (s.FlightModes_ALTSEL_Active) =
+  (sn.FlightModes_ALTSEL_Active)
+  (s.FlightModes_PITCH_Active) = (sn.FlightModes_PITCH_Active)
+  (s.FlightModes_NAV_Active) = (sn.FlightModes_NAV_Active)
+  (s.FlightModes_ROLL_Active) = (sn.FlightModes_ROLL_Active)
+  (s.FlightModes_ALTSEL_Selected) =
+  (sn.FlightModes_ALTSEL_Selected)
+  (s.FlightModes_VGA_Selected) = (sn.FlightModes_VGA_Selected)
+  (s.FlightModes_VAPPR_Active) = (sn.FlightModes_VAPPR_Active)
+  (s.FlightModes_LAPPR_Selected) =
+  (sn.FlightModes_LAPPR_Selected)
+  (s.FlightModes_VS_Active) = (sn.FlightModes_VS_Active)
+  (s.FlightModes_LAPPR_Active) = (sn.FlightModes_LAPPR_Active)
+  (s.FlightModes_LGA_Selected) = (sn.FlightModes_LGA_Selected)
+  (s.FlightModes_FLC_Active) = (sn.FlightModes_FLC_Active)
+  (s.FlightModes_FD_On) = (sn.FlightModes_FD_On)
+  (s.FlightModes_ALT_Selected) = (sn.FlightModes_ALT_Selected)
+  (s.FlightModes_Independent_Mode) =
+  (sn.FlightModes_Independent_Mode)
+  (s.FlightModes_HDG_Active) = (sn.FlightModes_HDG_Active)
+  (s.FlightModes_VS_Selected) = (sn.FlightModes_VS_Selected)
+  (s.FlightModes_VGA_Active) = (sn.FlightModes_VGA_Active)
+  (s.FlightModes_Active_Side) = (sn.FlightModes_Active_Side)
+  (s.FlightModes_NAV_Selected) = (sn.FlightModes_NAV_Selected)
+  (none.(FlightModes_VERTICAL_VS.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -4975,7 +6523,7 @@ pred FlightModes_VERTICAL_VS_NewVerticalModeActivated [
   sn.(s.FlightModes_VERTICAL_VS_NewVerticalModeActivated_post)
 }
 
-pred _testIfNextStable [
+pred _nextIsStable [
 	s: one DshSnapshot,
 	sn: one DshSnapshot,
 	dsh_scp0: DshStates,
@@ -5070,7 +6618,51 @@ pred dsh_small_step [
     sn.(s.FlightModes_VERTICAL_ALTSEL_NewVerticalModeActivated) or
     sn.(s.FlightModes_VERTICAL_VS_Clear) or
     sn.(s.FlightModes_VERTICAL_FLC_NewVerticalModeActivated) or
-    sn.(s.FlightModes_VERTICAL_VS_NewVerticalModeActivated) }
+    sn.(s.FlightModes_VERTICAL_VS_NewVerticalModeActivated) or
+    !({ s.FlightModes_LATERAL_LAPPR_Capture_pre or
+          s.FlightModes_VERTICAL_ALT_NewVerticalModeActivated_pre or
+          s.FlightModes_LATERAL_NAV_Select_pre or
+          s.FlightModes_LATERAL_NAV_NewLateralModeActivated_pre or
+          s.FlightModes_ANNUNCIATIONS_TurnAnnunciationsOn_pre or
+          s.FlightModes_VERTICAL_VAPPR_NewVerticalModeActivated_pre or
+          s.FlightModes_ANNUNCIATIONS_TurnAnnunciationsOff_pre or
+          s.FlightModes_LATERAL_HDG_NewLateralModeActivated_pre or
+          s.FlightModes_LATERAL_LGA_Select_pre or
+          s.FlightModes_VERTICAL_FLC_Clear_pre or
+          s.FlightModes_LATERAL_LGA_Clear_pre or
+          s.FlightModes_LATERAL_NAV_Clear_pre or
+          s.FlightModes_VERTICAL_PITCH_Select_pre or
+          s.FlightModes_VERTICAL_ALTSEL_Select_pre or
+          s.FlightModes_VERTICAL_VAPPR_Capture_pre or
+          s.FlightModes_VERTICAL_VAPPR_Select_pre or
+          s.FlightModes_VERTICAL_ALT_Clear_pre or
+          s.FlightModes_VERTICAL_ALTSEL_Clear_pre or
+          s.FlightModes_VERTICAL_VGA_Clear_pre or
+          s.FlightModes_FD_TurnFDOff_pre or
+          s.FlightModes_LATERAL_ROLL_Clear_pre or
+          s.FlightModes_FD_TurnFDOn_pre or
+          s.FlightModes_LATERAL_LAPPR_Clear_pre or
+          s.FlightModes_VERTICAL_ALTSEL_Capture_pre or
+          s.FlightModes_VERTICAL_VAPPR_Clear_pre or
+          s.FlightModes_LATERAL_LGA_NewLateralModeActivated_pre or
+          s.FlightModes_LATERAL_HDG_Select_pre or
+          s.FlightModes_VERTICAL_VS_Select_pre or
+          s.FlightModes_VERTICAL_FLC_Select_pre or
+          s.FlightModes_LATERAL_NAV_Capture_pre or
+          s.FlightModes_VERTICAL_ALT_Select_pre or
+          s.FlightModes_VERTICAL_VGA_NewVerticalModeActivated_pre or
+          s.FlightModes_LATERAL_HDG_Clear_pre or
+          s.FlightModes_VERTICAL_PITCH_Clear_pre or
+          s.FlightModes_VERTICAL_VGA_Select_pre or
+          s.FlightModes_LATERAL_LAPPR_NewLateralModeActivated_pre or
+          s.FlightModes_LATERAL_LAPPR_Select_pre or
+          s.FlightModes_LATERAL_ROLL_Select_pre or
+          s.FlightModes_VERTICAL_ALTSEL_Track_pre or
+          s.FlightModes_VERTICAL_ALTSEL_NewVerticalModeActivated_pre or
+          s.FlightModes_VERTICAL_VS_Clear_pre or
+          s.FlightModes_VERTICAL_FLC_NewVerticalModeActivated_pre or
+          s.FlightModes_VERTICAL_VS_NewVerticalModeActivated_pre }) and
+      s = sn }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

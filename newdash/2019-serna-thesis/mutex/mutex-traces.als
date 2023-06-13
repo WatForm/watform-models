@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-11 19:17:38
+   on 2023-06-13 15:57:21
 */
 
 open util/boolean
@@ -62,7 +62,7 @@ pred Mutex_Process1_enter_critical_section_post [
        Mutex_Process1_Critical) - Mutex_Process1_Wait) +
      Mutex_Process1_Critical)
   (sn.Mutex_semaphore_free) = False
-  (Mutex_Process1.(sn.(s._testIfNextStable)))=>
+  (Mutex_Process1.(sn.(s._nextIsStable)))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        { (s.dsh_stable).boolean/isTrue or
@@ -111,7 +111,8 @@ pred Mutex_Process1_give_up_post [
   (((((s.dsh_conf0) - Mutex_Process1_NonCritical) -
        Mutex_Process1_Critical) - Mutex_Process1_Wait) +
      Mutex_Process1_NonCritical)
-  (Mutex_Process1.(sn.(s._testIfNextStable)))=>
+  (s.Mutex_semaphore_free) = (sn.Mutex_semaphore_free)
+  (Mutex_Process1.(sn.(s._nextIsStable)))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        { (s.dsh_stable).boolean/isTrue or
@@ -160,7 +161,8 @@ pred Mutex_Process2_wait_post [
   (((((s.dsh_conf0) - Mutex_Process2_NonCritical) -
        Mutex_Process2_Critical) - Mutex_Process2_Wait) +
      Mutex_Process2_Wait)
-  (Mutex_Process2.(sn.(s._testIfNextStable)))=>
+  (s.Mutex_semaphore_free) = (sn.Mutex_semaphore_free)
+  (Mutex_Process2.(sn.(s._nextIsStable)))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        { (s.dsh_stable).boolean/isTrue or
@@ -211,7 +213,7 @@ pred Mutex_Process2_enter_critical_section_post [
        Mutex_Process2_Critical) - Mutex_Process2_Wait) +
      Mutex_Process2_Critical)
   (sn.Mutex_semaphore_free) = False
-  (Mutex_Process2.(sn.(s._testIfNextStable)))=>
+  (Mutex_Process2.(sn.(s._nextIsStable)))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        { (s.dsh_stable).boolean/isTrue or
@@ -262,7 +264,7 @@ pred Mutex_Process2_exit_critical_section_post [
        Mutex_Process2_Critical) - Mutex_Process2_Wait) +
      Mutex_Process2_NonCritical)
   (sn.Mutex_semaphore_free) = True
-  (Mutex_Process2.(sn.(s._testIfNextStable)))=>
+  (Mutex_Process2.(sn.(s._nextIsStable)))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        { (s.dsh_stable).boolean/isTrue or
@@ -311,7 +313,8 @@ pred Mutex_Process1_wait_post [
   (((((s.dsh_conf0) - Mutex_Process1_NonCritical) -
        Mutex_Process1_Critical) - Mutex_Process1_Wait) +
      Mutex_Process1_Wait)
-  (Mutex_Process1.(sn.(s._testIfNextStable)))=>
+  (s.Mutex_semaphore_free) = (sn.Mutex_semaphore_free)
+  (Mutex_Process1.(sn.(s._nextIsStable)))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        { (s.dsh_stable).boolean/isTrue or
@@ -362,7 +365,7 @@ pred Mutex_Process1_exit_critical_section_post [
        Mutex_Process1_Critical) - Mutex_Process1_Wait) +
      Mutex_Process1_NonCritical)
   (sn.Mutex_semaphore_free) = True
-  (Mutex_Process1.(sn.(s._testIfNextStable)))=>
+  (Mutex_Process1.(sn.(s._nextIsStable)))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        { (s.dsh_stable).boolean/isTrue or
@@ -411,7 +414,8 @@ pred Mutex_Process2_give_up_post [
   (((((s.dsh_conf0) - Mutex_Process2_NonCritical) -
        Mutex_Process2_Critical) - Mutex_Process2_Wait) +
      Mutex_Process2_NonCritical)
-  (Mutex_Process2.(sn.(s._testIfNextStable)))=>
+  (s.Mutex_semaphore_free) = (sn.Mutex_semaphore_free)
+  (Mutex_Process2.(sn.(s._nextIsStable)))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        { (s.dsh_stable).boolean/isTrue or
@@ -445,7 +449,7 @@ pred Mutex_Process2_give_up [
   sn.(s.Mutex_Process2_give_up_post)
 }
 
-pred _testIfNextStable [
+pred _nextIsStable [
 	s: one DshSnapshot,
 	sn: one DshSnapshot,
 	dsh_scp0: DshStates] {
@@ -469,7 +473,16 @@ pred dsh_small_step [
     sn.(s.Mutex_Process2_exit_critical_section) or
     sn.(s.Mutex_Process1_wait) or
     sn.(s.Mutex_Process1_exit_critical_section) or
-    sn.(s.Mutex_Process2_give_up) }
+    sn.(s.Mutex_Process2_give_up) or
+    !({ s.Mutex_Process1_enter_critical_section_pre or
+          s.Mutex_Process1_give_up_pre or
+          s.Mutex_Process2_wait_pre or
+          s.Mutex_Process2_enter_critical_section_pre or
+          s.Mutex_Process2_exit_critical_section_pre or
+          s.Mutex_Process1_wait_pre or
+          s.Mutex_Process1_exit_critical_section_pre or
+          s.Mutex_Process2_give_up_pre }) and
+      s = sn }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

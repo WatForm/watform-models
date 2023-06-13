@@ -2,7 +2,7 @@ open util/ordering[Level] as nodeLevel
 
 sig Level {}
 
-state DistrubedTreeSpanning {
+state DistributedTreeSpanning {
 	root: one Node
 
 	conc N [Node] {

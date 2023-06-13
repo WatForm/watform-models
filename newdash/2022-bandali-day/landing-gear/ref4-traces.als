@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-11 19:17:50
+   on 2023-06-13 15:57:32
 */
 
 open util/boolean
@@ -268,6 +268,7 @@ pred LandingGear_retraction_sequence_post [
   else
     ((sn.LandingGear_open_doors_electro_valve).((s.LandingGear_open_doors_electro_valve).((sn.LandingGear_close_doors_electro_valve).((s.LandingGear_close_doors_electro_valve).((sn.LandingGear_general_electro_valve).((s.LandingGear_general_electro_valve).((sn.LandingGear_doors).((s.LandingGear_doors).((s.LandingGear_f_doors_closed).close_door)))))))))
 
+  (s.LandingGear_anomaly) = (sn.LandingGear_anomaly)
 }
 
 pred LandingGear_retraction_sequence [
@@ -330,6 +331,7 @@ pred LandingGear_outgoing_sequence_post [
   else
     ((sn.LandingGear_open_doors_electro_valve).((s.LandingGear_open_doors_electro_valve).((sn.LandingGear_close_doors_electro_valve).((s.LandingGear_close_doors_electro_valve).((sn.LandingGear_general_electro_valve).((s.LandingGear_general_electro_valve).((sn.LandingGear_doors).((s.LandingGear_doors).((s.LandingGear_f_doors_closed).close_door)))))))))
 
+  (s.LandingGear_anomaly) = (sn.LandingGear_anomaly)
 }
 
 pred LandingGear_outgoing_sequence [
@@ -383,6 +385,18 @@ pred LandingGear_health_monitoring_post [
      !((s.LandingGear_f_gears_extended).all_landing_set) and
      (s.LandingGear_timeout) = True) =>
     ((sn.LandingGear_anomaly) = True)
+  (s.LandingGear_close_doors_electro_valve) =
+  (sn.LandingGear_close_doors_electro_valve)
+  (s.LandingGear_retract_gears_electro_valve) =
+  (sn.LandingGear_retract_gears_electro_valve)
+  (s.LandingGear_gears) = (sn.LandingGear_gears)
+  (s.LandingGear_open_doors_electro_valve) =
+  (sn.LandingGear_open_doors_electro_valve)
+  (s.LandingGear_extend_gears_electro_valve) =
+  (sn.LandingGear_extend_gears_electro_valve)
+  (s.LandingGear_general_electro_valve) =
+  (sn.LandingGear_general_electro_valve)
+  (s.LandingGear_doors) = (sn.LandingGear_doors)
 }
 
 pred LandingGear_health_monitoring [
@@ -397,7 +411,11 @@ pred dsh_small_step [
 	sn: one DshSnapshot] {
   { sn.(s.LandingGear_retraction_sequence) or
     sn.(s.LandingGear_outgoing_sequence) or
-    sn.(s.LandingGear_health_monitoring) }
+    sn.(s.LandingGear_health_monitoring) or
+    !({ s.LandingGear_retraction_sequence_pre or
+          s.LandingGear_outgoing_sequence_pre or
+          s.LandingGear_health_monitoring_pre }) and
+      s = sn }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

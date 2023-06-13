@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-11 19:17:44
+   on 2023-06-13 15:57:27
 */
 
 open util/boolean
@@ -154,7 +154,7 @@ pred DigitalWatch_Main_Displays_Date_return_to_time_post [
        DigitalWatch_Main_Displays_Chime) -
       DigitalWatch_Main_Displays_StopWatch) +
      DigitalWatch_Main_Displays_Time)
-  (none.(DigitalWatch_Main.(sn.(s._testIfNextStable))))=>
+  (none.(DigitalWatch_Main.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -215,7 +215,7 @@ pred DigitalWatch_Main_Displays_Date_show_time_post [
        DigitalWatch_Main_Displays_Chime) -
       DigitalWatch_Main_Displays_StopWatch) +
      DigitalWatch_Main_Displays_Time)
-  (none.(DigitalWatch_Main.(sn.(s._testIfNextStable))))=>
+  (none.(DigitalWatch_Main.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -275,7 +275,7 @@ pred DigitalWatch_Main_Displays_Update_show_time_post [
        DigitalWatch_Main_Displays_Chime) -
       DigitalWatch_Main_Displays_StopWatch) +
      DigitalWatch_Main_Displays_Time)
-  (none.(DigitalWatch_Main.(sn.(s._testIfNextStable))))=>
+  (none.(DigitalWatch_Main.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -335,7 +335,7 @@ pred DigitalWatch_Main_Displays_Alarm2_go2chime_post [
        DigitalWatch_Main_Displays_Chime) -
       DigitalWatch_Main_Displays_StopWatch) +
      DigitalWatch_Main_Displays_Chime)
-  (none.(DigitalWatch_Main.(sn.(s._testIfNextStable))))=>
+  (none.(DigitalWatch_Main.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -395,7 +395,7 @@ pred DigitalWatch_Main_Displays_Time_try_update_post [
        DigitalWatch_Main_Displays_Chime) -
       DigitalWatch_Main_Displays_StopWatch) +
      DigitalWatch_Main_Displays_Wait)
-  (none.(DigitalWatch_Main.(sn.(s._testIfNextStable))))=>
+  (none.(DigitalWatch_Main.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -456,7 +456,7 @@ pred DigitalWatch_Main_Displays_Wait_show_update_post [
        DigitalWatch_Main_Displays_Chime) -
       DigitalWatch_Main_Displays_StopWatch) +
      DigitalWatch_Main_Displays_Update)
-  (none.(DigitalWatch_Main.(sn.(s._testIfNextStable))))=>
+  (none.(DigitalWatch_Main.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -510,7 +510,7 @@ pred DigitalWatch_Light_Off_light_on_post [
   (sn.dsh_conf0) =
   ((((s.dsh_conf0) - DigitalWatch_Light_Off) -
       DigitalWatch_Light_On) + DigitalWatch_Light_On)
-  (none.(DigitalWatch_Light.(sn.(s._testIfNextStable))))=>
+  (none.(DigitalWatch_Light.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -563,7 +563,7 @@ pred DigitalWatch_Light_On_light_off_post [
   (sn.dsh_conf0) =
   ((((s.dsh_conf0) - DigitalWatch_Light_Off) -
       DigitalWatch_Light_On) + DigitalWatch_Light_Off)
-  (none.(DigitalWatch_Light.(sn.(s._testIfNextStable))))=>
+  (none.(DigitalWatch_Light.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -623,7 +623,7 @@ pred DigitalWatch_Main_Displays_Chime_go2Stopwatch_post [
        DigitalWatch_Main_Displays_Chime) -
       DigitalWatch_Main_Displays_StopWatch) +
      DigitalWatch_Main_Displays_StopWatch)
-  (none.(DigitalWatch_Main.(sn.(s._testIfNextStable))))=>
+  (none.(DigitalWatch_Main.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -683,7 +683,7 @@ pred DigitalWatch_Main_Displays_Time_go2alarm1_post [
        DigitalWatch_Main_Displays_Chime) -
       DigitalWatch_Main_Displays_StopWatch) +
      DigitalWatch_Main_Displays_Alarm1)
-  (none.(DigitalWatch_Main.(sn.(s._testIfNextStable))))=>
+  (none.(DigitalWatch_Main.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -743,7 +743,7 @@ pred DigitalWatch_Main_Displays_Time_show_date_post [
        DigitalWatch_Main_Displays_Chime) -
       DigitalWatch_Main_Displays_StopWatch) +
      DigitalWatch_Main_Displays_Date)
-  (none.(DigitalWatch_Main.(sn.(s._testIfNextStable))))=>
+  (none.(DigitalWatch_Main.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -803,7 +803,7 @@ pred DigitalWatch_Main_Displays_Wait_show_time_post [
        DigitalWatch_Main_Displays_Chime) -
       DigitalWatch_Main_Displays_StopWatch) +
      DigitalWatch_Main_Displays_Time)
-  (none.(DigitalWatch_Main.(sn.(s._testIfNextStable))))=>
+  (none.(DigitalWatch_Main.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -863,7 +863,7 @@ pred DigitalWatch_Main_Displays_Alarm1_go2alarm2_post [
        DigitalWatch_Main_Displays_Chime) -
       DigitalWatch_Main_Displays_StopWatch) +
      DigitalWatch_Main_Displays_Alarm2)
-  (none.(DigitalWatch_Main.(sn.(s._testIfNextStable))))=>
+  (none.(DigitalWatch_Main.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -923,7 +923,7 @@ pred DigitalWatch_Main_Displays_StopWatch_go2Time_post [
        DigitalWatch_Main_Displays_Chime) -
       DigitalWatch_Main_Displays_StopWatch) +
      DigitalWatch_Main_Displays_Time)
-  (none.(DigitalWatch_Main.(sn.(s._testIfNextStable))))=>
+  (none.(DigitalWatch_Main.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -961,7 +961,7 @@ pred DigitalWatch_Main_Displays_StopWatch_go2Time [
   sn.(s.DigitalWatch_Main_Displays_StopWatch_go2Time_post)
 }
 
-pred _testIfNextStable [
+pred _nextIsStable [
 	s: one DshSnapshot,
 	sn: one DshSnapshot,
 	dsh_scp0: DshStates,
@@ -998,7 +998,22 @@ pred dsh_small_step [
     sn.(s.DigitalWatch_Main_Displays_Time_show_date) or
     sn.(s.DigitalWatch_Main_Displays_Wait_show_time) or
     sn.(s.DigitalWatch_Main_Displays_Alarm1_go2alarm2) or
-    sn.(s.DigitalWatch_Main_Displays_StopWatch_go2Time) }
+    sn.(s.DigitalWatch_Main_Displays_StopWatch_go2Time) or
+    !({ s.DigitalWatch_Main_Displays_Date_return_to_time_pre or
+          s.DigitalWatch_Main_Displays_Date_show_time_pre or
+          s.DigitalWatch_Main_Displays_Update_show_time_pre or
+          s.DigitalWatch_Main_Displays_Alarm2_go2chime_pre or
+          s.DigitalWatch_Main_Displays_Time_try_update_pre or
+          s.DigitalWatch_Main_Displays_Wait_show_update_pre or
+          s.DigitalWatch_Light_Off_light_on_pre or
+          s.DigitalWatch_Light_On_light_off_pre or
+          s.DigitalWatch_Main_Displays_Chime_go2Stopwatch_pre or
+          s.DigitalWatch_Main_Displays_Time_go2alarm1_pre or
+          s.DigitalWatch_Main_Displays_Time_show_date_pre or
+          s.DigitalWatch_Main_Displays_Wait_show_time_pre or
+          s.DigitalWatch_Main_Displays_Alarm1_go2alarm2_pre or
+          s.DigitalWatch_Main_Displays_StopWatch_go2Time_pre }) and
+      s = sn }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-11 19:17:42
+   on 2023-06-13 15:57:24
 */
 
 open util/boolean
@@ -76,7 +76,7 @@ pred RDT_Sender_t2_post [
   (((((s.dsh_conf0) - RDT_Sender_ReadySendNext) -
        RDT_Sender_WaitAck) - RDT_Sender_ReadyResend) +
      RDT_Sender_WaitAck)
-  (none.(RDT_Sender.(sn.(s._testIfNextStable))))=>
+  (none.(RDT_Sender.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        { (s.dsh_stable).boolean/isTrue or
@@ -137,7 +137,7 @@ pred RDT_Sender_t1_post [
   (((((s.dsh_conf0) - RDT_Sender_ReadySendNext) -
        RDT_Sender_WaitAck) - RDT_Sender_ReadyResend) +
      RDT_Sender_WaitAck)
-  (none.(RDT_Sender.(sn.(s._testIfNextStable))))=>
+  (none.(RDT_Sender.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        { (s.dsh_stable).boolean/isTrue or
@@ -198,7 +198,7 @@ pred RDT_Sender_t6_post [
   (((((s.dsh_conf0) - RDT_Sender_ReadySendNext) -
        RDT_Sender_WaitAck) - RDT_Sender_ReadyResend) +
      RDT_Sender_WaitAck)
-  (none.(RDT_Sender.(sn.(s._testIfNextStable))))=>
+  (none.(RDT_Sender.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        { (s.dsh_stable).boolean/isTrue or
@@ -259,7 +259,7 @@ pred RDT_Sender_t5_post [
   (((((s.dsh_conf0) - RDT_Sender_ReadySendNext) -
        RDT_Sender_WaitAck) - RDT_Sender_ReadyResend) +
      RDT_Sender_WaitAck)
-  (none.(RDT_Sender.(sn.(s._testIfNextStable))))=>
+  (none.(RDT_Sender.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        { (s.dsh_stable).boolean/isTrue or
@@ -320,7 +320,7 @@ pred RDT_Sender_t4_post [
   (((((s.dsh_conf0) - RDT_Sender_ReadySendNext) -
        RDT_Sender_WaitAck) - RDT_Sender_ReadyResend) +
      RDT_Sender_ReadyResend)
-  (none.(RDT_Sender.(sn.(s._testIfNextStable))))=>
+  (none.(RDT_Sender.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        { (s.dsh_stable).boolean/isTrue or
@@ -381,7 +381,7 @@ pred RDT_Sender_t3_post [
   (((((s.dsh_conf0) - RDT_Sender_ReadySendNext) -
        RDT_Sender_WaitAck) - RDT_Sender_ReadyResend) +
      RDT_Sender_ReadySendNext)
-  (none.(RDT_Sender.(sn.(s._testIfNextStable))))=>
+  (none.(RDT_Sender.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        { (s.dsh_stable).boolean/isTrue or
@@ -444,7 +444,7 @@ pred RDT_Receiver_t13_post [
        RDT_Receiver_ReceiveError) -
       RDT_Receiver_ReadyReceiveResend) +
      RDT_Receiver_ReceiveSuccess)
-  (none.(RDT_Receiver.(sn.(s._testIfNextStable))))=>
+  (none.(RDT_Receiver.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        { (s.dsh_stable).boolean/isTrue or
@@ -507,7 +507,7 @@ pred RDT_Receiver_t12_post [
        RDT_Receiver_ReceiveError) -
       RDT_Receiver_ReadyReceiveResend) +
      RDT_Receiver_ReceiveError)
-  (none.(RDT_Receiver.(sn.(s._testIfNextStable))))=>
+  (none.(RDT_Receiver.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        { (s.dsh_stable).boolean/isTrue or
@@ -570,7 +570,7 @@ pred RDT_Receiver_t11_post [
        RDT_Receiver_ReceiveError) -
       RDT_Receiver_ReadyReceiveResend) +
      RDT_Receiver_ReadyReceiveResend)
-  (none.(RDT_Receiver.(sn.(s._testIfNextStable))))=>
+  (none.(RDT_Receiver.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        { (s.dsh_stable).boolean/isTrue or
@@ -633,7 +633,7 @@ pred RDT_Receiver_t10_post [
        RDT_Receiver_ReceiveError) -
       RDT_Receiver_ReadyReceiveResend) +
      RDT_Receiver_ReceiveError)
-  (none.(RDT_Receiver.(sn.(s._testIfNextStable))))=>
+  (none.(RDT_Receiver.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        { (s.dsh_stable).boolean/isTrue or
@@ -696,7 +696,7 @@ pred RDT_Receiver_t8_post [
        RDT_Receiver_ReceiveError) -
       RDT_Receiver_ReadyReceiveResend) +
      RDT_Receiver_ReadyReceiveNext)
-  (none.(RDT_Receiver.(sn.(s._testIfNextStable))))=>
+  (none.(RDT_Receiver.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        { (s.dsh_stable).boolean/isTrue or
@@ -759,7 +759,7 @@ pred RDT_Receiver_t7_post [
        RDT_Receiver_ReceiveError) -
       RDT_Receiver_ReadyReceiveResend) +
      RDT_Receiver_ReceiveSuccess)
-  (none.(RDT_Receiver.(sn.(s._testIfNextStable))))=>
+  (none.(RDT_Receiver.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        { (s.dsh_stable).boolean/isTrue or
@@ -822,7 +822,7 @@ pred RDT_Receiver_t9_post [
        RDT_Receiver_ReceiveError) -
       RDT_Receiver_ReadyReceiveResend) +
      RDT_Receiver_ReadyReceiveNext)
-  (none.(RDT_Receiver.(sn.(s._testIfNextStable))))=>
+  (none.(RDT_Receiver.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        { (s.dsh_stable).boolean/isTrue or
@@ -863,7 +863,7 @@ pred RDT_Receiver_t9 [
   sn.(s.RDT_Receiver_t9_post)
 }
 
-pred _testIfNextStable [
+pred _nextIsStable [
 	s: one DshSnapshot,
 	sn: one DshSnapshot,
 	dsh_scp0: DshStates,
@@ -898,7 +898,21 @@ pred dsh_small_step [
     sn.(s.RDT_Receiver_t10) or
     sn.(s.RDT_Receiver_t8) or
     sn.(s.RDT_Receiver_t7) or
-    sn.(s.RDT_Receiver_t9) }
+    sn.(s.RDT_Receiver_t9) or
+    !({ s.RDT_Sender_t2_pre or
+          s.RDT_Sender_t1_pre or
+          s.RDT_Sender_t6_pre or
+          s.RDT_Sender_t5_pre or
+          s.RDT_Sender_t4_pre or
+          s.RDT_Sender_t3_pre or
+          s.RDT_Receiver_t13_pre or
+          s.RDT_Receiver_t12_pre or
+          s.RDT_Receiver_t11_pre or
+          s.RDT_Receiver_t10_pre or
+          s.RDT_Receiver_t8_pre or
+          s.RDT_Receiver_t7_pre or
+          s.RDT_Receiver_t9_pre }) and
+      s = sn }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

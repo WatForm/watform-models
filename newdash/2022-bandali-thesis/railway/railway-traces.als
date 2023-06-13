@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-11 19:17:52
+   on 2023-06-13 15:57:35
 */
 
 open util/boolean
@@ -283,6 +283,13 @@ pred Railway_move_train3_post [
     (((sn.Railway_P3).(Const.A3)).((s.Railway_RA).plus)) and
   (sn.Railway_RB) =
     (((sn.Railway_P3).(Const.B3)).((s.Railway_RB).plus))
+  (s.Railway_P0) = (sn.Railway_P0)
+  (s.Railway_P1) = (sn.Railway_P1)
+  (s.Railway_P2) = (sn.Railway_P2)
+  (s.Railway_P4) = (sn.Railway_P4)
+  (s.Railway_P5) = (sn.Railway_P5)
+  (s.Railway_P6) = (sn.Railway_P6)
+  (s.Railway_P7) = (sn.Railway_P7)
 }
 
 pred Railway_move_train3 [
@@ -326,6 +333,13 @@ pred Railway_move_train2_post [
     (((sn.Railway_P2).(Const.A2)).((s.Railway_RA).plus)) and
   (sn.Railway_RB) =
     (((sn.Railway_P2).(Const.B2)).((s.Railway_RB).plus))
+  (s.Railway_P0) = (sn.Railway_P0)
+  (s.Railway_P1) = (sn.Railway_P1)
+  (s.Railway_P3) = (sn.Railway_P3)
+  (s.Railway_P4) = (sn.Railway_P4)
+  (s.Railway_P5) = (sn.Railway_P5)
+  (s.Railway_P6) = (sn.Railway_P6)
+  (s.Railway_P7) = (sn.Railway_P7)
 }
 
 pred Railway_move_train2 [
@@ -369,6 +383,13 @@ pred Railway_move_train1_post [
     (((sn.Railway_P1).(Const.A1)).((s.Railway_RA).plus)) and
   (sn.Railway_RB) =
     (((sn.Railway_P1).(Const.B1)).((s.Railway_RB).plus))
+  (s.Railway_P0) = (sn.Railway_P0)
+  (s.Railway_P2) = (sn.Railway_P2)
+  (s.Railway_P3) = (sn.Railway_P3)
+  (s.Railway_P4) = (sn.Railway_P4)
+  (s.Railway_P5) = (sn.Railway_P5)
+  (s.Railway_P6) = (sn.Railway_P6)
+  (s.Railway_P7) = (sn.Railway_P7)
 }
 
 pred Railway_move_train1 [
@@ -412,6 +433,13 @@ pred Railway_move_train0_post [
     (((sn.Railway_P0).(Const.A0)).((s.Railway_RA).plus)) and
   (sn.Railway_RB) =
     (((sn.Railway_P0).(Const.B0)).((s.Railway_RB).plus))
+  (s.Railway_P1) = (sn.Railway_P1)
+  (s.Railway_P2) = (sn.Railway_P2)
+  (s.Railway_P3) = (sn.Railway_P3)
+  (s.Railway_P4) = (sn.Railway_P4)
+  (s.Railway_P5) = (sn.Railway_P5)
+  (s.Railway_P6) = (sn.Railway_P6)
+  (s.Railway_P7) = (sn.Railway_P7)
 }
 
 pred Railway_move_train0 [
@@ -455,6 +483,13 @@ pred Railway_move_train7_post [
     (((sn.Railway_P7).(Const.A7)).((s.Railway_RA).plus)) and
   (sn.Railway_RB) =
     (((sn.Railway_P7).(Const.B7)).((s.Railway_RB).plus))
+  (s.Railway_P0) = (sn.Railway_P0)
+  (s.Railway_P1) = (sn.Railway_P1)
+  (s.Railway_P2) = (sn.Railway_P2)
+  (s.Railway_P3) = (sn.Railway_P3)
+  (s.Railway_P4) = (sn.Railway_P4)
+  (s.Railway_P5) = (sn.Railway_P5)
+  (s.Railway_P6) = (sn.Railway_P6)
 }
 
 pred Railway_move_train7 [
@@ -498,6 +533,13 @@ pred Railway_move_train6_post [
     (((sn.Railway_P6).(Const.A6)).((s.Railway_RA).plus)) and
   (sn.Railway_RB) =
     (((sn.Railway_P6).(Const.B6)).((s.Railway_RB).plus))
+  (s.Railway_P0) = (sn.Railway_P0)
+  (s.Railway_P1) = (sn.Railway_P1)
+  (s.Railway_P2) = (sn.Railway_P2)
+  (s.Railway_P3) = (sn.Railway_P3)
+  (s.Railway_P4) = (sn.Railway_P4)
+  (s.Railway_P5) = (sn.Railway_P5)
+  (s.Railway_P7) = (sn.Railway_P7)
 }
 
 pred Railway_move_train6 [
@@ -541,6 +583,13 @@ pred Railway_move_train5_post [
     (((sn.Railway_P5).(Const.A5)).((s.Railway_RA).plus)) and
   (sn.Railway_RB) =
     (((sn.Railway_P5).(Const.B5)).((s.Railway_RB).plus))
+  (s.Railway_P0) = (sn.Railway_P0)
+  (s.Railway_P1) = (sn.Railway_P1)
+  (s.Railway_P2) = (sn.Railway_P2)
+  (s.Railway_P3) = (sn.Railway_P3)
+  (s.Railway_P4) = (sn.Railway_P4)
+  (s.Railway_P6) = (sn.Railway_P6)
+  (s.Railway_P7) = (sn.Railway_P7)
 }
 
 pred Railway_move_train5 [
@@ -584,6 +633,13 @@ pred Railway_move_train4_post [
     (((sn.Railway_P4).(Const.A4)).((s.Railway_RA).plus)) and
   (sn.Railway_RB) =
     (((sn.Railway_P4).(Const.B4)).((s.Railway_RB).plus))
+  (s.Railway_P0) = (sn.Railway_P0)
+  (s.Railway_P1) = (sn.Railway_P1)
+  (s.Railway_P2) = (sn.Railway_P2)
+  (s.Railway_P3) = (sn.Railway_P3)
+  (s.Railway_P5) = (sn.Railway_P5)
+  (s.Railway_P6) = (sn.Railway_P6)
+  (s.Railway_P7) = (sn.Railway_P7)
 }
 
 pred Railway_move_train4 [
@@ -612,6 +668,16 @@ pred Railway_choose_train_post [
     (s.Railway_ct) = t5 and (sn.Railway_ct) = t6 or
     (s.Railway_ct) = t6 and (sn.Railway_ct) = t7 or
     (s.Railway_ct) = t7 and (sn.Railway_ct) = t0 }
+  (s.Railway_RA) = (sn.Railway_RA)
+  (s.Railway_P0) = (sn.Railway_P0)
+  (s.Railway_RB) = (sn.Railway_RB)
+  (s.Railway_P1) = (sn.Railway_P1)
+  (s.Railway_P2) = (sn.Railway_P2)
+  (s.Railway_P3) = (sn.Railway_P3)
+  (s.Railway_P4) = (sn.Railway_P4)
+  (s.Railway_P5) = (sn.Railway_P5)
+  (s.Railway_P6) = (sn.Railway_P6)
+  (s.Railway_P7) = (sn.Railway_P7)
 }
 
 pred Railway_choose_train [
@@ -632,7 +698,17 @@ pred dsh_small_step [
     sn.(s.Railway_move_train6) or
     sn.(s.Railway_move_train5) or
     sn.(s.Railway_move_train4) or
-    sn.(s.Railway_choose_train) }
+    sn.(s.Railway_choose_train) or
+    !({ s.Railway_move_train3_pre or
+          s.Railway_move_train2_pre or
+          s.Railway_move_train1_pre or
+          s.Railway_move_train0_pre or
+          s.Railway_move_train7_pre or
+          s.Railway_move_train6_pre or
+          s.Railway_move_train5_pre or
+          s.Railway_move_train4_pre or
+          s.Railway_choose_train_pre }) and
+      s = sn }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

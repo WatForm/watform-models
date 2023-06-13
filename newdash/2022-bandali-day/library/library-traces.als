@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-11 19:17:51
+   on 2023-06-13 15:57:33
 */
 
 open util/boolean
@@ -129,6 +129,9 @@ pred Library_Cancel_post [
   (sn.dsh_conf0) = (((s.dsh_conf0) - Library) + Library)
   ((s.Library_in_b).(sn.Library_reservations)) =
   (((s.Library_in_m).(((s.Library_in_b).(s.Library_reservations)).idxOf)).(((s.Library_in_b).(s.Library_reservations)).delete))
+  (s.Library_books) = (sn.Library_books)
+  (s.Library_members) = (sn.Library_members)
+  (s.Library_loans) = (sn.Library_loans)
 }
 
 pred Library_Cancel [
@@ -152,6 +155,9 @@ pred Library_Join_post [
   (sn.dsh_conf0) = (((s.dsh_conf0) - Library) + Library)
   (sn.Library_members) =
   ((s.Library_members) + (s.Library_in_m))
+  (s.Library_books) = (sn.Library_books)
+  (s.Library_reservations) = (sn.Library_reservations)
+  (s.Library_loans) = (sn.Library_loans)
 }
 
 pred Library_Join [
@@ -178,6 +184,9 @@ pred Library_Return_post [
   (sn.Library_loans) =
   ((s.Library_loans) -
      (s.Library_in_b -> ((s.Library_in_b).(s.Library_loans))))
+  (s.Library_books) = (sn.Library_books)
+  (s.Library_reservations) = (sn.Library_reservations)
+  (s.Library_members) = (sn.Library_members)
 }
 
 pred Library_Return [
@@ -204,6 +213,9 @@ pred Library_Discard_post [
 	sn: one DshSnapshot] {
   (sn.dsh_conf0) = (((s.dsh_conf0) - Library) + Library)
   (sn.Library_books) = ((s.Library_books) - (s.Library_in_b))
+  (s.Library_reservations) = (sn.Library_reservations)
+  (s.Library_members) = (sn.Library_members)
+  (s.Library_loans) = (sn.Library_loans)
 }
 
 pred Library_Discard [
@@ -232,6 +244,9 @@ pred Library_Leave_post [
   (sn.dsh_conf0) = (((s.dsh_conf0) - Library) + Library)
   (sn.Library_members) =
   ((s.Library_members) - (s.Library_in_m))
+  (s.Library_books) = (sn.Library_books)
+  (s.Library_reservations) = (sn.Library_reservations)
+  (s.Library_loans) = (sn.Library_loans)
 }
 
 pred Library_Leave [
@@ -257,6 +272,10 @@ pred Library_Renew_post [
 	s: one DshSnapshot,
 	sn: one DshSnapshot] {
   (sn.dsh_conf0) = (((s.dsh_conf0) - Library) + Library)
+  (s.Library_books) = (sn.Library_books)
+  (s.Library_reservations) = (sn.Library_reservations)
+  (s.Library_members) = (sn.Library_members)
+  (s.Library_loans) = (sn.Library_loans)
 }
 
 pred Library_Renew [
@@ -290,6 +309,8 @@ pred Library_Take_post [
   ((s.Library_loans) + (s.Library_in_b -> s.Library_in_m)) and
   ((s.Library_in_b).(sn.Library_reservations)) =
     (((s.Library_in_m).(((s.Library_in_b).(s.Library_reservations)).idxOf)).(((s.Library_in_b).(s.Library_reservations)).delete))
+  (s.Library_books) = (sn.Library_books)
+  (s.Library_members) = (sn.Library_members)
 }
 
 pred Library_Take [
@@ -312,6 +333,9 @@ pred Library_Acquire_post [
 	sn: one DshSnapshot] {
   (sn.dsh_conf0) = (((s.dsh_conf0) - Library) + Library)
   (sn.Library_books) = ((s.Library_books) + (s.Library_in_b))
+  (s.Library_reservations) = (sn.Library_reservations)
+  (s.Library_members) = (sn.Library_members)
+  (s.Library_loans) = (sn.Library_loans)
 }
 
 pred Library_Acquire [
@@ -342,6 +366,9 @@ pred Library_Lend_post [
   (sn.dsh_conf0) = (((s.dsh_conf0) - Library) + Library)
   (sn.Library_loans) =
   ((s.Library_loans) + (s.Library_in_b -> s.Library_in_m))
+  (s.Library_books) = (sn.Library_books)
+  (s.Library_reservations) = (sn.Library_reservations)
+  (s.Library_members) = (sn.Library_members)
 }
 
 pred Library_Lend [
@@ -373,6 +400,9 @@ pred Library_Reserve_post [
   (sn.dsh_conf0) = (((s.dsh_conf0) - Library) + Library)
   ((s.Library_in_b).(sn.Library_reservations)) =
   ((s.Library_in_m).(((s.Library_in_b).(s.Library_reservations)).add))
+  (s.Library_books) = (sn.Library_books)
+  (s.Library_members) = (sn.Library_members)
+  (s.Library_loans) = (sn.Library_loans)
 }
 
 pred Library_Reserve [
@@ -394,7 +424,18 @@ pred dsh_small_step [
     sn.(s.Library_Take) or
     sn.(s.Library_Acquire) or
     sn.(s.Library_Lend) or
-    sn.(s.Library_Reserve) }
+    sn.(s.Library_Reserve) or
+    !({ s.Library_Cancel_pre or
+          s.Library_Join_pre or
+          s.Library_Return_pre or
+          s.Library_Discard_pre or
+          s.Library_Leave_pre or
+          s.Library_Renew_pre or
+          s.Library_Take_pre or
+          s.Library_Acquire_pre or
+          s.Library_Lend_pre or
+          s.Library_Reserve_pre }) and
+      s = sn }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

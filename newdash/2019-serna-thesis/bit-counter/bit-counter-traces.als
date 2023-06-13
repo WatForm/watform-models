@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-11 19:17:35
+   on 2023-06-13 15:57:18
 */
 
 open util/boolean
@@ -65,7 +65,7 @@ pred Counter_Bit2_T4_post [
   (sn.dsh_conf0) =
   ((((s.dsh_conf0) - Counter_Bit2_Bit21) -
       Counter_Bit2_Bit22) + Counter_Bit2_Bit21)
-  (Counter_Bit2_Done.(Counter_Bit2.(sn.(s._testIfNextStable))))=>
+  (Counter_Bit2_Done.(Counter_Bit2.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -129,7 +129,7 @@ pred Counter_Bit1_T2_post [
   (sn.dsh_conf0) =
   ((((s.dsh_conf0) - Counter_Bit1_Bit11) -
       Counter_Bit1_Bit12) + Counter_Bit1_Bit11)
-  (Counter_Bit1_Tk1.(Counter_Bit1.(sn.(s._testIfNextStable))))=>
+  (Counter_Bit1_Tk1.(Counter_Bit1.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -196,7 +196,7 @@ pred Counter_Bit2_T3_post [
   (sn.dsh_conf0) =
   ((((s.dsh_conf0) - Counter_Bit2_Bit21) -
       Counter_Bit2_Bit22) + Counter_Bit2_Bit22)
-  (none.(Counter_Bit2.(sn.(s._testIfNextStable))))=>
+  (none.(Counter_Bit2.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -255,7 +255,7 @@ pred Counter_Bit1_T1_post [
   (sn.dsh_conf0) =
   ((((s.dsh_conf0) - Counter_Bit1_Bit11) -
       Counter_Bit1_Bit12) + Counter_Bit1_Bit12)
-  (none.(Counter_Bit1.(sn.(s._testIfNextStable))))=>
+  (none.(Counter_Bit1.(sn.(s._nextIsStable))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        ((s.dsh_stable).boolean/isTrue)=>
@@ -301,7 +301,7 @@ pred Counter_Bit1_T1 [
   sn.(s.Counter_Bit1_T1_post)
 }
 
-pred _testIfNextStable [
+pred _nextIsStable [
 	s: one DshSnapshot,
 	sn: one DshSnapshot,
 	dsh_scp0: DshStates,
@@ -318,7 +318,12 @@ pred dsh_small_step [
   { sn.(s.Counter_Bit2_T4) or
     sn.(s.Counter_Bit1_T2) or
     sn.(s.Counter_Bit2_T3) or
-    sn.(s.Counter_Bit1_T1) }
+    sn.(s.Counter_Bit1_T1) or
+    !({ s.Counter_Bit2_T4_pre or
+          s.Counter_Bit1_T2_pre or
+          s.Counter_Bit2_T3_pre or
+          s.Counter_Bit1_T1_pre }) and
+      s = sn }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-11 19:17:59
+   on 2023-06-13 15:57:42
 */
 
 open util/ring[Identifier] as P0
@@ -71,7 +71,13 @@ pred System_Process_Electing_ConsumeToken_post [
       (p0_Identifier -> System_Process_Electing)) +
      (p0_Identifier -> System_Process_Electing))
   (p0_Identifier.(sn.System_Process_token)).((p0_Identifier.(s.System_Process_token)).removeFirst)
-  ((p0_Identifier -> System_Process).(none.(p0_Identifier.(sn.(s._testIfNextStable)))))=>
+  (all Identifier_aa: Identifier - p0_Identifier | (Identifier_aa.(s.System_Process_token)) =
+                                                   (Identifier_aa.(sn.System_Process_token)))
+  (s.System_elected) = (sn.System_elected)
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.System_Process_succ)) =
+                 (Identifier_aa.(sn.System_Process_succ)))
+  ((p0_Identifier -> System_Process).(none.(p0_Identifier.(sn.(s._nextIsStable)))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -140,7 +146,11 @@ pred System_Process_Electing_PassToken_post [
   ((p0_Identifier.(s.System_Process_token)).firstElem).(((p0_Identifier.nextRing).(sn.System_Process_token)).(((p0_Identifier.nextRing).(s.System_Process_token)).addFirst)) and
   (all others: Identifier - (p0_Identifier.nextRing) | (others.(sn.System_Process_token)) =
                                                          (others.(s.System_Process_token)))
-  ((p0_Identifier -> System_Process).(none.(p0_Identifier.(sn.(s._testIfNextStable)))))=>
+  (s.System_elected) = (sn.System_elected)
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.System_Process_succ)) =
+                 (Identifier_aa.(sn.System_Process_succ)))
+  ((p0_Identifier -> System_Process).(none.(p0_Identifier.(sn.(s._nextIsStable)))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -207,7 +217,10 @@ pred System_Process_Electing_ElectLeader_post [
       (p0_Identifier -> System_Process_Elected)) +
      (p0_Identifier -> System_Process_Elected))
   (sn.System_elected) = p0_Identifier
-  ((p0_Identifier -> System_Process).(none.(p0_Identifier.(sn.(s._testIfNextStable)))))=>
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.System_Process_succ)) =
+                 (Identifier_aa.(sn.System_Process_succ)))
+  ((p0_Identifier -> System_Process).(none.(p0_Identifier.(sn.(s._nextIsStable)))))=>
     ((sn.dsh_stable).boolean/isTrue and
        (sn.dsh_sc_used0) = none and
        (sn.dsh_sc_used1) = (none -> none) and
@@ -249,7 +262,7 @@ pred System_Process_Electing_ElectLeader [
   p0_Identifier.(sn.(s.System_Process_Electing_ElectLeader_post))
 }
 
-pred _testIfNextStable [
+pred _nextIsStable [
 	s: one DshSnapshot,
 	sn: one DshSnapshot,
 	p0_Identifier: one Identifier,
@@ -263,10 +276,15 @@ pred _testIfNextStable [
 pred dsh_small_step [
 	s: one DshSnapshot,
 	sn: one DshSnapshot] {
-  (some p0_Identifier: one
-  Identifier | { p0_Identifier.(sn.(s.System_Process_Electing_ConsumeToken)) or
-                   p0_Identifier.(sn.(s.System_Process_Electing_PassToken)) or
-                   p0_Identifier.(sn.(s.System_Process_Electing_ElectLeader)) })
+  { (some p0_Identifier: one
+      Identifier | { p0_Identifier.(sn.(s.System_Process_Electing_ConsumeToken)) or
+                       p0_Identifier.(sn.(s.System_Process_Electing_PassToken)) or
+                       p0_Identifier.(sn.(s.System_Process_Electing_ElectLeader)) }) or
+    !((some p0_Identifier: one
+         Identifier | { p0_Identifier.(s.System_Process_Electing_ConsumeToken_pre) or
+                          p0_Identifier.(s.System_Process_Electing_PassToken_pre) or
+                          p0_Identifier.(s.System_Process_Electing_ElectLeader_pre) })) and
+      s = sn }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

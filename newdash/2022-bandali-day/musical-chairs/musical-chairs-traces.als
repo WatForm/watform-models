@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-11 19:17:51
+   on 2023-06-13 15:57:34
 */
 
 open util/boolean
@@ -134,6 +134,7 @@ pred Game_Sitting_EliminateLoser_post [
   (sn.Game_activePlayers) = (Chairs.(s.Game_occupiedChairs)) and
   (# sn.Game_activeChairs) =
     ((1).((# s.Game_activeChairs).minus))
+  (s.Game_occupiedChairs) = (sn.Game_occupiedChairs)
 }
 
 pred Game_Sitting_EliminateLoser [
@@ -157,6 +158,9 @@ pred Game_Start_DeclareWinner_post [
   (sn.dsh_conf0) =
   ((((((s.dsh_conf0) - Game_Start) - Game_Walking) -
        Game_Sitting) - Game_End) + Game_End)
+  (s.Game_activePlayers) = (sn.Game_activePlayers)
+  (s.Game_activeChairs) = (sn.Game_activeChairs)
+  (s.Game_occupiedChairs) = (sn.Game_occupiedChairs)
 }
 
 pred Game_Start_DeclareWinner [
@@ -182,6 +186,8 @@ pred Game_Start_Walk_post [
   ((((((s.dsh_conf0) - Game_Start) - Game_Walking) -
        Game_Sitting) - Game_End) + Game_Walking)
   (sn.Game_occupiedChairs) = (none -> none)
+  (s.Game_activePlayers) = (sn.Game_activePlayers)
+  (s.Game_activeChairs) = (sn.Game_activeChairs)
 }
 
 pred Game_Start_Walk [
@@ -228,7 +234,12 @@ pred dsh_small_step [
   { sn.(s.Game_Sitting_EliminateLoser) or
     sn.(s.Game_Start_DeclareWinner) or
     sn.(s.Game_Start_Walk) or
-    sn.(s.Game_Walking_Sit) }
+    sn.(s.Game_Walking_Sit) or
+    !({ s.Game_Sitting_EliminateLoser_pre or
+          s.Game_Start_DeclareWinner_pre or
+          s.Game_Start_Walk_pre or
+          s.Game_Walking_Sit_pre }) and
+      s = sn }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

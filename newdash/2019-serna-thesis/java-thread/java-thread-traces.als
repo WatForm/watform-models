@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-11 19:17:37
+   on 2023-06-13 15:57:20
 */
 
 open util/boolean
@@ -762,7 +762,32 @@ pred dsh_small_step [
     sn.(s.ThreadStates_t20) or
     sn.(s.ThreadStates_Runnable_t3) or
     sn.(s.ThreadStates_Runnable_t4) or
-    sn.(s.ThreadStates_Runnable_t2) }
+    sn.(s.ThreadStates_Runnable_t2) or
+    !({ s.ThreadStates_t16_pre or
+          s.ThreadStates_t17_pre or
+          s.ThreadStates_t14_pre or
+          s.ThreadStates_t9_pre or
+          s.ThreadStates_t15_pre or
+          s.ThreadStates_t12_pre or
+          s.ThreadStates_t23_pre or
+          s.ThreadStates_t13_pre or
+          s.ThreadStates_t24_pre or
+          s.ThreadStates_t10_pre or
+          s.ThreadStates_t21_pre or
+          s.ThreadStates_t11_pre or
+          s.ThreadStates_t22_pre or
+          s.ThreadStates_t8_pre or
+          s.ThreadStates_t7_pre or
+          s.ThreadStates_t6_pre or
+          s.ThreadStates_t18_pre or
+          s.ThreadStates_t5_pre or
+          s.ThreadStates_t19_pre or
+          s.ThreadStates_New_t1_pre or
+          s.ThreadStates_t20_pre or
+          s.ThreadStates_Runnable_t3_pre or
+          s.ThreadStates_Runnable_t4_pre or
+          s.ThreadStates_Runnable_t2_pre }) and
+      s = sn }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial

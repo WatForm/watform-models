@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-11 19:17:36
+   on 2023-06-13 15:57:19
 */
 
 open util/boolean
@@ -68,6 +68,7 @@ pred Elevator_Idle_post [
   (s.Elevator_called) - (sn.Elevator_current) in
     sn.Elevator_called and
   sn.Elevator_current !in sn.Elevator_called
+  (s.Elevator_direction) = (sn.Elevator_direction)
 }
 
 pred Elevator_Idle [
@@ -94,6 +95,7 @@ pred Elevator_DefaultToGround_post [
   (s.Elevator_called) - (sn.Elevator_current) in
     sn.Elevator_called and
   sn.Elevator_current !in sn.Elevator_called
+  (s.Elevator_maintenance) = (sn.Elevator_maintenance)
 }
 
 pred Elevator_DefaultToGround [
@@ -184,6 +186,8 @@ pred Elevator_MoveUp_post [
   sn.Elevator_current !in sn.Elevator_called and
   (s.Elevator_called) - (sn.Elevator_current) in
     sn.Elevator_called
+  (s.Elevator_direction) = (sn.Elevator_direction)
+  (s.Elevator_maintenance) = (sn.Elevator_maintenance)
 }
 
 pred Elevator_MoveUp [
@@ -247,6 +251,8 @@ pred Elevator_MoveDown_post [
   sn.Elevator_current !in sn.Elevator_called and
   (s.Elevator_called) - (sn.Elevator_current) in
     sn.Elevator_called
+  (s.Elevator_direction) = (sn.Elevator_direction)
+  (s.Elevator_maintenance) = (sn.Elevator_maintenance)
 }
 
 pred Elevator_MoveDown [
@@ -265,7 +271,15 @@ pred dsh_small_step [
     sn.(s.Elevator_ChangeDirToDown) or
     sn.(s.Elevator_MoveUp) or
     sn.(s.Elevator_ChangeDirToUp) or
-    sn.(s.Elevator_MoveDown) }
+    sn.(s.Elevator_MoveDown) or
+    !({ s.Elevator_Idle_pre or
+          s.Elevator_DefaultToGround_pre or
+          s.Elevator_maintenance_pre or
+          s.Elevator_ChangeDirToDown_pre or
+          s.Elevator_MoveUp_pre or
+          s.Elevator_ChangeDirToUp_pre or
+          s.Elevator_MoveDown_pre }) and
+      s = sn }
 }
 
 fact dsh_traces_fact {  DshSnapshot/first.dsh_initial
