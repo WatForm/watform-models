@@ -1,6 +1,6 @@
 /*
    Automatically created via translation of a Dash model to Alloy
-   on 2023-06-13 17:09:49
+   on 2023-06-14 09:34:16
 */
 
 open util/ring[Identifier] as P0
@@ -217,6 +217,9 @@ pred System_Process_Electing_ElectLeader_post [
       (p0_Identifier -> System_Process_Elected)) +
      (p0_Identifier -> System_Process_Elected))
   (sn.System_elected) = p0_Identifier
+  (all Identifier_aa: one
+  Identifier | (Identifier_aa.(s.System_Process_token)) =
+                 (Identifier_aa.(sn.System_Process_token)))
   (all Identifier_aa: one
   Identifier | (Identifier_aa.(s.System_Process_succ)) =
                  (Identifier_aa.(sn.System_Process_succ)))
