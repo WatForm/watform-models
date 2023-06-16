@@ -38,6 +38,7 @@ print ("\n++ Running files ...")
 cnt = 0
 errlist = []
 sat = 0
+unsatlist = []
 
 myinputpath = locn
 print("Checking files within: "+myinputpath)
@@ -97,12 +98,17 @@ for filename in listoffiles:
             print("Msg: "+ msg)
     if "Result: SAT" in output:
         sat = sat + 1
+    else:
+        unsatlist.append(filename)
     if errlist != 0 and stop_on_first_fail:
         break
             
 print("** Files executed: " + str(cnt))
 if ext == ".als":
-    print("** SAT result: " + str(sat))
+    print("** SAT #: " + str(sat))
+    print("** Unsat: ")
+    for i in unsatlist:
+        print(i)
 if errlist != [] :
     print("** Failures: "+ str(len(errlist)))
     for i in errlist:

@@ -173,7 +173,7 @@ state LandingGear {
 
 
     // NAD: These can't be one->one
-    // NAD: they are function ->one
+    // NAD: they are a function ->one
     // === sensors ===
     // gears_extended is true if the corresponding gear is locked in
     // the extended position and false in other cases

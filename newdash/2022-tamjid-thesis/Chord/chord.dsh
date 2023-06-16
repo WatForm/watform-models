@@ -28,7 +28,7 @@ state System {
 		frst: lone Node
 		scnd: lone Node
 		prdc: lone Node
-		status: Status
+		status: lone Status
 		saved: lone Node
 
 		default state Live {

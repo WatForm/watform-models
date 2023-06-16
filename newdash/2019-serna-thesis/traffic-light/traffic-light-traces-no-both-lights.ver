@@ -1,3 +1,18 @@
+// Environmental assumptions
+
+fact {
+    // Environment generates End First
+    all s: DshSnapshot | {
+        dsh_initial[s] => s.dsh_events0 = TrafficLight_End
+    }
+    // Events alternate after each stable snapshot
+    all s: DshSnapshot, sn: DshSnapshot | dsh_small_step[s,sn] => {
+        s.dsh_stable = True and sn.dsh_stable = True => sn.dsh_events0 != s.dsh_events0
+        s.dsh_stable = False and sn.dsh_stable = True => sn.dsh_events0 != s.dsh_events0
+        s.dsh_stable = True and sn.dsh_stable = False => sn.dsh_events0 = s.dsh_events0
+        s.dsh_stable = False and sn.dsh_stable = False => sn.dsh_events0 = s.dsh_events0
+    }
+}
 
 // Property fails is the single input assumption is not used
 assert no_both_lights_green {
