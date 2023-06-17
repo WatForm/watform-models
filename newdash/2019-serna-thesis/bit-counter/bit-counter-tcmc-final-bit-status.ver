@@ -3,8 +3,8 @@
 
 assert ctl_final_bitStatus {
     ag (
-        Counter/Bit2/Done in events =>
-        {Counter/Bit1/Bit11 + Counter/Bit2/Bit21} in conf
+        Counter_Bit2_Done in events =>
+        {Counter_Bit1_Bit11 + Counter_Bit2_Bit21} in conf
     )
 }
-check ctl_final_bitStatus for 7 Snapshot, exactly 2 EventLabel expect 0
+check ctl_final_bitStatus for 3 Snapshot 

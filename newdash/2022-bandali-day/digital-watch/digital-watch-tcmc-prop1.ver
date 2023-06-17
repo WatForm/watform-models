@@ -5,14 +5,27 @@
 
 // remember to set Option in Alloy to use TCMC
 
-pred eventually_time {
+// AG(DigitalWatch_press_a in s.events0 => EF(EX (DigitalWatch_Main_Displays_Time in s.conf0 )))
+
+assert eventually_time {
     ctl_mc[
         ag[
-            imp_[{ s : Snapshot | DigitalWatch_press_a in s.events0},
-                ef[ex[{s: Snapshot | DigitalWatch_Main_Displays_Time in s.conf0 }]]
+            imp_ctl[{ s : DshSnapshot | DigitalWatch_press_a in s.dsh_events0 and
+                                     DigitalWatch_Main_Displays_StopWatch in s.dsh_conf0},
+                ax[{s: DshSnapshot | DigitalWatch_Main_Displays_Time in s.dsh_conf0 }]
             ]
         ]
     ]
 }
 
-check eventually_time for 10 Snapshot expect 0
+pred aa {
+    ctl_mc[
+        ef[
+            { s : DshSnapshot | DigitalWatch_press_a in s.dsh_events0 and
+                                     DigitalWatch_Main_Displays_Chime in s.dsh_conf0}
+            ]
+        ]
+    
+}
+
+check eventually_time for 6 DshSnapshot

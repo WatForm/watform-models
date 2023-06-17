@@ -80,14 +80,14 @@ This model has appeared in the following publications:
 */
 
  state DigitalWatch {
-    event press_a {}
-    event release_a {}
-    event press_b {}
-    event release_b {}
-    event press_c {}
-    event release_c {}
-    event press_d {}
-    event release_d {}
+    env event press_a {}
+    env event release_a {}
+    env event press_b {}
+    env event release_b {}
+    env event press_c {}
+    env event release_c {}
+    env event press_d {}
+    env event release_d {}
 
     conc Light {
         default state Off {
