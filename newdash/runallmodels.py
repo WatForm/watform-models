@@ -9,8 +9,7 @@
 
 # set path toexecutable
 exe = "java -cp /Users/nday/UW/github/org.alloytools.alloy/org.alloytools.alloy.dist/target/org.alloytools.alloy.dist.jar ca.uwaterloo.watform.dash4whole.Dash"
-options = "-t -m tcmc"
-#ext = "-tcmc.dsh"
+options = "-t -m tcmc -reach -enough"
 ext = ".als"
 
 # set path to tests to run
