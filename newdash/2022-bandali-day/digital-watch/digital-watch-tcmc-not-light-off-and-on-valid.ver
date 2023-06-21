@@ -1,0 +1,25 @@
+
+// these are two basic states and the system should never be in both of them
+
+
+assert not_light_on_and_off {
+    ctl_mc[
+        ag[
+            { s : DshSnapshot | !(DigitalWatch_Light_Off + DigitalWatch_Light_On in s.dsh_conf0)}
+            ]
+        ]
+    
+}
+
+// this property is valid (Alloy returns UNSAT)
+check not_light_on_and_off for exactly 8 DshSnapshot
+
+// takes around 4 sec at this scope on Nancy's mac
+
+/*
+
+dashcli -enough -reach -single -t -m tcmc digital-watch.dsh
+cat digital-watch-tcmc.als digital-watch-tcmc-not-light-off-and-on-valid.ver > out.als
+time dashcli out.als
+
+*/

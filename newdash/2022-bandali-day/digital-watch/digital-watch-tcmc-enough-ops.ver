@@ -1,0 +1,17 @@
+/* 
+    determine a scope that has enough snapshots
+    to have a representative of every transition in the model
+
+    On Nancy's mac, this is still UNSAT at 11 snapshots (taking 30min)
+*/
+
+
+run dsh_enough_operations for 11 DshSnapshot
+
+/*
+
+dashcli -enough -reach -single -t -m tcmc digital-watch.dsh
+cat digital-watch-tcmc.als digital-watch-tcmc-enough-ops.ver > out.als
+time dashcli out.als
+
+*/

@@ -1,0 +1,23 @@
+// these are two basic states and the system should never be in both of them in the same conf
+
+assert reach_light_on_and_off {
+    ctl_mc[
+        ef[
+            { s : DshSnapshot | DigitalWatch_Light_Off + DigitalWatch_Light_On in s.dsh_conf0}
+            ]
+        ]
+}
+
+
+// this property is not valid (meaning it is SAT) b/c no model satisfies this EF property
+check reach_light_on_and_off for exactly 8 DshSnapshot
+
+// takes around 2-3 sec on Nancy's mac
+
+/*
+
+dashcli -enough -reach -single -t -m tcmc digital-watch.dsh
+cat digital-watch-tcmc.als digital-watch-tcmc-reach-light-on-and-off-invalid.ver > out.als
+time dashcli out.als
+
+*/
