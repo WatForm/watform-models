@@ -8,7 +8,7 @@ import pathlib
 PROP_SUFFIX = '.ver'
 # traces are <name>-traces.als
 TRACE_SUFFIX = '-traces.als'
-DEFAULT_DEST = './combined-files'
+DEFAULT_DEST = 'combined-files'
 DEST_FOLDER_NAME = 'combined-files'
 
 #if not os.path.exists(destination):
@@ -22,7 +22,7 @@ parser = argparse.ArgumentParser(
 
 parser.add_argument('sources', nargs='*',
                     type=pathlib.Path,
-                    default=['./2022-bandali-day', '2022-bandali-thesis', '2022-tamjid-thesis']
+                    default=['2022-bandali-day', '2022-bandali-thesis', '2019-serna-thesis', '2022-tamjid-thesis']
                     )
 # parser.add_argument('-v', '--verbose', action='store_true')
 parser.add_argument('-c', '--combine', action='store_true', help='combine the outputs of all sources.')
