@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<alloy>
+
+<view>
+
+<projection> <type name="tcmc/TS"/> </projection>
+
+<defaultnode/>
+
+<defaultedge/>
+
+<node>
+   <type name="DshScopes"/>
+   <type name="DshStates"/>
+   <type name="EHealthSystem"/>
+   <type name="EHealthSystem_add_interaction"/>
+   <type name="EHealthSystem_add_medication"/>
+   <type name="EHealthSystem_add_patient"/>
+   <type name="EHealthSystem_add_prescription"/>
+   <type name="EHealthSystem_remove_interaction"/>
+   <type name="EHealthSystem_remove_prescription"/>
+   <type name="EHealthSystemScope"/>
+   <type name="Int"/>
+   <type name="Medication"/>
+   <type name="NO_TRANS"/>
+   <type name="Patient"/>
+   <type name="String"/>
+   <type name="Transitions"/>
+   <type name="boolean/Bool"/>
+   <type name="boolean/False"/>
+   <type name="boolean/True"/>
+   <type name="seq/Int"/>
+   <type name="tcmc/TS"/>
+   <set name="S0" type="DshSnapshot"/>
+</node>
+
+<node visible="no">
+   <type name="univ"/>
+</node>
+
+<node visible="yes">
+   <type name="DshSnapshot"/>
+</node>
+
+<edge attribute="yes">
+   <relation name="dsh_conf0"> <type name="DshSnapshot"/> <type name="DshStates"/> </relation>
+   <relation name="dsh_sc_used0"> <type name="DshSnapshot"/> <type name="DshScopes"/> </relation>
+   <relation name="dsh_taken0"> <type name="DshSnapshot"/> <type name="Transitions"/> </relation>
+   <relation name="EHealthSystem_in_m1"> <type name="DshSnapshot"/> <type name="Medication"/> </relation>
+   <relation name="EHealthSystem_in_m2"> <type name="DshSnapshot"/> <type name="Medication"/> </relation>
+   <relation name="EHealthSystem_in_p"> <type name="DshSnapshot"/> <type name="Patient"/> </relation>
+   <relation name="EHealthSystem_interactions"> <type name="DshSnapshot"/> <type name="Medication"/> <type name="Medication"/> </relation>
+   <relation name="EHealthSystem_medications"> <type name="DshSnapshot"/> <type name="Medication"/> </relation>
+   <relation name="EHealthSystem_patients"> <type name="DshSnapshot"/> <type name="Patient"/> </relation>
+   <relation name="EHealthSystem_prescriptions"> <type name="DshSnapshot"/> <type name="Patient"/> <type name="Medication"/> </relation>
+</edge>
+
+</view>
+
+</alloy>

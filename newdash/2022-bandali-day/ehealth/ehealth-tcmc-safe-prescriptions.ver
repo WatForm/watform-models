@@ -1,0 +1,30 @@
+/*
+	invariant safe_prescriptions {
+        all m1, m2: medications, p: patients |
+            m1 -> m2 in interactions =>
+                !((p -> m1 in prescriptions) and (p -> m2 in prescriptions))
+*/
+
+pred safe_perscriptions {
+    ctl_mc[
+        ag[
+            {s: DshSnapshot | 
+                all m1, m2:Medication | 
+                	all p: Patient |
+                		m1 -> m2 in s.EHealthSystem_interactions 
+                		=>
+                		!((p -> m1 in s.EHealthSystem_prescriptions) and (p -> m2 in s.EHealthSystem_prescriptions))
+ 			}
+        ]
+    ]
+}
+
+check { safe_perscriptions } for 2 but 6 DshSnapshot expect 0
+
+/*
+
+dashcli -enough -reach -t -m tcmc ehealth.dsh
+cat ehealth-tcmc.als ehealth-tcmc-safe-prescriptions.ver > out.als
+time dashcli out.als
+
+*/

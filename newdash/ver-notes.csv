@@ -1,0 +1,6 @@
+﻿Directory,Model,Method,Prop Name,Type of Command,Snapshot Scope,Other Scopes,Correct Result,Owen's Opt?,Purpose,Notes
+2022-bandali-day,ehealth,tcmc,explore,run,10,,SAT,no,debugging - see examples of the model,limited to one initial state
+2022-bandali-day,ehealth,tcmc,enough-ops,run,8,4,SAT,no,find sig scope of 8,takes time
+2022-bandali-day,ehealth,tcmc,symmetry,check,6,2,UNSAT,no,property used to be inv of model,waiting to confirm with Amin
+2022-bandali-day,ehealth,tcmc,no-self-interaction,check,6,2,UNSAT,no,property used to be inv of model,waiting to confirm with Amin
+2022-bandali-day,ehealth,tcmc,safe-prescriptions,check,6,2,UNSAT,no,property used to be inv of model,waiting to confirm with Amin

@@ -1,6 +1,6 @@
 // these are two basic states and the system should never be in both of them in the same conf
 
-assert reach_light_on_and_off {
+pred reach_light_on_and_off {
     ctl_mc[
         ef[
             { s : DshSnapshot | DigitalWatch_Light_Off + DigitalWatch_Light_On in s.dsh_conf0}
@@ -10,9 +10,14 @@ assert reach_light_on_and_off {
 
 
 // this property is not valid (meaning it is SAT) b/c no model satisfies this EF property
-check reach_light_on_and_off for exactly 8 DshSnapshot
+// check {dsh_reachability => reach_light_on_and_off } for exactly 8 DshSnapshot
+
+check {
+   reach_light_on_and_off 
+} for exactly 10 DshSnapshot
 
 // takes around 2-3 sec on Nancy's mac
+// does not take longer with more snapshots b/c it just generates more initial or orphan snapshots
 
 /*
 

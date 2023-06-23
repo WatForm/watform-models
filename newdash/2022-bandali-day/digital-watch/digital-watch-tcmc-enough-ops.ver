@@ -6,7 +6,11 @@
 */
 
 
-run dsh_enough_operations for 11 DshSnapshot
+run {
+    dsh_reachability 
+    //dsh_enough_operations 
+}
+for 4 DshSnapshot
 
 /*
 

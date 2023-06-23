@@ -1,0 +1,28 @@
+/*
+    invariant symmetry {
+        all m1, m2: Medication |
+            m1 -> m2  in interactions iff m2 -> m1 in interactions
+    }
+*/
+
+pred symmetry {
+    ctl_mc[
+        ag[
+            {s: DshSnapshot | 
+                all m1, m2:Medication | 
+                    m1 -> m2 in s.EHealthSystem_interactions 
+                    iff 
+                    m2 ->m1 in s.EHealthSystem_interactions }
+        ]
+    ]
+}
+
+check { symmetry } for 2 but 6 DshSnapshot expect 0
+
+/*
+
+dashcli -enough -reach -t -m tcmc ehealth.dsh
+cat ehealth-tcmc.als ehealth-tcmc-symmetry.ver > out.als
+time dashcli out.als
+
+*/

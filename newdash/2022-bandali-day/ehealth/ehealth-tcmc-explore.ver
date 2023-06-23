@@ -1,0 +1,17 @@
+/* 
+    first, see examples of the model
+
+*/
+
+run { 
+   #(tcmc/ks_s0) = 1 
+   dsh_reachability 
+} for 4 but exactly 10 DshSnapshot
+
+/*
+
+dashcli -enough -reach -t -m tcmc ehealth.dsh
+cat ehealth-tcmc.als ehealth-tcmc-explore.ver > out.als
+time dashcli out.als
+
+*/

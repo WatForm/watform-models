@@ -82,27 +82,35 @@ This model has appeared in the following publications:
  sig Medication {}
 
 state EHealthSystem {
-    env in_p: lone Patient
-    env in_m1, in_m2: lone Medication
+    // NAD: changed env inputs from "lone" to "one"
+    // NAD: checking with Amin whether these always have values in models in other languages
+    env in_p: one Patient
+    
+    env in_m1, in_m2: one Medication
     medications: set Medication
     patients: set Patient
     prescriptions: Patient -> set Medication
     interactions: Medication -> set Medication
 
+    // NAD: I think these should be properties to check???
+    // NAD: in a system of operations how are invariants enforced operationally?
+
+    /*
     invariant symmetry {
         all m1, m2: Medication |
             m1 -> m2  in interactions iff m2 -> m1 in interactions
     }
-
+    
     invariant no_self_interaction {
-        all m: medications | not (m -> m in interactions)
+        all m: Medication | not (m -> m in interactions)
     }
-
+    
     invariant safe_prescriptions {
-        all m1, m2: medications, p: patients |
+        all m1, m2: Medication, p: Patient |
             m1 -> m2 in interactions =>
                 !((p -> m1 in prescriptions) and (p -> m2 in prescriptions))
     }
+    */
 
     trans add_patient {
         when !(in_p in patients)
@@ -138,6 +146,7 @@ state EHealthSystem {
         when {
             in_m1 in medications
             in_m2 in medications
+            // because of the invariant in_m2 -> in_m1 should also be in the interactions
             in_m1 -> in_m2 in interactions
         }
         do interactions' = interactions - {in_m1->in_m2 + in_m2->in_m1}
