@@ -1,0 +1,27 @@
+/*
+    invariant no_self_interaction {
+        all m: medications | not (m -> m in interactions)
+    }
+*/
+
+
+pred no_self_interaction {
+    ctl_mc[
+        ag[
+            {s: DshSnapshot | 
+                all m:Medication | 
+                	not (m -> m in s.EHealthSystem_interactions ) }
+        ]
+    ]
+}
+
+check { no_self_interaction } for exactly 6 DshSnapshot, exactly 2 Medication, exactly 2 Patient   expect 0
+
+/*
+
+dashcli -enough -reach -t -m tcmc ehealth.dsh
+cat ehealth-tcmc.als ehealth-tcmc-no-self-interaction.ver > out.als
+time dashcli out.als
+
+*/
+

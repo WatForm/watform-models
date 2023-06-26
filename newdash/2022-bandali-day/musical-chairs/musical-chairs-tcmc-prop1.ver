@@ -1,7 +1,0 @@
-assert safety {
-        // number of players is walways 1 greater than number of chairs
-        ctl_mc[ ag[{ s : Snapshot |
-            #s.Game_activePlayers = (#s.Game_activeChairs).plus[1]}]]
-    }
-    check safety for exactly 3 Players , exactly 2 Chairs ,
-        exactly 8 Snapshot, 2 EventLabel

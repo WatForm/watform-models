@@ -1,0 +1,12 @@
+/*
+    Reachability of a state
+    finite liveness category
+*/
+
+assert reachability_of_state {
+    ctl_mc[af [{ s : Snapshot | Game_Sitting in s.conf0 }]]
+}
+    
+
+check reachability_of_state for exactly 3 Players , exactly 2 Chairs ,
+        exactly 8 Snapshot

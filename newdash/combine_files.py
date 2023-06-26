@@ -7,7 +7,7 @@ import pathlib
 
 PROP_SUFFIX = '.ver'
 # traces are <name>-traces.als
-TRACE_SUFFIX = '-traces.als'
+METHOD_SUFFIX = '-tcmc.als'
 DEFAULT_DEST = 'combined-files'
 DEST_FOLDER_NAME = 'combined-files'
 
@@ -49,16 +49,16 @@ for source in sources:
             fragment_path = str(os.path.join(root, file))
             all_fragments.append(fragment_path)
 
-    traces = list(filter(lambda name: name.endswith(TRACE_SUFFIX), all_fragments))
+    traces = list(filter(lambda name: name.endswith(METHOD_SUFFIX), all_fragments))
 
     for trace in traces:
         print('Found trace:', trace)
-        identifier = trace[:-len(TRACE_SUFFIX)]  # remove the suffix
+        identifier = trace[:-len(METHOD_SUFFIX)]  # remove the suffix
 
         # Determine the name for the result file
         trace_path_split = trace.split('/')
         folder_name = trace_path_split[-2]
-        file_name = trace_path_split[-1][:-len(TRACE_SUFFIX)]
+        file_name = trace_path_split[-1][:-len(METHOD_SUFFIX)]
 
         if folder_name.lower() == file_name.lower():
             model_name = folder_name

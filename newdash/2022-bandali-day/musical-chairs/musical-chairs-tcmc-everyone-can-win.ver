@@ -1,0 +1,21 @@
+/*
+    Everyone can win so Alice (an arbitrary player can win in some instance)
+*/
+
+one sig Alice extends Players {}
+
+pred everyone_can_win {
+    ctl_mc[ef[{ s : Snapshot |
+        Game_End in s.conf and s.Game_activePlayers = Alice }]]
+}
+
+run everyone_can_win for exactly 3 Players , exactly 2 Chairs ,
+    exactly 8 Snapshot
+
+/*
+
+dashcli -enough -reach -t -m tcmc musical-chairs.dsh
+cat ehealth-tcmc.als musical-chairs-tcmc-everyone-can-win.ver > out.als
+time dashcli out.als
+
+*/

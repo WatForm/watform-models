@@ -1,0 +1,17 @@
+/* 
+    first, see examples of the model
+
+*/
+
+run { 
+   #(tcmc/ks_s0) = 1 
+   dsh_reachability 
+} for exactly 5 DshSnapshot
+
+/*
+
+dashcli -enough -reach -t -m tcmc digital-watch.dsh
+cat digital-watch-tcmc.als digital-watch-tcmc-explore.ver > out.als
+time dashcli out.als
+
+*/

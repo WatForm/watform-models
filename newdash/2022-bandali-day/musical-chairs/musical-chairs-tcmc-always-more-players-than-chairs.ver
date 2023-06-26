@@ -1,0 +1,19 @@
+/*
+    Number of players is always 1 greater than number of chairs
+*/
+
+assert always_more_players_than_chairs {
+    ctl_mc[ ag[{ s : Snapshot |
+        #s.Game_activePlayers = (#s.Game_activeChairs).plus[1]}]]
+}
+
+check safety for exactly 3 Players, exactly 2 Chairs,
+        exactly 8 Snapshot
+
+/*
+
+dashcli -enough -reach -t -m tcmc musical-chairs.dsh
+cat ehealth-tcmc.als musical-chairs-tcmc-always-more-players-then-chairs.ver > out.als
+time dashcli out.als
+
+*/

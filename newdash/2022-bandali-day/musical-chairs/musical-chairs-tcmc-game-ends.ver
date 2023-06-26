@@ -1,0 +1,12 @@
+/*
+    number of players eventually always reaches and remains at 1
+    infinite liveness category of property
+*/
+
+pred game_ends {
+    ctl_mc[af[ag[{ s : Snapshot | #s.Game_activePlayers = 1}]]]
+}
+
+check {
+    game_ends 
+} for exactly 3 Players, exactly 2 Chairs, exactly 8 Snapshot

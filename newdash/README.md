@@ -1,22 +1,43 @@
-# General README about checking properties about Dash models
+# README
 
-## Equality?
-- currently Snapshots can be different atoms but have the same field values?
+## Organization
 
-## Reachability
-- only needed when view instances of the model in tcmc option
-(TCMC explored only reachable snapshots for ctl)
-- there can be orphan snapshots with reachability but these are other initial states
-- 
-## Significant scope (# of Snapshots)
-- might be less than the number of transitions; might be more
-- can this be determined for Electrum and traces methods?
-- if takeni is part of the model, the sig scope must be at least the number of transitions + 1
+Each model.dsh file is in a directory called 'model'.
 
-## expect 0/1
-- expect 1 means SAT (an instance for run; prop does not hold for check)
-- expect 0 meanst UNSAT (no instance for run; prop holds for check)
+Optionally, also present in that directory is a 
 
-## Themes
-- there is a generic theme in dash-theme.thm
-- sometimes a more specific theme is needed to display variables as attributes; such a theme is in the directory with the model
+model.opt file
+
+which contains any additional options for that model (such as '-single').
+
+Properties with commands are each in a file called 
+
+model-method-propname.ver   
+
+These properties are specific to the model checking method (tcmc, traces, electrum). 
+
+## Step 1: ./run_all_models -t tcmc (or another m/c method) <dir_name>
+
+This python scripts translates all .dsh models present in the directory adding in any options present in model.opt for the method given (default method is `traces`).
+
+(Note: -t is the default for run_all_models)
+
+## Step 2: ./run_all_models -s <dir_name>
+
+Checks .als models in model directories are satisfiable.
+
+## Step 3: ./run_all_models.py -c <dir_name>
+
+Creates .als files of all combinations of the model and properties in the combine_models directory.
+
+## Step 4: ./run_all_models -p <dir_name>
+
+Runs our dashcli on all .als files in combine_models directory and checks which commands do not meet "expectations".
+
+## Step 5: clean up .als files
+
+make clean
+
+## Notes
+
+If dir_name is not provided, it runs over all directories (except combined_files).

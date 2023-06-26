@@ -78,8 +78,8 @@ This model has appeared in the following publications:
 
 */
 
- sig Patient {}
- sig Medication {}
+sig Patient {}
+sig Medication {}
 
 state EHealthSystem {
     // NAD: changed env inputs from "lone" to "one"

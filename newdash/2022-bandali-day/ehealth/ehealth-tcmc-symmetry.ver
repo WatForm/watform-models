@@ -17,7 +17,7 @@ pred symmetry {
     ]
 }
 
-check { symmetry } for 2 but 6 DshSnapshot expect 0
+check { symmetry } for exactly 6 DshSnapshot, exactly 2 Medication, exactly 2 Patient expect 0
 
 /*
 

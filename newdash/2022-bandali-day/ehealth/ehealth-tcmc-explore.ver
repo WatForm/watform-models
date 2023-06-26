@@ -6,7 +6,7 @@
 run { 
    #(tcmc/ks_s0) = 1 
    dsh_reachability 
-} for 4 but exactly 10 DshSnapshot
+} for exactly 10 DshSnapshot, exactly 4 Medication, exactly 4 Patient expect 1
 
 /*
 

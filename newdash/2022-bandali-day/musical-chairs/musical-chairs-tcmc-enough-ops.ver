@@ -4,18 +4,18 @@
 
 */
 
-// 8 is the sig scope
+// ? is the sig scope
 // this take perceptable time
 
 run {
    dsh_reachability
    dsh_enough_operations 
-} for exactly 8 DshSnapshot, exactly 4 Medication, exactly 4 Patient  expect 1
+} for exactly 8 DshSnapshot, exactly 4 Players, exactly 3 Chairs expect 1
 
 /*
 
-dashcli -enough -reach -t -m tcmc ehealth.dsh
-cat ehealth-tcmc.als ehealth-tcmc-enough-ops.ver > out.als
+dashcli -enough -reach -t -m tcmc musical-chairs.dsh
+cat ehealth-tcmc.als ehealth-tcmc-musical-chairs-enough-ops.ver > out.als
 time dashcli out.als
 
 */

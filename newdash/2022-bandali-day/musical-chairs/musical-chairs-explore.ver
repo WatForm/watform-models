@@ -1,0 +1,17 @@
+/* 
+    first, see examples of the model
+
+*/
+
+run { 
+   #(tcmc/ks_s0) = 1 
+   dsh_reachability 
+} for 4 Players, 3 Chairs exactly 5 DshSnapshot
+
+/*
+
+dashcli -enough -reach -t -m tcmc musical-chairts.dsh
+cat ehealth-tcmc.als ehealth-tcmc-musical-chairs-explore.ver > out.als
+time dashcli out.als
+
+*/

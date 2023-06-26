@@ -1,5 +1,0 @@
-assert finiteLiveness {
-        ctl_mc[af [{ s : Snapshot | Game_Sitting in s.conf }]]
-    }
-    check finiteLiveness for exactly 3 Players , exactly 2 Chairs ,
-        exactly 8 Snapshot, 2 EventLabel
