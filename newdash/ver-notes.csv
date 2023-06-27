@@ -4,3 +4,10 @@
 2022-bandali-day,ehealth,tcmc,symmetry,check,6,2,UNSAT,no,property used to be inv of model,waiting to confirm with Amin
 2022-bandali-day,ehealth,tcmc,no-self-interaction,check,6,2,UNSAT,no,property used to be inv of model,waiting to confirm with Amin
 2022-bandali-day,ehealth,tcmc,safe-prescriptions,check,6,2,UNSAT,no,property used to be inv of model,waiting to confirm with Amin
+2022-bandali-day,digital-watch,tcmc,explore,run,9,none,SAT,no,,
+2022-bandali-day,digital-watch,tcmc,enough-ops,run,9,none,UNSAT,no,did not find sig scope yet,
+2022-bandali-day,digital-watch,tcmc,not-light-off-and-on,check,9,none,UNSAT,no,,
+2022-bandali-day,digital-watch,tcmc,reach-light-on-and-off,check,11,none,SAT,yes,probably not interesting b/c problem not harder with higher scope,
+2022-bandali-day,digital-watch,tcmc,trans-to2Time,check,7,none,UNSAT,no,,
+2022-bandali-day,digital-watch,tcmc,trans-light-on,check,7,none,UNSAT,no,,
+2022-bandali-day,digital-watch,tcmc,ef_trans_light_on,check,40,none,UNSAT,yes,,

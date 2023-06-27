@@ -16,13 +16,13 @@ pred not_light_on_and_off {
 // to see an instance with only reachable snapshots
 // check { reachability => not_light_on_and_off } for exactly 8 DshSnapshot
 
-check not_light_on_and_off for exactly 8 DshSnapshot
+check { not_light_on_and_off } for exactly 9 DshSnapshot expect 0
 // takes around 4 sec at this scope on Nancy's mac
 
 /*
 
-dashcli -enough -reach -single -t -m tcmc digital-watch.dsh
-cat digital-watch-tcmc.als digital-watch-tcmc-not-light-off-and-on-valid.ver > out.als
+dashcli -t -m tcmc -single digital-watch.dsh
+cat digital-watch-tcmc.als digital-watch-tcmc-not-light-off-and-on.ver > out.als
 time dashcli out.als
 
 */

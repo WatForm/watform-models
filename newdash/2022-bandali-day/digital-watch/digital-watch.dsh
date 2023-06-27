@@ -194,10 +194,12 @@ This model has appeared in the following publications:
                 }
             }
         }
-        // this seems to be an orphan state?
+        // NAD: this seems to be an orphan state?
+        /*
         state Alarms_Beep {
 
         }
+        */
     }
  }
 

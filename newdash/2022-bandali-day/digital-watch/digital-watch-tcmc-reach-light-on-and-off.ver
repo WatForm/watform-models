@@ -14,15 +14,16 @@ pred reach_light_on_and_off {
 
 check {
    reach_light_on_and_off 
-} for exactly 10 DshSnapshot
+} for exactly 11 DshSnapshot expect 1
 
 // takes around 2-3 sec on Nancy's mac
 // does not take longer with more snapshots b/c it just generates more initial or orphan snapshots
+// and we don't want to add reachability for Owen's optimization
 
 /*
 
-dashcli -enough -reach -single -t -m tcmc digital-watch.dsh
-cat digital-watch-tcmc.als digital-watch-tcmc-reach-light-on-and-off-invalid.ver > out.als
+dashcli -single -t -m tcmc digital-watch.dsh
+cat digital-watch-tcmc.als digital-watch-tcmc-reach-light-on-and-off.ver > out.als
 time dashcli out.als
 
 */

@@ -6,11 +6,11 @@
 run { 
    #(tcmc/ks_s0) = 1 
    dsh_reachability 
-} for exactly 5 DshSnapshot
+} for exactly 9 DshSnapshot expect 1
 
 /*
 
-dashcli -enough -reach -t -m tcmc digital-watch.dsh
+dashcli -t -m tcmc -single digital-watch.dsh
 cat digital-watch-tcmc.als digital-watch-tcmc-explore.ver > out.als
 time dashcli out.als
 

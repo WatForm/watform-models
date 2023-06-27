@@ -6,7 +6,7 @@
     goto DigitalWatch_Light_On
 */
 
-assert trans_light_on {
+pred trans_light_on {
     ctl_mc[
         ag[
             imp_ctl[{ s : DshSnapshot | DigitalWatch_press_b in s.dsh_events0 and
@@ -20,14 +20,17 @@ assert trans_light_on {
 // this property is true (Alloy returns UNSAT)
 // takes perceptible time at 7 snapshots
 
-check trans_light_on for exactly 7 DshSnapshot
+check {
+    trans_light_on 
+}
+for exactly 7 DshSnapshot expect 0
 
 // takes around 11 sec on Nancy's mac
 
 /*
 
-dashcli -enough -reach -single -t -m tcmc digital-watch.dsh
-cat digital-watch-tcmc.als digital-watch-tcmc-trans-light-on-valid.ver > out.als
+dashcli -single -t -m tcmc digital-watch.dsh
+cat digital-watch-tcmc.als digital-watch-tcmc-trans-light-on.ver > out.als
 time dashcli out.als
 
 */

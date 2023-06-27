@@ -25,7 +25,7 @@ If the command includes `expect 1` it means SAT (an instance for run; property d
 
 ## Step 1: Explore
 
-The first step is always to look at instances of the model.  These instances should only include reachable states and are easier to look at if there is only one initial state (to avoid orphan initial states):
+The first step is always to look at instances of the model in the GUI.  These instances should only include reachable states and are easier to look at if there is only one initial state (to avoid orphan initial states):
 
 run { 
    #(tcmc/ks_s0) = 1 

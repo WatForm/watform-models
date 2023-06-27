@@ -1,0 +1,36 @@
+/*
+    trans light_on
+
+    on press_b
+    goto On
+
+*/
+
+fun is_a_next_state: set DshSnapshot {
+    ex[ {s: DshSnapshot | boolean/isTrue[boolean/True] } ]
+}
+
+pred ef_trans_light_on {
+    ctl_mc[
+        imp_ctl[and_ctl[{ s : DshSnapshot | DigitalWatch_press_b in s.dsh_events0 },
+                              is_a_next_state ],
+                ef[{s: DshSnapshot | DigitalWatch_Light_On in s.dsh_conf0 }]
+            ]
+    ]
+}
+
+// this property is valid (Alloy returns UNSAT)
+// takes perceptible time at 7 snapshots
+
+check {
+    ef_trans_light_on
+}
+for exactly 40 DshSnapshot expect 0
+
+/*
+
+dashcli -single -t -m tcmc digital-watch.dsh
+cat digital-watch-tcmc.als digital-watch-tcmc-trans-ef-light-on.ver > out.als
+time dashcli out.als
+
+*/
