@@ -18,7 +18,7 @@ fun is_a_next_state: set DshSnapshot {
 }
 
 // make this about one particular client
-// quantify this inside the property b/c it has to the same C for different moments in time
+// can't quantify this inside the property b/c it has to the same C for different moments in time
 
 one sig C extends ClientID {}
 
