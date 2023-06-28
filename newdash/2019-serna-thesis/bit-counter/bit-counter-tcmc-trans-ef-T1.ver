@@ -1,0 +1,43 @@
+/*
+
+    trans T1 {
+        from Bit1/Bit11
+        on Tk0
+        goto Bit12
+    }
+
+
+*/
+
+fun is_a_next_state: set DshSnapshot {
+    ex[ {s: DshSnapshot | boolean/isTrue[boolean/True] } ]
+}
+
+// this model has a very fairly small finite state space
+
+pred ef_trans_T1 {
+    ctl_mc[
+        imp_ctl[and_ctl[{ s : DshSnapshot | 
+                Counter_Tk0 in s.dsh_events0 and
+                Counter_Bit1_Bit11 in s.dsh_conf0 },
+                is_a_next_state ],
+                ef[{s: DshSnapshot | Counter_Bit1_T1 in s.dsh_taken0 }]
+            ]
+    ]
+}
+
+// this property is valid (Alloy returns UNSAT)
+// takes perceptible time at 7 snapshots
+
+check {
+    ef_trans_T1
+}
+for exactly 30 DshSnapshot   expect 0
+
+/*
+
+dashcli -t -m tcmc bit-counter.dsh
+cat bit-counter-tcmc.als bit-counter-tcmc-trans-ef-T1.ver > bit-counter-tcmc-trans-ef-T1.als
+time dashcli bit-counter-tcmc-trans-ef-T1.als
+
+*/

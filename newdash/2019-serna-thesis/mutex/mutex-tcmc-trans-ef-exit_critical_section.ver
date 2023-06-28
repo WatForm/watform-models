@@ -1,0 +1,40 @@
+/*
+
+    trans exit_critical_section {
+        from Critical
+        when semaphore_free = False
+        goto NonCritical
+        do semaphore_free' = True
+    }
+
+*/
+
+fun is_a_next_state: set DshSnapshot {
+    ex[ {s: DshSnapshot | boolean/isTrue[boolean/True] } ]
+}
+
+pred ef_trans_exit_critical_section {
+    ctl_mc[
+        imp_ctl[and_ctl[{ s : DshSnapshot | 
+                Mutex_Process2_Critical in s.dsh_conf0 and
+                s.Mutex_semaphore_free = False
+                 },
+                is_a_next_state ],
+                ef[{s: DshSnapshot | Mutex_Process2_exit_critical_section in s.dsh_taken0 }]
+            ]
+    ]
+}
+
+// this one has a finite state space
+check {
+    ef_trans_exit_critical_section
+}
+for exactly 70 DshSnapshot   expect 0
+
+/*
+
+dashcli -t -m tcmc -single mutex.dsh
+cat mutex-tcmc.als mutex-tcmc-trans-ef-exit_critical_section.ver > mutex-tcmc-trans-ef-exit_critical_section.als
+time dashcli mutex-tcmc-trans-ef-exit_critical_section.als
+
+*/

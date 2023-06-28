@@ -1,0 +1,40 @@
+/*
+
+    trans Acquire {
+        when !(in_b in books)
+        do books' = books + in_b
+    }
+
+
+*/
+
+fun is_a_next_state: set DshSnapshot {
+    ex[ {s: DshSnapshot | boolean/isTrue[boolean/True] } ]
+}
+
+// have to be enough conditions here to make this transition uniquely enabled
+pred ef_trans_acquire {
+    ctl_mc[
+        imp_ctl[and_ctl[{ s : DshSnapshot | 
+                !(s.Library_in_b in s.Library_books) and
+                s.Library_in_m in s.Library_members and
+                some (s.Library_loans).(s.Library_in_m)   },
+                is_a_next_state ],
+                ef[{s: DshSnapshot | Library_Acquire in s.dsh_taken0 }]
+            ]
+    ]
+}
+
+
+check {
+    ef_trans_acquire
+}
+for exactly 20 DshSnapshot, exactly 10 BookID, 10 MemberID  expect 0
+
+/*
+
+dashcli -t -m tcmc library.dsh
+cat library-tcmc.als library-tcmc-trans-ef-acquire.ver > library-tcmc-trans-ef-acquire.als
+time dashcli library-tcmc-trans-ef-acquire.als
+
+*/

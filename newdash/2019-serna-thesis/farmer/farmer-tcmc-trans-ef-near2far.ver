@@ -1,0 +1,36 @@
+/*
+
+    trans near2far {
+        when Farmer in near
+
+
+*/
+
+fun is_a_next_state: set DshSnapshot {
+    ex[ {s: DshSnapshot | boolean/isTrue[boolean/True] } ]
+}
+
+pred ef_trans_near2far {
+    ctl_mc[
+        imp_ctl[and_ctl[{ s : DshSnapshot | 
+                Farmer in s.Puzzle_near
+                 },
+                is_a_next_state ],
+                ef[{s: DshSnapshot | Puzzle_near2far in s.dsh_taken0 }]
+            ]
+    ]
+}
+
+// farmer just keeps going back and forth
+check {
+    ef_trans_near2far
+}
+for exactly 60 DshSnapshot   expect 0
+
+/*
+
+dashcli -t -m tcmc farmer.dsh
+cat farmer-tcmc.als farmer-tcmc-trans-ef-near2far.ver > farmer-tcmc-trans-ef-near2far.als
+time dashcli farmer-tcmc-trans-ef-near2far.als
+
+*/

@@ -1,0 +1,30 @@
+
+
+// this model does have a fixed max state space because all snapshot elements
+// are based on inherently finite sets
+
+// the health monitoring transition has no preconditions
+// so we have to say that it is not taken
+
+pred ef_trans_retraction_sequence {
+    ctl_mc[
+        imp_ctl[and_ctl[
+                { s : DshSnapshot | s.LandingGear_anomaly = False and s.LandingGear_handle = UP  },
+                ex [ {s : DshSnapshot | !(LandingGear_health_monitoring in s.dsh_taken0) }]],
+                ef[{s: DshSnapshot | LandingGear_retraction_sequence in s.dsh_taken0 }]
+            ]
+    ]
+}
+
+check {
+    ef_trans_retraction_sequence
+}
+for exactly 50 DshSnapshot expect 0
+
+/*
+
+dashcli -t -m tcmc ref4.dsh
+cat ref4-tcmc.als ref4-tcmc-trans-ef-retraction-sequence.ver > ref4-tcmc-trans-ef-retraction-sequence.als
+time dashcli ref4-tcmc-trans-ef-retraction-sequence.als
+
+*/

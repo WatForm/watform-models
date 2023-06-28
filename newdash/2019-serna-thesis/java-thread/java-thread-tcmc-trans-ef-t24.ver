@@ -1,0 +1,40 @@
+/*
+
+    trans t24 {
+        from TimedWaiting
+        on ThreadSleepTimeElapsed
+        goto Runnable
+    }
+
+
+*/
+
+fun is_a_next_state: set DshSnapshot {
+    ex[ {s: DshSnapshot | boolean/isTrue[boolean/True] } ]
+}
+
+pred ef_trans_t24 {
+    ctl_mc[
+        imp_ctl[and_ctl[{ s : DshSnapshot | 
+                ThreadStates_TimedWaiting in s.dsh_conf0 and
+                ThreadStates_ThreadSleepTimeElapsed in s.dsh_events0
+                 },
+                is_a_next_state ],
+                ef[{s: DshSnapshot | ThreadStates_t24 in s.dsh_taken0 }]
+            ]
+    ]
+}
+
+// this one has a finite state space
+check {
+    ef_trans_t24
+}
+for exactly 60 DshSnapshot   expect 0
+
+/*
+
+dashcli -t -m tcmc -single java-thread.dsh
+cat java-thread-tcmc.als java-thread-tcmc-trans-ef-t24.ver > java-thread-tcmc-trans-ef-t24.als
+time dashcli java-thread-tcmc-trans-ef-t24.als
+
+*/

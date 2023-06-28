@@ -19,18 +19,15 @@ pred ef_trans_light_on {
     ]
 }
 
-// this property is valid (Alloy returns UNSAT)
-// takes perceptible time at 7 snapshots
-
 check {
     ef_trans_light_on
 }
-for exactly 40 DshSnapshot expect 0
+for exactly 30 DshSnapshot expect 0
 
 /*
 
 dashcli -single -t -m tcmc digital-watch.dsh
-cat digital-watch-tcmc.als digital-watch-tcmc-trans-ef-light-on.ver > out.als
-time dashcli out.als
+cat digital-watch-tcmc.als digital-watch-tcmc-trans-ef-light-on.ver > digital-watch-tcmc-trans-ef-light-on.als
+time dashcli digital-watch-tcmc-trans-ef-light-on.als
 
 */

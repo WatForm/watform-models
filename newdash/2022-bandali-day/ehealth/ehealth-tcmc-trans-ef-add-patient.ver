@@ -1,0 +1,37 @@
+/*
+    trans add_patient {
+        when !(in_p in patients)
+        do patients' = patients + in_p
+    }
+
+*/
+
+fun is_a_next_state: set DshSnapshot {
+    ex[ {s: DshSnapshot | boolean/isTrue[boolean/True] } ]
+}
+
+// have to be enough conditions here to make this transition uniquely enabled
+pred ef_trans_add_patient {
+    ctl_mc[
+        imp_ctl[and_ctl[{ s : DshSnapshot | 
+                !(s.EHealthSystem_in_p in s.EHealthSystem_patients) and
+                  s.EHealthSystem_in_m1 in s.EHealthSystem_medications},
+                is_a_next_state ],
+                ef[{s: DshSnapshot | EHealthSystem_add_patient in s.dsh_taken0 }]
+            ]
+    ]
+}
+
+
+check {
+    ef_trans_add_patient
+}
+for exactly 50 DshSnapshot, exactly 6 Medication, exactly 6 Patient   expect 0
+
+/*
+
+dashcli -t -m tcmc ehealth.dsh
+cat ehealth-tcmc.als ehealth-tcmc-trans-ef-add-patient.ver > ehealth-tcmc-trans-ef-add-patient.als
+time dashcli ehealth-tcmc-trans-ef-add-patient.als
+
+*/

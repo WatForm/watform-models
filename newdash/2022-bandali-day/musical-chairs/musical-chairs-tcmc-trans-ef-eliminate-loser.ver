@@ -1,0 +1,44 @@
+/*
+    state Sitting {
+        trans EliminateLoser {
+            goto Start
+            do {
+                activePlayers' = Chairs.occupiedChairs
+                #activeChairs' = (#activeChairs).minus[1]
+            }
+        }
+    }
+
+
+*/
+
+fun is_a_next_state: set DshSnapshot {
+    ex[ {s: DshSnapshot | boolean/isTrue[boolean/True] } ]
+}
+
+// have to be enough conditions here to make this transition uniquely enabled
+pred ef_trans_eliminate_loser {
+    ctl_mc[
+        imp_ctl[and_ctl[{ s : DshSnapshot | 
+                Game_Sitting in s.dsh_conf0 },
+                is_a_next_state ],
+                ef[{s: DshSnapshot | Game_Sitting_EliminateLoser in s.dsh_taken0 }]
+            ]
+    ]
+}
+
+// this property is valid (Alloy returns UNSAT)
+// takes perceptible time at 7 snapshots
+
+check {
+    ef_trans_eliminate_loser
+}
+for exactly 60 DshSnapshot, exactly 14 Chairs, exactly 15 Players  expect 0
+
+/*
+
+dashcli -t -m tcmc musical-chairs.dsh
+cat musical-chairs-tcmc.als musical-chairs-tcmc-trans-ef-eliminate-loser.ver > musical-chairs-tcmc-trans-ef-eliminate-loser.als
+time dashcli musical-chairs-tcmc-trans-ef-eliminate-loser.als
+
+*/

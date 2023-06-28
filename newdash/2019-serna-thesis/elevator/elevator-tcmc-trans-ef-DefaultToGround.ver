@@ -1,0 +1,41 @@
+/*
+
+   trans DefaultToGround {
+        when {
+            no called
+            min[Floor] not in current
+        }
+
+
+*/
+
+fun is_a_next_state: set DshSnapshot {
+    ex[ {s: DshSnapshot | boolean/isTrue[boolean/True] } ]
+}
+
+pred ef_trans_DefaultToGround {
+    ctl_mc[
+        imp_ctl[and_ctl[{ s : DshSnapshot | 
+                no s.Elevator_called and
+                min[Floor] not in s.Elevator_current and
+                s.Elevator_maintenance != 2
+                 },
+                is_a_next_state ],
+                ef[{s: DshSnapshot | Elevator_DefaultToGround in s.dsh_taken0 }]
+            ]
+    ]
+}
+
+
+check {
+    ef_trans_DefaultToGround
+}
+for exactly 60 DshSnapshot, exactly 20 Floor   expect 0
+
+/*
+
+dashcli -t -m tcmc elevator.dsh
+cat elevator-tcmc.als elevator-tcmc-trans-ef-DefaultToGround.ver > elevator-tcmc-trans-ef-DefaultToGround.als
+time dashcli elevator-tcmc-trans-ef-DefaultToGround.als
+
+*/
