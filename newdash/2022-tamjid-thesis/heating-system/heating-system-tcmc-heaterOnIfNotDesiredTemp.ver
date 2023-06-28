@@ -1,0 +1,6 @@
+assert heaterOnIfNotDesiredTemp{
+    ctl_mc[imp_ctl[ag[{s0: DshSnapshot | (HeatingSystem_ERROR !in s0.dsh_conf0)}], 
+	af[{s0: one DshSnapshot | some p0: one Identifier | lt[p0.(s0.HeatingSystem_Functioning_Room_actualTemp), p0.(s0.HeatingSystem_Functioning_Room_actualTemp)]}]]]
+}
+
+check heaterOnIfNotDesiredTemp for exactly 30 DshSnapshot, exactly 3 Identifier, exactly 4 Temp expect 0

@@ -7,7 +7,7 @@
 # CONFIGURATION -----------------------------
 
 # set path to executable
-exe = "java -cp /Users/nday/UW/github/org.alloytools.alloy/org.alloytools.alloy.dist/target/org.alloytools.alloy.dist.jar ca.uwaterloo.watform.dash4whole.Dash"
+exe = "java -cp /Users/adityashankarnarayanan/dashplus/org.alloytools.alloy/org.alloytools.alloy.dist/target/org.alloytools.alloy.dist.jar ca.uwaterloo.watform.dash4whole.Dash"
 #exe = "dashcli"
 #options = "-t -m tcmc"
 #ext = ".als"

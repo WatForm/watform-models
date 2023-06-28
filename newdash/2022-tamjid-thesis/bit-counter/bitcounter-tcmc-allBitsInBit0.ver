@@ -1,0 +1,6 @@
+assert allBitsInBit0 {
+        ctl_mc[af[{ s: DshSnapshot | Counter_Done in s.dsh_events0 and 
+		(all p: PID | Counter_Bit_Bit1 in p.(s.dsh_conf1)) }]]
+}
+
+check allBitsInBit0 for 20 DshSnapshot, exactly 4 PID expect 0

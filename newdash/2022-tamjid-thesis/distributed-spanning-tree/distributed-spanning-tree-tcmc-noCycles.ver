@@ -1,0 +1,5 @@
+assert noCycles  {
+	ctl_mc[ag[{ s: DshSnapshot | all n: Node -  s.DistrubedTreeSpanning_root | n !in n.(^(~(s.DistrubedTreeSpanning_N_parent)))}]]
+}
+
+check noCycles for 13 DshSnapshot, exactly 6 Level, exactly 6 Node expect 0

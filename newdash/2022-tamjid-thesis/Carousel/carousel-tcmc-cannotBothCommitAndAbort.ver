@@ -1,0 +1,5 @@
+assert cannotBothCommitAndAbort {
+    ctl_mc[ag[{s0: one DshSnapshot | one disj p0, p1: PartLdrID | (Carousel_PartitionLeader_Waiting_FinalizeCommit in (p0.(s0.(DshSnapshot <: dsh_taken1))) => (Carousel_PartitionLeader_Abort !in p1.(s0.(DshSnapshot <: dsh_conf1))))}]]
+}
+
+check cannotBothCommitAndAbort for 30 DshSnapshot, exactly 2 ClientID, exactly 2 CoordinatorID, 3 currentTxn, exactly 3 Key, exactly 3 PartLdrID, 3 pendingTxn, exactly 4 Transaction, exactly 2 Value expect 0

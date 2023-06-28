@@ -1,0 +1,8 @@
+assert closestElevatorHasCall {
+    ctl_mc[af[{s: one DshSnapshot | (one e0: one PID,f: one Floor | f in e0. (s.(DshSnapshot <: System_Elevator_called)) and
+            e0. (s.(DshSnapshot <: System_Elevator_direction)) = Up => (
+            (no e1: one PID - e0 | between[e0. (s.(DshSnapshot <: System_Elevator_current)), e1. (s.(DshSnapshot <: System_Elevator_current)), f] and
+                e1. (s.(DshSnapshot <: System_Elevator_direction)) = Up))) }]]
+}
+
+check closestElevatorHasCall for 17 Snapshot, exactly 4 Floor, exactly 4 PID expect 0

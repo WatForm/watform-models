@@ -1,3 +1,0 @@
-assert ctl_eventuallyLeaderElected {
-	ctl_mc[af[{s: Snapshot | some s.System_elected}]]
-}

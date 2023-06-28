@@ -1,7 +1,0 @@
-assert heaterOnIfNotDesiredTemp{
-    ctl_mc[path_ctl/imp_[path_ctl/ag[{s0: Snapshot | (HeatingSystem_ERROR !in s0.conf0)}], 
-	path_ctl/af[{s0: one Snapshot | some p0: one Identifier | lt[p0.(s0.HeatingSystem_Functioning_Room_actualTemp), p0.(s0.HeatingSystem_Functioning_Room_actualTemp)]}]]]
-}
-
-check heaterOnIfNotDesiredTemp for exactly 25 Snapshot, exactly 2 Identifier, exactly 4 Temp, 1 PathNode
-// check heaterOnIfNotDesiredTemp for exactly 30 Snapshot, exactly 3 Identifier, exactly 4 Temp, 1 PathNode

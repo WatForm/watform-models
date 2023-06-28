@@ -1,0 +1,5 @@
+assert electedHasHighestIdentifier {
+    ctl_mc[af[{s: one DshSnapshot | some s.System_elected => (s.System_elected) in P0/last}]]
+}
+
+check electedHasHighestIdentifier for exactly 15 DshSnapshot, exactly 7 Identifier, exactly 7 token expect 0

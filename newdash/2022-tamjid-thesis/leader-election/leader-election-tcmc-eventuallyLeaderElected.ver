@@ -1,0 +1,5 @@
+assert eventuallyLeaderElected {
+	ctl_mc[af[{s: DshSnapshot | some s.System_elected}]]
+}
+
+check eventuallyLeaderElected for exactly 15 DshSnapshot, exactly 7 Identifier, exactly 7 token expect 0
