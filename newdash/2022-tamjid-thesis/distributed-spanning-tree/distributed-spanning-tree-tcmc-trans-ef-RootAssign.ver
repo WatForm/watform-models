@@ -1,0 +1,49 @@
+/*
+default state Unassigned {
+	trans RootAssign {
+		when {
+			thisN in root
+		}
+		do {
+		    level' = nodeLevel/first
+			parent' = thisN
+		}
+		goto Assigned
+	}
+*/
+
+fun is_a_next_state: set DshSnapshot {
+    ex[ {s: DshSnapshot | boolean/isTrue[boolean/True] } ]
+}
+
+one sig L extends Node {}
+
+pred ef_trans_RootAssign {
+    ctl_mc[
+        imp_ctl[and_ctl[{ s : DshSnapshot | 
+                (L -> DistributedTreeSpanning_N_Unassigned) in s.dsh_conf1 and
+                L in s.DistributedTreeSpanning_root
+                 },
+                is_a_next_state ],
+                ef[{s: DshSnapshot | L -> DistributedTreeSpanning_N_Unassigned_RootAssign in s.dsh_taken1 }]
+            ]
+    ]
+}
+
+check {
+    ef_trans_RootAssign
+}
+for 
+exactly 20 DshSnapshot,
+exactly 6 Level, 
+exactly 6 Node
+expect 0
+
+
+/*
+
+dashcli -t -m tcmc distributed-spanning-tree.dsh
+cat distributed-spanning-tree-tcmc.als distributed-spanning-tree-tcmc-trans-ef-RootAssign.ver > distributed-spanning-tree-tcmc-trans-ef-RootAssign.als
+time dashcli distributed-spanning-tree-tcmc-trans-ef-RootAssign.als
+
+*/
