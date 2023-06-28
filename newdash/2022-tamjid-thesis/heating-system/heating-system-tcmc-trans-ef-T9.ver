@@ -1,0 +1,45 @@
+/*
+default state Idle {
+	trans T9 {
+		when heatRequested 
+		send activate
+		goto Heater_Active
+	}
+*/
+
+fun is_a_next_state: set DshSnapshot {
+    ex[ {s: DshSnapshot | boolean/isTrue[boolean/True] } ]
+}
+
+one sig R extends Identifier {}
+
+pred ef_trans_T9 {
+    ctl_mc[
+        imp_ctl[and_ctl[{ s : DshSnapshot | 
+                HeatingSystem_Functioning_Controller_On_Idle in s.dsh_conf0 and
+                (R.(s.HeatingSystem_Functioning_Room_requestHeat) = True)
+                 },
+                is_a_next_state ],
+                ef[{s: DshSnapshot | HeatingSystem_Functioning_Controller_On_Idle_T9 in s.dsh_taken0 }]
+            ]
+    ]
+}
+
+check {
+    ef_trans_T9
+}
+for 
+exactly 18 DshSnapshot,
+exactly 6 Identifier,
+exactly 6 Temp    
+expect 0
+
+
+
+/*
+
+dashcli -t -m tcmc heating-system.dsh
+cat heating-system-tcmc.als heating-system-tcmc-trans-ef-T9.ver > heating-system-tcmc-trans-ef-T9.als
+time dashcli heating-system-tcmc-trans-ef-T9.als
+
+*/
