@@ -1,0 +1,39 @@
+/*
+    conc  EastWest {
+        state Green {
+            trans T5 {
+                on End
+                goto Yellow
+            }
+        }
+*/
+
+fun is_a_next_state: set DshSnapshot {
+    ex[ {s: DshSnapshot | boolean/isTrue[boolean/True] } ]
+}
+
+pred ef_trans_T5 {
+    ctl_mc[
+        imp_ctl[and_ctl[{ s : DshSnapshot | 
+                TrafficLight_EastWest_Green in s.dsh_conf0 and
+                TrafficLight_Change in s.dsh_events0
+                 },
+                is_a_next_state ],
+                ef[{s: DshSnapshot | TrafficLight_EastWest_Green_T5 in s.dsh_taken0 }]
+            ]
+    ]
+}
+
+// this one has a finite state space
+check {
+    ef_trans_T5
+}
+for exactly 30 DshSnapshot   expect 0
+
+/*
+
+dashcli -t -m tcmc -single traffic-light.dsh
+cat traffic-light-tcmc.als traffic-light-tcmc-trans-ef-T5.ver > traffic-light-tcmc-trans-ef-T5.als
+time dashcli traffic-light-tcmc-trans-ef-T5.als
+
+*/

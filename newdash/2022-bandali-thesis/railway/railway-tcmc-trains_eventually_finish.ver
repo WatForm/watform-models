@@ -1,0 +1,29 @@
+
+pred trains_eventually_finish {
+    ctl_mc[
+        ef [{ s: DshSnapshot | 
+            s.Railway_P0 = 6 and
+            s.Railway_P1 = 6 and
+            s.Railway_P2 = 6 and
+            s.Railway_P3 = 6 and
+            s.Railway_P4 = 6 and
+            s.Railway_P5 = 6 and
+            s.Railway_P6 = 6 and
+            s.Railway_P7 = 6
+        }]
+    ]
+}
+
+
+check {
+    trains_eventually_finish
+}
+for exactly 7 DshSnapshot expect 0
+
+/*
+
+dashcli -t -m tcmc railway.dsh
+cat railway-tcmc.als railway-tcmc-trains_eventually_finish.ver > railway-tcmc-trains_eventually_finish.als
+time dashcli railway-tcmc-trains_eventually_finish.als
+
+*/

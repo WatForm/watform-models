@@ -1,0 +1,40 @@
+/*
+
+   trans t13 {
+        from ReadyReceiveResend
+        on SendSuccess
+        goto ReceiveSuccess
+    }
+
+
+*/
+
+fun is_a_next_state: set DshSnapshot {
+    ex[ {s: DshSnapshot | boolean/isTrue[boolean/True] } ]
+}
+
+pred ef_trans_t13 {
+    ctl_mc[
+        imp_ctl[and_ctl[{ s : DshSnapshot | 
+                RDT_Receiver_ReadyReceiveResend in s.dsh_conf0 and
+                RDT_SendSuccess in s.dsh_events0
+                 },
+                is_a_next_state ],
+                ef[{s: DshSnapshot | RDT_Receiver_t13 in s.dsh_taken0 }]
+            ]
+    ]
+}
+
+// this one has a finite state space
+check {
+    ef_trans_t13
+}
+for exactly 40 DshSnapshot   expect 0
+
+/*
+
+dashcli -t -m tcmc -single rdt.dsh
+cat rdt-tcmc.als rdt-tcmc-trans-ef-t13.ver > rdt-tcmc-trans-ef-t13.als
+time dashcli rdt-tcmc-trans-ef-t13.als
+
+*/
