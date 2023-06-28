@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<alloy>
+
+<view>
+
+<projection> <type name="tcmc/TS"/> </projection>
+
+<defaultnode/>
+
+<defaultedge/>
+
+<node>
+   <type name="DshIds"/>
+   <type name="DshScopes"/>
+   <type name="DshStates"/>
+   <type name="Int"/>
+   <type name="N"/>
+   <type name="NO_TRANS"/>
+   <type name="Node"/>
+   <type name="Rectifying"/>
+   <type name="Stabilizing"/>
+   <type name="Status"/>
+   <type name="String"/>
+   <type name="System"/>
+   <type name="System_N"/>
+   <type name="System_N_Failed"/>
+   <type name="System_N_Failed_Join"/>
+   <type name="System_N_FailedScope"/>
+   <type name="System_N_Live"/>
+   <type name="System_N_Live_Fail"/>
+   <type name="System_N_Live_Flush"/>
+   <type name="System_N_Live_Rectify"/>
+   <type name="System_N_Live_StabilizeFromPrdc"/>
+   <type name="System_N_Live_StabilizeFromSucc"/>
+   <type name="System_N_LiveScope"/>
+   <type name="System_NScope"/>
+   <type name="SystemScope"/>
+   <type name="Transitions"/>
+   <type name="boolean/Bool"/>
+   <type name="boolean/False"/>
+   <type name="boolean/True"/>
+   <type name="node/Ord"/>
+   <type name="seq/Int"/>
+   <type name="tcmc/TS"/>
+   <set name="$is_a_next_state" type="DshSnapshot"/>
+   <set name="S0" type="DshSnapshot"/>
+</node>
+
+<node visible="no">
+   <type name="univ"/>
+</node>
+
+<node visible="yes">
+   <type name="DshSnapshot"/>
+</node>
+
+<edge attribute="yes">
+   <relation name="dsh_conf0"> <type name="DshSnapshot"/> <type name="DshStates"/> </relation>
+   <relation name="dsh_conf1"> <type name="DshSnapshot"/> <type name="DshIds"/> <type name="DshStates"/> </relation>
+   <relation name="dsh_sc_used0"> <type name="DshSnapshot"/> <type name="DshScopes"/> </relation>
+   <relation name="dsh_sc_used1"> <type name="DshSnapshot"/> <type name="DshIds"/> <type name="DshScopes"/> </relation>
+   <relation name="dsh_stable"> <type name="DshSnapshot"/> <type name="boolean/Bool"/> </relation>
+   <relation name="dsh_taken0"> <type name="DshSnapshot"/> <type name="Transitions"/> </relation>
+   <relation name="dsh_taken1"> <type name="DshSnapshot"/> <type name="DshIds"/> <type name="Transitions"/> </relation>
+   <relation name="System_members"> <type name="DshSnapshot"/> <type name="DshIds"/> </relation>
+   <relation name="System_N_frst"> <type name="DshSnapshot"/> <type name="DshIds"/> <type name="DshIds"/> </relation>
+   <relation name="System_N_prdc"> <type name="DshSnapshot"/> <type name="DshIds"/> <type name="DshIds"/> </relation>
+   <relation name="System_N_saved"> <type name="DshSnapshot"/> <type name="DshIds"/> <type name="DshIds"/> </relation>
+   <relation name="System_N_scnd"> <type name="DshSnapshot"/> <type name="DshIds"/> <type name="DshIds"/> </relation>
+   <relation name="System_N_status"> <type name="DshSnapshot"/> <type name="DshIds"/> <type name="Status"/> </relation>
+</edge>
+
+</view>
+
+</alloy>

@@ -1,0 +1,48 @@
+/*
+
+    trans StabilizeFromSucc {
+        when {
+            no status
+        }
+
+
+*/
+
+fun is_a_next_state: set DshSnapshot {
+    ex[ {s: DshSnapshot | boolean/isTrue[boolean/True] } ]
+}
+
+// make this about one particular Node
+// can't quantify this inside the property b/c it has to the same N for different moments in time
+
+one sig N extends Node {}
+
+pred ef_trans_StabilizeFromSucc {
+    ctl_mc[
+        imp_ctl[and_ctl[{ s : DshSnapshot | 
+                (N -> System_N_Live) in s.dsh_conf1 and
+                no (N.(s.System_N_status)) and
+                (N not in (s.System_members)) // to avoid Flush transition
+                 },
+                is_a_next_state ],
+                ef[{s: DshSnapshot | N -> System_N_Live_StabilizeFromSucc in s.dsh_taken1 }]
+            ]
+    ]
+}
+
+check {
+    ef_trans_StabilizeFromSucc
+}
+for 
+exactly 12 DshSnapshot, 
+exactly 4 Node   
+expect 0
+
+
+/*
+
+dashcli -t -m tcmc chord.dsh
+cat chord-tcmc.als chord-tcmc-trans-ef-StabilizeFromSucc.ver > chord-tcmc-trans-ef-StabilizeFromSucc.als
+time dashcli chord-tcmc-trans-ef-StabilizeFromSucc.als
+
+*/
