@@ -26,9 +26,6 @@ pred ef_trans_T1 {
     ]
 }
 
-// this property is valid (Alloy returns UNSAT)
-// takes perceptible time at 7 snapshots
-
 check {
     ef_trans_T1
 }
