@@ -1,0 +1,51 @@
+/*
+
+trans ElectLeader {
+	when {
+		no elected
+		token.firstElem = thisProcess
+	}
+	do {
+		elected' =  thisProcess // Elect Leader
+	}
+	goto Elected
+}
+
+*/
+
+fun is_a_next_state: set DshSnapshot {
+    ex[ {s: DshSnapshot | boolean/isTrue[boolean/True] } ]
+}
+
+one sig I extends Identifier {}
+
+pred ef_trans_ElectLeader {
+    ctl_mc[
+        imp_ctl[and_ctl[{ s : DshSnapshot | 
+                (I -> System_Process_Electing) in s.dsh_conf1 and
+                no  s.System_elected and
+				((I.(s.System_Process_token)).firstElem) = I
+                 },
+                is_a_next_state ],
+                ef[{s: DshSnapshot | I -> System_Process_Electing_ElectLeader in s.dsh_taken1 }]
+            ]
+    ]
+}
+
+check {
+    ef_trans_ElectLeader
+}
+for 
+exactly 20 DshSnapshot,
+exactly 6 Identifier,
+exactly 6 bufIdx0
+expect 0
+
+
+/*
+
+dashcli -t -m tcmc leader-election.dsh
+cat leader-election-tcmc.als leader-election-tcmc-trans-ef-ElectLeader.ver > leader-election-tcmc-trans-ef-ElectLeader.als
+time dashcli leader-election-tcmc-trans-ef-ElectLeader.als
+
+*/
