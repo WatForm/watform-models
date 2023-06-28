@@ -40,8 +40,8 @@ expect 0
 
 /*
 
-dashcli -t -m tcmc bit-counter.dsh
-cat bit-counter-tcmc.als bit-counter-tcmc-trans-ef-currentBitToBit2.ver > bit-counter-tcmc-trans-ef-currentBitToBit2.als
-time dashcli bit-counter-tcmc-trans-ef-T1.als
+dashcli -t -m tcmc bitcounter.dsh
+cat bitcounter-tcmc.als bitcounter-tcmc-trans-ef-currentBitToBit2.ver > bitcounter-tcmc-trans-ef-currentBitToBit2.als
+time dashcli bitcounter-tcmc-trans-ef-currentBitToBit2.als
 
 */
