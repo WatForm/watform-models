@@ -1,0 +1,47 @@
+/*
+
+trans currentBitToBit2{
+			from Bit1
+			when thisBit in current
+			on Tk0
+			goto Bit2
+		} 
+
+*/ 
+
+fun is_a_next_state: set DshSnapshot {
+    ex[ {s: DshSnapshot | boolean/isTrue[boolean/True] } ]
+}
+
+one sig P extends PID {}
+
+pred ef_trans_currentBitToBit2 {
+    ctl_mc[
+        imp_ctl[and_ctl[{ s : DshSnapshot | 
+                Counter_Tk0 in s.dsh_events0 and
+		 P in s.Counter_current and
+                some ((P -> Counter_Bit_Bit1) & (s.dsh_conf1)) },
+                is_a_next_state ],
+                ef[{s: DshSnapshot | P -> Counter_Bit_currentBitToBit2 in  s.dsh_taken1 }]
+            ]
+    ]
+}
+
+// this property is valid (Alloy returns UNSAT)
+// takes perceptible time at 7 snapshots
+
+check {
+    ef_trans_currentBitToBit2
+}
+for 
+exactly 24 DshSnapshot, 
+exactly 4 PID   
+expect 0
+
+/*
+
+dashcli -t -m tcmc bit-counter.dsh
+cat bit-counter-tcmc.als bit-counter-tcmc-trans-ef-currentBitToBit2.ver > bit-counter-tcmc-trans-ef-currentBitToBit2.als
+time dashcli bit-counter-tcmc-trans-ef-T1.als
+
+*/
