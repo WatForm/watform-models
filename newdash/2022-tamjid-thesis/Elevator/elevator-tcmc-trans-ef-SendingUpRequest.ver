@@ -1,0 +1,41 @@
+/* 
+
+trans SendingUpRequest {
+			from Sending
+			when Up in Floor.callToSend
+
+*/
+
+fun is_a_next_state: set DshSnapshot {
+    ex[ {s: DshSnapshot | boolean/isTrue[boolean/True] } ]
+}
+
+pred ef_trans_SendingUpRequest {
+    ctl_mc[
+        imp_ctl[and_ctl[{ s : DshSnapshot | 
+                System_Controller_Sending in s.dsh_conf0 and 
+                Up in (Floor.(s.System_Controller_callToSend))
+                 },
+                is_a_next_state ],
+                ef[{s: DshSnapshot |  System_Controller_SendingUpRequest in s.dsh_taken0 }]
+            ]
+    ]
+}
+
+check {
+    ef_trans_SendingUpRequest
+}
+for 
+exactly 20 DshSnapshot,
+exactly 10 Floor,
+exactly 4 PID   
+expect 0
+
+
+/*
+
+dashcli -t -m tcmc elevator.dsh
+cat elevator-tcmc.als elevator-tcmc-trans-ef-SendingUpRequest.ver > elevator-tcmc-trans-ef-SendingUpRequest.als
+time dashcli elevator-tcmc-trans-ef-SendingUpRequest.als
+
+*/
