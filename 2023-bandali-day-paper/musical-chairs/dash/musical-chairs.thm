@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<alloy>
+
+<view>
+
+<projection> <type name="tcmc/TS"/> </projection>
+
+<defaultnode/>
+
+<defaultedge/>
+
+<node>
+   <type name="DigitalWatch"/>
+   <type name="DigitalWatch_Light"/>
+   <type name="DigitalWatch_Light_Off"/>
+   <type name="DigitalWatch_Light_Off_light_on"/>
+   <type name="DigitalWatch_Light_OffScope"/>
+   <type name="DigitalWatch_Light_On"/>
+   <type name="DigitalWatch_Light_On_light_off"/>
+   <type name="DigitalWatch_Light_OnScope"/>
+   <type name="DigitalWatch_LightScope"/>
+   <type name="DigitalWatch_Main"/>
+   <type name="DigitalWatch_Main_Alarms_Beep"/>
+   <type name="DigitalWatch_Main_Alarms_BeepScope"/>
+   <type name="DigitalWatch_Main_Displays"/>
+   <type name="DigitalWatch_Main_Displays_Alarm1"/>
+   <type name="DigitalWatch_Main_Displays_Alarm1_go2alarm2"/>
+   <type name="DigitalWatch_Main_Displays_Alarm1Scope"/>
+   <type name="DigitalWatch_Main_Displays_Alarm2"/>
+   <type name="DigitalWatch_Main_Displays_Alarm2_go2chime"/>
+   <type name="DigitalWatch_Main_Displays_Alarm2Scope"/>
+   <type name="DigitalWatch_Main_Displays_Chime"/>
+   <type name="DigitalWatch_Main_Displays_Chime_go2Stopwatch"/>
+   <type name="DigitalWatch_Main_Displays_ChimeScope"/>
+   <type name="DigitalWatch_Main_Displays_Date"/>
+   <type name="DigitalWatch_Main_Displays_Date_return_to_time"/>
+   <type name="DigitalWatch_Main_Displays_Date_show_time"/>
+   <type name="DigitalWatch_Main_Displays_Date_waited_2_min"/>
+   <type name="DigitalWatch_Main_Displays_DateScope"/>
+   <type name="DigitalWatch_Main_Displays_StopWatch"/>
+   <type name="DigitalWatch_Main_Displays_StopWatch_go2Time"/>
+   <type name="DigitalWatch_Main_Displays_StopWatchScope"/>
+   <type name="DigitalWatch_Main_Displays_Time"/>
+   <type name="DigitalWatch_Main_Displays_Time_go2alarm1"/>
+   <type name="DigitalWatch_Main_Displays_Time_show_date"/>
+   <type name="DigitalWatch_Main_Displays_Time_try_update"/>
+   <type name="DigitalWatch_Main_Displays_TimeScope"/>
+   <type name="DigitalWatch_Main_Displays_Update"/>
+   <type name="DigitalWatch_Main_Displays_Update_show_time"/>
+   <type name="DigitalWatch_Main_Displays_UpdateScope"/>
+   <type name="DigitalWatch_Main_Displays_Wait"/>
+   <type name="DigitalWatch_Main_Displays_Wait_show_time"/>
+   <type name="DigitalWatch_Main_Displays_Wait_show_update"/>
+   <type name="DigitalWatch_Main_Displays_Wait_waited_2_sec"/>
+   <type name="DigitalWatch_Main_Displays_WaitScope"/>
+   <type name="DigitalWatch_Main_DisplaysScope"/>
+   <type name="DigitalWatch_MainScope"/>
+   <type name="DigitalWatch_press_a"/>
+   <type name="DigitalWatch_press_b"/>
+   <type name="DigitalWatch_press_c"/>
+   <type name="DigitalWatch_press_d"/>
+   <type name="DigitalWatch_release_a"/>
+   <type name="DigitalWatch_release_b"/>
+   <type name="DigitalWatch_release_c"/>
+   <type name="DigitalWatch_release_d"/>
+   <type name="DigitalWatchScope"/>
+   <type name="DshEnvEvents"/>
+   <type name="DshEvents"/>
+   <type name="DshIntEvents"/>
+   <type name="DshScopes"/>
+   <type name="DshStates"/>
+   <type name="Int"/>
+   <type name="NO_TRANS"/>
+   <type name="String"/>
+   <type name="Transitions"/>
+   <type name="boolean/Bool"/>
+   <type name="boolean/False"/>
+   <type name="boolean/True"/>
+   <type name="seq/Int"/>
+   <type name="tcmc/TS"/>
+   <set name="S0" type="DshSnapshot"/>
+</node>
+
+<node visible="no">
+   <type name="univ"/>
+</node>
+
+<node visible="yes">
+   <type name="DshSnapshot"/>
+</node>
+
+<edge attribute="yes">
+   <relation name="dsh_conf0"> <type name="DshSnapshot"/> <type name="DshStates"/> </relation>
+   <relation name="dsh_events0"> <type name="DshSnapshot"/> <type name="DshEvents"/> </relation>
+   <relation name="dsh_sc_used0"> <type name="DshSnapshot"/> <type name="DshScopes"/> </relation>
+   <relation name="dsh_stable"> <type name="DshSnapshot"/> <type name="boolean/Bool"/> </relation>
+   <relation name="dsh_taken0"> <type name="DshSnapshot"/> <type name="Transitions"/> </relation>
+</edge>
+
+</view>
+
+</alloy>

@@ -1,0 +1,195 @@
+/* The Musical Chairs case study - Dash model
+
+Copyright (c) 2018 Jose Serna <jserna@uwaterloo.ca>
+Copyright (c) 2018 Nancy Day <nday@uwaterloo.ca>
+
+This file is part of the Musical Chairs B model.
+
+The Musical Chairs Dash model is free software: you can redistribute
+it and/or modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+The Musical Chairs Dash model is distributed in the hope that it will
+be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with the Musical Chairs Dash model.  If not, see
+<https://www.gnu.org/licenses/>.
+
+
+The Musical Chairs case study is described in~\cite{Nissanke_1999} by
+Nissanke.  The Musical Chairs Dash model is an adaptation of the
+original model(s) presented there.
+
+@Book{Nissanke_1999,
+  author    = {Nissanke, Nimal},
+  title     = {Formal Specification: Techniques and Applications},
+  year      = 1999,
+  doi       = {10.1007/978-1-4471-0791-0},
+  url       = {http://dx.doi.org/10.1007/978-1-4471-0791-0},
+  isbn      = 9781447107910,
+  publisher = {Springer London}
+}
+
+This model has appeared in the following publications:
+
+@inproceedings{DBLP:conf/re/AbbassiBDS18,
+  author    = {Ali Abbassi and
+               Amin Bandali and
+               Nancy A. Day and
+               Jos{\'{e}} Serna},
+  editor    = {Ana Moreira and
+               Gunter Mussbacher and
+               Jo{\~{a}}o Ara{\'{u}}jo and
+               Pablo S{\'{a}}nchez},
+  title     = {A Comparison of the Declarative Modelling Languages B, Dash, and {TLA+}},
+  booktitle = {8th {IEEE} International Model-Driven Requirements Engineering Workshop,
+               MoDRE@RE 2018, Banff, AB, Canada, August 20, 2018},
+  pages     = {11--20},
+  publisher = {{IEEE} Computer Society},
+  year      = {2018},
+  url       = {https://doi.org/10.1109/MoDRE.2018.00008},
+  doi       = {10.1109/MoDRE.2018.00008},
+  timestamp = {Wed, 16 Oct 2019 14:14:56 +0200},
+  biburl    = {https://dblp.org/rec/conf/re/AbbassiBDS18.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@mastersthesis{bandali2020,
+  type      = {{MMath} thesis},
+  author    = {Amin Bandali},
+  title     = {{A Comprehensive Study of Declarative Modelling Languages}},
+  school    = "University of Waterloo, David R. Cheriton School of Computer Science",
+  year      = 2020,
+  month     = {July},
+  publisher = "UWSpace",
+  url       = {http://hdl.handle.net/10012/16059},
+  note      = {\url{http://hdl.handle.net/10012/16059} and
+                  \url{https://bndl.org/mmath}},
+  pdf       = {https://p.bndl.org/bandali-mmath-thesis.pdf}
+}
+
+*/
+
+open util/integer
+
+sig Chairs, Players {}
+
+state Game {
+    // Game variables
+    activePlayers: set Players
+    activeChairs: set Chairs
+    occupiedChairs: Chairs set -> set Players
+
+    event MusicStarts {}
+    event MusicStops {}
+
+    init {
+        #activePlayers > 1
+        #activePlayers = (#activeChairs ).plus[1]
+        // force all Chair and Player to be included
+        activePlayers = Players
+        activeChairs = Chairs
+        occupiedChairs = none -> none
+    }
+
+    default state Start {
+        trans Walk {
+            on MusicStarts
+            when #activePlayers > 1
+            goto Walking
+            do occupiedChairs' = none -> none
+        }
+
+        trans DeclareWinner {
+            when one activePlayers
+            goto End
+        }
+    }
+
+    state Walking {
+        trans Sit {
+            on MusicStops
+            goto Sitting
+            do  {
+                occupiedChairs' in activeChairs -> activePlayers
+                activeChairs' = activeChairs
+                activePlayers' = activePlayers
+                // forcing occupied to be total and
+                // each chair mapped to only one player
+                all c : activeChairs' | one c .(occupiedChairs')
+                // each " occupying " player is sitting on one chair
+                all p : Chairs.(occupiedChairs') | one occupiedChairs'.p
+            }
+        }
+    }
+
+    state Sitting {
+        trans EliminateLoser {
+            goto Start
+            do {
+                activePlayers' = Chairs.occupiedChairs
+                #activeChairs' = (#activeChairs).minus[1]
+            }
+        }
+    }
+
+     state End {}
+}
+
+// make sure the model is consistent
+run {
+    dsh_reachability
+} for exactly 8 DshSnapshot, exactly 3 Players, exactly 2 Chairs expect 1
+
+ // Get a significant scope
+ run {
+    dsh_reachability
+    dsh_enough_operations
+} for exactly 12 DshSnapshot, exactly 3 Players, exactly 2 Chairs expect 1
+
+
+/******************************* PROPERTIES ***********************************/
+
+/********************************* SAFETY *************************************/
+assert safety {
+    // number of players is walways 1 greater than number of chairs
+    ctl_mc[ ag[{ s : DshSnapshot |
+        #s.Game_activePlayers = (#s.Game_activeChairs).plus[1]}]]
+}
+check safety for exactly 8 DshSnapshot, exactly 3 Players , exactly 2 Chairs expect 0
+    
+
+/******************************** EXISTENTIAL *********************************/
+one sig Alice extends Players {}
+pred existential {
+    // Alice wins in some instance
+    ctl_mc[ef[{ s : DshSnapshot |
+        Game_End in s.dsh_conf0 and s.Game_activePlayers = Alice }]]
+}
+run existential for exactly 8 DshSnapshot, exactly 3 Players, exactly 2 Chairs expect 0
+
+/******************************* FINITE LIVENESS ******************************/
+assert finiteLiveness {
+    ctl_mc[af [{ s : DshSnapshot | Game_Sitting in s.dsh_conf0 }]]
+}
+check finiteLiveness for exactly 8 DshSnapshot, exactly 3 Players , exactly 2 Chairs expect 0
+
+/**************************** INFINITE LIVENESS *******************************/
+assert infiniteLiveness {
+    // number of players eventually always reaches and remains at 1
+    ctl_mc[af[ag[{ s : DshSnapshot | #s.Game_activePlayers = 1}]]]
+}
+check infiniteLiveness for exactly 8 DshSnapshot, exactly 3 Players , exactly 2 Chairs expect 0
+    
+/*
+    How to run this model:
+
+    dashcli -t -m tcmc musical-chairs.dsh
+    dashcli musical-chairs-tcmc.als
+*/
+
+

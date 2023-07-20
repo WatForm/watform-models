@@ -1,9 +1,0 @@
-/**
- *   Eventually is possible that someone logs out and logs in again
- */
-pred logOutLogIn {
-    ef(
-        ex(SnapshotUI/LoginPage in conf) and ex(ex(some x:SnapshotUI/Snapshot | x in conf))
-    )
-}
-run logOutLogIn for 6 expect 1

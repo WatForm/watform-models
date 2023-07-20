@@ -1,6 +1,0 @@
-assert R32 {
-    ag[imp_e[(LandingGear/open_doors_electro_valve = True
-        or LandingGear/close_doors_electro_valve = True),
-            (LandingGear/gears = RETRACTED
-                     or LandingGear/gears = EXTENDED)]]
-}

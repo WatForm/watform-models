@@ -1,6 +1,0 @@
-assert R72 {
-    ag[imp_e[(LandingGear/close_doors_electro_valve = True
-        and not(doors_closed)
-        and LandingGear/timeout = True),
-       ax[ag[LandingGear/anomaly]]]]
-}
