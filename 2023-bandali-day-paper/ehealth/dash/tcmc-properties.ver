@@ -1,0 +1,44 @@
+
+// significant scope
+
+run { 
+    dsh_reachability
+    dsh_enough_operations 
+} for exactly 8 DshSnapshot, 2 Patient, 2 Medication expect 1
+
+// for these it takes too long for 8 DshSnapshot
+pred symmetry {
+    ctl_mc[
+        ag[{s: DshSnapshot | all m1, m2: Medication |
+            m1 -> m2  in s.EHealthSystem_interactions iff m2 -> m1 in s.EHealthSystem_interactions}]
+    ]
+}
+
+check { symmetry } for 8 DshSnapshot, 2 Patient, 2 Medication   expect 0 
+
+pred no_self_interaction {
+    ctl_mc[
+        ag[{s:DshSnapshot | all m: Medication | not (m -> m in s. EHealthSystem_interactions)}]
+    ]
+}
+
+check { no_self_interaction } for 8 DshSnapshot, 2 Patient, 2 Medication expect 0  
+
+pred safe_prescriptions {
+    ctl_mc[
+        ag[{s:DshSnapshot | all m1, m2: Medication, p: Patient |
+            m1 -> m2 in s.EHealthSystem_interactions =>
+            !((p -> m1 in s.EHealthSystem_prescriptions) and (p -> m2 in s.EHealthSystem_prescriptions))}]
+    ]
+}
+
+// are 2 medications for a patient that later interact is the reason this property does not pass invariant
+// 7 is the smallest # of DshSnapshots that will show the bug
+check { safe_prescriptions } for 7 DshSnapshot, 2 Patient, 2 Medication   expect 1 
+
+/*
+    How to run this model:
+    
+    make tcmc
+    dashcli ehealth1-tcmc.als 2>&1 | grep 'Result\|Executing'
+*/

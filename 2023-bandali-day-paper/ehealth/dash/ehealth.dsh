@@ -82,9 +82,7 @@ sig Patient {}
 sig Medication {}
 
 state EHealthSystem {
-    // NAD: changed env inputs from "lone" to "one"
-    // NAD: checking with Amin whether these always have values in models in other languages
-    // NAD: consistent with other language models
+
     env in_p: one Patient
     
     env in_m1, in_m2: one Medication
@@ -152,44 +150,3 @@ state EHealthSystem {
     }
 }
 
-// significant scope
-// running this for 7 (unsat) take much longer than running it for 8 (sat)
-run { 
-    dsh_reachability
-    dsh_enough_operations 
-} for exactly 8 DshSnapshot, 3 Patient, 4 Medication expect 1
-
-// for these it takes too long for 8 DshSnapshot
-pred symmetry {
-    ctl_mc[
-        ag[{s: DshSnapshot | all m1, m2: Medication |
-            m1 -> m2  in s.EHealthSystem_interactions iff m2 -> m1 in s.EHealthSystem_interactions}]
-    ]
-}
-
-check { symmetry } for 7 DshSnapshot, 3 Patient, 4 Medication   expect 0 
-
-pred no_self_interaction {
-    ctl_mc[
-        ag[{s:DshSnapshot | all m: Medication | not (m -> m in s. EHealthSystem_interactions)}]
-    ]
-}
-
-check { no_self_interaction } for 7 DshSnapshot, 3 Patient, 4 Medication expect 0  
-
-pred safe_prescriptions {
-    ctl_mc[
-        ag[{s:DshSnapshot | all m1, m2: Medication, p: Patient |
-            m1 -> m2 in s.EHealthSystem_interactions =>
-            !((p -> m1 in s.EHealthSystem_prescriptions) and (p -> m2 in s.EHealthSystem_prescriptions))}]
-    ]
-}
-
-check { safe_prescriptions } for 7 DshSnapshot, 3 Patient, 4 Medication   expect 0 
-
-/*
-    How to run this model:
-
-    dashcli -t -m tcmc ehealth.dsh
-    dashcli ehealth-tcmc.als
-*/

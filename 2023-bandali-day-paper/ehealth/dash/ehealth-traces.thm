@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<alloy>
+
+<view hidePrivate="no">
+
+<projection> <type name="DshSnapshot/Ord"/> </projection>
+
+<defaultnode hideunconnected="yes"/>
+
+<defaultedge/>
+
+<node>
+   <type name="DshSnapshot"/>
+   <type name="EHealthSystem_add_interaction"/>
+   <type name="EHealthSystem_add_medication"/>
+   <type name="EHealthSystem_add_patient"/>
+   <type name="EHealthSystem_add_prescription"/>
+   <type name="EHealthSystem_remove_interaction"/>
+   <type name="EHealthSystem_remove_prescription"/>
+   <type name="Int"/>
+   <type name="Medication"/>
+   <type name="NO_TRANS"/>
+   <type name="Patient"/>
+   <type name="String"/>
+   <type name="Transitions"/>
+   <type name="univ"/>
+   <type name="boolean/Bool"/>
+   <type name="boolean/False"/>
+   <type name="boolean/True"/>
+   <type name="DshSnapshot/Ord"/>
+   <type name="seq/Int"/>
+   <set name="First" type="DshSnapshot"/>
+   <set name="DshSnapshot/back" type="DshSnapshot"/>
+</node>
+
+<edge visible="no" attribute="yes">
+   <relation name="dsh_taken0"> <type name="DshSnapshot"/> <type name="Transitions"/> </relation>
+   <relation name="EHealthSystem_in_m1"> <type name="DshSnapshot"/> <type name="Medication"/> </relation>
+   <relation name="EHealthSystem_in_m2"> <type name="DshSnapshot"/> <type name="Medication"/> </relation>
+   <relation name="EHealthSystem_in_p"> <type name="DshSnapshot"/> <type name="Patient"/> </relation>
+   <relation name="EHealthSystem_interactions"> <type name="DshSnapshot"/> <type name="Medication"/> <type name="Medication"/> </relation>
+   <relation name="EHealthSystem_medications"> <type name="DshSnapshot"/> <type name="Medication"/> </relation>
+   <relation name="EHealthSystem_patients"> <type name="DshSnapshot"/> <type name="Patient"/> </relation>
+   <relation name="EHealthSystem_prescriptions"> <type name="DshSnapshot"/> <type name="Patient"/> <type name="Medication"/> </relation>
+   <relation name="First"> <type name="DshSnapshot/Ord"/> <type name="DshSnapshot"/> </relation>
+</edge>
+
+</view>
+
+</alloy>

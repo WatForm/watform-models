@@ -84,8 +84,8 @@ state Game {
     activeChairs: set Chairs
     occupiedChairs: Chairs set -> set Players
 
-    event MusicStarts {}
-    event MusicStops {}
+    env event MusicStarts {}
+    env event MusicStops {}
 
     init {
         #activePlayers > 1
@@ -140,6 +140,8 @@ state Game {
      state End {}
 }
 
+/******************************* PROPERTIES ***********************************/
+
 // make sure the model is consistent
 run {
     dsh_reachability
@@ -149,14 +151,14 @@ run {
  run {
     dsh_reachability
     dsh_enough_operations
-} for exactly 12 DshSnapshot, exactly 3 Players, exactly 2 Chairs expect 1
+} for exactly 8 DshSnapshot, exactly 3 Players, exactly 2 Chairs expect 1
+// this is just enough for the game to end b/c 
 
 
-/******************************* PROPERTIES ***********************************/
 
 /********************************* SAFETY *************************************/
 assert safety {
-    // number of players is walways 1 greater than number of chairs
+    // number of players is always 1 greater than number of chairs
     ctl_mc[ ag[{ s : DshSnapshot |
         #s.Game_activePlayers = (#s.Game_activeChairs).plus[1]}]]
 }
@@ -165,25 +167,37 @@ check safety for exactly 8 DshSnapshot, exactly 3 Players , exactly 2 Chairs exp
 
 /******************************** EXISTENTIAL *********************************/
 one sig Alice extends Players {}
-pred existential {
+assert existential {
+    dsh_reachability =>
     // Alice wins in some instance
-    ctl_mc[ef[{ s : DshSnapshot |
-        Game_End in s.dsh_conf0 and s.Game_activePlayers = Alice }]]
+    ctl_mc[
+       imp_ctl[
+         ag[ax[{s: DshSnapshot |
+            // avoid stutter because nothing to do
+            // Alice won't win in the first step
+            // and the first step has a NO_TRANS
+            (no (s.dsh_taken0 & NO_TRANS)) || s.Game_activePlayers = Alice}]],
+          ef[{ s : DshSnapshot |
+             Game_End in s.dsh_conf0 and s.Game_activePlayers = Alice }]]]
 }
-run existential for exactly 8 DshSnapshot, exactly 3 Players, exactly 2 Chairs expect 0
+// to guarantee that there is a way for Alice to win we need enough Snapshots to generate the whole state space
+check existential for exactly 20 DshSnapshot, exactly 3 Players, exactly 2 Chairs expect 0
 
 /******************************* FINITE LIVENESS ******************************/
 assert finiteLiveness {
+    dsh_reachability =>
     ctl_mc[af [{ s : DshSnapshot | Game_Sitting in s.dsh_conf0 }]]
 }
 check finiteLiveness for exactly 8 DshSnapshot, exactly 3 Players , exactly 2 Chairs expect 0
 
 /**************************** INFINITE LIVENESS *******************************/
 assert infiniteLiveness {
+    dsh_reachability =>
     // number of players eventually always reaches and remains at 1
     ctl_mc[af[ag[{ s : DshSnapshot | #s.Game_activePlayers = 1}]]]
 }
-check infiniteLiveness for exactly 8 DshSnapshot, exactly 3 Players , exactly 2 Chairs expect 0
+// need to have the whole Kripke structure to prove this
+check infiniteLiveness for exactly 14 DshSnapshot, exactly 3 Players , exactly 2 Chairs expect 0
     
 /*
     How to run this model:

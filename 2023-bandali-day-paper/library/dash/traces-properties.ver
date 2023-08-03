@@ -1,0 +1,127 @@
+
+/* property checking  ------ */
+
+// best to use the theme: digital-watch-traces.thm for display of instance
+// unfortunately theme displays the actual "Next" relation rather than the 
+// predicate "next", which matches small_step
+// "next" includes the loop while the "Next" relation does not
+
+// let's make sure the model is consistent
+// with TCMC, we always want the returned model to only include reachable Snapshots
+// and usually we only want to see one initial state
+run {
+    one tcmc/ks_s0 
+    dsh_reachability 
+} for 3 MemberID, 3 BookID, exactly 8 DshSnapshot
+
+// let's make sure dsh_strong_no_stutter is possible 
+// The only way to violate dsh_strong_no_stutter is if we have a sync DshSnapshot
+// where no transitions exit it within this number of steps
+// higher scope is better here
+
+run {
+    dsh_strong_no_stutter 
+
+} for 3 MemberID, 3 BookID,exactly 50 DshSnapshot expect 1
+
+// Next let's check reachability
+// The only way to violate dsh_enough_operations is if some transition is unreachable 
+// within the number of Snapshots (or possibly never reachable)
+// There are 14 transitions so that means at least 15 DshSnapshots
+// through trial and error, we find it takes 17 DshSnapshots for there
+// to be an instance of every transition
+// we want to find the lowest number of snapshots that make this possible
+
+run {
+    dsh_enough_operations
+} for 3 MemberID, 3 BookID, exactly 17 DshSnapshot expect 1
+
+
+
+/*
+check assert_ltl_2 {
+    all s: Snapshot | pre_Library_Acquire[s] => not(s.Library_in_b in s.Library_books)
+} for 8 Snapshot, 3 MemberID, 3 BookID expect 0
+
+check assert_ltl_3 {
+    all s: Snapshot |
+        (s.Library_in_b in s.Library_books and pre_Library_Discard[s]) =>
+            (no (s.Library_in_b).(s.Library_loans) and
+             no (s.Library_in_b).(s.Library_reservations))
+} for 8 Snapshot,3 MemberID, 3 BookID expect 0
+
+check assert_ltl_4 {
+    all s: Snapshot | pre_Library_Lend[s] => s.Library_in_m in s.Library_members
+} for 8 Snapshot,3 MemberID, 3 BookID expect 0
+
+check assert_ltl_5 {
+    all s: Snapshot | pre_Library_Reserve[s] =>
+        ((no (s.Library_reservations).(s.Library_in_m)) and
+         not (s.Library_in_m in s.Library_loans[s.Library_in_b]) and
+         ((some ((s.Library_in_b).(s.Library_loans))) or
+          (no (s.Library_in_b).(s.Library_reservations))))
+} for 8 Snapshot, 3 MemberID, 3 BookID expect 0
+
+check assert_ltl_6 {
+    all s: Snapshot | pre_Library_Reserve[s] =>
+        not (s.Library_in_m in s.Library_loans[s.Library_in_b])
+} for 8 Snapshot, 0 EventLabel, 3 MemberID, 3 BookID expect 0
+
+check assert_ltl_7 {
+    all s: Snapshot | pre_Library_Reserve[s] =>
+        no ((s.Library_reservations).(s.Library_in_m))
+} for 8 Snapshot, 0 EventLabel, 3 MemberID, 3 BookID expect 0
+
+check assert_ltl_8 {
+    all s: Snapshot | (some ((s.Library_in_b).(s.Library_reservations)) =>
+        not(pre_Library_Lend[s]))
+} for 8 Snapshot, 0 EventLabel, 3 MemberID, 3 BookID expect 0
+
+check assert_ltl_9 {
+    all s: Snapshot | (some ((s.Library_in_b).(s.Library_reservations)) =>
+        not(pre_Library_Renew[s]))
+} for 8 Snapshot, 0 EventLabel, 3 MemberID, 3 BookID expect 0
+
+check assert_ltl_10 {
+    all s: Snapshot | pre_Library_Take[s] =>
+        ((some (s.Library_reservations[s.Library_in_b])) and
+         first[(s.Library_reservations[s.Library_in_b])] = s.Library_in_m)
+} for 8 Snapshot, 3 MemberID, 3 BookID expect 0
+
+check assert_ltl_11 {
+    all s: Snapshot {
+        all b: s.Library_books {
+            (some s.Library_loans[b]) =>
+                not(pre_Library_Take[s] and b = s.Library_in_b)
+        }
+        (pre_Library_Take[s] =>
+            (no s.Library_loans[s.Library_in_b]))
+    }
+} for 8 Snapshot, 3 MemberID, 3 BookID expect 0
+
+check assert_ltl_13 {
+    all s: Snapshot | pre_Library_Leave[s] =>
+        ((s.Library_in_m in s.Library_members) and
+         (no ((s.Library_loans).(s.Library_in_m))) and
+         (no ((s.Library_reservations).(s.Library_in_m))))
+} for 8 Snapshot, 3 MemberID, 3 BookID expect 0
+
+assert assert_ctl_14 {
+    ctl_mc[ag [{ s : Snapshot | ef [{s:Snapshot | s.Library_in_m not in s.Library_members}]}]]
+}
+check assert_ctl_14 for 8 Snapshot, 3 MemberID, 3 BookID expect 0
+
+check assert_ltl_15 {
+    all s: Snapshot, m: s.Library_members | #(s.Library_loans.m) <= Const.maxNbLoans
+} for 8 Snapshot,  3 MemberID, 3 BookID expect 0
+
+*/
+
+/*
+    How to run this model:
+
+    dashcli -t -m traces library.dsh
+    dashcli library-traces.als 2>&1 | grep 'Result\|Executing'
+*/
+
+

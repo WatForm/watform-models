@@ -90,13 +90,13 @@ This model has appeared in the following publications:
 
  state DigitalWatch {
     env event press_a {}
-    env event release_a {}
+    
     env event press_b {}
     env event release_b {}
     env event press_c {}
     env event release_c {}
     env event press_d {}
-    env event release_d {}
+    
 
     conc Light {
         default state Off {
@@ -134,7 +134,7 @@ This model has appeared in the following publications:
             }
 
            state Date {
-                event waited_2_min {}
+                env event waited_2_min {}
                 trans show_time {
                     on press_d
                     goto Time
@@ -147,7 +147,7 @@ This model has appeared in the following publications:
             }
 
             state Wait {
-                event waited_2_sec {}
+                env event waited_2_sec {}
                 trans show_time {
                     on release_c
                     goto Time
@@ -197,47 +197,75 @@ This model has appeared in the following publications:
     }
  }
 
-// significant scope: at least one copy of every transition
-// has to be at least 14 since there are 14 different transitions
-// can't get this to finish on my mac
-/*
+
+
+/* property checking  ------ */
+
+// best to use the theme: digital-watch-traces.thm for display of instance
+// unfortunately theme displays the actual "Next" relation rather than the 
+// predicate "next", which matches small_step
+// "next" includes the loop while the "Next" relation does not
+
+// first let's make sure dsh_strong_no_stutter is possible 
+// The only way to violate dsh_strong_no_stutter is if we have a sync DshSnapshot
+// where no transitions exit it within this number of steps
+// higher scope is better here
+
 run {
-    dsh_reachability 
-    dsh_enough_operations 
-}
-for exactly 14 DshSnapshot expect 1
-*/
+    dsh_strong_no_stutter 
 
-fun is_a_next_state: set DshSnapshot {
-    ex[ {s: DshSnapshot | boolean/isTrue[boolean/True] } ]
-}
+} for exactly 50 DshSnapshot expect 1
 
-// this won't hold unless we force there to be a next snapshot from the one in which press_a is pressed
-// note that not all states may be reachable in c/e
+// Next let's check reachability
+// The only way to violate dsh_enough_operations is if some transition is unreachable 
+// within the number of Snapshots (or possibly never reachable)
+// There are 14 transitions so that means at least 15 DshSnapshots
+// through trial and error, we find it takes 17 DshSnapshots for there
+// to be an instance of every transition
+// we want to find the lowest number of snapshots that make this possible
 
-//NAD: before this property did not have StopWatch in antecedent
-pred eventually_time {
-    ctl_mc[
-        ag[
-            imp_ctl[and_ctl[
-                    { s : DshSnapshot | DigitalWatch_press_a in s.dsh_events0
-                                        && 
-                                        DigitalWatch_Main_Displays_StopWatch in s.dsh_conf0},
-                    is_a_next_state],
-                // ef[ex ] changed to just ex
-                ex[{s: DshSnapshot | DigitalWatch_Main_Displays_Time in s.dsh_conf0 }]
-            ]
-        ]
-    ]
-}
+run {
+    dsh_enough_operations
+} for exactly 17 DshSnapshot expect 1
 
-// we expect this to hold (be UNSAT)
-// this is the max that runs quickly on my mac
-check { eventually_time } for exactly 7 DshSnapshot expect 0
+// now let's make sure the inner antecedent isn't vacuous
+// we can reach a state where press_a happens when in StopWatch
+// by a certain number of steps
+
+// we don't need dsh_enough_operations any more because 
+// we don't need to limit to only those the traces with
+// enough operations
+// scope here is high enough to reach DigitalWatch_Main_Displays_StopWatch
+run {
+    some s:DshSnapshot |
+        DigitalWatch_press_a in s.dsh_events0
+             && 
+             DigitalWatch_Main_Displays_StopWatch in s.dsh_conf0 
+} for exactly 10 DshSnapshot expect 1
+
+// here's the property we want to check:
+//   whenever press_a occurs when in Displays_StopWatch, 
+//   the system moves to Displays_Time
+
+// we don't need to limit this to dsh_strong_no_stutter traces
+// because we are forcing the event press_a to occur
+// the higher the scope, the better!
+
+check {
+    all s: DshSnapshot |
+       DigitalWatch_press_a in s.dsh_events0
+       && 
+       DigitalWatch_Main_Displays_StopWatch in s.dsh_conf0 
+       &&
+       // o/w we could end the trace in a state with press_a and in StopWatch
+       infinite
+       =>
+       DigitalWatch_Main_Displays_Time in next[s].dsh_conf0 
+} for exactly 50 DshSnapshot expect 0
 
 /*
     How to run this model:
 
-    dashcli -t -m tcmc -single digital-watch.dsh
-    dashcli digital-watch.als
+    dashcli -t -m traces -single digital-watch.dsh
+    dashcli digital-watch-traces.als 2>&1 | grep 'Result\|Executing'
 */

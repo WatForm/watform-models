@@ -1,0 +1,67 @@
+
+
+/* property checking  ------ */
+
+// best to use the theme: ehealth-traces.thm for display of instance
+// unfortunately theme displays the actual "Next" relation rather than the 
+// predicate "next", which matches small_step
+// "next" includes the loop while the "Next" relation does not
+
+// first let's make sure dsh_strong_no_stutter is possible 
+// The only way to violate dsh_strong_no_stutter is if we have a sync DshSnapshot
+// where no transitions exit it within this number of steps
+// higher scope is better here
+
+run {
+    dsh_strong_no_stutter 
+} for 5 Patient, 5 Medication, exactly 20 DshSnapshot  expect 1
+
+// Next let's check reachability
+// The only way to violate dsh_enough_operations is if some transition is unreachable 
+// within the number of Snapshots (or possibly never reachable)
+// There are 6 transitions so that means at least 7 DshSnapshots
+// through trial and error, we find it takes 8 DshSnapshots for there
+// to be an instance of every transition
+// we want to find the lowest number of snapshots that make this possible
+
+run {
+    dsh_enough_operations
+} for 5 Patient, 5 Medication, exactly 8 DshSnapshot expect 1
+
+// here are the invariants we want to check
+// higher the scope the better
+
+pred symmetry {
+    all s: DshSnapshot | all m1, m2: Medication |
+            m1 -> m2  in s.EHealthSystem_interactions iff m2 -> m1 in s.EHealthSystem_interactions
+}
+
+check { symmetry } for 5 Patient, 5 Medication, exactly 50 DshSnapshot expect 0
+
+pred no_self_interaction {
+    all s:DshSnapshot | all m: Medication | not (m -> m in s. EHealthSystem_interactions)
+}
+
+check { no_self_interaction } for 5 Patient, 5 Medication, exactly 50 DshSnapshot expect 0
+
+// this invariant does NOT hold
+
+pred safe_prescriptions {
+    all s:DshSnapshot | all m1, m2: Medication, p: Patient |
+            m1 -> m2 in s.EHealthSystem_interactions =>
+            !((p -> m1 in s.EHealthSystem_prescriptions) and (p -> m2 in s.EHealthSystem_prescriptions))
+}
+
+// are 2 medications for a patient that later interact is the reason this property does not pass invariant
+// 7 is the smallest # of DshSnapshots that will show the bug
+check { 
+    safe_prescriptions 
+} for 1 Patient, 2 Medication, exactly 7 DshSnapshot expect 1
+
+
+/*
+    How to run this model:
+
+    make traces
+    dashcli ehealth1-traces.als 2>&1 | grep 'Result\|Executing'
+*/

@@ -1,0 +1,72 @@
+
+
+/* property checking  ------ */
+
+// best to use the theme: digital-watch-traces.thm for display of instance
+// unfortunately theme displays the actual "Next" relation rather than the 
+// predicate "next", which matches small_step
+// "next" includes the loop while the "Next" relation does not
+
+// first let's make sure dsh_strong_no_stutter is possible 
+// The only way to violate dsh_strong_no_stutter is if we have a sync DshSnapshot
+// where no transitions exit it within this number of steps
+// higher scope is better here
+
+run {
+    dsh_strong_no_stutter 
+
+} for exactly 50 DshSnapshot expect 1
+
+// Next let's check reachability
+// The only way to violate dsh_enough_operations is if some transition is unreachable 
+// within the number of Snapshots (or possibly never reachable)
+// There are 14 transitions so that means at least 15 DshSnapshots
+// through trial and error, we find it takes 17 DshSnapshots for there
+// to be an instance of every transition
+// we want to find the lowest number of snapshots that make this possible
+
+run {
+    dsh_enough_operations
+} for exactly 17 DshSnapshot expect 1
+
+// now let's make sure the inner antecedent isn't vacuous
+// we can reach a state where press_a happens when in StopWatch
+// by a certain number of steps
+
+// we don't need dsh_enough_operations any more because 
+// we don't need to limit to only those the traces with
+// enough operations
+// scope here is high enough to reach DigitalWatch_Main_Displays_StopWatch
+run {
+    some s:DshSnapshot |
+        DigitalWatch_press_a in s.dsh_events0
+             && 
+             DigitalWatch_Main_Displays_StopWatch in s.dsh_conf0 
+} for exactly 10 DshSnapshot expect 1
+
+// here's the property we want to check:
+//   whenever press_a occurs when in Displays_StopWatch, 
+//   the system moves to Displays_Time
+
+// we don't need to limit this to dsh_strong_no_stutter traces
+// because we are forcing the event press_a to occur
+// the higher the scope, the better!
+
+check {
+    all s: DshSnapshot |
+       DigitalWatch_press_a in s.dsh_events0
+       && 
+       DigitalWatch_Main_Displays_StopWatch in s.dsh_conf0 
+       &&
+       // o/w we could end the trace in a state with press_a and in StopWatch
+       infinite
+       =>
+       DigitalWatch_Main_Displays_Time in next[s].dsh_conf0 
+} for exactly 50 DshSnapshot expect 0
+
+/*
+    How to run this model:
+
+    dashcli -t -m traces -single digital-watch.dsh
+    dashcli digital-watch-traces.als 2>&1 | grep 'Result\|Executing'
+*/

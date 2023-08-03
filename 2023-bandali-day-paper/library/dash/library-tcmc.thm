@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<alloy>
+
+<view>
+
+<projection> <type name="tcmc/TS"/> </projection>
+
+<defaultnode hideunconnected="yes"/>
+
+<defaultedge/>
+
+<node>
+   <type name="BookID"/>
+   <type name="Const"/>
+   <type name="DshSnapshot"/>
+   <type name="Int"/>
+   <type name="Library_Acquire"/>
+   <type name="Library_Cancel"/>
+   <type name="Library_Discard"/>
+   <type name="Library_Join"/>
+   <type name="Library_Leave"/>
+   <type name="Library_Lend"/>
+   <type name="Library_Renew"/>
+   <type name="Library_Reserve"/>
+   <type name="Library_Return"/>
+   <type name="Library_Take"/>
+   <type name="MemberID"/>
+   <type name="NO_TRANS"/>
+   <type name="String"/>
+   <type name="Transitions"/>
+   <type name="univ"/>
+   <type name="boolean/Bool"/>
+   <type name="boolean/False"/>
+   <type name="boolean/True"/>
+   <type name="seq/Int"/>
+   <type name="tcmc/TS"/>
+   <set name="S0" type="DshSnapshot"/>
+</node>
+
+<edge visible="no" attribute="yes">
+   <relation name="dsh_taken0"> <type name="DshSnapshot"/> <type name="Transitions"/> </relation>
+   <relation name="Library_books"> <type name="DshSnapshot"/> <type name="BookID"/> </relation>
+   <relation name="Library_in_b"> <type name="DshSnapshot"/> <type name="BookID"/> </relation>
+   <relation name="Library_in_m"> <type name="DshSnapshot"/> <type name="MemberID"/> </relation>
+   <relation name="Library_loans"> <type name="DshSnapshot"/> <type name="BookID"/> <type name="MemberID"/> </relation>
+   <relation name="Library_members"> <type name="DshSnapshot"/> <type name="MemberID"/> </relation>
+   <relation name="Library_reservations"> <type name="DshSnapshot"/> <type name="BookID"/> <type name="seq/Int"/> <type name="MemberID"/> </relation>
+</edge>
+
+</view>
+
+</alloy>

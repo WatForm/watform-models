@@ -77,20 +77,28 @@ state Library {
     env in_b: lone BookID
     members: set MemberID
     books: set BookID
-    loans: books one -> one (members)
-    reservations: books one -> one (seq members)
+    // one -> one does not work for these
+    // if books and members are different sizes it can't be 1-1
+    loans: books -> one (members)
+    reservations: books -> one (seq members)
 
     invariant maxNbLoans {
         Const.maxNbLoans = 7
     }
 
     trans Acquire {
-        when !(in_b in books)
+        when {
+            // using some as a quantifier of a set needs brackets around it
+            some in_b
+            !(in_b in books)
+        }
         do books' = books + in_b
     }
 
     trans Cancel {
         when {
+            some in_m
+            some in_b
             in_m in members
             in_b in books
             one (Int->in_m & reservations[in_b])
@@ -101,6 +109,7 @@ state Library {
 
     trans Discard {
         when {
+            some in_b
             in_b in books
             no loans[in_b]
             no reservations[in_b]
@@ -109,12 +118,16 @@ state Library {
     }
 
     trans Join {
-        when !(in_m in members)
+        when {
+            some in_m
+            !(in_m in members)
+        }
         do members' = members + in_m
     }
 
     trans Leave {
         when {
+            some in_m
             in_m in members
             no loans.in_m
             no (Int->in_m & reservations[in_b])
@@ -124,6 +137,8 @@ state Library {
 
     trans Lend {
         when {
+            some in_m
+            some in_b
             in_m in members
             in_b in books
             all m: members | no loans.m & in_b
@@ -135,6 +150,8 @@ state Library {
 
     trans Renew {
         when {
+            some in_m
+            some in_b
             in_m in members
             in_b in books
             in_b->in_m in loans
@@ -144,17 +161,20 @@ state Library {
 
     trans Reserve {
         when {
+            some in_m
+            some in_b
             in_m in members
             in_b in books
             !(in_b->in_m in loans)
             no Int->in_m & reservations[in_b]
-            (some loans[in_b] or (not isEmpty[(reservations[in_b])]))
+            some loans[in_b] or (not isEmpty[(reservations[in_b])])
         }
         do reservations'[in_b] = add[(reservations[in_b]), in_m]
     }
 
     trans Return {
         when {
+            some in_b
             in_b in books
             some loans[in_b]
         }
@@ -163,6 +183,8 @@ state Library {
 
     trans Take {
         when {
+            some in_m
+            some in_b
             in_m in members
             in_b in books
             no loans[in_b]
@@ -184,84 +206,3 @@ state Library {
         no reservations
     }
 }
-
-
-// run operation for 8 Snapshot, 3 Patient, 4 Medication
-
-check assert_ltl_2 {
-    all s: Snapshot | pre_Library_Acquire[s] => not(s.Library_in_b in s.Library_books)
-} for 8 Snapshot, 3 MemberID, 3 BookID expect 0
-
-check assert_ltl_3 {
-    all s: Snapshot |
-        (s.Library_in_b in s.Library_books and pre_Library_Discard[s]) =>
-            (no (s.Library_in_b).(s.Library_loans) and
-             no (s.Library_in_b).(s.Library_reservations))
-} for 8 Snapshot,3 MemberID, 3 BookID expect 0
-
-check assert_ltl_4 {
-    all s: Snapshot | pre_Library_Lend[s] => s.Library_in_m in s.Library_members
-} for 8 Snapshot,3 MemberID, 3 BookID expect 0
-
-check assert_ltl_5 {
-    all s: Snapshot | pre_Library_Reserve[s] =>
-        ((no (s.Library_reservations).(s.Library_in_m)) and
-         not (s.Library_in_m in s.Library_loans[s.Library_in_b]) and
-         ((some ((s.Library_in_b).(s.Library_loans))) or
-          (no (s.Library_in_b).(s.Library_reservations))))
-} for 8 Snapshot, 3 MemberID, 3 BookID expect 0
-
-check assert_ltl_6 {
-    all s: Snapshot | pre_Library_Reserve[s] =>
-        not (s.Library_in_m in s.Library_loans[s.Library_in_b])
-} for 8 Snapshot, 0 EventLabel, 3 MemberID, 3 BookID expect 0
-
-check assert_ltl_7 {
-    all s: Snapshot | pre_Library_Reserve[s] =>
-        no ((s.Library_reservations).(s.Library_in_m))
-} for 8 Snapshot, 0 EventLabel, 3 MemberID, 3 BookID expect 0
-
-check assert_ltl_8 {
-    all s: Snapshot | (some ((s.Library_in_b).(s.Library_reservations)) =>
-        not(pre_Library_Lend[s]))
-} for 8 Snapshot, 0 EventLabel, 3 MemberID, 3 BookID expect 0
-
-check assert_ltl_9 {
-    all s: Snapshot | (some ((s.Library_in_b).(s.Library_reservations)) =>
-        not(pre_Library_Renew[s]))
-} for 8 Snapshot, 0 EventLabel, 3 MemberID, 3 BookID expect 0
-
-check assert_ltl_10 {
-    all s: Snapshot | pre_Library_Take[s] =>
-        ((some (s.Library_reservations[s.Library_in_b])) and
-         first[(s.Library_reservations[s.Library_in_b])] = s.Library_in_m)
-} for 8 Snapshot, 3 MemberID, 3 BookID expect 0
-
-check assert_ltl_11 {
-    all s: Snapshot {
-        all b: s.Library_books {
-            (some s.Library_loans[b]) =>
-                not(pre_Library_Take[s] and b = s.Library_in_b)
-        }
-        (pre_Library_Take[s] =>
-            (no s.Library_loans[s.Library_in_b]))
-    }
-} for 8 Snapshot, 3 MemberID, 3 BookID expect 0
-
-check assert_ltl_13 {
-    all s: Snapshot | pre_Library_Leave[s] =>
-        ((s.Library_in_m in s.Library_members) and
-         (no ((s.Library_loans).(s.Library_in_m))) and
-         (no ((s.Library_reservations).(s.Library_in_m))))
-} for 8 Snapshot, 3 MemberID, 3 BookID expect 0
-
-assert assert_ctl_14 {
-    ctl_mc[ag [{ s : Snapshot | ef [{s:Snapshot | s.Library_in_m not in s.Library_members}]}]]
-}
-check assert_ctl_14 for 8 Snapshot, 3 MemberID, 3 BookID expect 0
-
-check assert_ltl_15 {
-    all s: Snapshot, m: s.Library_members | #(s.Library_loans.m) <= Const.maxNbLoans
-} for 8 Snapshot,  3 MemberID, 3 BookID expect 0
-
-
